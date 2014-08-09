@@ -3,11 +3,7 @@
 include:
   - project.dirs
   - project.repo
-  {% if pillar['python_version'] > 3 %}
-  - python.33
-  {% else %}
-  - python.27
-  {% endif %}
+  - python.version
 
 venv:
   virtualenv.managed:
