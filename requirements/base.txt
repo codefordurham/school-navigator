@@ -6,6 +6,7 @@ django_compressor==1.4
 # Required by django-compressor
 django-appconf==0.6
 six==1.6.1
+celery==3.1.13
 
 BeautifulSoup4==4.3.2
 

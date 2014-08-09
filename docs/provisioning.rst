@@ -8,7 +8,7 @@ Overview
 School_Inspector is deployed on the following stack.
 
 - OS: Ubuntu 12.04 LTS
-- Python: 2.7
+- Python: 3.4
 - Database: Postgres 9.1
 - Application Server: Gunicorn
 - Frontend Server: Nginx
@@ -34,7 +34,7 @@ E.g., change this::
 to this::
 
     repo:
-      url: git@github.com:account/reponame.git
+      url: git@github.com:codefordurham/school-inspector.git
       branch: master
 
 The repo will also need a deployment key generated so that the Salt minion can
@@ -152,6 +152,8 @@ EC2 uses a private key. These credentials will be passed as command line argumen
     fab -H <fresh-server-ip> -u <root-user> setup_master
     # Example of provisioning 33.33.33.10 as the Salt Master
     fab -H 33.33.33.10 -u root setup_master
+    # Example DO setup
+    fab -H 107.170.136.182 -u root setup_master
 
 This will install salt-master and update the master configuration file. The master will use a
 set of base states from https://github.com/caktus/margarita using the gitfs root. Once the master
@@ -177,6 +179,9 @@ To provision the master server itself with salt you need to create a minion on t
     fab -H <ip-of-new-master> -u <root-user> --set environment=master setup_minion:salt-master
     fab -u <root-user> accept_key:<server-name>
     fab -u <root-user> --set environment=master deploy
+    # Example DO (may have to run a second time to catch key)
+    fab -H 107.170.136.182 -u root --set environment=master setup_minion:salt-master
+    fab -u root --set environment=master deploy
 
 This will create developer users on the master server so you will no longer have to connect
 as the root user.
@@ -192,6 +197,8 @@ to complete the provisioning. To setup a minion you call the Fabric command::
 
     fab <environment> setup_minion:<roles> -H <ip-of-new-server> -u <root-user>
     fab staging setup_minion:web,balancer,db-master,cache -H  33.33.33.10 -u root
+    # Example DO
+    fab production setup_minion:web,balancer,db-master,cache,queue,worker -H 107.170.136.182
 
 The available roles are ``salt-master``, ``web``, ``worker``, ``balancer``, ``db-master``,
 ``queue`` and ``cache``. If you are running everything on a single server you need to enable
