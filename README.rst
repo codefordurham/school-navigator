@@ -58,18 +58,3 @@ Create the Postgres database and run the initial syncdb/migrate::
 You should now be able to run the development server::
 
     python manage.py runserver
-
-
-Deployment
-------------------------
-
-You can deploy changes to a particular environment with
-the ``deploy`` command. This takes an optional branch name to deploy. If the branch
-is not given, it will use the default branch defined for this environment in
-``env.branch``::
-
-    fab staging deploy
-    fab staging deploy:new-feature
-
-New requirements or South migrations are detected by parsing the VCS changes and
-will be installed/run automatically.
