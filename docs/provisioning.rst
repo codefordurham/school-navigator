@@ -181,7 +181,7 @@ To provision the master server itself with salt you need to create a minion on t
     fab -u <root-user> --set environment=master deploy
     # Example DO (may have to run a second time to catch key)
     fab -H 107.170.136.182 -u root --set environment=master setup_minion:salt-master
-    fab -u root --set environment=master deploy
+    fab -H 107.170.136.182 -u root --set environment=master deploy
 
 This will create developer users on the master server so you will no longer have to connect
 as the root user.

@@ -3,7 +3,6 @@
 
 include:
   - postgresql
-  - project.db.extensions
   - ufw
 
 user-{{ pillar['project_name'] }}:
@@ -76,4 +75,17 @@ db_allow-{{ host_addr }}:
     - from: {{ host_addr }}
     - require:
       - pkg: ufw
+{% endfor %}
+
+{% for extension in pillar.get('postgresql_extensions', []) %}
+create-{{ extension }}-extension:
+  cmd.run:
+    - name: psql -U postgres {{ pillar['project_name'] }}_{{ pillar['environment'] }} -c "CREATE EXTENSION postgis;"
+    - unless: psql -U postgres {{ pillar['project_name'] }}_{{ pillar['environment'] }} -c "\dx+" | grep postgis
+    - user: postgres
+    - require:
+      - pkg: postgis-packages
+      - postgres_database: database-{{ pillar['project_name'] }}
+    - require_in:
+      - virtualenv: venv
 {% endfor %}
