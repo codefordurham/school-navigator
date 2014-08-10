@@ -1,7 +1,9 @@
 {% import 'project/_vars.sls' as vars with context %}
+{% set version=pillar.get("postgresql_version", "9.3") %}
 
 include:
   - postgresql
+  - project.db.extensions
   - ufw
 
 user-{{ pillar['project_name'] }}:
@@ -31,7 +33,7 @@ database-{{ pillar['project_name'] }}:
 
 hba_conf:
   file.managed:
-    - name: /etc/postgresql/9.1/main/pg_hba.conf
+    - name: /etc/postgresql/{{ version }}/main/pg_hba.conf
     - source: salt://project/db/pg_hba.conf
     - user: postgres
     - group: postgres
@@ -51,12 +53,14 @@ hba_conf:
 
 postgresql_conf:
   file.managed:
-    - name: /etc/postgresql/9.1/main/postgresql.conf
+    - name: /etc/postgresql/{{ version }}/main/postgresql.conf
     - source: salt://project/db/postgresql.conf
     - user: postgres
     - group: postgres
     - mode: 0644
     - template: jinja
+    - context:
+      version: {{ version }}
     - require:
       - pkg: postgresql
       - cmd: /var/lib/postgresql/configure_utf-8.sh
