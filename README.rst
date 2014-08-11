@@ -1,3 +1,6 @@
+.. image:: https://badge.waffle.io/codefordurham/school-inspector.png?label=ready&title=Ready 
+ :target: https://waffle.io/codefordurham/school-inspector
+ :alt: 'Stories in Ready'
 
 
 School_Inspector
