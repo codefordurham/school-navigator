@@ -1,3 +1,6 @@
+.. image:: https://badge.waffle.io/codefordurham/school-inspector.png?label=ready&title=Ready 
+ :target: https://waffle.io/codefordurham/school-inspector
+ :alt: 'Stories in Ready'
 
 
 School_Inspector
@@ -5,13 +8,13 @@ School_Inspector
 
 Below you will find basic setup and deployment instructions for the school_inspector
 project. To begin you should have the following applications installed on your
-local development system::
+local development system:
 
-- Python >= 2.6 (2.7 recommended)
-- `pip >= 1.1 <http://www.pip-installer.org/>`_
-- `virtualenv >= 1.7 <http://www.virtualenv.org/>`_
+- Python >= 3.3 (3.4 recommended)
+- `pip >= 1.5 <http://www.pip-installer.org/>`_
+- `virtualenv >= 1.11 <http://www.virtualenv.org/>`_
 - `virtualenvwrapper >= 3.0 <http://pypi.python.org/pypi/virtualenvwrapper>`_
-- Postgres >= 8.4 (9.1 recommended)
+- Postgres >= 9.1
 - git >= 1.7
 
 The deployment uses SSH with agent forwarding so you'll need to enable agent
@@ -21,10 +24,22 @@ forwarding if it is not already by adding ``ForwardAgent yes`` to your SSH confi
 Getting Started
 ------------------------
 
+If you need Python 3.4 installed, you can use this PPA::
+
+    sudo add-apt-repository ppa:fkrull/deadsnakes
+    sudo apt-get update
+    sudo apt-get install python3.4-dev
+
+The tool that we use to deploy code is called `Fabric
+<http://docs.fabfile.org/>`_, which is not yet Python3 compatible. So,
+we need to install that globally in our Python2 environment::
+
+    sudo pip install fabric==1.8.1
+
 To setup your local environment you should create a virtualenv and install the
 necessary requirements::
 
-    mkvirtualenv school_inspector
+    mkvirtualenv --python=/usr/bin/python3.4 school_inspector
     $VIRTUAL_ENV/bin/pip install -r $PWD/requirements/dev.txt
 
 Then create a local settings file and set your ``DJANGO_SETTINGS_MODULE`` to use it::
@@ -41,24 +56,8 @@ Exit the virtualenv and reactivate it to activate the settings just changed::
 Create the Postgres database and run the initial syncdb/migrate::
 
     createdb -E UTF-8 school_inspector
-    python manage.py syncdb
-    python manage.py migrate
+    python manage.py syncdb --migrate
 
 You should now be able to run the development server::
 
     python manage.py runserver
-
-
-Deployment
-------------------------
-
-You can deploy changes to a particular environment with
-the ``deploy`` command. This takes an optional branch name to deploy. If the branch
-is not given, it will use the default branch defined for this environment in
-``env.branch``::
-
-    fab staging deploy
-    fab staging deploy:new-feature
-
-New requirements or South migrations are detected by parsing the VCS changes and
-will be installed/run automatically.
