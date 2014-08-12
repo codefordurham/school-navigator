@@ -2,11 +2,6 @@
 
 
 <div id="search-form">
-    <form class="form-inline" role="form">
-      <div class="form-group">
-        <label class="sr-only" for="search-box">Email address</label>
-        <input type="email" class="form-control" id="search-box" placeholder="Type your address">
-      </div>
-      <button type="submit" class="btn btn-primary">Search</button>
-    </form>
+    <input data-ng-model='address' class="form-control" id="search-box" placeholder="Type your address">
+    <button class="btn btn-primary" data-ng-click="relocate()">Search</button>
 </div>

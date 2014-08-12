@@ -6,6 +6,9 @@ app.config(function ($routeProvider) {
             controller: 'schoolsMapCtrl',
             templateUrl: 'app/partials/map.html'
             })
+        .when('search', {
+
+        })
         .otherwise({
             redirectTo: '/'
             })
