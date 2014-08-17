@@ -6,7 +6,7 @@ domain: 107.170.136.182
 # FIXME: Update to the correct project repo
 repo:
   url: git@github.com:codefordurham/school-inspector.git
-  branch: gis
+  branch: master
 
 # Addtional public environment variables to set for the project
 env:
