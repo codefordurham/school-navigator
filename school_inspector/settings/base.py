@@ -13,7 +13,7 @@ ADMINS = (
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'school_inspector',
         'USER': '',
         'PASSWORD': '',
@@ -127,6 +127,9 @@ INSTALLED_APPS = (
     # External apps
     'south',
     'compressor',
+    'leaflet',
+    # Internal apps
+    'regions',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -142,12 +145,30 @@ LOGGING = {
             '()': 'django.utils.log.RequireDebugFalse'
         }
     },
+    'formatters': {
+        'basic': {
+            'format': '%(asctime)s %(name)-20s %(levelname)-8s %(message)s',
+        },
+    },
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'basic',
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'formatter': 'basic',
+            'filename': os.path.join(PROJECT_ROOT, 'schools.log'),
+            'maxBytes': 10 * 1024 * 1024,  # 10 MB
+            'backupCount': 10,
+        },
     },
     'loggers': {
         'django.request': {
@@ -155,6 +176,20 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+        'schools': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'regions': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        # '': {
+        #     'handlers': ['file'],
+        #     'level': 'ERROR',
+        # },
     }
 }
 

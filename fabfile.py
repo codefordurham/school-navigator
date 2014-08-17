@@ -24,7 +24,7 @@ VALID_ROLES = (
 
 # FIXME: Once the master has been setup this should be set to IP of the master
 # This assumes a single master for both staging and production
-env.master = 'CHANGEME'
+env.master = '107.170.136.182'
 
 
 @task

@@ -1,4 +1,7 @@
 # FIXME: Change to match project name
-project_name: example
+project_name: school_inspector
 
-python_version: 2.7
+python_version: 3.4
+
+postgresql_version: 9.3
+postgresql_extensions: [postgis]

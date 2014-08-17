@@ -26,6 +26,11 @@ CACHES = {
 }
 
 EMAIL_SUBJECT_PREFIX = '[School_Inspector Staging] '
+DEFAULT_FROM_EMAIL = 'noreply@foobar.com'
+ADMINS = (
+    ('Colin Copeland', 'ccopeland@codeforamerica.org'),
+)
+MANAGERS = ADMINS
 
 COMPRESS_ENABLED = True
 
@@ -36,4 +41,6 @@ SESSION_COOKIE_HTTPONLY = True
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(';')
 
 # Uncomment if using celery worker configuration
-# BROKER_URL = 'amqp://school_inspector_staging:%(BROKER_PASSWORD)s@%(BROKER_HOST)s/school_inspector_staging' % os.environ
+BROKER_URL = 'amqp://school_inspector_staging:%(BROKER_PASSWORD)s@%(BROKER_HOST)s/school_inspector_staging' % os.environ
+
+LOGGING['handlers']['file']['filename'] = '/var/www/school_inspector/log/schools.log'
