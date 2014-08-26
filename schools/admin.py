@@ -1,3 +1,7 @@
 from django.contrib import admin
+from school_inspector.schools.models import School 
 
-# Register your models here.
+class SchoolAdmin(admin.ModelAdmin):
+        pass
+
+admin.site.register(School, SchoolAdmin)
