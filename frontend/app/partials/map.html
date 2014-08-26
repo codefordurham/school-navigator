@@ -2,6 +2,8 @@
 
 
 <div id="search-form">
-    <input data-ng-model='address' class="form-control" id="search-box" placeholder="Type your address">
-    <button class="btn btn-primary" data-ng-click="relocate()">Search</button>
+    <form class="form-inline" novalidate>
+        <input data-ng-model='address' class="form-control" id="search-box" placeholder="Type your address">
+        <button class="btn btn-primary" data-ng-click="relocate()">Search</button>
+    </form>
 </div>
