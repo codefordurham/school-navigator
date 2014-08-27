@@ -13,6 +13,8 @@ class Migration(SchemaMigration):
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=100)),
             ('level', self.gf('django.db.models.fields.IntegerField')(default=4)),
+            ('address', self.gf('django.db.models.fields.CharField')(max_length=100)),
+            ('zip_code', self.gf('django.db.models.fields.CharField')(max_length=5)),
             ('magnet', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('year_round', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('location', self.gf('django.contrib.gis.db.models.fields.PointField')()),
@@ -32,6 +34,7 @@ class Migration(SchemaMigration):
     models = {
         'schools.school': {
             'Meta': {'object_name': 'School'},
+            'address': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'choice_zone': ('django.contrib.gis.db.models.fields.PolygonField', [], {'null': 'True'}),
             'district': ('django.contrib.gis.db.models.fields.PolygonField', [], {}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -41,7 +44,8 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'priority_zone': ('django.contrib.gis.db.models.fields.PolygonField', [], {'null': 'True'}),
             'walk_zone': ('django.contrib.gis.db.models.fields.PolygonField', [], {'null': 'True'}),
-            'year_round': ('django.db.models.fields.BooleanField', [], {'default': 'False'})
+            'year_round': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'zip_code': ('django.db.models.fields.CharField', [], {'max_length': '5'})
         }
     }
 

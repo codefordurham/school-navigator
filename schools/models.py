@@ -16,6 +16,8 @@ SCHOOL_LEVELS = (
 class School(models.Model):
     name = models.CharField(max_length=100)
     level = models.IntegerField(choices=SCHOOL_LEVELS, default=4)
+    address = models.CharField(max_length=100)
+    zip_code = models.CharField(max_length=5)
     magnet = models.BooleanField(default=False)
     year_round = models.BooleanField(default=False)
     location = models.PointField()
