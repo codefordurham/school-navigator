@@ -124,12 +124,14 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.humanize',
     'django.contrib.sitemaps',
+    'django.contrib.gis',
     # External apps
     'south',
     'compressor',
     'leaflet',
     # Internal apps
     'regions',
+    'schools'
 )
 
 # A sample logging configuration. The only tangible logging

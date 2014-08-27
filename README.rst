@@ -53,7 +53,13 @@ Exit the virtualenv and reactivate it to activate the settings just changed::
     deactivate
     workon school_inspector
 
-Create the Postgres database and run the initial syncdb/migrate::
+If you're on Ubuntu 12.04, to get get postgis you need to set up a few more
+packages before you can create the db and set up the postgis extension::
+
+   sudo apt-add-repository ppa:ubuntugis/ppa
+   sudo aptitude update && sudo aptitude install postgis postgresql-9.1-postgis-2.0 postgresql-9.1-postgis-2.0-scripts
+
+Now, create the Postgres database and run the initial syncdb/migrate::
 
     createdb -E UTF-8 school_inspector
     psql school_inspector -c "CREATE EXTENSION postgis;"
