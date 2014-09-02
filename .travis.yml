@@ -14,4 +14,4 @@ before_script:
   - python manage.py syncdb --migrate --noinput
 script:
   - coverage run manage.py test
-  - coverage report -m --fail-under 60
+  - coverage report -m --fail-under 30
