@@ -8,6 +8,8 @@ pylint==1.1.0
 # Required by pylint
 logilab-common==0.61.0
 astroid==1.0.1
+coveralls==0.4.2
+flake8==2.2.3
 
 PyYAML==3.10
 # disable Fabric when using Python 3.4
