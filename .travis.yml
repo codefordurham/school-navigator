@@ -17,3 +17,6 @@ script:
   - coverage report -m --fail-under 30
 after_success:
   - coveralls
+notifications:
+  email:
+    - school-inspector@googlegroups.com
