@@ -15,6 +15,5 @@ before_script:
 script:
   - coverage run manage.py test
   - coverage report -m --fail-under 30
-  - flake8 .
 after_success:
   - coveralls
