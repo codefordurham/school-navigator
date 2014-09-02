@@ -15,4 +15,3 @@ before_script:
 script:
   - coverage run manage.py test
   - coverage report -m --fail-under 60
-  - flake8 .
