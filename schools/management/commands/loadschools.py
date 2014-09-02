@@ -16,8 +16,8 @@ class Command(BaseCommand):
 
     def query_api(self, api_endpoint_id):
         url = "%s/%s/query" % (self.api_base, api_endpoint_id)
-        json_doc = requests.get(url, params=self.api_get_params)
-        return json.loads(json_doc.content)['features']
+        doc = requests.get(url, params=self.api_get_params)
+        return doc.json()['features']
 
     def load_school_points(self):
         school_point_id = 0
