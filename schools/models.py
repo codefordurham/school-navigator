@@ -14,14 +14,14 @@ SCHOOL_LEVELS = (
 
 
 class School(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     level = models.IntegerField(choices=SCHOOL_LEVELS, default=4)
     address = models.CharField(max_length=100)
     zip_code = models.CharField(max_length=5)
     magnet = models.BooleanField(default=False)
     year_round = models.BooleanField(default=False)
     location = models.PointField()
-    district = models.PolygonField()
+    district = models.PolygonField(null=True)
 
     # Zones per http://dpsncapplication.com/site327.php
     walk_zone = models.PolygonField(null=True)
