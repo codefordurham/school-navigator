@@ -154,6 +154,8 @@ EC2 uses a private key. These credentials will be passed as command line argumen
     fab -H 33.33.33.10 -u root setup_master
     # Example DO setup
     fab -H 107.170.136.182 -u root setup_master
+    # Example AWS setup
+    fab -H 54.86.14.136 -u ubuntu -i ~/.ssh/aws-cfa.pem setup_master
 
 This will install salt-master and update the master configuration file. The master will use a
 set of base states from https://github.com/caktus/margarita using the gitfs root. Once the master
@@ -182,6 +184,9 @@ To provision the master server itself with salt you need to create a minion on t
     # Example DO (may have to run a second time to catch key)
     fab -H 107.170.136.182 -u root --set environment=master setup_minion:salt-master
     fab -H 107.170.136.182 -u root --set environment=master deploy
+    # Example AWS setup
+    fab -H 54.86.14.136 -u ubuntu -i ~/.ssh/aws-cfa.pem --set environment=master setup_minion:salt-master
+    fab -H 54.86.14.136 -u ubuntu -i ~/.ssh/aws-cfa.pem --set environment=master deploy
 
 This will create developer users on the master server so you will no longer have to connect
 as the root user.

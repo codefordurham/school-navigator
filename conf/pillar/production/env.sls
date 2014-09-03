@@ -1,7 +1,7 @@
 environment: production
 
 # FIXME: Change to match production domain name
-domain: 107.170.136.182
+domain: 54.86.14.136
 
 # FIXME: Update to the correct project repo
 repo:
