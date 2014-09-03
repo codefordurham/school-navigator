@@ -1,7 +1,7 @@
 environment: production
 
 # FIXME: Change to match production domain name
-domain: 54.86.14.136
+domain: schools.codefordurham.com
 
 # FIXME: Update to the correct project repo
 repo:
