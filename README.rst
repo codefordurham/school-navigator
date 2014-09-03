@@ -5,6 +5,9 @@
 .. image:: https://coveralls.io/repos/codefordurham/school-inspector/badge.png?branch=master
  :target: https://coveralls.io/r/codefordurham/school-inspector?branch=master
 
+.. image:: https://travis-ci.org/codefordurham/school-inspector.svg?branch=master
+ :target: https://travis-ci.org/codefordurham/school-inspector
+
 
 School_Inspector
 ========================
