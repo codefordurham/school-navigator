@@ -8,4 +8,5 @@ class SchoolSerializer(serializers.GeoModelSerializer):
     """
     class Meta:
         model = schools_models.School
-        fields = ('id', 'name', 'level', 'address', 'magnet', 'district', 'location')
+        fields = ('id', 'name', 'level', 'address',
+                    'magnet', 'district', 'location')
