@@ -204,6 +204,8 @@ to complete the provisioning. To setup a minion you call the Fabric command::
     fab staging setup_minion:web,balancer,db-master,cache -H  33.33.33.10 -u root
     # Example DO
     fab production setup_minion:web,balancer,db-master,cache,queue,worker -H 107.170.136.182
+    # Example AWS setup
+    fab production setup_minion:web,balancer,db-master,cache,queue,worker -H 54.86.14.136
 
 The available roles are ``salt-master``, ``web``, ``worker``, ``balancer``, ``db-master``,
 ``queue`` and ``cache``. If you are running everything on a single server you need to enable
