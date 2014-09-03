@@ -1,8 +1,8 @@
-from rest_framework import serializers
+from rest_framework_gis import serializers
 
 import schools.models as schools_models
 
-class SchoolSerializer(serializers.ModelSerializer):
+class SchoolSerializer(serializers.GeoModelSerializer):
     """
     Serializing all the Books
     """
