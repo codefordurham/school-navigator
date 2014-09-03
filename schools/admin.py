@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import School 
 
-class SchoolAdmin(admin.ModelAdmin):
-        pass
+from leaflet.admin import LeafletGeoAdmin
 
-admin.site.register(School, SchoolAdmin)
+from .models import School
+
+admin.site.register(School, LeafletGeoAdmin)
