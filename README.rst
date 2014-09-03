@@ -2,6 +2,9 @@
  :target: https://waffle.io/codefordurham/school-inspector
  :alt: 'Stories in Ready'
 
+.. image:: https://coveralls.io/repos/codefordurham/school-inspector/badge.png?branch=master
+ :target: https://coveralls.io/r/codefordurham/school-inspector?branch=master
+
 
 School_Inspector
 ========================
