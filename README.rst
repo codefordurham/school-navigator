@@ -69,7 +69,7 @@ Now, create the Postgres database and run the initial syncdb/migrate::
 
     createdb -E UTF-8 school_inspector
     psql school_inspector -c "CREATE EXTENSION postgis;"
-    python manage.py syncdb --migrate
+    python manage.py syncdb
 
 You should now be able to run the development server::
 

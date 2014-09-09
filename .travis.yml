@@ -11,7 +11,7 @@ install:
 before_script:
   - createdb -E UTF-8 school_inspector -U postgres -O $USER
   - psql school_inspector -c "CREATE EXTENSION postgis;"
-  - python manage.py syncdb --migrate --noinput
+  - python manage.py syncdb --noinput
 script:
   - coverage run manage.py test
   - coverage report -m --fail-under 30
