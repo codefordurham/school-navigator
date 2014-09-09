@@ -94,6 +94,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -126,10 +127,11 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     'django.contrib.gis',
     # External apps
-    'south',
+    # 'south',
     'compressor',
     'leaflet',
     'rest_framework',
+    'corsheaders',
     # Internal apps
     'regions',
     'schools'
@@ -211,3 +213,5 @@ REST_FRAMEWORK = {
         #'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+CORS_ORIGIN_ALLOW_ALL = True

@@ -1,5 +1,5 @@
 -r base.txt
-django-debug-toolbar==1.0.1
+django-debug-toolbar==1.2.1
 # Required by django-debug-toolbar
 sqlparse==0.1.11
 
@@ -18,3 +18,4 @@ PyYAML==3.10
 # paramiko==1.13.0
 # pycrypto==2.6.1
 # ecdsa==0.11
+Sphinx==1.2.3
