@@ -30,7 +30,13 @@ app.service('Schools', function($http) {
         ]]
     }
 }];
-    this.getList = function() {
-      return schools
+//    var schools = $http.get('https://schools.codefordurham.com/api/schools/eligible/?location=-78.934,35.9730');
+
+    this.get = function(lat, lon) {
+      return $http({
+          method: 'GET',
+          url: 'https://schools.codefordurham.com/api/schools/eligible/',
+          params: {location: '-78.934,35.9730'}
+      });
     };
 });
