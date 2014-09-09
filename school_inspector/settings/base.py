@@ -127,7 +127,7 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     'django.contrib.gis',
     # External apps
-    'south',
+    # 'south',
     'compressor',
     'leaflet',
     'rest_framework',
