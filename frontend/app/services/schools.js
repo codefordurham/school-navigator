@@ -1,4 +1,5 @@
-app.service('Schools', function($http) {
+angular.module('SchoolsApp.services', [])
+    .service('Schools', function($http) {
     this.get = function(location) {
       return $http({
           method: 'GET',

@@ -1,6 +1,9 @@
 var app = angular.module("schoolsApp", [
     'ngRoute',
-    'SchoolsApp.directives'
+    'SchoolsApp.directives',
+    'SchoolsApp.geoDecoder',
+    'SchoolsApp.services',
+    'SchoolsApp.controllers'
 ]);
 
 app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
