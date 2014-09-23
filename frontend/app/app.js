@@ -1,4 +1,7 @@
-var app = angular.module("schoolsApp", ['ngRoute']);
+var app = angular.module("schoolsApp", [
+    'ngRoute',
+    'SchoolsApp.directives'
+]);
 
 app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
     $httpProvider.defaults.xsrfCookieName = 'csrftoken';
