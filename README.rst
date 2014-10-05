@@ -1,12 +1,12 @@
-.. image:: https://badge.waffle.io/codefordurham/school-inspector.png?label=ready&title=Ready 
- :target: https://waffle.io/codefordurham/school-inspector
+.. image:: https://badge.waffle.io/codefordurham/school-navigator.png?label=ready&title=Ready
+ :target: https://waffle.io/codefordurham/school-navigator
  :alt: 'Stories in Ready'
 
-.. image:: https://coveralls.io/repos/codefordurham/school-inspector/badge.png?branch=master
- :target: https://coveralls.io/r/codefordurham/school-inspector?branch=master
+.. image:: https://coveralls.io/repos/codefordurham/school-navigator/badge.png?branch=master
+ :target: https://coveralls.io/r/codefordurham/school-navigator?branch=master
 
-.. image:: https://travis-ci.org/codefordurham/school-inspector.svg?branch=master
- :target: https://travis-ci.org/codefordurham/school-inspector
+.. image:: https://travis-ci.org/codefordurham/school-navigator.svg?branch=master
+ :target: https://travis-ci.org/codefordurham/school-navigator
 
 
 Durham School Navigator
