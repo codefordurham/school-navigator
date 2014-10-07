@@ -14,8 +14,9 @@ class LocationEligibleSchools(generics.ListAPIView):
     def get_queryset(self):
         queryset = super(LocationEligibleSchools, self).get_queryset()
         try:
-            lat, lon = self.request.GET['location'].split(',')
-            pt = Point(float(lat), float(lon))
+            lat = self.request.GET['latitude']
+            lon = self.request.GET['longitude']
+            pt = Point(float(lon), float(lat))
         except ValueError:
             raise ParseError("Bad location")
         except KeyError:
