@@ -8,7 +8,10 @@ angular.module('SchoolsApp.controllers', [])
         };
 
         $scope.relocate = function() {
-            Geodecoder.geocode( { 'address': $scope.address}, function(results, status) {
+            if ($scope.address.indexOf("durham") == -1) {
+                var lookup_address = $scope.address + " Durham";
+            }
+            Geodecoder.geocode( { 'address': lookup_address}, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                     // always get the first result returned
                     var geo = results[0].geometry.location;
