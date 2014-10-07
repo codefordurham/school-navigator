@@ -1,0 +1,3 @@
+[run]
+source = schools,school_inspector
+omit = schools/tests*,schools/urls.py,school_inspector/urls.py,schools/migrations/*

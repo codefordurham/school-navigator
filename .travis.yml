@@ -1,0 +1,22 @@
+language: python
+python:
+ - "3.4"
+addons:
+  postgresql: "9.3"
+env:
+  - DJANGO_SETTINGS_MODULE="school_inspector.settings.dev"
+install:
+  - pip install -r requirements/dev.txt --use-mirrors
+  - pip install coveralls
+before_script:
+  - createdb -E UTF-8 school_inspector -U postgres -O $USER
+  - psql school_inspector -c "CREATE EXTENSION postgis;"
+  - python manage.py syncdb --migrate --noinput
+script:
+  - coverage run manage.py test
+  - coverage report -m --fail-under 30
+after_success:
+  - coveralls
+notifications:
+  email:
+    - school-inspector@googlegroups.com
