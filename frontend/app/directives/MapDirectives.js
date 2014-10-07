@@ -5,7 +5,7 @@ angular.module('SchoolsApp.directives', [])
             var map = L.map('map', { zoomControl:false }).setView([36.002453, -78.905869], 13),
                 schools_layers = [];
             element.css({
-                "height":document.documentElement.clientHeight + "px"
+                "height": document.documentElement.clientHeight + "px"
             });
             L.tileLayer('http://{s}.tiles.mapbox.com/v3/vrocha.j3fib8g6/{z}/{x}/{y}.png', {
                 attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -15,7 +15,7 @@ angular.module('SchoolsApp.directives', [])
             // resize map to fit current window
             $(window).bind('resize', function() {
                 element.css({
-                    "height":document.documentElement.clientHeight + "px"
+                    "height": document.documentElement.clientHeight + "px"
                 });
             });
 
@@ -30,20 +30,13 @@ angular.module('SchoolsApp.directives', [])
             });
 
             scope.$watch(attrs.schools, function(schools) {
-                angular.forEach(schools, function(value) {
-                    var school_layer,
-                        edges = [];
-
-                    // HACK: we need to flip latitude and longitude to
-                    // account for the fact that django stores coordinates in
-                    // reversed order.
-                    angular.forEach(value.district.coordinates[0], function(value, key) {
-                        edges.push([value[1], value[0]]);
-                    });
+                angular.forEach(schools, function(school) {
+                    console.log(school);
+                    var school_layer;
 
                     school_layer = L.layerGroup([
-                        L.polygon(edges),
-                        L.marker([value.location.coordinates['1'], value.location.coordinates['0']])
+                        L.marker([school.location.coordinates['1'], school.location.coordinates['0']])
+                         .bindPopup(school.name)
                     ]);
 
                     schools_layers.push(school_layer);

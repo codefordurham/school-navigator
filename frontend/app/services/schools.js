@@ -1,10 +1,14 @@
 angular.module('SchoolsApp.services', [])
     .service('Schools', function($http) {
     this.get = function(location) {
+      console.log(location);
       return $http({
           method: 'GET',
           url: 'https://schools.codefordurham.com/api/schools/eligible/',
-          params: {location: '-78.934,35.9730'}
+          params: {
+              longitude: location.longitude,
+              latitude: location.latitude
+          }
       });
     };
 });
