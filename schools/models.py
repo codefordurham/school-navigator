@@ -19,6 +19,7 @@ class School(models.Model):
     address = models.CharField(max_length=100)
     zip_code = models.CharField(max_length=5)
     magnet = models.BooleanField(default=False)
+    #Type = Neighborhood, Magnet, Charter
     year_round = models.BooleanField(default=False)
     location = models.PointField()
     district = models.PolygonField(null=True)
