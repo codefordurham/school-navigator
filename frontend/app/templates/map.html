@@ -1,5 +1,14 @@
 <div id="map" data-user-location="userLocation" data-schools="schools" data-schools-map></div>
 
+<div id="main-menu">
+    <ul class="nav nav-pills">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Navigating DPS</a></li>
+      <li><a href="#">School List</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+</div>
+
 <div id="search-form">
     <form class="form-inline" novalidate>
         <input data-ng-model='address' class="form-control" id="search-box" placeholder="Type your address">
@@ -15,8 +24,10 @@
       <li data-ng-class="{active: eligibility == 'all'}"><a data-ng-click="filterSchools('all')">All</a></li>
     </ul>
     <div id="my-schools">
-        <div data-ng-repeat="school in schools">
-            <input type="checkbox" /> {{ school.name }}
+        <div data-ng-repeat="school in schools" class="checkbox">
+            <label>
+                <input type="checkbox" /> {{ school.name }}
+            </label>
         </div>
     </div>
     <div class="compare-schools clearfix">

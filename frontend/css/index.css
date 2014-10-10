@@ -2,6 +2,13 @@ body {
     margin: 0;
     position: relative;
 }
+#main-menu {
+    position: absolute;
+    z-index: 1000000;
+    top: 20px;
+    right: 40px;
+    background: white;
+}
 #search-form {
     position: absolute;
     z-index: 1000000;
