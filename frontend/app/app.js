@@ -16,6 +16,15 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
             controller: 'schoolsMapCtrl',
             templateUrl: 'app/templates/map.html'
             })
+        .when('/about', {
+            templateUrl: 'app/templates/about.html'
+            })
+        .when('/navigating', {
+            templateUrl: 'app/templates/navigating.html'
+            })
+        .when('/schools', {
+            templateUrl: 'app/templates/navigating.html'
+            })
         .when('search', {
 
         })
