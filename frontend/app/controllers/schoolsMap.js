@@ -1,11 +1,24 @@
 angular.module('SchoolsApp.controllers', [])
-    .controller('schoolsMapCtrl', ['$scope','Schools', 'Geodecoder', function($scope, Schools, Geodecoder) {
-        $scope.schools = [];
+    .controller('schoolsMapCtrl', ['$scope', '$filter', 'Schools', 'Geodecoder', function($scope, $filter, Schools, Geodecoder) {
+        $scope.all_schools = [];
         $scope.address = '';
-        $scope.type = 'assigned';
+        $scope.eligibility = 'assigned';
         $scope.userLocation = {
             latitude: '35.9730',
             longitude: '-78.934'
+        };
+
+        $scope.$watch('all_schools', function(newValue) {
+            $scope.schools = $filter('filter')(newValue, {'eligibility': $scope.eligibility});
+        });
+
+        $scope.filterSchools = function (eligibility) {
+            if (eligibility == 'all') {
+                $scope.schools = $scope.all_schools;
+            } else {
+                $scope.schools = $filter('filter')($scope.all_schools, {'eligibility': eligibility});
+            }
+            $scope.eligibility = eligibility;
         };
 
         $scope.relocate = function() {
@@ -19,7 +32,7 @@ angular.module('SchoolsApp.controllers', [])
                         longitude: geo.lng()
                     };
                     Schools.get($scope.userLocation, $scope.type).success(function(data) {
-                        $scope.schools = data;
+                        $scope.all_schools = data;
                     });
                 } else {
                     alert('Geocode was not successful for the following reason: ' + status);

@@ -1,5 +1,14 @@
 <div id="map" data-user-location="userLocation" data-schools="schools" data-schools-map></div>
 
+<div id="main-menu">
+    <ul class="nav nav-pills">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#navigating">Navigating DPS</a></li>
+      <li><a href="#schools">School List</a></li>
+      <li><a data-ng-href="#about">About</a></li>
+    </ul>
+</div>
+
 <div id="search-form">
     <form class="form-inline" novalidate>
         <input data-ng-model='address' class="form-control" id="search-box" placeholder="Type your address">
@@ -7,8 +16,21 @@
     </form>
 </div>
 
-<div class="my-schools">
-    <ul>
-        <li ng-repeat=""
+<div id="schools-wrapper" data-ng-show="schools.length">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li data-ng-class="{active: eligibility == 'assigned'}"><a data-ng-click="filterSchools('assigned')">Assigned</a></li>
+      <li data-ng-class="{active: eligibility == 'option'}"><a data-ng-click="filterSchools('option')">Option</a></li>
+      <li data-ng-class="{active: eligibility == 'all'}"><a data-ng-click="filterSchools('all')">All</a></li>
     </ul>
+    <div id="my-schools">
+        <div data-ng-repeat="school in schools" class="checkbox">
+            <label>
+                <input type="checkbox" /> {{ school.name }}
+            </label>
+        </div>
+    </div>
+    <div class="compare-schools clearfix">
+        <button class="pull-right btn btn-success">Compare Schools</button>
+    </div>
 </div>

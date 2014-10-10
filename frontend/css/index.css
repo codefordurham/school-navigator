@@ -2,6 +2,13 @@ body {
     margin: 0;
     position: relative;
 }
+#main-menu {
+    position: absolute;
+    z-index: 1000000;
+    top: 20px;
+    right: 40px;
+    background: white;
+}
 #search-form {
     position: absolute;
     z-index: 1000000;
@@ -11,6 +18,22 @@ body {
 }
 #search-box {
     width: 320px;
+}
+#schools-wrapper {
+    position: absolute;
+    z-index: 1000000;
+    top: 70px;
+    left: 40px;
+    width: 400px;
+    background: white;
+    padding-bottom: 5px;
+}
+#my-schools {
+    background: white;
+    padding: 20px;
+}
+.compare-schools button {
+    margin-right: 5px;
 }
 #map {
     width: 100%;

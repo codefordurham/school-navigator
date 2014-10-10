@@ -9,7 +9,7 @@ angular.module('SchoolsApp.directives', [])
             element.css({
                 "height": document.documentElement.clientHeight + "px"
             });
-            L.tileLayer('http://{s}.tiles.mapbox.com/v3/vrocha.j3fib8g6/{z}/{x}/{y}.png', {
+            L.tileLayer('https://{s}.tiles.mapbox.com/v3/vrocha.j3fib8g6/{z}/{x}/{y}.png', {
                 attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
                 maxZoom: 18
             }).addTo(map);
@@ -23,8 +23,6 @@ angular.module('SchoolsApp.directives', [])
 
             // variable changes
             scope.$watch(attrs.userLocation, function(location) {
-                // clear map
-                clearMap();
                 // add or move marker to map
                 if (marker) {
                     markerLatLng = new L.LatLng(location.latitude, location.longitude);
@@ -37,6 +35,8 @@ angular.module('SchoolsApp.directives', [])
             });
 
             scope.$watch(attrs.schools, function(schools) {
+                // clear map
+                clearMap();
                 angular.forEach(schools, function(school) {
                     console.log(school);
                     var school_layer;
@@ -55,7 +55,6 @@ angular.module('SchoolsApp.directives', [])
                 angular.forEach(schools_layers, function(layer) {
                     map.removeLayer(layer)
                 });
-
                 schools_layers = [];
             }
         };
