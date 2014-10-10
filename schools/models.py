@@ -1,3 +1,5 @@
+import random
+
 from django.contrib.gis.db import models
 
 
@@ -19,6 +21,7 @@ class School(models.Model):
     address = models.CharField(max_length=100)
     zip_code = models.CharField(max_length=5)
     magnet = models.BooleanField(default=False)
+    #Type = Neighborhood, Magnet, Charter
     year_round = models.BooleanField(default=False)
     location = models.PointField()
     district = models.PolygonField(null=True)
@@ -33,3 +36,11 @@ class School(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    @property
+    def assigned(self):
+        return random.choice((True, False))
+
+    @property
+    def option(self):
+        return random.choice((True, False))
