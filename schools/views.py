@@ -24,6 +24,11 @@ class SchoolAPIView(generics.ListAPIView):
         self.pt = pt
         return queryset
 
+    def get_context(self, **kwargs):
+        context = super(SchoolAPIView, self).get_context(**kwargs)
+        context['point'] = self.pt
+        return context
+
 class AssignedSchools(SchoolAPIView):
     """
     pt is in school districts or walkzones

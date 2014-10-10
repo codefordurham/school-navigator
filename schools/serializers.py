@@ -4,10 +4,13 @@ from rest_framework_gis import serializers as geo_serializers
 import schools.models as schools_models
 
 class SchoolSerializer(geo_serializers.GeoModelSerializer):
-    option = serializers.BooleanField(source='option')
-    assigned = serializers.BooleanField(source='assigned')
+    type = serializers.SerializerMethodField('get_type')
 
     class Meta:
         model = schools_models.School
-        fields = ('id', 'name', 'level', 'address', 'magnet', 'district',
-                    'option', 'assigned')
+        #TODO Add back district?
+        fields = ('id', 'name', 'level', 'address', 'magnet', 'type')
+
+    def get_type(self, obj):
+       import random
+       return random.choice(('assigned', 'option', 'all'))

@@ -1,7 +1,4 @@
-import random
-
 from django.contrib.gis.db import models
-
 
 ELEM = 1
 MID = 2
@@ -36,11 +33,3 @@ class School(models.Model):
 
     def __unicode__(self):
         return self.name
-
-    @property
-    def assigned(self):
-        return random.choice((True, False))
-
-    @property
-    def option(self):
-        return random.choice((True, False))
