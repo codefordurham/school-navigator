@@ -28,6 +28,12 @@ class Command(BaseCommand):
 
     def load_school_points(self, schools={}):
         school_point_id = 0
+        school_grade_mapping = {
+            'elementary' : (0, 4),
+            'middle': (5, 8),
+            'secondary': (5, 12),
+            'high': (9, 12),
+        }
         for school in query_api(school_point_id):
             name = school['attributes']['School'].strip()
             s = self.get_school(name, schools)
@@ -36,31 +42,21 @@ class Command(BaseCommand):
                     float(school['geometry']['y'])
                 )
             s.address = school['attributes']['ADDRESS'].strip()
+            s.level = school['attributes']['TYPE_'].lower()
+            s.grade_min, s.grade_max = school_grade_mapping[s.level]
             schools[name] = s
         return schools
 
 
     def load_districts(self, schools={}):
         #maps external API endpoint IDs to internal model choices
-        school_level_mapping = [
-            ('1', 'middle'),
-            ('2', 'high'),
-            ('3', 'elementary')
-        ]
-        school_grade_mapping = {
-            'elementary' : (0, 4),
-            'middle': (5, 8),
-            'high': (9, 12),
-        }
 
-        for api_id, level in school_level_mapping:
+        for api_id in (1, 2, 3):
             for district_json in query_api(api_id):
                 name = district_json['attributes']['DISTRICT'].strip()
                 s = self.get_school(name, schools)
                 s.district = Polygon(district_json['geometry']['rings'][0])
                 s.type = 'neighborhood'
-                s.level = level
-                s.grade_min, s.grade_max = school_grade_mapping[level]
                 schools[name] = s
         return schools
 
