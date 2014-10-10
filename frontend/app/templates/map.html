@@ -10,7 +10,7 @@
 </div>
 
 <div id="search-form">
-    <form class="form-inline" novalidate>
+    <form class="form-inline">
         <input data-ng-model='address' class="form-control" id="search-box" placeholder="Type your address">
         <button class="btn btn-primary" data-ng-click="relocate()">Search</button>
     </form>
@@ -24,7 +24,22 @@
       <li data-ng-class="{active: eligibility == 'all'}"><a data-ng-click="filterSchools('all')">All</a></li>
     </ul>
     <div id="my-schools">
-        <div data-ng-repeat="school in schools" class="checkbox">
+        <h4>Elementary</h4>
+        <div data-ng-repeat="school in schools | filter:{'level': 1}" class="checkbox">
+            <label>
+                <input type="checkbox" /> {{ school.name }}
+            </label>
+        </div>
+
+        <h4>Middle School</h4>
+        <div data-ng-repeat="school in schools | filter:{'level': 2}" class="checkbox">
+            <label>
+                <input type="checkbox" /> {{ school.name }}
+            </label>
+        </div>
+
+        <h4>High School</h4>
+        <div data-ng-repeat="school in schools | filter:{'level': 4}" class="checkbox">
             <label>
                 <input type="checkbox" /> {{ school.name }}
             </label>

@@ -27,10 +27,12 @@ body {
     width: 400px;
     background: white;
     padding-bottom: 5px;
+    max-height: 800px;
 }
 #my-schools {
     background: white;
     padding: 20px;
+    max-height: 700px;
 }
 .compare-schools button {
     margin-right: 5px;
@@ -38,4 +40,7 @@ body {
 #map {
     width: 100%;
     height: 1000px;
+}
+#map .fa-home {
+    color: #A9071E;
 }
