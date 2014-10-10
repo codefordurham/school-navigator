@@ -14,7 +14,7 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
     $routeProvider
         .when('/', {
             controller: 'schoolsMapCtrl',
-            templateUrl: 'app/partials/map.html'
+            templateUrl: 'app/templates/map.html'
             })
         .when('search', {
 
