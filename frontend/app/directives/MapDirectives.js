@@ -3,6 +3,8 @@ angular.module('SchoolsApp.directives', [])
         var linker = function(scope, element, attrs) {
             // do all map rendering and interactions here
             var map = L.map('map', { zoomControl:false }).setView([36.002453, -78.905869], 13),
+                marker,
+                markerLatLng,
                 schools_layers = [];
             element.css({
                 "height": document.documentElement.clientHeight + "px"
@@ -23,8 +25,13 @@ angular.module('SchoolsApp.directives', [])
             scope.$watch(attrs.userLocation, function(location) {
                 // clear map
                 clearMap();
-                // add marker to map
-                L.marker([location.latitude, location.longitude]).addTo(map);
+                // add or move marker to map
+                if (marker) {
+                    markerLatLng = new L.LatLng(location.latitude, location.longitude);
+                    marker.setLatLng(markerLatLng);
+                } else {
+                    marker = L.marker([location.latitude, location.longitude]).addTo(map);
+                }
                 // center marker
                 map.setView([location.latitude, location.longitude], 12);
             });
