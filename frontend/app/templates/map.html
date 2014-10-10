@@ -10,13 +10,16 @@
 <div id="schools-wrapper" data-ng-show="schools.length">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-      <li><a data-ng-click="filterSchools('assigned')">Assigned</a></li>
-      <li><a data-ng-click="filterSchools('option')">Option</a></li>
-      <li><a data-ng-click="filterSchools('all')">All</a></li>
+      <li data-ng-class="{active: eligibility == 'assigned'}"><a data-ng-click="filterSchools('assigned')">Assigned</a></li>
+      <li data-ng-class="{active: eligibility == 'option'}"><a data-ng-click="filterSchools('option')">Option</a></li>
+      <li data-ng-class="{active: eligibility == 'all'}"><a data-ng-click="filterSchools('all')">All</a></li>
     </ul>
     <div id="my-schools">
         <div data-ng-repeat="school in schools">
             <input type="checkbox" /> {{ school.name }}
         </div>
+    </div>
+    <div class="compare-schools clearfix">
+        <button class="pull-right btn btn-success">Compare Schools</button>
     </div>
 </div>

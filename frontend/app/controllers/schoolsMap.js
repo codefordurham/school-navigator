@@ -13,7 +13,12 @@ angular.module('SchoolsApp.controllers', [])
         });
 
         $scope.filterSchools = function (eligibility) {
-            $scope.schools = $filter('filter')($scope.all_schools, {'eligibility': eligibility});
+            if (eligibility == 'all') {
+                $scope.schools = $scope.all_schools;
+            } else {
+                $scope.schools = $filter('filter')($scope.all_schools, {'eligibility': eligibility});
+            }
+            $scope.eligibility = eligibility;
         };
 
         $scope.relocate = function() {
