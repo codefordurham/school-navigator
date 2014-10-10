@@ -47,8 +47,6 @@ class AllSchools(SchoolAPIView):
     """
     Both Assigned And Option Schools
     """
-    model = schools_models.School
-    serializer_class = SchoolSerializer
 
     def get_queryset(self):
         queryset = super(AllSchools, self).get_queryset()
