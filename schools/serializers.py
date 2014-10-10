@@ -9,8 +9,12 @@ class SchoolSerializer(geo_serializers.GeoModelSerializer):
     class Meta:
         model = schools_models.School
         #TODO Add back district?
-        fields = ('id', 'name', 'level', 'address', 'magnet', 'eligibility', 'location')
+        fields = ('id', 'name', 'level', 'address', 'type', 'eligibility', 'location')
 
     def get_eligibility(self, obj):
        import random
-       return random.choice(('assigned', 'option', 'all'))
+       #TODO
+       #Assigned schools are blue
+       #Option schools are orange
+       #Others are gray
+       return random.choice(('assigned', 'option'))
