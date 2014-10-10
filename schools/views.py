@@ -29,26 +29,6 @@ class SchoolAPIView(generics.ListAPIView):
         context['point'] = self.pt
         return context
 
-class AssignedSchools(SchoolAPIView):
-    """
-    pt is in school districts or walkzones
-    """
-
-    def get_queryset(self):
-        queryset = super(AssignedSchools, self).get_queryset()
-        return queryset.filter(Q(district__contains=self.pt) | Q(walk_zone__contains=self.pt))
-
-class OptionSchools(SchoolAPIView):
-    """
-    Magnets (except where pt is in Walkzone), Charters
-    """
-
-    def get_queryset(self):
-        queryset = super(OptionSchools, self).get_queryset()
-        #TODO highlight Schools where pt in priority_zone or choice_zone
-        # (Type == Magnet && walk_zone != contain pt) || Type = Charter
-        return queryset.filter(district=None).exclude(walk_zone__contains=self.pt)
-
 class AllSchools(SchoolAPIView):
     """
     Both Assigned And Option Schools
