@@ -5,7 +5,9 @@ angular.module('SchoolsApp.directives', [])
             var map = L.map('map', { zoomControl:false }).setView([36.002453, -78.905869], 13),
                 marker,
                 markerLatLng,
-                schools_layers = [];
+                schools_layers = [],
+                homeIcon = L.divIcon({className: 'fa fa-home fa-2x', iconSize: '64px'}),
+                schoolIcon = L.divIcon({className: 'fa fa-building fa-2x', iconSize: '64px'});
             element.css({
                 "height": document.documentElement.clientHeight + "px"
             });
@@ -28,7 +30,10 @@ angular.module('SchoolsApp.directives', [])
                     markerLatLng = new L.LatLng(location.latitude, location.longitude);
                     marker.setLatLng(markerLatLng);
                 } else {
-                    marker = L.marker([location.latitude, location.longitude]).addTo(map);
+                    marker = L.marker(
+                        [location.latitude, location.longitude],
+                        {icon: homeIcon}
+                    ).addTo(map);
                 }
                 // center marker
                 map.setView([location.latitude, location.longitude], 12);
@@ -39,13 +44,11 @@ angular.module('SchoolsApp.directives', [])
                 clearMap();
                 angular.forEach(schools, function(school) {
                     console.log(school);
-                    var school_layer;
+                    var school_layer,
+                        school_marker =  L.marker([school.location.coordinates['1'], school.location.coordinates['0']], {icon: schoolIcon})
+                            .bindPopup(school.name);
 
-                    school_layer = L.layerGroup([
-                        L.marker([school.location.coordinates['1'], school.location.coordinates['0']])
-                         .bindPopup(school.name)
-                    ]);
-
+                    school_layer = L.layerGroup([school_marker]);
                     schools_layers.push(school_layer);
                     school_layer.addTo(map);
                 });
