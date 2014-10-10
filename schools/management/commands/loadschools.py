@@ -9,6 +9,7 @@ def query_api(api_endpoint_id):
     api_get_params = {
             'outSR':'4326', #output spatial reference
             'where': '1=1', #grab all records
+            'outFields' : '*', #all fields
             'f' : 'pjson'   #json file type
     }
     url = "%s/%s/query" % (api_base, api_endpoint_id)
@@ -34,6 +35,7 @@ class Command(BaseCommand):
                     float(school['geometry']['x']),
                     float(school['geometry']['y'])
                 )
+            s.address = school['attributes']['ADDRESS'].strip()
             schools[name] = s
         return schools
 
@@ -62,14 +64,21 @@ class Command(BaseCommand):
                 schools[name] = s
         return schools
 
-    def load_walkzones(self, schools={}):
+    def load_zones(self, schools={}):
         school_walkzone_id = 6
         for school in query_api(school_walkzone_id):
             name = school['attributes']['NAME'].strip()
             s = self.get_school(name, schools)
             s = schools_models.School.objects.get(name=name)
-            s.walk_zone = Polygon(school['geometry']['rings'][0])
             s.type = 'magnet'
+            zone = Polygon(school['geometry']['rings'][0])
+            zone_type = school['attributes']['TYPE_']
+            if zone_type == "Walk Zone":
+                s.walk_zone = zone
+            if zone_type == "Choice Zone":
+                s.choice_zone = zone
+            if zone_type == "Priority":
+                s.priority_zone = zone
             schools[name] = s
         return schools
 
@@ -78,6 +87,6 @@ class Command(BaseCommand):
         schools = {}
         schools = self.load_school_points(schools)
         schools = self.load_districts(schools)
-        schools = self.load_walkzones(schools)
+        schools = self.load_zones(schools)
         for name in schools.keys():
             schools[name].save()
