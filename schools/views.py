@@ -41,6 +41,7 @@ class OptionSchools(SchoolAPIView):
     def get_queryset(self):
         queryset = super(OptionSchools, self).get_queryset()
         #TODO highlight Schools where pt in priority_zone or choice_zone
+        # (Type == Magnet && walk_zone != contain pt) || Type = Charter
         return queryset.filter(district=None).exclude(walk_zone__contains=self.pt)
 
 class AllSchools(SchoolAPIView):
