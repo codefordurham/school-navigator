@@ -56,6 +56,7 @@ class Command(BaseCommand):
                 name = district_json['attributes']['DISTRICT'].strip()
                 s = self.get_school(name, schools)
                 s.district = Polygon(district_json['geometry']['rings'][0])
+                s.type = 'neighborhood'
                 s.level = level
                 s.grade_min, s.grade_max = school_grade_mapping[level]
                 schools[name] = s
