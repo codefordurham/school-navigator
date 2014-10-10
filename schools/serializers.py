@@ -9,7 +9,7 @@ class SchoolSerializer(geo_serializers.GeoModelSerializer):
     class Meta:
         model = schools_models.School
         #TODO Add back district?
-        fields = ('id', 'name', 'level', 'address', 'magnet', 'eligibility')
+        fields = ('id', 'name', 'level', 'address', 'magnet', 'eligibility', 'location')
 
     def get_eligibility(self, obj):
        import random
