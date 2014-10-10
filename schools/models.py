@@ -1,25 +1,30 @@
 from django.contrib.gis.db import models
 
-ELEM = 1
-MID = 2
-SEC = 3
-HIGH = 4
 SCHOOL_LEVELS = (
-    (ELEM, 'Elementary'),
-    (MID, 'Middle'),
-    (SEC, 'Secondary'),
-    (HIGH, 'High')
+    ('elementary', 'Elementary'),
+    ('middle', 'Middle'),
+    ('secondary', 'Secondary'),
+    ('high', 'High')
 )
 
+SCHOOL_TYPES = (
+    ('neighborhood', 'Neighborhood'),
+    ('magnet', 'Magnet'),
+    ('charter', 'Charter'),
+    ('speciality', 'Specialty')
+)
 
 class School(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    level = models.IntegerField(choices=SCHOOL_LEVELS, default=4)
     address = models.CharField(max_length=100)
     zip_code = models.CharField(max_length=5)
-    magnet = models.BooleanField(default=False)
-    #Type = Neighborhood, Magnet, Charter
+
+    level = models.CharField(choices=SCHOOL_LEVELS, max_length=20)
+    type = models.CharField(choices=SCHOOL_TYPES, max_length=20)
     year_round = models.BooleanField(default=False)
+    grade_min = models.IntegerField()
+    grade_max = models.IntegerField()
+
     location = models.PointField()
     district = models.PolygonField(null=True)
 
