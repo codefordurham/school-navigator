@@ -42,6 +42,8 @@ class Command(BaseCommand):
                     float(school['geometry']['y'])
                 )
             s.address = school['attributes']['ADDRESS'].strip()
+            if school['attributes']['YEARROUND'] == "Year-Round":
+                s.year_round = True
             s.level = school['attributes']['TYPE_'].lower()
             s.website_url = school['attributes']['WEBSITE']
             s.grade_min, s.grade_max = school_grade_mapping[s.level]
@@ -50,8 +52,6 @@ class Command(BaseCommand):
 
 
     def load_districts(self, schools={}):
-        #maps external API endpoint IDs to internal model choices
-
         for api_id in (1, 2, 3):
             for district_json in query_api(api_id):
                 name = district_json['attributes']['DISTRICT'].strip()
