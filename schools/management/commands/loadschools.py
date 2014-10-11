@@ -43,6 +43,7 @@ class Command(BaseCommand):
                 )
             s.address = school['attributes']['ADDRESS'].strip()
             s.level = school['attributes']['TYPE_'].lower()
+            s.website_url = school['attributes']['WEBSITE']
             s.grade_min, s.grade_max = school_grade_mapping[s.level]
             schools[name] = s
         return schools
