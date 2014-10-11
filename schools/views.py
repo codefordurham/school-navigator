@@ -37,8 +37,8 @@ class AllSchools(SchoolAPIView):
     def get_queryset(self):
         queryset = super(AllSchools, self).get_queryset()
         queryset.filter(
-                Q(walk_zone__contains=self.pt) |
                 Q(district__contains=self.pt) |
+                Q(type='magnet') |
                 Q(type='specialty') |
                 Q(type='charter')
         )
