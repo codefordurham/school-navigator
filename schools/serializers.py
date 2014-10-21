@@ -1,4 +1,3 @@
-import random
 from rest_framework import serializers
 from rest_framework_gis import serializers as geo_serializers
 
@@ -9,8 +8,6 @@ class SchoolSerializer(geo_serializers.GeoModelSerializer):
 
     class Meta:
         model = schools_models.School
-        eligibility = serializers.SerializerMethodField('get_eligibility')
-        #TODO Add back district?
         fields = ('id', 'name', 'level', 'address', 'type', 'eligibility', 'location')
 
     def get_eligibility(self, obj):
