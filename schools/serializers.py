@@ -1,3 +1,4 @@
+import random
 from rest_framework import serializers
 from rest_framework_gis import serializers as geo_serializers
 
@@ -14,7 +15,6 @@ class SchoolSerializer(geo_serializers.GeoModelSerializer):
 
     def get_eligibility(self, obj):
         pt = self.context['point']
-        print obj.name
         if obj.district is not None and obj.district.contains(pt):
             return 'assigned'
         if obj.walk_zone is not None and obj.walk_zone.contains(pt):
