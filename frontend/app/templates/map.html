@@ -25,21 +25,28 @@
     </ul>
     <div id="my-schools">
         <h4>Elementary</h4>
-        <div data-ng-repeat="school in schools | filter:{'level': 1}" class="checkbox">
+        <div data-ng-repeat="school in schools | filter:{'level': 'elementary}" class="checkbox">
             <label>
                 <input type="checkbox" /> {{ school.name }}
             </label>
         </div>
 
         <h4>Middle School</h4>
-        <div data-ng-repeat="school in schools | filter:{'level': 2}" class="checkbox">
+        <div data-ng-repeat="school in schools | filter:{'level': 'middle'}" class="checkbox">
+            <label>
+                <input type="checkbox" /> {{ school.name }}
+            </label>
+        </div>
+
+        <h4>Secondary</h4>
+        <div data-ng-repeat="school in schools | filter:{'level': 'secondary'}" class="checkbox">
             <label>
                 <input type="checkbox" /> {{ school.name }}
             </label>
         </div>
 
         <h4>High School</h4>
-        <div data-ng-repeat="school in schools | filter:{'level': 4}" class="checkbox">
+        <div data-ng-repeat="school in schools | filter:{'level': 'high'}" class="checkbox">
             <label>
                 <input type="checkbox" /> {{ school.name }}
             </label>
