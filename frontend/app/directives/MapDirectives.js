@@ -6,7 +6,7 @@ angular.module('SchoolsApp.directives', [])
                 marker,
                 markerLatLng,
                 schools_layers = [],
-                homeIcon = L.divIcon({className: 'fa fa-home fa-2x', iconSize: '64px'}),
+                homeIcon = L.divIcon({className: 'fa fa-home fa-3x', iconSize: '64px'}),
                 schoolIcon = L.divIcon({className: 'fa fa-building fa-2x', iconSize: '64px'});
             element.css({
                 "height": document.documentElement.clientHeight + "px"
