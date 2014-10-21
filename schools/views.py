@@ -24,8 +24,8 @@ class SchoolAPIView(generics.ListAPIView):
         self.pt = pt
         return queryset
 
-    def get_context(self, **kwargs):
-        context = super(SchoolAPIView, self).get_context(**kwargs)
+    def get_serializer_context(self):
+        context = super(SchoolAPIView, self).get_serializer_context()
         context['point'] = self.pt
         return context
 
@@ -36,8 +36,10 @@ class AllSchools(SchoolAPIView):
 
     def get_queryset(self):
         queryset = super(AllSchools, self).get_queryset()
-        #TODO
-        #Assigned schools are blue
-        #Option schools are orange
-        #Others are gray
+        queryset.filter(
+                Q(district__contains=self.pt) |
+                Q(type='magnet') |
+                Q(type='specialty') |
+                Q(type='charter')
+        )
         return queryset

@@ -12,9 +12,14 @@ class SchoolSerializer(geo_serializers.GeoModelSerializer):
         fields = ('id', 'name', 'level', 'address', 'type', 'eligibility', 'location')
 
     def get_eligibility(self, obj):
-       import random
-       #TODO
-       #Assigned schools are blue
-       #Option schools are orange
-       #Others are gray
-       return random.choice(('assigned', 'option'))
+        pt = self.context['point']
+        if obj.district is not None and pt in obj.district:
+            return 'assigned'
+        elif obj.walk_zone is not None and pt in obj.walk_zone:
+            #TODO set highlight color
+            return 'option'
+        elif obj.type == 'magnet':
+            return 'option'
+        elif obj.type == 'charter':
+            return 'option'
+        return 'none'

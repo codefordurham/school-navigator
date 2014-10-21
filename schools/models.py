@@ -18,6 +18,7 @@ class School(models.Model):
     name = models.CharField(max_length=100, unique=True)
     address = models.CharField(max_length=100)
     zip_code = models.CharField(max_length=5)
+    website_url = models.CharField(max_length=500)
 
     level = models.CharField(choices=SCHOOL_LEVELS, max_length=20)
     type = models.CharField(choices=SCHOOL_TYPES, max_length=20)
