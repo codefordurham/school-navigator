@@ -3,7 +3,7 @@ from rest_framework_gis import serializers as geo_serializers
 
 import schools.models as schools_models
 
-class SchoolSerializer(geo_serializers.GeoModelSerializer):
+class SchoolListSerializer(geo_serializers.GeoModelSerializer):
     eligibility = serializers.SerializerMethodField('get_eligibility')
 
     class Meta:
@@ -16,9 +16,13 @@ class SchoolSerializer(geo_serializers.GeoModelSerializer):
             return 'assigned'
         if obj.walk_zone is not None and obj.walk_zone.contains(pt):
             #TODO set highlight color
-            return 'option'
+            return 'assigned'
         if obj.type == 'magnet':
             return 'option'
         if obj.type == 'charter':
             return 'option'
         return 'all'
+
+class SchoolDetailSerializer(geo_serializers.GeoModelSerializer):
+    class Meta:
+        model = schools_models.School

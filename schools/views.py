@@ -4,12 +4,16 @@ from django.db.models import Q
 from rest_framework import generics
 from rest_framework.exceptions import ParseError
 
-from schools.serializers import SchoolSerializer
+from schools.serializers import SchoolDetailSerializer, SchoolListSerializer
 from schools import models as schools_models
+
+class SchoolDetail(generics.RetrieveAPIView):
+    model = schools_models.School
+    serializer_class = SchoolDetailSerializer
 
 class SchoolAPIView(generics.ListAPIView):
     model = schools_models.School
-    serializer_class = SchoolSerializer
+    serializer_class = SchoolListSerializer
 
     def get_queryset(self):
         queryset = super(SchoolAPIView, self).get_queryset()
