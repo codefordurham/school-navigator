@@ -8,18 +8,20 @@ class SchoolSerializer(geo_serializers.GeoModelSerializer):
 
     class Meta:
         model = schools_models.School
+        eligibility = serializers.SerializerMethodField('get_eligibility')
         #TODO Add back district?
         fields = ('id', 'name', 'level', 'address', 'type', 'eligibility', 'location')
 
     def get_eligibility(self, obj):
         pt = self.context['point']
-        if obj.district is not None and pt in obj.district:
+        print obj.name
+        if obj.district is not None and obj.district.contains(pt):
             return 'assigned'
-        elif obj.walk_zone is not None and pt in obj.walk_zone:
+        if obj.walk_zone is not None and obj.walk_zone.contains(pt):
             #TODO set highlight color
             return 'option'
-        elif obj.type == 'magnet':
+        if obj.type == 'magnet':
             return 'option'
-        elif obj.type == 'charter':
+        if obj.type == 'charter':
             return 'option'
-        return 'none'
+        return 'all'
