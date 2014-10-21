@@ -20,7 +20,7 @@ class Command(BaseCommand):
     help = 'Load up the data from GeoJSON into the models'
 
     def get_school(self, name, schools):
-        if schools.has_key(name):
+        if name in schools:
             return schools[name]
         else:
             school, created = schools_models.School.objects.get_or_create(name=name)
