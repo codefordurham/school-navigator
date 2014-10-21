@@ -31,7 +31,7 @@ angular.module('SchoolsApp.controllers', [])
                         latitude: geo.lat(),
                         longitude: geo.lng()
                     };
-                    Schools.get($scope.userLocation, $scope.type).success(function(data) {
+                    Schools.get($scope.userLocation, $scope.eligibility).success(function(data) {
                         $scope.all_schools = data;
                     });
                 } else {
