@@ -1,3 +1,4 @@
+import random
 from rest_framework import serializers
 from rest_framework_gis import serializers as geo_serializers
 
@@ -13,13 +14,4 @@ class SchoolSerializer(geo_serializers.GeoModelSerializer):
 
     def get_eligibility(self, obj):
         pt = self.context['point']
-        if obj.district is not None and pt in obj.district:
-            return 'assigned'
-        elif obj.walk_zone is not None and pt in obj.walk_zone:
-            #TODO set highlight color
-            return 'option'
-        elif obj.type == 'magnet':
-            return 'option'
-        elif obj.type == 'charter':
-            return 'option'
-        return 'none'
+        return random.choice(['assigned', 'option'])
