@@ -12,6 +12,10 @@ angular.module('SchoolsApp.controllers', [])
             $scope.schools = $filter('filter')(newValue, {'eligibility': $scope.eligibility});
         });
 
+        $scope.NavigationActive = function(tab) {
+            $scope.tab_name = tab;
+        };
+
         $scope.filterSchools = function (eligibility) {
             if (eligibility == 'all') {
                 $scope.schools = $scope.all_schools;
@@ -31,7 +35,7 @@ angular.module('SchoolsApp.controllers', [])
                         latitude: geo.lat(),
                         longitude: geo.lng()
                     };
-                    Schools.get($scope.userLocation, $scope.eligibility).success(function(data) {
+                    Schools.get_by_type($scope.userLocation, $scope.eligibility).success(function(data) {
                         $scope.all_schools = data;
                     });
                 } else {

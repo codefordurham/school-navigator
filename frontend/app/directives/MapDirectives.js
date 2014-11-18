@@ -1,11 +1,12 @@
 angular.module('SchoolsApp.directives', [])
-    .directive('schoolsMap', [function() {
+    .directive('schoolsMap', ['Schools', function(Schools) {
         var linker = function(scope, element, attrs) {
             // do all map rendering and interactions here
             var map = L.map('map', { zoomControl:false }).setView([36.002453, -78.905869], 13),
                 marker,
                 markerLatLng,
                 schools_layers = [],
+                current_highlight,
                 homeIcon = L.divIcon({className: 'fa fa-home fa-3x', iconSize: '64px'}),
                 schoolIcon = L.divIcon({className: 'fa fa-building fa-2x', iconSize: '64px'});
             element.css({
@@ -48,11 +49,34 @@ angular.module('SchoolsApp.directives', [])
                         school_marker =  L.marker([school.location.coordinates['1'], school.location.coordinates['0']], {icon: schoolIcon})
                             .bindPopup(school.name);
 
+                    school_marker.school_id = school.id;
+                    school_marker.on('mouseover', function() {
+                        highlight_school(this.school_id);
+                    });
+
                     school_layer = L.layerGroup([school_marker]);
                     schools_layers.push(school_layer);
                     school_layer.addTo(map);
                 });
             });
+
+            var highlight_school = function(school_id) {
+                // remove current highlight
+                if (current_highlight) {
+                    map.removeLayer(current_highlight);
+                }
+                Schools.get(school_id).success(function(school) {
+                    var district_bounderies = [];
+                    angular.forEach(school.district.coordinates[0], function(coordinates, key) {
+                        // HACK: coordinates need to be inverted.
+                        // just the django things.
+                        district_bounderies.push([coordinates[1], coordinates[0]]);
+                    });
+                    current_highlight = L.polygon(district_bounderies, {color: school.color});
+                    current_highlight.addTo(map);
+                    console.log(data);
+                })
+            };
 
             var clearMap = function() {
                 angular.forEach(schools_layers, function(layer) {

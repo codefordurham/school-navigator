@@ -3,6 +3,14 @@ from rest_framework_gis import serializers as geo_serializers
 
 import schools.models as schools_models
 
+COLOR_MAP = {
+    'elementary': 'red',
+    'middle': 'yellow',
+    'secondary': 'green',
+    'high': 'blue'
+}
+
+
 class SchoolListSerializer(geo_serializers.GeoModelSerializer):
     eligibility = serializers.SerializerMethodField('get_eligibility')
     preference = serializers.SerializerMethodField('get_preference')
@@ -31,6 +39,12 @@ class SchoolListSerializer(geo_serializers.GeoModelSerializer):
         if obj.choice_zone is not None and obj.choice_zone.contains(pt):
             return 'choice'
 
+
 class SchoolDetailSerializer(geo_serializers.GeoModelSerializer):
+    color = serializers.SerializerMethodField('get_color')
+
     class Meta:
         model = schools_models.School
+
+    def get_color(self, obj):
+        return COLOR_MAP[obj.level]
