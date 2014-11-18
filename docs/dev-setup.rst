@@ -66,8 +66,9 @@ local development system:
 - `pip >= 1.5 <http://www.pip-installer.org/>`_
 - `virtualenv >= 1.11 <http://www.virtualenv.org/>`_
 - `virtualenvwrapper >= 3.0 <http://pypi.python.org/pypi/virtualenvwrapper>`_
-- Postgres >= 9.1
+- Postgres >= 9.1 
 - git >= 1.7
+
 
 The deployment uses SSH with agent forwarding so you'll need to enable agent
 forwarding if it is not already by adding ``ForwardAgent yes`` to your SSH config.
@@ -81,6 +82,13 @@ If you need Python 3.4 installed, you can use this PPA::
     sudo add-apt-repository ppa:fkrull/deadsnakes
     sudo apt-get update
     sudo apt-get install python3.4-dev
+
+Even if you have python3.4 installed, ensure that you have `python3.4-dev`
+installed, as it's needed to install several python libraries.
+
+You'll also need to install the postgres dev package::
+
+    sudo apt-get install postgresql-server-X.Y-dev
 
 The tool that we use to deploy code is called `Fabric
 <http://docs.fabfile.org/>`_, which is not yet Python3 compatible. So,
@@ -109,9 +117,24 @@ If you're on Ubuntu 12.04, to get get postgis you need to set up a few more
 packages before you can create the db and set up the postgis extension::
 
    sudo apt-add-repository ppa:ubuntugis/ppa
-   sudo aptitude update && sudo aptitude install postgis postgresql-9.1-postgis-2.0 postgresql-9.1-postgis-2.0-scripts
+   sudo apt-get update
+   sudo apt-get install postgis postgresql-9.1-postgis-2.0 postgresql-9.1-postgis-2.0-scripts
 
-Now, create the Postgres database and run the initial syncdb/migrate::
+If your on 12.10 or later::
+
+    sudo apt-get install postgis postgresql-X.Y-postgis-2.0 postgresql-X.Y-postgis-2.0-scripts
+
+Now, create a Postgres user::
+
+    sudo -u postgres createuser --superuser $USER
+    sudo -u postgres psql
+
+This will open the psql prompt; there you can set the new user's password::
+
+    \password $USER
+
+Exit the psql prompt and create the database for the app and run the initial
+syncdb/migrate::
 
     createdb -E UTF-8 school_inspector
     psql school_inspector -c "CREATE EXTENSION postgis;"
