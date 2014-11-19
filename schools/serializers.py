@@ -47,4 +47,4 @@ class SchoolDetailSerializer(geo_serializers.GeoModelSerializer):
         model = schools_models.School
 
     def get_color(self, obj):
-        return COLOR_MAP[obj.level]
+        return COLOR_MAP.get(obj.level, 'purple')
