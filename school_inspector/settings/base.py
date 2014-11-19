@@ -193,7 +193,7 @@ LOGGING = {
         },
         '': {
             'handlers': ['file'],
-            'level': 'ERROR',
+            'level': 'DEBUG',
         },
     }
 }
