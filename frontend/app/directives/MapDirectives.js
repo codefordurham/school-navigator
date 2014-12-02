@@ -67,14 +67,17 @@ angular.module('SchoolsApp.directives', [])
                 }
                 Schools.get(school_id).success(function(school) {
                     var district_bounderies = [];
-                    angular.forEach(school.district.coordinates[0], function(coordinates, key) {
-                        // HACK: coordinates need to be inverted.
-                        // just the django things.
-                        district_bounderies.push([coordinates[1], coordinates[0]]);
-                    });
-                    current_highlight = L.polygon(district_bounderies, {color: school.color});
-                    current_highlight.addTo(map);
-                    console.log(data);
+                    if (school.district) {
+                        angular.forEach(school.district.coordinates[0], function(coordinates, key) {
+                            // HACK: coordinates need to be inverted.
+                            // just the django things.
+                            district_bounderies.push([coordinates[1], coordinates[0]]);
+                        });
+                    }
+                    if (district_bounderies) {
+                        current_highlight = L.polygon(district_bounderies, {color: school.color});
+                        current_highlight.addTo(map);
+                    }
                 })
             };
 
