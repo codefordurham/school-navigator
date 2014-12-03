@@ -80,6 +80,12 @@ angular.module('SchoolsApp.directives', [])
                     }
                 })
             };
+            $('.nav li a').click(function() {
+                // remove current highlight
+                if (current_highlight) {
+                    map.removeLayer(current_highlight);
+                }
+            });
 
             var clearMap = function() {
                 angular.forEach(schools_layers, function(layer) {
