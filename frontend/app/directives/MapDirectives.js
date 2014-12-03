@@ -7,8 +7,7 @@ angular.module('SchoolsApp.directives', [])
                 markerLatLng,
                 schools_layers = [],
                 current_highlight,
-                homeIcon = L.divIcon({className: 'fa fa-home fa-3x', iconSize: '64px'}),
-                schoolIcon = L.divIcon({className: 'fa fa-building fa-2x', iconSize: '64px'});
+                homeIcon = L.divIcon({className: 'fa fa-home fa-3x', iconSize: '64px'});
             element.css({
                 "height": document.documentElement.clientHeight + "px"
             });
@@ -44,7 +43,7 @@ angular.module('SchoolsApp.directives', [])
                 // clear map
                 clearMap();
                 angular.forEach(schools, function(school) {
-                    console.log(school);
+                    schoolIcon = L.divIcon({className: school.type + ' school_point ' + school.level, iconSize: '64px', html: school.name});
                     var school_layer,
                         school_marker =  L.marker([school.location.coordinates['1'], school.location.coordinates['0']], {icon: schoolIcon})
                             .bindPopup(school.name);
