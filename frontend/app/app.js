@@ -3,7 +3,8 @@ var app = angular.module("schoolsApp", [
     'SchoolsApp.directives',
     'SchoolsApp.geoDecoder',
     'SchoolsApp.services',
-    'SchoolsApp.controllers'
+    'SchoolsApp.controllers',
+    'SchoolsApp.detailCtrl'
 ]);
 
 app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
@@ -19,6 +20,10 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
         .when('/location/:latitude/:longitude/', {
             controller: 'schoolsMapCtrl',
             templateUrl: 'app/templates/map.html'
+            })
+        .when('/schools/:school/', {
+            controller: 'detailCtrl',
+            templateUrl: 'app/templates/details.html'
             })
         .when('/about', {
             templateUrl: 'app/templates/about.html'
