@@ -1,16 +1,25 @@
 angular.module('SchoolsApp.controllers', [])
-    .controller('schoolsMapCtrl', ['$scope', '$filter', 'Schools', 'Geodecoder', function($scope, $filter, Schools, Geodecoder) {
+    .controller('schoolsMapCtrl', ['$scope', '$filter', '$routeParams', '$location',
+        'Schools', 'Geodecoder', function($scope, $filter, $params, $location, Schools, Geodecoder) {
         $scope.all_schools = [];  // assigned and optional schools
         $scope.schools = [];  // schools for current selected eligibility
         $scope.address = '';
         $scope.eligibility = 'assigned';
-        $scope.userLocation = {
-            latitude: '35.9730',
-            longitude: '-78.934'
-        };
+        if ($params.latitude && $params.longitude) {
+            $scope.userLocation = {
+                latitude: $params.latitude,
+                longitude: $params.longitude
+            };
+        } else {
+            $scope.userLocation = {
+                latitude: '35.9730',
+                longitude: '-78.934'
+            };
+        }
 
-        $scope.$watch('all_schools', function(newValue) {
-            $scope.schools = $filter('filter')(newValue, {'eligibility': $scope.eligibility});
+        Schools.get_schools($scope.userLocation).success(function(data) {
+            $scope.all_schools = data;
+            $scope.filterSchools($scope.eligibility);
         });
 
         $scope.NavigationActive = function(tab) {
@@ -32,9 +41,8 @@ angular.module('SchoolsApp.controllers', [])
                         latitude: geo.lat(),
                         longitude: geo.lng()
                     };
-                    Schools.get_by_type($scope.userLocation).success(function(data) {
-                        $scope.all_schools = data;
-                    });
+                    $location.path('/location/' + geo.lat() + '/' + geo.lng() + '/');
+                    $scope.$apply();
                 } else {
                     alert('Geocode was not successful for the following reason: ' + status);
                 }

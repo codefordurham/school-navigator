@@ -1,6 +1,6 @@
 angular.module('SchoolsApp.services', [])
     .service('Schools', function($http) {
-    this.get_by_type = function(location) {
+    this.get_schools = function(location) {
       var url = 'https://schools.codefordurham.com/api/schools/';
       return $http({
           method: 'GET',

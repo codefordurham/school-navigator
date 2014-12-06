@@ -16,6 +16,10 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
             controller: 'schoolsMapCtrl',
             templateUrl: 'app/templates/map.html'
             })
+        .when('/location/:latitude/:longitude/', {
+            controller: 'schoolsMapCtrl',
+            templateUrl: 'app/templates/map.html'
+            })
         .when('/about', {
             templateUrl: 'app/templates/about.html'
             })
@@ -28,7 +32,4 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
         .when('search', {
 
         })
-        .otherwise({
-            redirectTo: '/'
-            })
 }]);
