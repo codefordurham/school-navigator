@@ -1,6 +1,7 @@
 angular.module('SchoolsApp.controllers', [])
     .controller('schoolsMapCtrl', ['$scope', '$filter', 'Schools', 'Geodecoder', function($scope, $filter, Schools, Geodecoder) {
-        $scope.all_schools = [];
+        $scope.all_schools = [];  // assigned and optional schools
+        $scope.schools = [];  // schools for current selected eligibility
         $scope.address = '';
         $scope.eligibility = 'assigned';
         $scope.userLocation = {
@@ -17,11 +18,7 @@ angular.module('SchoolsApp.controllers', [])
         };
 
         $scope.filterSchools = function (eligibility) {
-            if (eligibility == 'all') {
-                $scope.schools = $scope.all_schools;
-            } else {
-                $scope.schools = $filter('filter')($scope.all_schools, {'eligibility': eligibility});
-            }
+            $scope.schools = $filter('filter')($scope.all_schools, {'eligibility': eligibility});
             $scope.eligibility = eligibility;
         };
 
