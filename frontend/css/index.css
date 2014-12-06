@@ -45,6 +45,14 @@ body {
     color: rgb(24, 24, 24);
 }
 
+.leaflet-left {
+    right: 20px!important;
+}
+
+.leaflet-top {
+    bottom: 30px!important;
+}
+
 .school_point {
     border-radius: 50%;
     width: 50px;

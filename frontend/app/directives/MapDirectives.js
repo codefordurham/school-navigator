@@ -1,8 +1,9 @@
 angular.module('SchoolsApp.directives', [])
-    .directive('schoolsMap', ['Schools', function(Schools) {
+    .directive('schoolsMap', ['$q', 'Schools', function($q, Schools) {
         var linker = function(scope, element, attrs) {
+            console.log("Linker");
             // do all map rendering and interactions here
-            var map = L.map('map', { zoomControl:false }).setView([36.002453, -78.905869], 13),
+            var map = L.map('map', { zoomControl:true }).setView([36.002453, -78.905869], 13),
                 marker,
                 markerLatLng,
                 schools_layers = [],
@@ -11,10 +12,20 @@ angular.module('SchoolsApp.directives', [])
             element.css({
                 "height": document.documentElement.clientHeight + "px"
             });
-            L.tileLayer('https://{s}.tiles.mapbox.com/v3/vrocha.j3fib8g6/{z}/{x}/{y}.png', {
-                attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-                maxZoom: 18
-            }).addTo(map);
+            // default zoom controls position
+            map.zoomControl.setPosition("bottomright");
+
+            d = $q.defer();
+            d.resolve({
+                'map': map
+            });
+            d.promise.then(function() {
+                console.log("what?");
+                L.tileLayer('https://{s}.tiles.mapbox.com/v3/vrocha.j3fib8g6/{z}/{x}/{y}.png', {
+                    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                    maxZoom: 18
+                }).addTo(map)
+            });
 
             // resize map to fit current window
             $(window).bind('resize', function() {
@@ -92,7 +103,10 @@ angular.module('SchoolsApp.directives', [])
                     map.removeLayer(layer)
                 });
                 schools_layers = [];
-            }
+            };
+
+            
+
         };
         return {
             restrict: 'A',
