@@ -1,8 +1,6 @@
 angular.module('SchoolsApp.controllers', [])
     .controller('schoolsMapCtrl', ['$scope', '$filter', '$routeParams', '$location',
         'Schools', 'Geodecoder', function($scope, $filter, $params, $location, Schools, Geodecoder) {
-        $scope.all_schools = [];  // assigned and optional schools
-        $scope.schools = [];  // schools for current selected eligibility
         $scope.address = '';
         $scope.eligibility = 'assigned';
         if ($params.latitude && $params.longitude) {
@@ -37,10 +35,6 @@ angular.module('SchoolsApp.controllers', [])
                 if (status == google.maps.GeocoderStatus.OK) {
                     // always get the first result returned
                     var geo = results[0].geometry.location;
-                    $scope.userLocation = {
-                        latitude: geo.lat(),
-                        longitude: geo.lng()
-                    };
                     $location.path('/location/' + geo.lat() + '/' + geo.lng() + '/');
                     $scope.$apply();
                 } else {

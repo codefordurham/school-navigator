@@ -38,8 +38,8 @@ body {
     margin-right: 5px;
 }
 #map {
-    width: 100%;
-    height: 1000px;
+    width: 800px;
+    height: 400px;
 }
 #map .fa-home {
     color: rgb(24, 24, 24);
