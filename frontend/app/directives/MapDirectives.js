@@ -62,7 +62,7 @@ angular.module('SchoolsApp.directives', [])
 
                     school_marker.school_id = school.id;
                     school_marker.on('mouseover', function() {
-                        highlight_school(this.school_id);
+                        scope.highlight_school(this.school_id);
                     });
 
                     school_layer = L.layerGroup([school_marker]);
@@ -71,7 +71,7 @@ angular.module('SchoolsApp.directives', [])
                 });
             });
 
-            var highlight_school = function(school_id) {
+            scope.highlight_school = function(school_id) {
                 // remove current highlight
                 if (current_highlight) {
                     map.removeLayer(current_highlight);
@@ -105,7 +105,7 @@ angular.module('SchoolsApp.directives', [])
                 schools_layers = [];
             };
 
-            
+
 
         };
         return {

@@ -25,30 +25,22 @@
     <div id="my-schools">
         <h4>Elementary</h4>
         <div data-ng-repeat="school in schools | filter:{'level': 'elementary'}" class="checkbox">
-            <label>
-                <input type="checkbox" /> {{ school.name }}
-            </label>
+            <a class="school_listing" data-ng-mouseover="highlight_school(school.id);" data-ng-href="#/details/{{ school.id }}">{{ school.name }}</a>
         </div>
 
         <h4>Middle School</h4>
         <div data-ng-repeat="school in schools | filter:{'level': 'middle'}" class="checkbox">
-            <label>
-                <input type="checkbox" /> {{ school.name }}
-            </label>
+            <a class="school_listing" data-ng-mouseover="highlight_school(school.id);" data-ng-href="#/details/{{ school.id }}">{{ school.name }}</a>
         </div>
 
         <h4>Secondary</h4>
         <div data-ng-repeat="school in schools | filter:{'level': 'secondary'}" class="checkbox">
-            <label>
-                <input type="checkbox" /> {{ school.name }}
-            </label>
+            <a class="school_listing" data-ng-mouseover="highlight_school(school.id);" data-ng-href="#/details/{{ school.id }}">{{ school.name }}</a>
         </div>
 
         <h4>High School</h4>
         <div data-ng-repeat="school in schools | filter:{'level': 'high'}" class="checkbox">
-            <label>
-                <input type="checkbox" /> {{ school.name }}
-            </label>
+            <a class="school_listing" data-ng-mouseover="highlight_school(school.id);" data-ng-href="#/details/{{ school.id }}">{{ school.name }}</a>
         </div>
     </div>
 </div>
