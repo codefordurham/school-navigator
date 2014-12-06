@@ -44,8 +44,11 @@ class SchoolListSerializer(geo_serializers.GeoModelSerializer):
     def get_short_name(self, obj):
         if obj.short_name:
             return obj.short_name
-        words = [word[0].upper() for index, word in enumerate(obj.name.split(' ')) if index <= 1]
-        return "".join(words)
+        words = [word.upper() for index, word in enumerate(obj.name.split(' ')) if index <= 1]
+        if len(words) == 1:
+            name = words[0]
+            return "".join([name[0], name[1]])
+        return "".join(map(lambda word: word[0], words))
 
 
 class SchoolDetailSerializer(geo_serializers.GeoModelSerializer):
