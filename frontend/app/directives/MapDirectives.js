@@ -3,7 +3,7 @@ angular.module('SchoolsApp.directives', [])
         var linker = function(scope, element, attrs) {
             // do all map rendering and interactions here
             element.height($(window).height()).width($(window).width());
-            var map = new L.map('map', { zoomControl:true }).setView([36.002453, -78.905869], 13),
+            var map = new L.map('map', { zoomControl:true }),
                 marker,
                 markerLatLng,
                 schools_layers = [],
@@ -27,11 +27,9 @@ angular.module('SchoolsApp.directives', [])
                     "height": document.documentElement.clientHeight + "px"
                 });
             });
-            console.log("twice");
             // variable changes
             scope.$watch(attrs.userLocation, function(location) {
                 // add or move marker to map
-                console.log("Watching");
                 if (marker) {
                     markerLatLng = new L.LatLng(location.latitude, location.longitude);
                     marker.setLatLng(markerLatLng);
@@ -48,11 +46,8 @@ angular.module('SchoolsApp.directives', [])
             scope.$watch(attrs.schools, function(schools, oldvalue) {
                 // clear map
                 if (schools) {
-                    console.log("change in schools variable");
-                    console.log(oldvalue);
                     clearMap();
                     angular.forEach(schools, function(school) {
-                        console.log(school);
                         var schoolIcon = L.divIcon({className: school.type + ' school_point ' + school.level, iconSize: '64px', html: school.short_name});
                         var school_layer,
                             school_marker =  L.marker([school.location.coordinates['1'], school.location.coordinates['0']], {icon: schoolIcon})
