@@ -1,4 +1,4 @@
-<div id="map" data-user-location="userLocation" data-schools="schools" data-schools-map></div>
+<div id="map" data-user-location="userLocation" data-schools="schools" data-schools-map height="1000" width="1000"></div>
 
 <div id="main-menu">
     <ul class="nav nav-pills">
@@ -21,38 +21,26 @@
     <ul class="nav nav-tabs" role="tablist">
       <li data-ng-class="{active: eligibility == 'assigned'}"><a data-ng-click="filterSchools('assigned')">Assigned</a></li>
       <li data-ng-class="{active: eligibility == 'option'}"><a data-ng-click="filterSchools('option')">Option</a></li>
-      <li data-ng-class="{active: eligibility == 'all'}"><a data-ng-click="filterSchools('all')">All</a></li>
     </ul>
     <div id="my-schools">
         <h4>Elementary</h4>
         <div data-ng-repeat="school in schools | filter:{'level': 'elementary'}" class="checkbox">
-            <label>
-                <input type="checkbox" /> {{ school.name }}
-            </label>
+            <a class="school_listing" data-ng-mouseover="highlight_school(school.id);" data-ng-href="#/schools/{{ school.id }}">{{ school.name }}</a>
         </div>
 
         <h4>Middle School</h4>
         <div data-ng-repeat="school in schools | filter:{'level': 'middle'}" class="checkbox">
-            <label>
-                <input type="checkbox" /> {{ school.name }}
-            </label>
+            <a class="school_listing" data-ng-mouseover="highlight_school(school.id);" data-ng-href="#/schools/{{ school.id }}">{{ school.name }}</a>
         </div>
 
         <h4>Secondary</h4>
         <div data-ng-repeat="school in schools | filter:{'level': 'secondary'}" class="checkbox">
-            <label>
-                <input type="checkbox" /> {{ school.name }}
-            </label>
+            <a class="school_listing" data-ng-mouseover="highlight_school(school.id);" data-ng-href="#/schools/{{ school.id }}">{{ school.name }}</a>
         </div>
 
         <h4>High School</h4>
         <div data-ng-repeat="school in schools | filter:{'level': 'high'}" class="checkbox">
-            <label>
-                <input type="checkbox" /> {{ school.name }}
-            </label>
+            <a class="school_listing" data-ng-mouseover="highlight_school(school.id);" data-ng-href="#/schools/{{ school.id }}">{{ school.name }}</a>
         </div>
-    </div>
-    <div class="compare-schools clearfix">
-        <button class="pull-right btn btn-success">Compare Schools</button>
     </div>
 </div>

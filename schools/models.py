@@ -14,8 +14,10 @@ SCHOOL_TYPES = (
     ('speciality', 'Specialty')
 )
 
+
 class School(models.Model):
     name = models.CharField(max_length=100, unique=True)
+    short_name = models.CharField(max_length=5, blank=True)
     address = models.CharField(max_length=100)
     zip_code = models.CharField(max_length=5)
     website_url = models.CharField(max_length=500)
