@@ -26,11 +26,9 @@ class SchoolListSerializer(geo_serializers.GeoModelSerializer):
         if obj.walk_zone is not None and obj.walk_zone.contains(pt):
             #TODO set highlight color
             return 'assigned'
-        if obj.type == 'magnet':
+        if obj.type in ('magnet', 'charter', 'speciality'):
             return 'option'
-        if obj.type == 'charter':
-            return 'option'
-        return 'all'
+        raise Exception
 
     def get_preference(self, obj):
         pt = self.context['point']
