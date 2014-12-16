@@ -23,7 +23,7 @@ class Command(BaseCommand):
         if name in schools:
             return schools[name]
         else:
-            school, created = schools_models.School.objects.get_or_create(name=name)
+            school, created = schools_models.School.objects.get_or_create(name=name, location=Point(0,0), grade_max=-1, grade_min=-1)
             return school
 
     def load_school_points(self, schools={}):
@@ -33,6 +33,7 @@ class Command(BaseCommand):
             'middle': (5, 8),
             'secondary': (5, 12),
             'high': (9, 12),
+            'hospital': (0, 12),
         }
         for school in query_api(school_point_id):
             name = school['attributes']['School'].strip()
@@ -40,7 +41,7 @@ class Command(BaseCommand):
             s.location = Point(
                     float(school['geometry']['x']),
                     float(school['geometry']['y'])
-                )
+            )
             s.address = school['attributes']['ADDRESS'].strip()
             if school['attributes']['YEARROUND'] == "Year-Round":
                 s.year_round = True
