@@ -23,7 +23,11 @@ class Command(BaseCommand):
         if name in schools:
             return schools[name]
         else:
-            school, created = schools_models.School.objects.get_or_create(name=name, location=Point(0,0), grade_max=-1, grade_min=-1)
+            school, created = schools_models.School.objects.get_or_create(name=name)
+            if created is True:
+                school.location=Point(0,0)
+                school.grade_max=-1
+                school.grade_min=-1
             return school
 
     def load_school_points(self, schools={}):
@@ -67,7 +71,6 @@ class Command(BaseCommand):
         for school in query_api(school_walkzone_id):
             name = school['attributes']['NAME'].strip()
             s = self.get_school(name, schools)
-            s = schools_models.School.objects.get(name=name)
             s.type = 'magnet'
             zone = Polygon(school['geometry']['rings'][0])
             zone_type = school['attributes']['TYPE_']
