@@ -23,11 +23,12 @@ class Command(BaseCommand):
         if name in schools:
             return schools[name]
         else:
-            school, created = schools_models.School.objects.get_or_create(name=name)
-            if created is True:
-                school.location=Point(0,0)
-                school.grade_max=-1
-                school.grade_min=-1
+            defaults = {
+                'location': Point(0,0),
+                'grade_max': -1,
+                'grade_min': -1,
+            }
+            school, created = schools_models.School.objects.get_or_create(name=name, defaults=defaults)
             return school
 
     def load_school_points(self, schools={}):
