@@ -1,5 +1,5 @@
 angular.module('SchoolsApp.directives', [])
-    .directive('schoolsMap', ['$q', 'Schools', function($q, Schools) {
+    .directive('schoolsMap', ['$q', 'Schools', '$location', function($q, Schools, $location) {
         var linker = function(scope, element, attrs) {
             // do all map rendering and interactions here
             element.height($(window).height()).width($(window).width());
@@ -9,6 +9,7 @@ angular.module('SchoolsApp.directives', [])
                 schools_layers = [],
                 current_highlight,
                 homeIcon = L.divIcon({className: 'fa fa-home fa-3x', iconSize: '64px'});
+
             // default zoom controls position
             map.zoomControl.setPosition("bottomright");
 
@@ -36,9 +37,16 @@ angular.module('SchoolsApp.directives', [])
                 } else {
                     marker = L.marker(
                         [location.latitude, location.longitude],
-                        {icon: homeIcon}
+                        {icon: homeIcon, draggable: true, riseOnHover: true}
                     ).addTo(map);
                 }
+                marker.on('dragend', function(event){
+                    var marker = event.target;
+                    var position = marker.getLatLng();
+                    scope.$apply(function(){
+                        $location.path('/location/' + position.lat + '/' + position.lng + '/').replace();
+                    });
+                });
                 // center marker
                 map.setView([location.latitude, location.longitude], 12);
             });
