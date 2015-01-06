@@ -45,4 +45,4 @@ class AllSchools(SchoolAPIView):
                 (~Q(district=None) & Q(walk_zone__contains=self.pt)) |
                 Q(type__in=('magnet', 'speciality', 'charter'))
         )
-        return qs
+        return qs.distance(self.pt)
