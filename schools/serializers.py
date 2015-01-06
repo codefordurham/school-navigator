@@ -20,7 +20,8 @@ class SchoolListSerializer(geo_serializers.GeoModelSerializer):
     class Meta:
         model = schools_models.School
         fields = ('id', 'name', 'level', 'address', 'type', 'eligibility',
-                  'location', 'preference', 'short_name', 'distance')
+                  'location', 'preference', 'short_name', 'distance',
+                  'year_round', 'grade_min', 'grade_max')
 
     def get_eligibility(self, obj):
         pt = self.context['point']
