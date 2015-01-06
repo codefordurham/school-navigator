@@ -18,6 +18,7 @@ angular.module('SchoolsApp.controllers', [])
         Schools.get_schools($scope.userLocation).success(function(data) {
             $scope.all_schools = data;
             $scope.filterSchools($scope.eligibility);
+            $('[data-toggle="tooltip"]').tooltip();
         });
 
         $scope.NavigationActive = function(tab) {

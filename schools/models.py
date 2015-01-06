@@ -18,9 +18,9 @@ SCHOOL_TYPES = (
 class School(models.Model):
     name = models.CharField(max_length=100, unique=True)
     short_name = models.CharField(max_length=5, blank=True)
-    address = models.CharField(max_length=100)
-    zip_code = models.CharField(max_length=5)
-    website_url = models.CharField(max_length=500)
+    address = models.CharField(max_length=100, blank=True)
+    zip_code = models.CharField(max_length=5, blank=True)
+    website_url = models.CharField(max_length=500, blank=True)
 
     level = models.CharField(choices=SCHOOL_LEVELS, max_length=20)
     type = models.CharField(choices=SCHOOL_TYPES, max_length=20)
@@ -29,12 +29,12 @@ class School(models.Model):
     grade_max = models.IntegerField()
 
     location = models.PointField()
-    district = models.PolygonField(null=True)
+    district = models.PolygonField(null=True, blank=True)
 
     # Zones per http://dpsncapplication.com/site327.php
-    walk_zone = models.PolygonField(null=True)
-    choice_zone =  models.PolygonField(null=True)
-    priority_zone = models.PolygonField(null=True)
+    walk_zone = models.PolygonField(null=True, blank=True)
+    choice_zone =  models.PolygonField(null=True, blank=True)
+    priority_zone = models.PolygonField(null=True, blank=True)
 
     # Override default manager for gis
     objects = models.GeoManager()
