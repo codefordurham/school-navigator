@@ -26,14 +26,74 @@ body {
     left: 40px;
     width: 400px;
     background: white;
-    padding-bottom: 5px;
     max-height: 800px;
 }
+
 #my-schools {
     background: white;
-    padding: 20px;
+    /*padding: 20px;*/
     max-height: 700px;
+    font-family: 'Roboto', sans-serif;
 }
+
+#my-schools h3 {
+    color: #fff;
+    padding: 10px 15px;
+    margin: 0px;
+}
+
+#my-schools h3.elementary {
+    background-color: #48BC6B;
+}
+
+#my-schools h3.secondary {
+    background-color: #3F899E;
+}
+
+#my-schools h3.high {
+    background-color: #4F61AD;
+}
+
+.school-group .school-group-item {
+    background-color: transparent;
+    overflow: hidden;
+    border: 0;
+    border-radius: 0;
+    padding: 0 16px;
+}
+
+/* http://paletton.com/#uid=53o0u0kjPvU9VPsfmFjnPsIrNn+ */
+
+.school-group.elementary .school-group-item:hover {
+    background-color: #9FE7B5;
+}
+
+.school-group.secondary .school-group-item:hover {
+    background-color: #9ACDDC;
+}
+
+.school-group.high .school-group-item:hover {
+    background-color: #A4B0E2;
+}
+
+.school-group .school-group-item .school-group-item-heading {
+    margin: 10px 0px;
+    vertical-align: middle;
+}
+
+.school-group .school-group-item .school-group-item-heading h4 {
+    display: inline;
+    font-size: 20px;
+    line-height: 29px;
+}
+
+.school-group .school-group-separator {
+    content: "";
+    width: 100%;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    float: right;
+}
+
 .compare-schools button {
     margin-right: 5px;
 }
@@ -63,3 +123,37 @@ body {
     border:5px solid rgba(255,255,255,0.5);
     color: white;
 }
+
+.school_point.elementary {
+    background: #48BC6B;
+}
+
+.school_point.middle {
+    background: #3F899E;
+}
+
+.school_point.secondary {
+    background: #3F899E;
+}
+
+.school_point.high {
+    background: #4F61AD;
+}
+
+.school-badge {
+    padding: 2px;
+    font-weight: bold;
+    font-size: 10px;
+}
+
+.school-badge.magnet {
+    background-color: #FFAE8B;
+    border:2px solid rgba(255,255,255,0.5);
+}
+
+.school-badge.year-round {
+    background-color: #EF83A2;
+    border:2px solid rgba(255,255,255,0.5);
+}
+
+

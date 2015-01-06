@@ -4,10 +4,10 @@ from rest_framework_gis import serializers as geo_serializers
 import schools.models as schools_models
 
 COLOR_MAP = {
-    'elementary': 'red',
-    'middle': 'yellow',
-    'secondary': 'green',
-    'high': 'blue'
+    'elementary': '#48BC6B',
+    'middle': '#3F899E',
+    'secondary': '#3F899E',
+    'high': '#4F61AD'
 }
 
 
