@@ -79,7 +79,7 @@ class Command(BaseCommand):
                 s.walk_zone = zone
             if zone_type == "Choice Zone":
                 s.choice_zone = zone
-            if zone_type == "Priority":
+            if zone_type == "Priority Zone":
                 s.priority_zone = zone
             schools[name] = s
         return schools
