@@ -36,8 +36,7 @@ angular.module('SchoolsApp.controllers', [])
                 if (status == google.maps.GeocoderStatus.OK) {
                     // always get the first result returned
                     var geo = results[0].geometry.location;
-                    $location.path('/location/' + geo.lat() + '/' + geo.lng() + '/');
-                    $scope.$apply();
+                    $location.path('/location/' + geo.lat() + '/' + geo.lng() + '/', false);
                 } else {
                     alert('Geocode was not successful for the following reason: ' + status);
                 }

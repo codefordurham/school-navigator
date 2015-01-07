@@ -44,7 +44,7 @@ angular.module('SchoolsApp.directives', [])
                     var marker = event.target;
                     var position = marker.getLatLng();
                     scope.$apply(function(){
-                        $location.path('/location/' + position.lat + '/' + position.lng + '/').replace();
+                        $location.path('/location/' + position.lat + '/' + position.lng + '/', false);
                     });
                 });
                 // center marker

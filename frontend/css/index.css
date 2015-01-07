@@ -34,6 +34,7 @@ body {
     /*padding: 20px;*/
     max-height: 700px;
     font-family: 'Roboto', sans-serif;
+    overflow: scroll;
 }
 
 #my-schools h3 {
