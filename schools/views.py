@@ -42,7 +42,6 @@ class AllSchools(SchoolAPIView):
         qs = super(AllSchools, self).get_queryset()
         qs = qs.filter(
                 (~Q(district=None) & Q(district__contains=self.pt)) |
-                (~Q(district=None) & Q(walk_zone__contains=self.pt)) |
                 Q(type__in=('magnet', 'speciality', 'charter'))
         )
-        return qs
+        return qs.distance(self.pt)

@@ -15,11 +15,13 @@ class SchoolListSerializer(geo_serializers.GeoModelSerializer):
     eligibility = serializers.SerializerMethodField('get_eligibility')
     preference = serializers.SerializerMethodField('get_preference')
     short_name = serializers.SerializerMethodField('get_short_name')
+    distance = serializers.SerializerMethodField('get_distance')
 
     class Meta:
         model = schools_models.School
-        fields = ('id', 'name', 'level', 'address', 'type', 'eligibility', 'location',
-                  'preference', 'short_name')
+        fields = ('id', 'name', 'level', 'address', 'type', 'eligibility',
+                  'location', 'preference', 'short_name', 'distance',
+                  'year_round', 'grade_min', 'grade_max')
 
     def get_eligibility(self, obj):
         pt = self.context['point']
@@ -47,6 +49,9 @@ class SchoolListSerializer(geo_serializers.GeoModelSerializer):
             name = words[0]
             return "".join([name[0], name[1]])
         return "".join(map(lambda word: word[0], words))
+
+    def get_distance(self, obj):
+        return obj.distance.mi
 
 
 class SchoolDetailSerializer(geo_serializers.GeoModelSerializer):
