@@ -87,7 +87,7 @@ angular.module('SchoolsApp.directives', [])
                         });
                     }
                     if (district_bounderies) {
-                        $rootScope.current_highlight  = L.polygon(district_bounderies, {color: school.color});
+                        $rootScope.current_highlight  = L.polygon(district_bounderies, {color: school.color, className: school.type + ' ' + school.level});
                         $rootScope.current_highlight.addTo(map);
                     }
                 })
