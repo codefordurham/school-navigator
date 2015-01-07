@@ -25,21 +25,14 @@ class Command(BaseCommand):
         else:
             defaults = {
                 'location': Point(0,0),
-                'grade_max': -1,
-                'grade_min': -1,
+                'grade_max': -100,
+                'grade_min': -100,
             }
             school, created = schools_models.School.objects.get_or_create(name=name, defaults=defaults)
             return school
 
     def load_school_points(self, schools={}):
         school_point_id = 0
-        school_grade_mapping = {
-            'elementary' : (0, 4),
-            'middle': (5, 8),
-            'secondary': (5, 12),
-            'high': (9, 12),
-            'hospital': (0, 12),
-        }
         for school in query_api(school_point_id):
             name = school['attributes']['School'].strip()
             s = self.get_school(name, schools)
@@ -48,11 +41,14 @@ class Command(BaseCommand):
                     float(school['geometry']['y'])
             )
             s.address = school['attributes']['ADDRESS'].strip()
+            if school['attributes']['MAGNET'] == 'Magnet':
+                s.type = 'magnet'
             if school['attributes']['YEARROUND'] == "Year-Round":
                 s.year_round = True
             s.level = school['attributes']['TYPE_'].lower()
             s.website_url = school['attributes']['WEBSITE']
-            s.grade_min, s.grade_max = school_grade_mapping[s.level]
+            s.grade_min = school['attributes']['Low_Grade']
+            s.grade_max = school['attributes']['Top_Grade']
             schools[name] = s
         return schools
 
