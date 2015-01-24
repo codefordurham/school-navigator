@@ -15,15 +15,24 @@ body {
     z-index: 1000000;
     top: 20px;
     left: 40px;
-    width: 400px;
+    width: 460px;
 }
+
+#search-form button {
+    padding: 10px 24px;
+    font-size: 16px;
+    margin-left: 2px;
+}
+
 #search-box {
     width: 320px;
+    height: 44px;
+    font-size: 18px;
 }
 #schools-wrapper {
     position: absolute;
     z-index: 1000000;
-    top: 70px;
+    top: 85px;
     left: 40px;
     width: 400px;
     background: white;
