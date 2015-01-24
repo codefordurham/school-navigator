@@ -3,16 +3,27 @@ body {
     position: relative;
     font-family: 'Roboto', sans-serif;
 }
+#logo {
+
+}
+#logo h1 {
+    display: inline;
+    position: relative;
+    top: -4px;
+    font-size: 24px;
+}
+#logo #icon {
+    width: 26px;
+    margin-top: 15px;
+    margin-left: 29px;
+}
+
 #main-menu {
     position: absolute;
     z-index: 1000000;
     top: 20px;
     right: 40px;
     background: white;
-}
-#main-menu object {
-    width: 26px;
-    margin-top: 6px;
 }
 #main-menu .nav-pills>li>a {
     border-radius: 0px;
@@ -29,7 +40,6 @@ body {
     left: 40px;
     width: 460px;
 }
-
 #search-form button {
     padding: 10px 24px;
     font-size: 16px;
