@@ -1,6 +1,7 @@
 body {
     margin: 0;
     position: relative;
+    font-family: 'Roboto', sans-serif;
 }
 #main-menu {
     position: absolute;
@@ -33,7 +34,6 @@ body {
     background: white;
     /*padding: 20px;*/
     max-height: 700px;
-    font-family: 'Roboto', sans-serif;
 }
 
 #my-schools h3 {
@@ -156,4 +156,24 @@ body {
     border:2px solid rgba(255,255,255,0.5);
 }
 
+div#schools-wrapper ul.nav li a {
+    color: #333;
+    background-color: #EFEFEF;
+    border-bottom: none;
+    border-radius: 0;
+    border-color: #EFEFEF;
+    font-size: 16px;
+    cursor: pointer;
+}
 
+
+div#schools-wrapper ul.nav li:last-child a {
+    border-left: none;
+}
+
+div#schools-wrapper ul.nav li.active a, div#schools-wrapper ul.nav li a:hover {
+    font-weight: bold;
+    background-color: #FFFFFF;
+    border-color: #FFFFFF;
+    color: #000;
+}
