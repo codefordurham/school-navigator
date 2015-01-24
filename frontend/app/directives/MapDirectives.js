@@ -1,5 +1,5 @@
 angular.module('SchoolsApp.directives', [])
-    .directive('schoolsMap', ['$q', 'Schools', '$location', function($q, Schools, $location) {
+    .directive('schoolsMap', ['$q', 'Schools', '$location', '$rootScope', function($q, Schools, $location, $rootScope) {
         var linker = function(scope, element, attrs) {
             // do all map rendering and interactions here
             element.height($(window).height()).width($(window).width());
@@ -7,7 +7,6 @@ angular.module('SchoolsApp.directives', [])
                 marker,
                 markerLatLng,
                 schools_layers = [],
-                current_highlight,
                 homeIcon = L.divIcon({className: 'fa fa-home fa-3x', iconSize: '64px'});
 
             // default zoom controls position
@@ -75,8 +74,8 @@ angular.module('SchoolsApp.directives', [])
 
             scope.highlight_school = function(school_id) {
                 // remove current highlight
-                if (current_highlight) {
-                    map.removeLayer(current_highlight);
+                if ($rootScope.current_highlight) {
+                    map.removeLayer($rootScope.current_highlight);
                 }
                 Schools.get(school_id).success(function(school) {
                     var district_bounderies = [];
@@ -88,23 +87,23 @@ angular.module('SchoolsApp.directives', [])
                         });
                     }
                     if (district_bounderies) {
-                        current_highlight = L.polygon(district_bounderies, {color: school.color});
-                        current_highlight.addTo(map);
+                        $rootScope.current_highlight  = L.polygon(district_bounderies, {color: school.color, className: school.type + ' ' + school.level});
+                        $rootScope.current_highlight.addTo(map);
                     }
                 })
             };
-            
+
             scope.clear_highlight = function() {
-                if (current_highlight) {
-                    map.removeLayer(current_highlight);
+                if ($rootScope.current_highlight) {
+                    map.removeLayer($rootScope.current_highlight);
                 }
-                current_highlight = null;
+                $rootScope.current_highlight  = null;
             };
 
             $('.nav li a').click(function() {
                 // remove current highlight
-                if (current_highlight) {
-                    map.removeLayer(current_highlight);
+                if ($rootScope.current_highlight) {
+                    map.removeLayer($rootScope.current_highlight);
                 }
             });
 

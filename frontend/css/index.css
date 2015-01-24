@@ -1,7 +1,23 @@
 body {
     margin: 0;
     position: relative;
+    font-family: 'Roboto', sans-serif;
 }
+#logo {
+
+}
+#logo h1 {
+    display: inline;
+    position: relative;
+    top: -4px;
+    font-size: 24px;
+}
+#logo #icon {
+    width: 26px;
+    margin-top: 15px;
+    margin-left: 29px;
+}
+
 #main-menu {
     position: absolute;
     z-index: 1000000;
@@ -9,20 +25,36 @@ body {
     right: 40px;
     background: white;
 }
+#main-menu .nav-pills>li>a {
+    border-radius: 0px;
+}
+#main-menu .nav-pills>li.active>a {
+    background-color: white;
+    font-weight: bold;
+    color: #000;
+}
 #search-form {
     position: absolute;
     z-index: 1000000;
     top: 20px;
     left: 40px;
-    width: 400px;
+    width: 460px;
 }
+#search-form button {
+    padding: 10px 24px;
+    font-size: 16px;
+    margin-left: 2px;
+}
+
 #search-box {
     width: 320px;
+    height: 44px;
+    font-size: 18px;
 }
 #schools-wrapper {
     position: absolute;
     z-index: 1000000;
-    top: 70px;
+    top: 85px;
     left: 40px;
     width: 400px;
     background: white;
@@ -33,7 +65,7 @@ body {
     background: white;
     /*padding: 20px;*/
     max-height: 700px;
-    font-family: 'Roboto', sans-serif;
+    overflow-y: auto;
 }
 
 #my-schools h3 {
@@ -92,6 +124,10 @@ body {
     width: 100%;
     border-bottom: 1px solid rgba(0,0,0,.1);
     float: right;
+}
+
+.school-group .school-group-item.last .school-group-separator {
+    border-bottom: none;
 }
 
 .compare-schools button {
@@ -156,4 +192,24 @@ body {
     border:2px solid rgba(255,255,255,0.5);
 }
 
+div#schools-wrapper ul.nav li a {
+    color: #333;
+    background-color: #EFEFEF;
+    border-bottom: none;
+    border-radius: 0;
+    border-color: #EFEFEF;
+    font-size: 16px;
+    cursor: pointer;
+}
 
+
+div#schools-wrapper ul.nav li:last-child a {
+    border-left: none;
+}
+
+div#schools-wrapper ul.nav li.active a, div#schools-wrapper ul.nav li a:hover {
+    font-weight: bold;
+    background-color: #FFFFFF;
+    border-color: #FFFFFF;
+    color: #000;
+}

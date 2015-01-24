@@ -1,6 +1,12 @@
 <div id="map" data-user-location="userLocation" data-schools="schools" data-schools-map height="1000" width="1000"></div>
 
 <div id="main-menu">
+    <div id='logo'>
+        <object id='icon' data="img/marker.svg" type="image/svg+xml">
+          <img src="img/marker.png" />
+        </object>
+        <h1 class='name'>Durham School Navigator</h1>
+    </div>
     <ul class="nav nav-pills">
       <li class="active"><a href="#">Home</a></li>
       <li data-ng-class="{active: tab_name == 'nav'}" data-ng-click="tab_name='nav';"><a href="#navigating">Navigating DPS</a></li>
@@ -11,21 +17,21 @@
 
 <div id="search-form">
     <form class="form-inline">
-        <input data-ng-model='address' class="form-control" id="search-box" placeholder="Type your address">
-        <button class="btn btn-primary" data-ng-click="relocate()">Search</button>
+        <input data-ng-model='address' class="form-control" id="search-box" placeholder="Enter a Durham address">
+        <button class="btn btn-default" data-ng-click="relocate()">Search</button>
     </form>
 </div>
 
 <div id="schools-wrapper" data-ng-show="all_schools.length">
     <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
+    <ul class="nav nav-tabs nav-justified" role="tablist">
       <li data-ng-class="{active: eligibility == 'assigned'}"><a data-ng-click="filterSchools('assigned')">Assigned</a></li>
-      <li data-ng-class="{active: eligibility == 'option'}"><a data-ng-click="filterSchools('option')">Option</a></li>
+      <li data-ng-class="{active: eligibility == 'option'}"><a data-ng-click="filterSchools('option')">Options</a></li>
     </ul>
     <div id="my-schools">
         <h3 class="elementary">Elementary</h3>
         <div class="school-group elementary">
-            <div data-ng-repeat="school in schools | filter:{'level': 'elementary'}" class="school-group-item" data-ng-mouseenter="highlight_school(school.id);" data-ng-mouseleave="clear_highlight();">
+            <div data-ng-repeat="school in schools | filter:{'level': 'elementary'}" class="school-group-item" data-ng-mouseenter="highlight_school(school.id);" data-ng-mouseleave="clear_highlight();" ng-class="{'last':$last}">
                 <div class="row-content">
                     <div class="school-group-item-heading">
                         <h4 class="school-group-item-heading">{{ school.name }}</h4>
@@ -42,7 +48,7 @@
         
         <h3 class="secondary">Middle</h3>
         <div class="school-group secondary">
-            <div data-ng-repeat="school in schools | filter:{'level': 'middle'}" class="school-group-item" data-ng-mouseenter="highlight_school(school.id);" data-ng-mouseleave="clear_highlight();">
+            <div data-ng-repeat="school in schools | filter:{'level': 'middle'}" class="school-group-item" data-ng-mouseenter="highlight_school(school.id);" data-ng-mouseleave="clear_highlight();" ng-class="{'last':$last}">
                 <div class="row-content">
                     <div class="school-group-item-heading">
                         <h4 class="school-group-item-heading">{{ school.name }}</h4>
@@ -57,7 +63,7 @@
 
         <h3 ng-hide="schools.length | filter:{'level': 'secondary'}" class="secondary">Secondary</h3>
         <div class="school-group secondary">
-            <div data-ng-repeat="school in schools | filter:{'level': 'secondary'}" class="school-group-item" data-ng-mouseenter="highlight_school(school.id);" data-ng-mouseleave="clear_highlight();">
+            <div data-ng-repeat="school in schools | filter:{'level': 'secondary'}" class="school-group-item" data-ng-mouseenter="highlight_school(school.id);" data-ng-mouseleave="clear_highlight();" ng-class="{'last':$last}">
                 <div class="row-content">
                     <div class="school-group-item-heading">
                         <h4 class="school-group-item-heading">{{ school.name }}</h4>
@@ -72,7 +78,7 @@
 
         <h3 class="high">High</h3>
         <div class="school-group high">
-            <div data-ng-repeat="school in schools | filter:{'level': 'high'}" class="school-group-item" data-ng-mouseenter="highlight_school(school.id);" data-ng-mouseleave="clear_highlight();">
+            <div data-ng-repeat="school in schools | filter:{'level': 'high'}" class="school-group-item" data-ng-mouseenter="highlight_school(school.id);" data-ng-mouseleave="clear_highlight();" ng-class="{'last':$last}">
                 <div class="row-content">
                     <div class="school-group-item-heading">
                         <h4 class="school-group-item-heading">{{ school.name }}</h4>
