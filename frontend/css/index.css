@@ -94,6 +94,10 @@ body {
     float: right;
 }
 
+.school-group .school-group-item.last .school-group-separator {
+    border-bottom: none;
+}
+
 .compare-schools button {
     margin-right: 5px;
 }
