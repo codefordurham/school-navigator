@@ -10,6 +10,18 @@ body {
     right: 40px;
     background: white;
 }
+#main-menu object {
+    width: 26px;
+    margin-top: 6px;
+}
+#main-menu .nav-pills>li>a {
+    border-radius: 0px;
+}
+#main-menu .nav-pills>li.active>a {
+    background-color: white;
+    font-weight: bold;
+    color: #000;
+}
 #search-form {
     position: absolute;
     z-index: 1000000;
