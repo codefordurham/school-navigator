@@ -36,7 +36,7 @@
                     <div class="school-group-item-heading">
                         <h4 class="school-group-item-heading">{{ school.name }}</h4>
                         <span ng-if="school.type == 'magnet'" class="school-badge magnet" data-toggle="tooltip" data-placement="top" title="Magnet School">M</span>
-                        <span ng-if="school.type == 'year-round" class="school-badge year-round" data-toggle="tooltip" data-placement="top" title="Year-round School">YR</span>
+                        <span ng-if="school.year_round == true" class="school-badge year-round" data-toggle="tooltip" data-placement="top" title="Year-round School">YR</span>
                     </div>
                     <p class="school-group-item-text">
                         {{ school.address }} <a class="school_listing" data-ng-href="#/schools/{{ school.id }}">More >></a>
