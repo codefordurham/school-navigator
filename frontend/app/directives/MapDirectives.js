@@ -7,10 +7,15 @@ angular.module('SchoolsApp.directives', [])
                 marker,
                 markerLatLng,
                 schools_layers = [],
+                map_highlights = L.featureGroup(),
                 homeIcon = L.divIcon({className: 'fa fa-home fa-3x', iconSize: '64px'});
 
             // default zoom controls position
             map.zoomControl.setPosition("bottomright");
+            map.on("mouseover", function() {
+                scope.clear_highlight();
+            });
+            map_highlights.addTo(map);
 
             d = $q.defer();
             d.resolve(map);
@@ -64,7 +69,9 @@ angular.module('SchoolsApp.directives', [])
                         school_marker.on('mouseover', function() {
                             scope.highlight_school(this.school_id);
                         });
-
+                        school_marker.on('mouseout', function() {
+                            scope.clear_highlight();
+                        });
                         school_layer = L.layerGroup([school_marker]);
                         schools_layers.push(school_layer);
                         school_layer.addTo(map);
@@ -74,9 +81,7 @@ angular.module('SchoolsApp.directives', [])
 
             scope.highlight_school = function(school_id) {
                 // remove current highlight
-                if ($rootScope.current_highlight) {
-                    map.removeLayer($rootScope.current_highlight);
-                }
+                scope.clear_highlight();
                 Schools.get(school_id).success(function(school) {
                     var district_bounderies = [];
                     if (school.district) {
@@ -87,24 +92,18 @@ angular.module('SchoolsApp.directives', [])
                         });
                     }
                     if (district_bounderies) {
-                        $rootScope.current_highlight  = L.polygon(district_bounderies, {color: school.color, className: school.type + ' ' + school.level});
-                        $rootScope.current_highlight.addTo(map);
+                        map_highlights.addLayer(L.polygon(district_bounderies, {color: school.color, className: school.type + ' ' + school.level}));
                     }
                 })
             };
 
             scope.clear_highlight = function() {
-                if ($rootScope.current_highlight) {
-                    map.removeLayer($rootScope.current_highlight);
-                }
-                $rootScope.current_highlight  = null;
+                map_highlights.clearLayers();
             };
 
             $('.nav li a').click(function() {
                 // remove current highlight
-                if ($rootScope.current_highlight) {
-                    map.removeLayer($rootScope.current_highlight);
-                }
+                scope.clear_highlight();
             });
 
             var clearMap = function() {
