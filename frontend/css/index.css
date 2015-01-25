@@ -72,13 +72,14 @@ body {
     color: #fff;
     padding: 10px 15px;
     margin: 0px;
+    text-transform: capitalize;
 }
 
 #my-schools h3.elementary {
     background-color: #48BC6B;
 }
 
-#my-schools h3.secondary {
+#my-schools h3.middle, #my-schools h3.secondary {
     background-color: #3F899E;
 }
 
@@ -100,7 +101,7 @@ body {
     background-color: #9FE7B5;
 }
 
-.school-group.secondary .school-group-item:hover {
+.school-group.middle .school-group-item:hover, .school-group.secondary .school-group-item:hover {
     background-color: #9ACDDC;
 }
 

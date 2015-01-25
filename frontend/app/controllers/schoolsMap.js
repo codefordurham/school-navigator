@@ -28,6 +28,7 @@ angular.module('SchoolsApp.controllers', [])
         $scope.filterSchools = function (eligibility) {
             $scope.schools = $filter('filter')($scope.all_schools, {'eligibility': eligibility});
             $scope.eligibility = eligibility;
+            $scope.levels = ['elementary', 'middle', 'high'];
         };
 
         $scope.relocate = function() {

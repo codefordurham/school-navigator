@@ -29,63 +29,18 @@
       <li data-ng-class="{active: eligibility == 'option'}"><a data-ng-click="filterSchools('option')">Options</a></li>
     </ul>
     <div id="my-schools">
-        <h3 class="elementary">Elementary</h3>
-        <div class="school-group elementary">
-            <div data-ng-repeat="school in schools | filter:{'level': 'elementary'}" class="school-group-item" data-ng-mouseenter="highlight_school(school.id);" data-ng-mouseleave="clear_highlight();" ng-class="{'last':$last}">
+        <div data-ng-repeat="level in levels" class="school-group {{ level }}">
+            <h3 class="{{ level }}">{{ level }}</h3>
+            <div data-ng-repeat="school in schools | filter:{'level': level}" class="school-group-item" data-ng-mouseenter="highlight_school(school.id);" data-ng-mouseleave="clear_highlight();" ng-class="{'last':$last}">
                 <div class="row-content">
                     <div class="school-group-item-heading">
                         <h4 class="school-group-item-heading">{{ school.name }}</h4>
                         <span ng-if="school.type == 'magnet'" class="school-badge magnet" data-toggle="tooltip" data-placement="top" title="Magnet School">M</span>
-                        <span ng-if="school.type == 'year-round'" class="school-badge year-round" data-toggle="tooltip" data-placement="top" title="Year-round School">YR</span>
+                        <span ng-if="school.type == 'year-round" class="school-badge year-round" data-toggle="tooltip" data-placement="top" title="Year-round School">YR</span>
                     </div>
                     <p class="school-group-item-text">
                         {{ school.address }} <a class="school_listing" data-ng-href="#/schools/{{ school.id }}">More >></a>
                     </p>
-                </div>
-                <div class="school-group-separator"></div>
-            </div>
-        </div>
-        
-        <h3 class="secondary">Middle</h3>
-        <div class="school-group secondary">
-            <div data-ng-repeat="school in schools | filter:{'level': 'middle'}" class="school-group-item" data-ng-mouseenter="highlight_school(school.id);" data-ng-mouseleave="clear_highlight();" ng-class="{'last':$last}">
-                <div class="row-content">
-                    <div class="school-group-item-heading">
-                        <h4 class="school-group-item-heading">{{ school.name }}</h4>
-                        <span ng-if="school.type == 'magnet'" class="school-badge magnet" data-toggle="tooltip" data-placement="top" title="Magnet School">M</span>
-                        <span ng-if="school.type == 'year-round'" class="school-badge year-round" data-toggle="tooltip" data-placement="top" title="Year-round School">YR</span>
-                    </div>
-                    <p class="school-group-item-text">{{ school.address }} <a class="school_listing" data-ng-href="#/schools/{{ school.id }}">More >></a></p>
-                </div>
-                <div class="school-group-separator"></div>
-            </div>
-        </div>
-
-        <h3 ng-hide="schools.length | filter:{'level': 'secondary'}" class="secondary">Secondary</h3>
-        <div class="school-group secondary">
-            <div data-ng-repeat="school in schools | filter:{'level': 'secondary'}" class="school-group-item" data-ng-mouseenter="highlight_school(school.id);" data-ng-mouseleave="clear_highlight();" ng-class="{'last':$last}">
-                <div class="row-content">
-                    <div class="school-group-item-heading">
-                        <h4 class="school-group-item-heading">{{ school.name }}</h4>
-                        <span ng-if="school.type == 'magnet'" class="school-badge magnet" data-toggle="tooltip" data-placement="top" title="Magnet School">M</span>
-                        <span ng-if="school.type == 'year-round'" class="school-badge year-round" data-toggle="tooltip" data-placement="top" title="Year-round School">YR</span>
-                    </div>
-                    <p class="school-group-item-text">{{ school.address }} <a class="school_listing" data-ng-href="#/schools/{{ school.id }}">More >></a></p>
-                </div>
-                <div class="school-group-separator"></div>
-            </div>
-        </div>
-
-        <h3 class="high">High</h3>
-        <div class="school-group high">
-            <div data-ng-repeat="school in schools | filter:{'level': 'high'}" class="school-group-item" data-ng-mouseenter="highlight_school(school.id);" data-ng-mouseleave="clear_highlight();" ng-class="{'last':$last}">
-                <div class="row-content">
-                    <div class="school-group-item-heading">
-                        <h4 class="school-group-item-heading">{{ school.name }}</h4>
-                        <span ng-if="school.type == 'magnet'" class="school-badge magnet" data-toggle="tooltip" data-placement="top" title="Magnet School">M</span>
-                        <span ng-if="school.type == 'year-round'" class="school-badge year-round" data-toggle="tooltip" data-placement="top" title="Year-round School">YR</span>
-                    </div>
-                    <p class="school-group-item-text">{{ school.address }} <a class="school_listing" data-ng-href="#/schools/{{ school.id }}">More >></a></p>
                 </div>
                 <div class="school-group-separator"></div>
             </div>
