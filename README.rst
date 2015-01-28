@@ -13,7 +13,7 @@ Durham School Navigator
 =======================
 
 Durham School Navigator is a website to help Durham, NC residents navigate the
-`Durham Public School System`_. The open source project is built and mainted by
+`Durham Public School System`_. The open source project is built and maintained by
 `Code for Durham`_.
 
 Please see the `documentation`_ for more information.
