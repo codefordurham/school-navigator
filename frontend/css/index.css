@@ -93,6 +93,15 @@ body {
     border: 0;
     border-radius: 0;
     padding: 0 16px;
+    position: relative;
+}
+
+.school-group .school-group-item .distance {
+    position: absolute;
+    font-size: 11px;
+    right: 10px;
+    top: 10px;
+    color: #666;
 }
 
 /* http://paletton.com/#uid=53o0u0kjPvU9VPsfmFjnPsIrNn+ */

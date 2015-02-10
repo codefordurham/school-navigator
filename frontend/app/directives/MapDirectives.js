@@ -93,6 +93,7 @@ angular.module('SchoolsApp.directives', [])
                     }
                     if (district_bounderies) {
                         map_highlights.addLayer(L.polygon(district_bounderies, {color: school.color, className: school.type + ' ' + school.level}));
+                        map.fitBounds(map_highlights.getBounds());
                     }
                 })
             };
