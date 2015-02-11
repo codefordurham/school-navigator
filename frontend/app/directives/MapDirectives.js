@@ -60,7 +60,7 @@ angular.module('SchoolsApp.directives', [])
                 if (schools) {
                     clearMap();
                     angular.forEach(schools, function(school) {
-                        var schoolIcon = L.divIcon({className: school.type + ' school_point ' + school.level, iconSize: '64px', html: school.short_name});
+                        var schoolIcon = L.divIcon({className: school.type + ' school_point ' + school.level + ' ' + (school.year_round ? "year-round" : ""), iconSize: '64px', html: school.short_name});
                         var school_layer,
                             school_marker =  L.marker([school.location.coordinates['1'], school.location.coordinates['0']], {icon: schoolIcon})
                                 .bindPopup(school.name);
