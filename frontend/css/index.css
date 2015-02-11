@@ -56,7 +56,7 @@ body {
     z-index: 1000000;
     top: 85px;
     left: 40px;
-    width: 400px;
+    width: 396px;
     background: white;
     max-height: 800px;
 }
@@ -96,12 +96,20 @@ body {
     position: relative;
 }
 
+.school-group .school-group-item:hover {
+    cursor: pointer;
+}
+
 .school-group .school-group-item .distance {
     position: absolute;
     font-size: 11px;
-    right: 10px;
-    top: 10px;
+    right: 16px;
+    top: 18px;
     color: #666;
+}
+
+.school-group .school-group-item img.photo {
+    text-align: center;
 }
 
 /* http://paletton.com/#uid=53o0u0kjPvU9VPsfmFjnPsIrNn+ */
