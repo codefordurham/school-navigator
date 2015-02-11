@@ -126,6 +126,10 @@ body {
     background-color: #A4B0E2;
 }
 
+.school-group-item.detail:hover{
+    background: white!important;
+}
+
 .school-group .school-group-item .school-group-item-heading {
     margin: 10px 0px;
     vertical-align: middle;
@@ -143,7 +147,6 @@ body {
     border-bottom: 1px solid rgba(0,0,0,.1);
     float: right;
 }
-
 .school-group .school-group-item.last .school-group-separator {
     border-bottom: none;
 }
@@ -230,4 +233,17 @@ div#schools-wrapper ul.nav li.active a, div#schools-wrapper ul.nav li a:hover {
     background-color: #FFFFFF;
     border-color: #FFFFFF;
     color: #000;
+}
+.detail .distance {
+    position: absolute;
+    font-size: 11px;
+    right: 10px;
+    top: 10px;
+    color: #666;
+}
+.detail .close {
+    z-index: 1000;
+}
+.detail .close:after {
+    content: "X";
 }

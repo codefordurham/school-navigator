@@ -44,4 +44,22 @@ angular.module('SchoolsApp.controllers', [])
                 }
             });
         };
+
+        $scope.selectSchool = function (school) {
+            angular.forEach($scope.all_schools, function(obj) {
+                if (obj.id == school.id) {
+                    obj.selected = true;
+                } else {
+                    obj.selected = 'hide';
+                }
+            });
+//            $scope.all_schools[index].selected = true;
+//            school.selected = true;
+        };
+
+        $scope.deselectSchool = function () {
+            angular.forEach($scope.all_schools, function(school) {
+                school.selected = null;
+            });
+        };
     }]);
