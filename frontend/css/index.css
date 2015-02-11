@@ -197,6 +197,14 @@ body {
     background: #4F61AD;
 }
 
+.school_point.magnet {
+    border:5px solid rgba(255,174,139,1.0);
+}
+
+.school_point.year-round {
+    border:5px solid rgba(239,131,162,1.0);
+}
+
 .school-badge {
     padding: 2px;
     font-weight: bold;
