@@ -11,7 +11,7 @@ Durham School Navigator is a website to help Durham, NC residents navigate the
 maintained by `Code for Durham`_.
 
 The official site is online at https://schools.codefordurham.com/. The code is
-available on `GitHub`_. The `email list` is on Google Groups.
+available on `GitHub`_. The `email list`_ is on Google Groups.
 
 The following documentation outlines how to get started developing code for the
 project.
