@@ -84,13 +84,18 @@ angular.module('SchoolsApp.directives', [])
                 scope.clear_highlight();
                 Schools.get(school_id).success(function(school) {
                     var district_bounderies = [];
-                    if (school.district) {
-                        angular.forEach(school.district.coordinates[0], function(coordinates, key) {
-                            // HACK: coordinates need to be inverted.
-                            // just the django things.
-                            district_bounderies.push([coordinates[1], coordinates[0]]);
-                        });
-                    }
+                    var fields = ['district', 'priority_zone', 'walk_zone', 'choice_zone'];
+                    angular.forEach(fields, function(field) {
+                        if (school[field]) {
+                            angular.forEach(school[field].coordinates[0], function(coordinates, key) {
+                                // HACK: coordinates need to be inverted.
+                                // just the django things.
+                                district_bounderies.push([coordinates[1], coordinates[0]]);
+                            });
+                        }
+
+                    });
+
                     if (district_bounderies) {
                         map_highlights.addLayer(L.polygon(district_bounderies, {color: school.color, className: school.type + ' ' + school.level}));
                         map.fitBounds(map_highlights.getBounds());
