@@ -8,7 +8,7 @@ angular.module('SchoolsApp.directives', [])
                 markerLatLng,
                 schools_layers = [],
                 map_highlights = L.featureGroup(),
-                homeIcon = L.divIcon({className: 'fa fa-home fa-3x', iconSize: '64px'});
+                homeIcon = L.divIcon({className: 'fa fa-home fa-3x', iconSize: [32, 32], iconAnchor: [16, 16]});
 
             // default zoom controls position
             map.zoomControl.setPosition("bottomright");
@@ -60,7 +60,7 @@ angular.module('SchoolsApp.directives', [])
                 if (schools) {
                     clearMap();
                     angular.forEach(schools, function(school) {
-                        var schoolIcon = L.divIcon({className: school.type + ' school_point ' + school.level + ' ' + (school.year_round ? "year-round" : ""), iconSize: '64px', html: school.short_name});
+                        var schoolIcon = L.divIcon({className: school.type + ' school_point ' + school.level + ' ' + (school.year_round ? "year-round" : ""), iconSize: [48,48], iconAnchor: [24,0], html: school.short_name});
                         var school_layer,
                             school_marker =  L.marker([school.location.coordinates['1'], school.location.coordinates['0']], {icon: schoolIcon})
                                 .bindPopup(school.name);
