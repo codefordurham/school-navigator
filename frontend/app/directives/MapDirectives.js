@@ -23,7 +23,7 @@ angular.module('SchoolsApp.directives', [])
                 L.tileLayer('https://{s}.tiles.mapbox.com/v3/vrocha.j3fib8g6/{z}/{x}/{y}.png', {
                     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
                     maxZoom: 18
-                }).addTo(map)
+                }).addTo(map);
             });
 
             // resize map to fit current window
@@ -100,7 +100,7 @@ angular.module('SchoolsApp.directives', [])
                         map_highlights.addLayer(L.polygon(district_bounderies, {color: school.color, className: school.type + ' ' + school.level}));
                         map.fitBounds(map_highlights.getBounds());
                     }
-                })
+                });
             };
 
             scope.clear_highlight = function() {
@@ -114,7 +114,7 @@ angular.module('SchoolsApp.directives', [])
 
             var clearMap = function() {
                 angular.forEach(schools_layers, function(layer) {
-                    map.removeLayer(layer)
+                    map.removeLayer(layer);
                 });
                 schools_layers = [];
             };
@@ -125,5 +125,5 @@ angular.module('SchoolsApp.directives', [])
         return {
             restrict: 'A',
             link: linker
-        }
+        };
     }]);
