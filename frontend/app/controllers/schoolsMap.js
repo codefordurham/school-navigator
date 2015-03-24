@@ -8,18 +8,15 @@ angular.module('SchoolsApp.controllers', [])
                 latitude: $params.latitude,
                 longitude: $params.longitude
             };
-        } else {
-            $scope.userLocation = {
-                latitude: '35.9730',
-                longitude: '-78.934'
-            };
         }
-
-        Schools.get_schools($scope.userLocation).success(function(data) {
-            $scope.all_schools = data;
-            $scope.filterSchools($scope.eligibility);
-            $('[data-toggle="tooltip"]').tooltip();
-        });
+        if ($scope.userLocation) {
+            // only pull in school listing if the user has entered a location
+            Schools.get_schools($scope.userLocation).success(function(data) {
+                $scope.all_schools = data;
+                $scope.filterSchools($scope.eligibility);
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+        }
 
         $scope.NavigationActive = function(tab) {
             $scope.tab_name = tab;
