@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup as BS
 import httplib2
 import json
 import pprint
+import re
 
 http = httplib2.Http()
 
@@ -44,7 +45,9 @@ def main():
               12: { "key": "", "function": page12 },
               13: { "key": "", "function": page13 },
               14: { "key": "", "function": page14 },
-              15: { "key": "", "function": page15 } }
+              15: { "key": "", "function": page15 },
+              16: { "key": "", "function": page16 },
+              17: { "key": "", "function": page17 } }
 
     for page in range(1,3):
         schoolCode = '304'
@@ -66,51 +69,27 @@ def singleHeadTable(rows, type):
     return object
 
 def demographicTable(rows, type):
-    object = {
-            "sex": {},
-            "ethnicity": {},
-            "economics": {},
-            "other": {}
-            }
+    object = { "sex": {}, "race": {}, "money": {}, "other": {} }
+    category = {
+            "Male": "sex", "Female": "sex",
+            "White": "race", "Black": "race", "Hispanic": "race", "AmericanIndian": "race", "Asian": "race", "PacificIslander": "race", "Multi": "race",
+            "E.D.": "money", "N.E.D.": "money",
+            "L.E.P.": "other", "Migrant": "other", "Disabilities": "other"
+    }
     for index in range(0, len(rows[0].find_all('th'))):
+        head = re.sub("Twoor.*", "Multi", rows[0].find_all('th')[index].text.strip().replace("\r\n","").replace(" ","").replace("Students","").replace("with",""), flags=re.DOTALL)
         body = rows[1].find_all('td')[index].text.strip()
-        if index == 0:
-            object["All"] = convert_data[type](body)
-        elif index == 1:
-            object["sex"]["Male"] = convert_data[type](body)
-        elif index == 2:
-            object["sex"]["Female"] = convert_data[type](body)
-        elif index == 3:
-            object["ethnicity"]["White"] = convert_data[type](body)
-        elif index == 4:
-            object["ethnicity"]["Black"] = convert_data[type](body)
-        elif index == 5:
-            object["ethnicity"]["Hispanic"] = convert_data[type](body)
-        elif index == 6:
-            object["ethnicity"]["American Indian"] = convert_data[type](body)
-        elif index == 7:
-            object["ethnicity"]["Asian"] = convert_data[type](body)
-        elif index == 8:
-            object["ethnicity"]["Pacific Islander"] = convert_data[type](body)
-        elif index == 9:
-            object["ethnicity"]["Multiple"] = convert_data[type](body)
-        elif index == 10:
-            object["economics"]["Disadvantaged"] = convert_data[type](body)
-        elif index == 11:
-            object["economics"]["Not Disadvantaged"] = convert_data[type](body)
-        elif index == 12:
-            object["other"]["Limited English"] = convert_data[type](body)
-        elif index == 13:
-            object["other"]["Migrant"] = convert_data[type](body)
-        elif index == 14:
-            object["other"]["Disabilities"] = convert_data[type](body)
+        if body != "N/A":
+            if head == "All":
+                object["All"] = convert_data[type](body)
+            else:
+                object[category[head]][head] = convert_data[type](body)
     return object
 
 def page1(soup):
     rows = soup.find('table',summary="average class size").find_all('tr')
-    object = { "avg": singleHeadTable(rows, "integer"),
-               "total" : int(soup.find_all('table',summary="school size")[1].find('tr').find_all('td')[1].text.strip()) }
-    return object
+    return { "avg": singleHeadTable(rows, "integer"),
+            "total" : int(soup.find_all('table',summary="school size")[1].find('tr').find_all('td')[1].text.strip()) }
 
 def page2(soup):
     ESEArows = soup.find('table',summary="End-of-Grade Science Tests for ESEA").find_all('tr')
@@ -128,135 +107,65 @@ def page2(soup):
 #        object['avg'][grade] = size
 #    return object
 
-def page3(schoolCode, year):
-    object = { "avg": {} }
-    object['total'] = soup.find_all('table',summary="school size")[1].find('tr').find_all('td')[1].text.strip()
-    rows = soup.find('table',summary="average class size").find_all('tr')
-    for index in range(0, len(rows[0].find_all('th'))):
-        grade = rows[0].find_all('th')[index].text.strip()
-        size = rows[1].find_all('td')[index].text.strip()
-        object['avg'][grade] = size
-    return object
+def page3(soup):
+    rows = soup.find('table',summary="").find_all('tr')
+    return { "key": singleHeadTable(rows, "type") }
 
-def page4(schoolCode, year):
-    object = { "avg": {} }
-    object['total'] = soup.find_all('table',summary="school size")[1].find('tr').find_all('td')[1].text.strip()
-    rows = soup.find('table',summary="average class size").find_all('tr')
-    for index in range(0, len(rows[0].find_all('th'))):
-        grade = rows[0].find_all('th')[index].text.strip()
-        size = rows[1].find_all('td')[index].text.strip()
-        object['avg'][grade] = size
-    return object
+def page4(soup):
+    rows = soup.find('table',summary="").find_all('tr')
+    return { "key": singleHeadTable(rows, "type") }
 
-def page5(schoolCode, year):
-    object = { "avg": {} }
-    object['total'] = soup.find_all('table',summary="school size")[1].find('tr').find_all('td')[1].text.strip()
-    rows = soup.find('table',summary="average class size").find_all('tr')
-    for index in range(0, len(rows[0].find_all('th'))):
-        grade = rows[0].find_all('th')[index].text.strip()
-        size = rows[1].find_all('td')[index].text.strip()
-        object['avg'][grade] = size
-    return object
+def page5(soup):
+    rows = soup.find('table',summary="").find_all('tr')
+    return { "key": singleHeadTable(rows, "type") }
 
-def page6(schoolCode, year):
-    object = { "avg": {} }
-    object['total'] = soup.find_all('table',summary="school size")[1].find('tr').find_all('td')[1].text.strip()
-    rows = soup.find('table',summary="average class size").find_all('tr')
-    for index in range(0, len(rows[0].find_all('th'))):
-        grade = rows[0].find_all('th')[index].text.strip()
-        size = rows[1].find_all('td')[index].text.strip()
-        object['avg'][grade] = size
-    return object
+def page6(soup):
+    rows = soup.find('table',summary="").find_all('tr')
+    return { "key": singleHeadTable(rows, "type") }
 
-def page7(schoolCode, year):
-    object = { "avg": {} }
-    object['total'] = soup.find_all('table',summary="school size")[1].find('tr').find_all('td')[1].text.strip()
-    rows = soup.find('table',summary="average class size").find_all('tr')
-    for index in range(0, len(rows[0].find_all('th'))):
-        grade = rows[0].find_all('th')[index].text.strip()
-        size = rows[1].find_all('td')[index].text.strip()
-        object['avg'][grade] = size
-    return object
+def page7(soup):
+    rows = soup.find('table',summary="").find_all('tr')
+    return { "key": singleHeadTable(rows, "type") }
 
-def page8(schoolCode, year):
-    object = { "avg": {} }
-    object['total'] = soup.find_all('table',summary="school size")[1].find('tr').find_all('td')[1].text.strip()
-    rows = soup.find('table',summary="average class size").find_all('tr')
-    for index in range(0, len(rows[0].find_all('th'))):
-        grade = rows[0].find_all('th')[index].text.strip()
-        size = rows[1].find_all('td')[index].text.strip()
-        object['avg'][grade] = size
-    return object
+def page8(soup):
+    rows = soup.find('table',summary="").find_all('tr')
+    return { "key": singleHeadTable(rows, "type") }
 
-def page9(schoolCode, year):
-    object = { "avg": {} }
-    object['total'] = soup.find_all('table',summary="school size")[1].find('tr').find_all('td')[1].text.strip()
-    rows = soup.find('table',summary="average class size").find_all('tr')
-    for index in range(0, len(rows[0].find_all('th'))):
-        grade = rows[0].find_all('th')[index].text.strip()
-        size = rows[1].find_all('td')[index].text.strip()
-        object['avg'][grade] = size
-    return object
+def page9(soup):
+    rows = soup.find('table',summary="").find_all('tr')
+    return { "key": singleHeadTable(rows, "type") }
 
-def page10(schoolCode, year):
-    object = { "avg": {} }
-    object['total'] = soup.find_all('table',summary="school size")[1].find('tr').find_all('td')[1].text.strip()
-    rows = soup.find('table',summary="average class size").find_all('tr')
-    for index in range(0, len(rows[0].find_all('th'))):
-        grade = rows[0].find_all('th')[index].text.strip()
-        size = rows[1].find_all('td')[index].text.strip()
-        object['avg'][grade] = size
-    return object
+def page10(soup):
+    rows = soup.find('table',summary="").find_all('tr')
+    return { "key": singleHeadTable(rows, "type") }
 
-def page11(schoolCode, year):
-    object = { "avg": {} }
-    object['total'] = soup.find_all('table',summary="school size")[1].find('tr').find_all('td')[1].text.strip()
-    rows = soup.find('table',summary="average class size").find_all('tr')
-    for index in range(0, len(rows[0].find_all('th'))):
-        grade = rows[0].find_all('th')[index].text.strip()
-        size = rows[1].find_all('td')[index].text.strip()
-        object['avg'][grade] = size
-    return object
+def page11(soup):
+    rows = soup.find('table',summary="").find_all('tr')
+    return { "key": singleHeadTable(rows, "type") }
 
-def page12(schoolCode, year):
-    object = { "avg": {} }
-    object['total'] = soup.find_all('table',summary="school size")[1].find('tr').find_all('td')[1].text.strip()
-    rows = soup.find('table',summary="average class size").find_all('tr')
-    for index in range(0, len(rows[0].find_all('th'))):
-        grade = rows[0].find_all('th')[index].text.strip()
-        size = rows[1].find_all('td')[index].text.strip()
-        object['avg'][grade] = size
-    return object
+def page12(soup):
+    rows = soup.find('table',summary="").find_all('tr')
+    return { "key": singleHeadTable(rows, "type") }
 
-def page13(schoolCode, year):
-    object = { "avg": {} }
-    object['total'] = soup.find_all('table',summary="school size")[1].find('tr').find_all('td')[1].text.strip()
-    rows = soup.find('table',summary="average class size").find_all('tr')
-    for index in range(0, len(rows[0].find_all('th'))):
-        grade = rows[0].find_all('th')[index].text.strip()
-        size = rows[1].find_all('td')[index].text.strip()
-        object['avg'][grade] = size
-    return object
+def page13(soup):
+    rows = soup.find('table',summary="").find_all('tr')
+    return { "key": singleHeadTable(rows, "type") }
 
-def page14(schoolCode, year):
-    object = { "avg": {} }
-    object['total'] = soup.find_all('table',summary="school size")[1].find('tr').find_all('td')[1].text.strip()
-    rows = soup.find('table',summary="average class size").find_all('tr')
-    for index in range(0, len(rows[0].find_all('th'))):
-        grade = rows[0].find_all('th')[index].text.strip()
-        size = rows[1].find_all('td')[index].text.strip()
-        object['avg'][grade] = size
-    return object
+def page14(soup):
+    rows = soup.find('table',summary="").find_all('tr')
+    return { "key": singleHeadTable(rows, "type") }
 
-def page15(schoolCode, year):
-    object = { "avg": {} }
-    object['total'] = soup.find_all('table',summary="school size")[1].find('tr').find_all('td')[1].text.strip()
-    rows = soup.find('table',summary="average class size").find_all('tr')
-    for index in range(0, len(rows[0].find_all('th'))):
-        grade = rows[0].find_all('th')[index].text.strip()
-        size = rows[1].find_all('td')[index].text.strip()
-        object['avg'][grade] = size
-    return object
+def page15(soup):
+    rows = soup.find('table',summary="").find_all('tr')
+    return { "key": singleHeadTable(rows, "type") }
+
+def page16(soup):
+    rows = soup.find('table',summary="").find_all('tr')
+    return { "key": singleHeadTable(rows, "type") }
+
+def page17(soup):
+    rows = soup.find('table',summary="").find_all('tr')
+    return { "key": singleHeadTable(rows, "type") }
 
 if __name__=="__main__":
     main()
