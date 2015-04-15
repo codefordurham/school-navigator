@@ -13,3 +13,4 @@ public/media/
 secrets.sls*
 *.log
 _build
+*.swp
