@@ -60,12 +60,14 @@ def main():
     pp = pprint.PrettyPrinter(depth=6)
     pp.pprint(data)
 
-def singleHeadTable(rows, type):
+def singleHeadTable(rows, type_array):
     object = {}
     for index in range(0, len(rows[0].find_all('th'))):
         head = rows[0].find_all('th')[index].text.strip()
-        body = rows[1].find_all('td')[index].text.strip()
-        object[head] = convert_data[type](body)
+        for j in range(0, len(type_array)):
+            pair = [(k, v) for (k, v) in type_array[j].items()]
+            body = rows[j+1].find_all('td')[index].text.strip()
+            object[head][type_array[j][pair[0][0]]] = convert_data[type_array[j][pair[0][1]]](body)
     return object
 
 def demographicTable(rows, type):
@@ -88,14 +90,13 @@ def demographicTable(rows, type):
 
 def page1(soup):
     rows = soup.find('table',summary="average class size").find_all('tr')
-    return { "avg": singleHeadTable(rows, "integer"),
+    return { "avg": singleHeadTable(rows, [{"Number":"integer"}]),
             "total" : int(soup.find_all('table',summary="school size")[1].find('tr').find_all('td')[1].text.strip()) }
 
 def page2(soup):
     ESEArows = soup.find('table',summary="End-of-Grade Science Tests for ESEA").find_all('tr')
     EOGrows = soup.find('table',summary="percentage of each student group on the North Carolina end-of-grade tests").find_all('tr')
-    object = { "ESEA": singleHeadTable(ESEArows, "percent"),
-            "EOG": demographicTable(EOGrows, "percent") }
+    object = { "ESEA": singleHeadTable(ESEA_rows, [ { "Percent": "percent" } ]), "EOG": demographicTable(EOG_rows,"percent") }
     return object
 
 #    object = { "grades": {}, "groups": { "races": {}, "sexes": {}, "economic": {} } }
