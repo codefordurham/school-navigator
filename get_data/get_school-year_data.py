@@ -20,8 +20,15 @@ def get_integer(x):
 def p2f(x):
     if x == "N/A":
         return -1
+    elif x == "<5%":
+        return 0.049999
+    elif x == ">95%":
+        return 0.950001
     else:
-        return round(float(x.strip('%'))/100, 3)
+        try:
+            return round(float(x.strip('%'))/100, 3)
+        except:
+            print(x)
 
 convert_data = {
         "string" : get_string,
@@ -54,7 +61,7 @@ def main():
         year = '2012-13'
         url = base_url + 'schDetails.jsp?Page=' + str(page) + '&pSchCode=' + schoolCode + '&pLEACode=320&pYear=' + year
         status, response = http.request(url)
-        soup = BS(response)
+        soup = BS(response, "html5lib")
         data[pages[page]['key']] = pages[page]['function'](soup)
 
     pp = pprint.PrettyPrinter(depth=6)
@@ -64,13 +71,33 @@ def singleHeadTable(rows, type_array):
     object = {}
     for index in range(0, len(rows[0].find_all('th'))):
         head = rows[0].find_all('th')[index].text.strip()
+        if len(type_array) > 1:
+            object[head] = {}
         for j in range(0, len(type_array)):
             pair = [(k, v) for (k, v) in type_array[j].items()]
             body = rows[j+1].find_all('td')[index].text.strip()
-            object[head][type_array[j][pair[0][0]]] = convert_data[type_array[j][pair[0][1]]](body)
+            if len(type_array) > 1:
+                object[head][pair[0][0]] = convert_data[pair[0][1]](body)
+            else:
+                object[head] = convert_data[pair[0][1]](body)
     return object
 
-def demographicTable(rows, type):
+def doubleHeadTable(rows, type_array):
+    object = {}
+    for index in range(0, len(rows[0].find_all('th'))):
+        head = rows[0].find_all('th')[index].text.strip()
+        if len(type_array) > 1:
+            object[head] = {}
+        for j in range(0, len(type_array)):
+            pair = [(k, v) for (k, v) in type_array[j].items()]
+            body = rows[j+2].find_all('td')[index].text.strip()
+            if len(type_array) > 1:
+                object[head][pair[0][0]] = convert_data[pair[0][1]](body)
+            else:
+                object[head] = convert_data[pair[0][1]](body)
+    return object
+
+def demographicTable(rows, type_array):
     object = { "sex": {}, "race": {}, "money": {}, "other": {} }
     category = {
             "Male": "sex", "Female": "sex",
@@ -79,13 +106,28 @@ def demographicTable(rows, type):
             "L.E.P.": "other", "Migrant": "other", "Disabilities": "other"
     }
     for index in range(0, len(rows[0].find_all('th'))):
-        head = re.sub("Twoor.*", "Multi", rows[0].find_all('th')[index].text.strip().replace("\r\n","").replace(" ","").replace("Students","").replace("with",""), flags=re.DOTALL)
-        body = rows[1].find_all('td')[index].text.strip()
-        if body != "N/A":
+        head = re.sub("Twoor.*", "Multi", rows[0].find_all('th')[index].text.strip().replace("\n","").replace(" ","").replace("Students","").replace("with",""), flags=re.DOTALL)
+        if len(type_array) > 1:
             if head == "All":
-                object["All"] = convert_data[type](body)
+                object["All"] = {}
             else:
-                object[category[head]][head] = convert_data[type](body)
+                object[category[head]][head] = {}
+        for j in range(0, len(type_array)):
+            pair = [(k, v) for (k, v) in type_array[j].items()]
+            body = rows[j+1].find_all('td')[index].text.strip()
+            if body != "N/A":
+                if head == "All":
+                    if len(type_array) > 1:
+                        object["All"][pair[0][0]] = convert_data[pair[0][1]](body)
+                    else:
+                        object["All"] = convert_data[pair[0][1]](body)
+                else:
+                    if len(type_array) > 1:
+                        object[category[head]][head][pair[0][0]] = convert_data[pair[0][1]](body)
+                    else:
+                        object[category[head]][head] = convert_data[pair[0][1]](body)
+            else:
+                object[category[head]].pop(head, None)
     return object
 
 def page1(soup):
@@ -94,9 +136,20 @@ def page1(soup):
             "total" : int(soup.find_all('table',summary="school size")[1].find('tr').find_all('td')[1].text.strip()) }
 
 def page2(soup):
-    ESEArows = soup.find('table',summary="End-of-Grade Science Tests for ESEA").find_all('tr')
-    EOGrows = soup.find('table',summary="percentage of each student group on the North Carolina end-of-grade tests").find_all('tr')
-    object = { "ESEA": singleHeadTable(ESEA_rows, [ { "Percent": "percent" } ]), "EOG": demographicTable(EOG_rows,"percent") }
+    ESEA_grade_rows = soup.find('table',summary="End-of-Grade Science Tests for ESEA").find_all('tr')
+    ESEA_demo_rows = soup.find('table',summary="percentage of each student group on the ABCs end-of-grade tests").find_all('tr')
+    EOG_demo_rows = soup.find('table',summary="percentage of each student group on the North Carolina end-of-grade tests").find_all('tr')
+    EOG_grade_rows = soup.find('table',summary="performance of students in each grade on the ABCs end-of-grade tests").find_all('tr')
+    object = {
+            "ESEA": {
+                "Grades": singleHeadTable(ESEA_grade_rows, [ { "%Pass": "percent" }, { "#Tests": "integer" } ]),
+                "Demographics": demographicTable(ESEA_demo_rows, [ { "%Pass": "percent" }, { "#Tests": "integer" } ])
+                },
+            "EOG": {
+                "Grades": doubleHeadTable(EOG_grade_rows, [{ "%Pass": "percent" }, { "#Tests": "integer" }]),
+                "Demographics": demographicTable(EOG_demo_rows,[ { "%Pass": "percent" }, { "#Tests": "integer" } ])
+                }
+            }
     return object
 
 #    object = { "grades": {}, "groups": { "races": {}, "sexes": {}, "economic": {} } }
