@@ -41,5 +41,5 @@ class School(models.Model):
     # Override default manager for gis
     objects = models.GeoManager()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
