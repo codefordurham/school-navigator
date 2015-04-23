@@ -53,8 +53,6 @@ angular.module('SchoolsApp.controllers', [])
                     obj.selected = 'hide';
                 }
             });
-//            $scope.all_schools[index].selected = true;
-//            school.selected = true;
         };
 
         $scope.deselectSchool = function () {
