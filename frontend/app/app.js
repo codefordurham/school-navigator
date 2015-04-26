@@ -5,7 +5,8 @@ var app = angular.module("schoolsApp", [
     'SchoolsApp.services',
     'SchoolsApp.controllers',
     'SchoolsApp.detailCtrl',
-    'SchoolsApp.searchDirectives'
+    'SchoolsApp.searchDirectives',
+    'SchoolsApp.navDirectives'
 ]);
 
 app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
