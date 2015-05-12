@@ -60,10 +60,10 @@ angular.module('SchoolsApp.directives', [])
                 if (schools) {
                     clearMap();
                     angular.forEach(schools, function(school) {
-                        var schoolIcon = L.divIcon({className: school.type + ' school_point ' + school.level + ' ' + (school.year_round ? "year-round" : ""), iconSize: [48,48], iconAnchor: [24,0], html: school.short_name});
+                        var schoolIcon = L.divIcon({className: school.type + ' school_point ' + school.level + ' ' + (school.year_round ? "year-round" : ""), iconSize: [48,48], iconAnchor: [24,24], html: school.short_name});
                         var school_layer,
                             school_marker =  L.marker([school.location.coordinates['1'], school.location.coordinates['0']], {icon: schoolIcon})
-                                .bindPopup(school.name);
+                                .bindPopup(school.name, { offset: new L.Point(0, -10) });
 
                         school_marker.school_id = school.id;
                         school_marker.on('mouseover', function() {
