@@ -33,15 +33,16 @@ def p2f(x):
 convert_data = {
         "string" : get_string,
         "integer" : get_integer,
-        "percent" : p2f
+        "percent" : p2f,
+        "float" : float
         }
 
 def main():
     data = {}
     pages = { 1: { "key": "size", "function": page1 },
               2: { "key": "tests", "function": page2 },
-              3: { "key": "", "function": page3 },
-              4: { "key": "", "function": page4 },
+              3: { "key": "discipline", "function": page3 },
+              4: { "key": "teachers", "function": page4 },
               5: { "key": "", "function": page5 },
               6: { "key": "", "function": page6 },
               7: { "key": "", "function": page7 },
@@ -56,7 +57,7 @@ def main():
               16: { "key": "", "function": page16 },
               17: { "key": "", "function": page17 } }
 
-    for page in range(1,3):
+    for page in range(1,5):
         schoolCode = '304'
         year = '2012-13'
         url = base_url + 'schDetails.jsp?Page=' + str(page) + '&pSchCode=' + schoolCode + '&pLEACode=320&pYear=' + year
@@ -67,10 +68,12 @@ def main():
     pp = pprint.PrettyPrinter(depth=6)
     pp.pprint(data)
 
+# TODO: Possibly use recursion to more elegantly deal with double header tables
+# and might be cleaner anywhere (if less grokable)
 def singleHeadTable(rows, type_array):
     object = {}
-    for index in range(0, len(rows[0].find_all('th'))):
-        head = rows[0].find_all('th')[index].text.strip()
+    for index in range(0, len(rows[0].find_all('th', class_="Bak_Dark_Blue"))):
+        head = ' '.join(rows[0].find_all('th')[index].text.strip().split())
         if len(type_array) > 1:
             object[head] = {}
         for j in range(0, len(type_array)):
@@ -84,8 +87,10 @@ def singleHeadTable(rows, type_array):
 
 def doubleHeadTable(rows, type_array):
     object = {}
-    for index in range(0, len(rows[0].find_all('th'))):
-        head = rows[0].find_all('th')[index].text.strip()
+    for index in range(0, len(rows[1].find_all('th'))):
+        head = rows[0].find_all('th')[int(index/2)].text.strip()
+        head2 = rows[1].find_all('th')[index].text.strip()
+        head = head + " - " + head2
         if len(type_array) > 1:
             object[head] = {}
         for j in range(0, len(type_array)):
@@ -162,12 +167,12 @@ def page2(soup):
 #    return object
 
 def page3(soup):
-    rows = soup.find('table',summary="").find_all('tr')
-    return { "key": singleHeadTable(rows, "type") }
+    rows = soup.find('table',summary="percentage of students who attend school daily").find_all('tr')
+    return { "suspends": singleHeadTable(rows, [{"Number": "float"}] ) }
 
 def page4(soup):
-    rows = soup.find('table',summary="").find_all('tr')
-    return { "key": singleHeadTable(rows, "type") }
+    rows = soup.find('table',summary="The percentage of teachers who have taught for 0 - 3 years, 4 - 10 years or over 10 years.").find_all('tr')
+    return { "yearsOfExp": singleHeadTable(rows, [{"Percent": "percent"}]) }
 
 def page5(soup):
     rows = soup.find('table',summary="").find_all('tr')
