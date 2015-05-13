@@ -8,7 +8,7 @@ angular.module('SchoolsApp.directives', [])
                 markerLatLng,
                 schools_layers = [],
                 map_highlights = L.featureGroup(),
-                homeIcon = L.divIcon({className: 'fa fa-home fa-3x', iconSize: '64px'});
+                homeIcon = L.divIcon({className: 'fa fa-home fa-3x', iconSize: [32, 32], iconAnchor: [16, 16]});
 
             // default zoom controls position
             map.zoomControl.setPosition("bottomright");
@@ -23,7 +23,7 @@ angular.module('SchoolsApp.directives', [])
                 L.tileLayer('https://{s}.tiles.mapbox.com/v3/vrocha.j3fib8g6/{z}/{x}/{y}.png', {
                     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
                     maxZoom: 18
-                }).addTo(map)
+                }).addTo(map);
             });
 
             // resize map to fit current window
@@ -60,10 +60,10 @@ angular.module('SchoolsApp.directives', [])
                 if (schools) {
                     clearMap();
                     angular.forEach(schools, function(school) {
-                        var schoolIcon = L.divIcon({className: school.type + ' school_point ' + school.level + ' ' + (school.year_round ? "year-round" : ""), iconSize: '64px', html: school.short_name});
+                        var schoolIcon = L.divIcon({className: school.type + ' school_point ' + school.level + ' ' + (school.year_round ? "year-round" : ""), iconSize: [48,48], iconAnchor: [24,24], html: school.short_name});
                         var school_layer,
                             school_marker =  L.marker([school.location.coordinates['1'], school.location.coordinates['0']], {icon: schoolIcon})
-                                .bindPopup(school.name);
+                                .bindPopup(school.name, { offset: new L.Point(0, -10) });
 
                         school_marker.school_id = school.id;
                         school_marker.on('mouseover', function() {
@@ -100,7 +100,7 @@ angular.module('SchoolsApp.directives', [])
                         map_highlights.addLayer(L.polygon(district_bounderies, {color: school.color, className: school.type + ' ' + school.level}));
                         
                     }
-                })
+                });
             };
 
             scope.clear_highlight = function() {
@@ -114,7 +114,7 @@ angular.module('SchoolsApp.directives', [])
 
             var clearMap = function() {
                 angular.forEach(schools_layers, function(layer) {
-                    map.removeLayer(layer)
+                    map.removeLayer(layer);
                 });
                 schools_layers = [];
             };
@@ -123,5 +123,5 @@ angular.module('SchoolsApp.directives', [])
         return {
             restrict: 'A',
             link: linker
-        }
+        };
     }]);
