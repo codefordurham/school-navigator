@@ -4,7 +4,9 @@ var app = angular.module("schoolsApp", [
     'SchoolsApp.geoDecoder',
     'SchoolsApp.services',
     'SchoolsApp.controllers',
-    'SchoolsApp.detailCtrl'
+    'SchoolsApp.detailCtrl',
+    'SchoolsApp.searchDirectives',
+    'SchoolsApp.navDirectives'
 ]);
 
 app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
