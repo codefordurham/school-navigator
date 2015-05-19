@@ -11,7 +11,7 @@ class SchoolAdmin(LeafletGeoAdmin):
     list_filter = ('year_round', 'level', 'type')
 
     def has_mission_statement(self, obj):
-        if obj.description:
+        if obj.mission_statement:
             return True
         return False
     has_mission_statement.boolean = True
