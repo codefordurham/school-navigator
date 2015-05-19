@@ -21,8 +21,8 @@ class School(models.Model):
     address = models.CharField(max_length=100, blank=True)
     zip_code = models.CharField(max_length=5, blank=True)
     website_url = models.CharField(max_length=500, blank=True)
-    description = models.TextField(null=True, blank=True)
-    hours = models.TextField(null=True, blank=True)
+    mission_statement = models.TextField(null=True, blank=True)
+    school_hours = models.TextField(null=True, blank=True)
     photo = models.ImageField(null=True, blank=True)
 
     level = models.CharField(choices=SCHOOL_LEVELS, max_length=20)
