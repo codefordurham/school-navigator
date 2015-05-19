@@ -21,14 +21,14 @@ class SchoolListSerializer(geo_serializers.GeoModelSerializer):
         model = schools_models.School
         fields = ('id', 'name', 'level', 'address', 'type', 'eligibility',
                   'location', 'preference', 'short_name', 'distance',
-                  'year_round', 'grade_min', 'grade_max', 'website_url')
+                  'year_round', 'grade_min', 'grade_max', 'website_url',
+                  'active')
 
     def get_eligibility(self, obj):
         pt = self.context['point']
         if obj.district is not None and obj.district.contains(pt):
             return 'assigned'
         if obj.walk_zone is not None and obj.walk_zone.contains(pt):
-            #TODO set highlight color
             return 'assigned'
         if obj.type in ('magnet', 'charter', 'speciality'):
             return 'option'
