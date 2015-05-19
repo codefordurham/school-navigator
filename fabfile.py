@@ -225,3 +225,18 @@ def deploy():
         target = "-G 'environment:{0}'".format(env.environment)
         salt('saltutil.sync_all', target)
         highstate(target)
+
+@task
+def reset_local_db(confirm_first=True):
+    """ Reset local database from remote host """
+    require('environment', provided_by=('production',))
+    if confirm_first:
+        question = 'Are you sure you want to reset your local ' \
+                   'database with the %(environment)s database?' % env
+        if not confirm(question, default=False):
+            abort('Local database reset aborted.')
+    with settings(warn_only=True):
+        local('dropdb school_inspector')
+    local('createdb school_inspector')
+    remote_db = 'school_inspector_production'
+    local('ssh -C %s sudo -u postgres pg_dump -Ox %s | psql school_inspector' % (env.master, remote_db, ))
