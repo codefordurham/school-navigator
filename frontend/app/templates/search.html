@@ -28,10 +28,10 @@
                             <p class="school-group-item-text">
                                 Grades {{ school.grade_min }}-{{ school.grade_max }} &mdash; {{ school.address }}
                             </p>
-                            <img class="photo" src="//placehold.it/350x150">
+                            <img class="photo" data-ng-src="{{ school.photo_url }}">
                             <p>Website: <a href="{{ school.website_url }}">{{ school.website_url }}</a></p>
                             <p class='description'>
-                                The mission of Jordan High School is to provide students with the opportunity to explore a body of knowledge, to develop academic, physical, and social skills, and to practice thinking and decision-making processes in an open and orderly environment.
+                                {{ school.mission_statement }}
                             </p>
                         </div>
                     </div>

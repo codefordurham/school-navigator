@@ -3,13 +3,12 @@ angular.module('SchoolsApp.directives', [])
         var linker = function(scope, element, attrs) {
             // do all map rendering and interactions here
             element.height($(window).height()).width($(window).width());
-            var map = new L.map('map', { zoomControl:true }),
+            var map = new L.map('map', { zoomControl:true }).setView([35.9730, -78.934], 13),
                 marker,
                 markerLatLng,
                 schools_layers = [],
                 map_highlights = L.featureGroup(),
                 homeIcon = L.divIcon({className: 'fa fa-home fa-3x', iconSize: [32, 32], iconAnchor: [16, 16]});
-
             // default zoom controls position
             map.zoomControl.setPosition("bottomright");
             map.on("mouseover", function() {
@@ -35,24 +34,26 @@ angular.module('SchoolsApp.directives', [])
             // variable changes
             scope.$watch(attrs.userLocation, function(location) {
                 // add or move marker to map
-                if (marker) {
-                    markerLatLng = new L.LatLng(location.latitude, location.longitude);
-                    marker.setLatLng(markerLatLng);
-                } else {
-                    marker = L.marker(
-                        [location.latitude, location.longitude],
-                        {icon: homeIcon, draggable: true, riseOnHover: true}
-                    ).addTo(map);
-                }
-                marker.on('dragend', function(event){
-                    var marker = event.target;
-                    var position = marker.getLatLng();
-                    scope.$apply(function(){
-                        $location.path('/location/' + position.lat + '/' + position.lng + '/').replace();
+                if (location) {
+                    if (marker) {
+                        markerLatLng = new L.LatLng(location.latitude, location.longitude);
+                        marker.setLatLng(markerLatLng);
+                    } else {
+                        marker = L.marker(
+                            [location.latitude, location.longitude],
+                            {icon: homeIcon, draggable: true, riseOnHover: true}
+                        ).addTo(map);
+                    }
+                    marker.on('dragend', function(event){
+                        var marker = event.target;
+                        var position = marker.getLatLng();
+                        scope.$apply(function(){
+                            $location.path('/location/' + position.lat + '/' + position.lng + '/').replace();
+                        });
                     });
-                });
-                // center marker
-                map.setView([location.latitude, location.longitude], 12);
+                    // center marker
+                    map.setView([location.latitude, location.longitude], 12);
+                }
             });
 
             scope.$watch(attrs.schools, function(schools, oldvalue) {
@@ -98,7 +99,7 @@ angular.module('SchoolsApp.directives', [])
 
                     if (district_bounderies) {
                         map_highlights.addLayer(L.polygon(district_bounderies, {color: school.color, className: school.type + ' ' + school.level}));
-                        
+
                     }
                 });
             };
