@@ -44,4 +44,5 @@ class AllSchools(SchoolAPIView):
                 (~Q(district=None) & Q(district__contains=self.pt)) |
                 Q(type__in=('magnet', 'speciality', 'charter'))
         )
+        qs = qs.filter(active=True)
         return qs.distance(self.pt)
