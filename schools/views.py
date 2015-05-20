@@ -33,13 +33,13 @@ class SchoolAPIView(generics.ListAPIView):
         context['point'] = self.pt
         return context
 
-class AllSchools(SchoolAPIView):
+class ActiveSchools(SchoolAPIView):
     """
     Both Assigned And Option Schools
     """
 
     def get_queryset(self):
-        qs = super(AllSchools, self).get_queryset()
+        qs = super(ActiveSchools, self).get_queryset()
         qs = qs.filter(
                 (~Q(district=None) & Q(district__contains=self.pt)) |
                 Q(type__in=('magnet', 'speciality', 'charter'))

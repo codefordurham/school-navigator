@@ -24,6 +24,7 @@ class School(models.Model):
     mission_statement = models.TextField(null=True, blank=True)
     school_hours = models.TextField(null=True, blank=True)
     photo = models.ImageField(null=True, blank=True)
+    active = models.BooleanField(default=False)
 
     level = models.CharField(choices=SCHOOL_LEVELS, max_length=20)
     type = models.CharField(choices=SCHOOL_TYPES, max_length=20)
