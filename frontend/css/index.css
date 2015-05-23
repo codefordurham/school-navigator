@@ -170,6 +170,22 @@ body {
     bottom: 30px!important;
 }
 
+div#schools-legend {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.schools-legend-el {
+  width: 100px;
+  height: 40px;
+  line-height: 40px;
+  margin: auto;
+}
+
+.schools-legend-el > img {
+  padding: 2px;
+}
+
 .school_point {
     border-radius: 50%;
     width: 50px;
@@ -209,16 +225,6 @@ body {
     padding: 2px;
     font-weight: bold;
     font-size: 10px;
-}
-
-.school-badge.magnet {
-    background-color: #FFAE8B;
-    border:2px solid rgba(255,255,255,0.5);
-}
-
-.school-badge.year-round {
-    background-color: #EF83A2;
-    border:2px solid rgba(255,255,255,0.5);
 }
 
 div#schools-wrapper ul.nav li a {
