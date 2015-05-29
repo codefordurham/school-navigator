@@ -1,6 +1,10 @@
 angular.module('SchoolsApp.searchDirectives', [])
     .directive('search', ['$q', 'Schools', '$location', 'Geodecoder', function($q, Schools, $location, Geodecoder) {
         var linker = function(scope, element, attrs) {
+            scope.maxHeight = function () {
+                return $(window).height() - 150 + 'px';
+            };
+
             // do all map rendering and interactions here
             scope.selectSchool = function (school) {
                 angular.forEach(scope.all_schools, function(obj) {
