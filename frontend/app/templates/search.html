@@ -26,6 +26,7 @@
                         <div class="school-group-item-heading">
                             <h4 class="school-group-item-heading">{{ school.name }}</h4>
                             <span ng-if="school.type == 'magnet'" class="school-badge magnet" data-toggle="tooltip" data-placement="top" title="Magnet School"><img src="./img/magnet.png"></span>
+                            <span ng-if="school.type == 'charter'" class="school-badge charter" data-toggle="tooltip" data-placement="top" title="Charter School"><img src="./img/scroll.png"></span>
                             <span ng-if="school.year_round == true" class="school-badge year-round" data-toggle="tooltip" data-placement="top" title="Year-round School"><img src="./img/calendar.png"></span>
                         </div>
                         <div class="distance">{{ school.distance | number:2 }} mi</div>
