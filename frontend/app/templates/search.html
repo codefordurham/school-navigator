@@ -12,7 +12,7 @@
           <li data-ng-class="{active: eligibility == 'assigned'}"><a data-ng-click="filterSchools('assigned')">Assigned</a></li>
           <li data-ng-class="{active: eligibility == 'option'}"><a data-ng-click="filterSchools('option')">Options</a></li>
         </ul>
-        <div id="my-schools" data-ng-mouseleave="clear_highlight();">
+        <div id="my-schools" data-ng-mouseleave="clear_highlight();" style="max-height: {{maxHeight()}}">
             <div data-ng-repeat="level in levels" class="school-group {{ level }}">
                 <h3 class="{{ level }}">{{ level }}</h3>
                 <div data-ng-repeat="school in schools | filter:{'level': level}" class="school-group-item" data-ng-mouseenter="highlight_school(school.id);" data-ng-mouseleave="clear_highlight();" ng-class="{'last':$last, detail: school.selected == true}" >

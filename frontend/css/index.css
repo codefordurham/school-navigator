@@ -63,8 +63,6 @@ body {
 
 #my-schools {
     background: white;
-    /*padding: 20px;*/
-    max-height: 700px;
     overflow-y: auto;
 }
 
