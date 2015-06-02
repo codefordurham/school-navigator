@@ -75,6 +75,9 @@ forwarding if it is not already by adding ``ForwardAgent yes`` to your SSH confi
 
 Getting Started
 ~~~~~~~~~~~~~~~
+*Note*: The following instructions use the apt package manager for Debian/Ubuntu
+Linux. If apt is not available for your system, use your preferred package manager
+(i.e. `Homebrew <http://brew.sh>`_ for Mac OS X) to install the required dependencies.
 
 If you need Python 3.4 installed, you can use this PPA::
 
