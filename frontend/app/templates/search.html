@@ -10,7 +10,8 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs nav-justified" role="tablist">
           <li data-ng-class="{active: eligibility == 'assigned'}"><a data-ng-click="filterSchools('assigned')">Assigned</a></li>
-          <li data-ng-class="{active: eligibility == 'option'}"><a data-ng-click="filterSchools('option')">Options</a></li>
+          <li data-ng-class="{active: eligibility == 'magnet'}"><a data-ng-click="filterSchools('magnet')">Magnets</a></li>
+          <li data-ng-class="{active: eligibility == 'charter'}"><a data-ng-click="filterSchools('charter')">Charters</a></li>
         </ul>
         <div id="my-schools" data-ng-mouseleave="clear_highlight();" style="max-height: {{maxHeight()}}">
             <div data-ng-repeat="level in levels" class="school-group {{ level }}">
@@ -19,7 +20,6 @@
                     <div class="row-content" data-ng-hide="school.selected == 'hide'" data-ng-click="selectSchool( school )">
                         <div class="school-group-item-heading">
                             <h4 class="school-group-item-heading">{{ school.name }}</h4>
-                            <span ng-if="school.type == 'magnet'" class="school-badge magnet" data-toggle="tooltip" data-placement="top" title="Magnet School">M</span>
                             <span ng-if="school.year_round == true" class="school-badge year-round" data-toggle="tooltip" data-placement="top" title="Year-round School">YR</span>
                         </div>
                         <div class="distance">{{ school.distance | number:2 }} mi</div>

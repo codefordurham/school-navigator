@@ -19,7 +19,11 @@ angular.module('SchoolsApp.controllers', [])
         }
 
         $scope.filterSchools = function (eligibility) {
-            $scope.schools = $filter('filter')($scope.all_schools, {'eligibility': eligibility});
+            if (eligibility === 'assigned') {
+                $scope.schools = $filter('filter')($scope.all_schools, {'eligibility': eligibility});
+            } else {
+                $scope.schools = $filter('filter')($scope.all_schools, {'eligibility': 'option', 'type': eligibility});
+            }
             $scope.eligibility = eligibility;
             $scope.levels = ['elementary', 'secondary', 'middle', 'high'];
         };
