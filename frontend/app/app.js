@@ -45,6 +45,6 @@ app.filter('gradeString', [function() {
     var gradeNames = ['PreK3', 'PreK4', 'K', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
     return function (gradeNumber) {
         //-2 = preK3, -1 = preK4, 0 = K, 1 = 1, ...
-	return gradeNames[gradeNumber + 1];
+	return gradeNames[gradeNumber + 2];
     }
 }]);
