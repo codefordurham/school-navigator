@@ -27,4 +27,10 @@ angular.module('SchoolsApp.controllers', [])
             $scope.eligibility = eligibility;
             $scope.levels = ['elementary', 'secondary', 'middle', 'high'];
         };
+
+        $scope.deselectSchools = function () {
+            angular.forEach($scope.schools, function(school) {
+                school.selected = false;
+            })
+        }
     }]);
