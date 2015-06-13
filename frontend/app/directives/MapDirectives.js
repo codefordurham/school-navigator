@@ -68,10 +68,16 @@ angular.module('SchoolsApp.directives', [])
 
                         school_marker.school_id = school.id;
                         school_marker.on('mouseover', function() {
+                            // highlight district
                             scope.highlight_school(this.school_id);
+                            // highlight list item
+                            $('.school-group-item.item-' + this.school_id).addClass('active')
                         });
                         school_marker.on('mouseout', function() {
+                            // remove district highlight
                             scope.clear_highlight();
+                            // remove list item highlight
+                            $('.school-group-item').removeClass('active')
                         });
                         school_layer = L.layerGroup([school_marker]);
                         schools_layers.push(school_layer);
