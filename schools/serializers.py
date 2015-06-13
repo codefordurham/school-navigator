@@ -16,19 +16,22 @@ class SchoolListSerializer(geo_serializers.GeoModelSerializer):
     preference = serializers.SerializerMethodField('get_preference')
     short_name = serializers.SerializerMethodField('get_short_name')
     distance = serializers.SerializerMethodField('get_distance')
+    preference_type = serializers.SerializerMethodField('get_preference_type')
 
     class Meta:
         model = schools_models.School
         fields = ('id', 'name', 'level', 'address', 'type', 'eligibility',
                   'location', 'preference', 'short_name', 'distance',
                   'year_round', 'grade_min', 'grade_max', 'website_url',
-                  'active', 'mission_statement')
+                  'active', 'mission_statement', 'preference_type')
 
     def get_eligibility(self, obj):
         pt = self.context['point']
         if obj.district is not None and obj.district.contains(pt):
             return 'assigned'
         if obj.walk_zone is not None and obj.walk_zone.contains(pt):
+            return 'assigned'
+        if obj.choice_zone is not None and obj.choice_zone.contains(pt):
             return 'assigned'
         if obj.type in ('magnet', 'charter', 'speciality'):
             return 'option'
@@ -52,6 +55,18 @@ class SchoolListSerializer(geo_serializers.GeoModelSerializer):
 
     def get_distance(self, obj):
         return obj.distance.mi
+
+    def get_preference_type(self, obj):
+        """Returns the type of preference you have ito be admitted in school"""
+        if obj.walk_zone:
+            return u'walk zone'
+        elif obj.choice_zone:
+            return u'choice zone'
+        elif obj.priority_zone:
+            return u'priority zone'
+        elif obj.district:
+            return u'districted'
+        return ''
 
 
 class SchoolDetailSerializer(geo_serializers.GeoModelSerializer):
