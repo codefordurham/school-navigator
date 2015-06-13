@@ -9,9 +9,9 @@
     <div id="schools-wrapper" data-ng-show="all_schools.length">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs nav-justified" role="tablist">
-          <li data-ng-class="{active: eligibility == 'assigned'}"><a data-ng-click="filterSchools('assigned')">Assigned</a></li>
-          <li data-ng-class="{active: eligibility == 'magnet'}"><a data-ng-click="filterSchools('magnet')">Magnets</a></li>
-          <li data-ng-class="{active: eligibility == 'charter'}"><a data-ng-click="filterSchools('charter')">Charters</a></li>
+          <li data-ng-class="{active: eligibility == 'assigned'}"><a data-ng-click="filterSchools('assigned'); deselectSchools();">Assigned</a></li>
+          <li data-ng-class="{active: eligibility == 'magnet'}"><a data-ng-click="filterSchools('magnet'); deselectSchools();">Magnets</a></li>
+          <li data-ng-class="{active: eligibility == 'charter'}"><a data-ng-click="filterSchools('charter'); deselectSchools();">Charters</a></li>
         </ul>
         <div id="my-schools" data-ng-mouseleave="clear_highlight();" style="max-height: {{maxHeight()}}">
             <div data-ng-repeat="level in levels" class="school-group {{ level }}">
