@@ -15,27 +15,29 @@
         </ul>
         <div id="my-schools" data-ng-mouseleave="clear_highlight();" style="max-height: {{maxHeight()}}">
             <div data-ng-repeat="level in levels" class="school-group {{ level }}">
-                <h3 class="{{ level }}">{{ level }}</h3>
-                <div data-ng-repeat="school in schools | filter:{'level': level}" class="school-group-item" data-ng-mouseenter="highlight_school(school.id);" data-ng-mouseleave="clear_highlight();" ng-class="{'last':$last, detail: school.selected == true}" >
-                    <div class="row-content" data-ng-hide="school.selected == 'hide'" data-ng-click="selectSchool( school )">
-                        <div class="school-group-item-heading">
-                            <h4 class="school-group-item-heading">{{ school.name }}</h4>
-                            <span ng-if="school.year_round == true" class="school-badge year-round" data-toggle="tooltip" data-placement="top" title="Year-round School">YR</span>
+                <div class="schoolLevelWrapper" data-ng-show="(schools | filter:{'level': level}).length">
+                    <h3 class="{{ level }}">{{ level }}</h3>
+                    <div data-ng-repeat="school in schools | filter:{'level': level}" class="school-group-item" data-ng-mouseenter="highlight_school(school.id);" data-ng-mouseleave="clear_highlight();" ng-class="{'last':$last, detail: school.selected == true}" >
+                        <div class="row-content" data-ng-hide="school.selected == 'hide'" data-ng-click="selectSchool( school )">
+                            <div class="school-group-item-heading">
+                                <h4 class="school-group-item-heading">{{ school.name }}</h4>
+                                <span data-ng-if="school.year_round == true" class="school-badge year-round" data-toggle="tooltip" data-placement="top" title="Year-round School">YR</span>
+                            </div>
+                            <div class="distance">{{ school.distance | number:2 }} mi</div>
+                            <div class="close" data-ng-click="deselectSchool(); $event.stopPropagation()"></div>
+                            <div data-ng-show="school.selected == true">
+                                <p class="school-group-item-text">
+                                    Grades {{ school.grade_min | gradeString }}-{{ school.grade_max | gradeString}} &mdash; {{ school.address }}
+                                </p>
+                                <img class="photo" data-ng-src="{{ school.photo_url }}">
+                                <p>Website: <a href="{{ school.website_url }}">{{ school.website_url }}</a></p>
+                                <p class='description'>
+                                    {{ school.mission_statement }}
+                                </p>
+                            </div>
                         </div>
-                        <div class="distance">{{ school.distance | number:2 }} mi</div>
-                        <div class="close" data-ng-click="deselectSchool(); $event.stopPropagation()"></div>
-                        <div data-ng-show="school.selected == true">
-                            <p class="school-group-item-text">
-                                Grades {{ school.grade_min | gradeString }}-{{ school.grade_max | gradeString}} &mdash; {{ school.address }}
-                            </p>
-                            <img class="photo" data-ng-src="{{ school.photo_url }}">
-                            <p>Website: <a href="{{ school.website_url }}">{{ school.website_url }}</a></p>
-                            <p class='description'>
-                                {{ school.mission_statement }}
-                            </p>
-                        </div>
+                        <div class="school-group-separator" data-ng-hide="school.selected == 'hide'"></div>
                     </div>
-                    <div class="school-group-separator" data-ng-hide="school.selected == 'hide'"></div>
                 </div>
             </div>
         </div>
