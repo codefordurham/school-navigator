@@ -56,7 +56,7 @@ body {
     z-index: 1000000;
     top: 85px;
     left: 40px;
-    width: 396px;
+    width: 420px;
     background: white;
     max-height: 800px;
 }
@@ -129,10 +129,25 @@ body {
 }
 
 .school-group .school-group-item .school-group-item-heading {
-    margin: 10px 0px;
+    margin: 15px 0;
     vertical-align: middle;
+    width: 330px;
 }
-
+.school-group .school-group-item .school-group-item-heading .legends {
+    border-radius: 50%;
+    padding: 5px;
+    font-size: 10px;
+    width: 48px;
+    height: 48px;
+    display: block;
+    float: left;
+    margin-top: -10px;
+    margin-right: 10px;
+}
+.school-group .school-group-item .school-group-item-heading .legends span {
+    margin: -5px auto auto auto;
+    display: block;
+}
 .school-group .school-group-item .school-group-item-heading h4 {
     display: inline;
     font-size: 20px;
