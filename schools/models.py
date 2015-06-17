@@ -39,6 +39,7 @@ class School(models.Model):
     walk_zone = models.PolygonField(null=True, blank=True)
     choice_zone =  models.PolygonField(null=True, blank=True)
     priority_zone = models.PolygonField(null=True, blank=True)
+    year_round_zone = models.PolygonField(null=True, blank=True)
 
     # Override default manager for gis
     objects = models.GeoManager()
