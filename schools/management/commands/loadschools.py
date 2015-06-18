@@ -100,7 +100,6 @@ class Command(BaseCommand):
             s.type = 'magnet'
             zone = Polygon(school['geometry']['rings'][0])
             s.year_round_zone = zone
-            print(name, zone[:10])
         return schools
 
     def handle(self, *args, **options):
