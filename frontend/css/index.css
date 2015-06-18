@@ -15,7 +15,6 @@ body {
 #logo #icon {
     width: 26px;
     margin-top: 15px;
-    margin-left: 29px;
 }
 
 #main-menu {
@@ -24,9 +23,10 @@ body {
     top: 20px;
     right: 40px;
     background: white;
+    padding: 0 10px;
 }
 #main-menu .nav-pills>li>a {
-    border-radius: 0px;
+    border-radius: 0;
 }
 #main-menu .nav-pills>li.active>a {
     background-color: white;
