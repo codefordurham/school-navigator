@@ -91,7 +91,7 @@ angular.module('SchoolsApp.directives', [])
                 scope.clear_highlight();
                 Schools.get(school_id).success(function(school) {
                     var district_bounderies = [];
-                    var fields = ['district', 'priority_zone', 'walk_zone', 'choice_zone'];
+                    var fields = ['district', 'priority_zone', 'walk_zone', 'choice_zone', 'year_round_zone'];
                     angular.forEach(fields, function(field) {
                         if (school[field]) {
                             angular.forEach(school[field].coordinates[0], function(coordinates, key) {

@@ -237,6 +237,7 @@ def reset_local_db(confirm_first=True):
             abort('Local database reset aborted.')
     with settings(warn_only=True):
         local('dropdb school_inspector')
-    local('createdb school_inspector')
+    local('createdb -E UTF-8 school_inspector')
+    local('psql school_inspector -c "CREATE EXTENSION postgis;"')
     remote_db = 'school_inspector_production'
     local('ssh -C %s sudo -u postgres pg_dump -Ox %s | psql school_inspector' % (env.master, remote_db, ))

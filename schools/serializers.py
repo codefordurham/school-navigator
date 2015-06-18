@@ -33,6 +33,8 @@ class SchoolListSerializer(geo_serializers.GeoModelSerializer):
             return 'assigned'
         if obj.choice_zone is not None and obj.choice_zone.contains(pt):
             return 'assigned'
+        if obj.year_round_zone is not None and obj.year_round_zone.contains(pt):
+            return 'assigned'
         if obj.type in ('magnet', 'charter', 'speciality'):
             return 'option'
         raise Exception
@@ -64,6 +66,8 @@ class SchoolListSerializer(geo_serializers.GeoModelSerializer):
             return u'choice zone'
         elif obj.priority_zone:
             return u'priority zone'
+        elif obj.year_round_zone:
+            return u'year round option'
         elif obj.district:
             return u'districted'
         return ''
