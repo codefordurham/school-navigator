@@ -10,6 +10,8 @@ angular.module('SchoolsApp.directives', [])
                 map_highlights = L.featureGroup(),
                 homeIcon = L.divIcon({className: 'fa fa-home fa-3x', iconSize: [32, 32], iconAnchor: [16, 16]});
             // default zoom controls position
+            // TODO: Tech-debt - Messy solution for issue #128: map doesn't load when given location in URL
+            // Find a better way
             if ($location.$$path === '/') {
               map = new L.map('map', { zoomControl:true }).setView([35.99, -78.9], 13);
             } else {
