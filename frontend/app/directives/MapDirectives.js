@@ -3,13 +3,20 @@ angular.module('SchoolsApp.directives', [])
         var linker = function(scope, element, attrs) {
             // do all map rendering and interactions here
             element.height($(window).height()).width($(window).width());
-            var map = new L.map('map', { zoomControl:true }).setView([35.9730, -78.934], 13),
+            var map,
                 marker,
                 markerLatLng,
                 schools_layers = [],
                 map_highlights = L.featureGroup(),
                 homeIcon = L.divIcon({className: 'fa fa-home fa-3x', iconSize: [32, 32], iconAnchor: [16, 16]});
             // default zoom controls position
+            // TODO: Tech-debt - Messy solution for issue #128: map doesn't load when given location in URL
+            // Find a better way
+            if ($location.$$path === '/') {
+              map = new L.map('map', { zoomControl:true }).setView([35.99, -78.9], 13);
+            } else {
+              map = new L.map('map', { zoomControl:true });
+            }
             map.zoomControl.setPosition("bottomright");
             map.on("mouseover", function() {
                 scope.clear_highlight();
