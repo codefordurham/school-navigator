@@ -99,8 +99,8 @@ class Command(BaseCommand):
             name = school['attributes']['YEARRND_ES'].strip()
             s = self.get_school(name, schools)
             s.type = 'magnet'
-            zone = Polygon(school['geometry']['rings'][0])
-            s.year_round_zone = zone
+            s.year_round_zone = Polygon(school['geometry']['rings'][0])
+            schools[name] = s
         return schools
 
     def load_year_round_middle(self, schools={}):
@@ -110,8 +110,8 @@ class Command(BaseCommand):
             name = school['attributes']['YEARRND_MS'].strip()
             s = self.get_school(name, schools)
             s.type = 'magnet'
-            zone = Polygon(school['geometry']['rings'][0])
-            s.year_round_zone = zone
+            s.year_round_zone = Polygon(school['geometry']['rings'][0])
+            schools[name] = s
         return schools
 
     def load_sandy_ridge_priority_zone(self, schools={}):
@@ -121,8 +121,8 @@ class Command(BaseCommand):
         for school in query_api2(api_end_point, api_section):
             if school['attributes']['SR_TRANSPO'] == 'Sandy Ridge Transportation Services Area':
                 s = self.get_school('Sandy Ridge', schools)
-                zone = Polygon(school['geometry']['rings'][0])
-                s.priority_zone = zone
+                s.priority_zone = Polygon(school['geometry']['rings'][0])
+            schools[name] = s
         return schools
 
     def handle(self, *args, **options):
