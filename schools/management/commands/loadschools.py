@@ -114,6 +114,17 @@ class Command(BaseCommand):
             schools[name] = s
         return schools
 
+    def load_sandy_ridge_priority_zone(self, schools={}):
+        # special case for Sandy Ridge Priority Zone.  See issue #99
+        api_end_point = 6
+        api_section = 'DPS_ElementaryStudentAssignment'
+        for school in query_api2(api_end_point, api_section):
+            if school['attributes']['SR_TRANSPO'] == 'Sandy Ridge Transportation Services Area':
+                s = self.get_school('Sandy Ridge', schools)
+                s.priority_zone = Polygon(school['geometry']['rings'][0])
+            schools[name] = s
+        return schools
+
     def handle(self, *args, **options):
         schools = {}
         schools = self.load_school_points(schools)
@@ -121,5 +132,6 @@ class Command(BaseCommand):
         schools = self.load_zones(schools)
         schools = self.load_year_round_elementary(schools)
         schools = self.load_year_round_middle(schools)
+        schools = self.load_sandy_ridge_priority_zone(schools)
         for name in schools.keys():
             schools[name].save()
