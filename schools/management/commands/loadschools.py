@@ -16,8 +16,8 @@ def query_api(api_endpoint_id):
     doc = requests.get(url, params=api_get_params)
     return doc.json()['features']
 
-def query_api2(api_endpoint_id):
-    api_base = 'http://gisweb2.ci.durham.nc.us/arcgis/rest/services/DurhamMaps/DPS_ElementaryStudentAssignment/MapServer'
+def query_api2(api_endpoint_id, api_section):
+    api_base = 'http://gisweb2.ci.durham.nc.us/arcgis/rest/services/DurhamMaps/{api_section}/MapServer'.format(api_section=api_section)
     api_get_params = {
             'outSR':'4326', #output spatial reference
             'where': '1=1', #grab all records
@@ -94,12 +94,35 @@ class Command(BaseCommand):
 
     def load_year_round_elementary(self, schools={}):
         api_end_point = 3
-        for school in query_api2(api_end_point):
+        api_section = 'DPS_ElementaryStudentAssignment'
+        for school in query_api2(api_end_point, api_section):
             name = school['attributes']['YEARRND_ES'].strip()
             s = self.get_school(name, schools)
             s.type = 'magnet'
-            zone = Polygon(school['geometry']['rings'][0])
-            s.year_round_zone = zone
+            s.year_round_zone = Polygon(school['geometry']['rings'][0])
+            schools[name] = s
+        return schools
+
+    def load_year_round_middle(self, schools={}):
+        api_end_point = 2
+        api_section = 'DPS_MiddleSchoolStudentAssignment'
+        for school in query_api2(api_end_point, api_section):
+            name = school['attributes']['YEARRND_MS'].strip()
+            s = self.get_school(name, schools)
+            s.type = 'magnet'
+            s.year_round_zone = Polygon(school['geometry']['rings'][0])
+            schools[name] = s
+        return schools
+
+    def load_sandy_ridge_priority_zone(self, schools={}):
+        # special case for Sandy Ridge Priority Zone.  See issue #99
+        api_end_point = 6
+        api_section = 'DPS_ElementaryStudentAssignment'
+        for school in query_api2(api_end_point, api_section):
+            if school['attributes']['SR_TRANSPO'] == 'Sandy Ridge Transportation Services Area':
+                s = self.get_school('Sandy Ridge', schools)
+                s.priority_zone = Polygon(school['geometry']['rings'][0])
+            schools[name] = s
         return schools
 
     def handle(self, *args, **options):
@@ -108,5 +131,7 @@ class Command(BaseCommand):
         schools = self.load_districts(schools)
         schools = self.load_zones(schools)
         schools = self.load_year_round_elementary(schools)
+        schools = self.load_year_round_middle(schools)
+        schools = self.load_sandy_ridge_priority_zone(schools)
         for name in schools.keys():
             schools[name].save()
