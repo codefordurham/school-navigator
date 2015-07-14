@@ -33,6 +33,15 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
         .when('/navigating', {
             templateUrl: 'app/templates/navigating.html'
             })
+        .when('/navigating/neighborhood', {
+            templateUrl: 'app/templates/neighborhood.html'
+            })
+        .when('/navigating/charter', {
+            templateUrl: 'app/templates/chater.html'
+            })
+        .when('/navigating/magnet', {
+            templateUrl: 'app/templates/magnet.html'
+            })
         .when('/schools', {
             templateUrl: 'app/templates/navigating.html'
             })
