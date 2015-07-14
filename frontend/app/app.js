@@ -37,7 +37,7 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
             templateUrl: 'app/templates/neighborhood.html'
             })
         .when('/navigating/charter', {
-            templateUrl: 'app/templates/chater.html'
+            templateUrl: 'app/templates/charter.html'
             })
         .when('/navigating/magnet', {
             templateUrl: 'app/templates/magnet.html'
