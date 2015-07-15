@@ -2,19 +2,18 @@ body {
     margin: 0;
     position: relative;
     font-family: 'Roboto', sans-serif;
-}
-#logo {
-
+    padding-top: 50px;
 }
 #logo h1 {
     display: inline;
     position: relative;
-    top: -4px;
-    font-size: 24px;
+    top: 10px;
+    left: 5px;
+    font-size: 20px;
 }
 #logo #icon {
     width: 26px;
-    margin-top: 15px;
+    margin-top: 12px;
 }
 
 #main-menu {
@@ -36,7 +35,7 @@ body {
 #search-form {
     position: absolute;
     z-index: 1000000;
-    top: 20px;
+    top: 90px;
     left: 40px;
     width: 460px;
 }
@@ -54,7 +53,7 @@ body {
 #schools-wrapper {
     position: absolute;
     z-index: 1000000;
-    top: 85px;
+    top: 165px;
     left: 40px;
     width: 420px;
     background: white;
@@ -277,4 +276,8 @@ div#schools-wrapper ul.nav li.active a, div#schools-wrapper ul.nav li a:hover {
 }
 .detail .close:after {
     content: "X";
+}
+
+.navbar {
+    margin-bottom: 0;
 }

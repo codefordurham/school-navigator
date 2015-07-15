@@ -2,7 +2,8 @@ angular.module('SchoolsApp.directives', [])
     .directive('schoolsMap', ['$q', 'Schools', '$location', '$rootScope', function($q, Schools, $location, $rootScope) {
         var linker = function(scope, element, attrs) {
             // do all map rendering and interactions here
-            element.height($(window).height()).width($(window).width());
+            var navbar_height = 52;
+            element.height($(window).height()-navbar_height).width($(window).width());
             var map = new L.map('map', { zoomControl:true }).setView([35.9730, -78.934], 13),
                 marker,
                 markerLatLng,
@@ -28,7 +29,8 @@ angular.module('SchoolsApp.directives', [])
             // resize map to fit current window
             $(window).bind('resize', function() {
                 element.css({
-                    "height": document.documentElement.clientHeight + "px"
+                    "height": (document.documentElement.clientHeight - navbar_height) + "px",
+                    "width": (document.documentElement.clientWidth) + "px"
                 });
             });
             // variable changes
