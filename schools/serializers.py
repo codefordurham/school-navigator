@@ -69,7 +69,7 @@ class SchoolListSerializer(geo_serializers.GeoModelSerializer):
         elif obj.year_round_zone:
             return u'year round option'
         elif obj.district:
-            return u'districted'
+            return u'neighborhood'
         return ''
 
 
