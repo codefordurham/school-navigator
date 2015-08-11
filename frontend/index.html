@@ -29,5 +29,16 @@
     </head>
     <body>
         <div data-ng-view></div>
+        <script type="text/javascript">
+            (function() {
+                var s = document.createElement("script");
+                s.type = "text/javascript";
+                s.async = true;
+                s.src = '//api.usersnap.com/load/'+
+                            '9d8f62dc-a163-4e7e-bc85-c4fab1070f54.js';
+                var x = document.getElementsByTagName('script')[0];
+                x.parentNode.insertBefore(s, x);
+            })();
+        </script>
     </body>
 </html>
