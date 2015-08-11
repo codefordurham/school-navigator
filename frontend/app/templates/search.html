@@ -21,7 +21,7 @@
                         <div class="row-content" data-ng-hide="school.selected == 'hide'" data-ng-click="selectSchool( school )">
                             <div class="school-group-item-heading">
                                 <h4 class="school-group-item-heading"><div class="school_point legends text-center" data-ng-class="[school.type, school.level, (school.year_round ? 'year-round' : '')]">
-                                    <span>{{ school.short_name }}</span></div> {{ school.name }} <small data-ng-show="eligibility == 'assigned'">{{ school.preference_type }}</small></h4>
+                                    <span>{{ school.short_name }}</span></div> {{ school.name }} <small>{{ school.preference }}</small></h4>
                                 <span data-ng-if="school.year_round == true" class="school-badge year-round" data-toggle="tooltip" data-placement="top" title="Year-round School">YR</span>
                             </div>
                             <div class="distance">{{ school.distance | number:2 }} mi</div>

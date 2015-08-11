@@ -41,6 +41,10 @@ class SchoolListSerializer(geo_serializers.GeoModelSerializer):
 
     def get_preference(self, obj):
         pt = self.context['point']
+        if obj.district is not None and obj.district.contains(pt):
+            return 'neighborhood'
+        if obj.walk_zone is not None and obj.walk_zone.contains(pt):
+            return 'walk zone'
         if obj.priority_zone is not None and obj.priority_zone.contains(pt):
             return 'priority'
         if obj.choice_zone is not None and obj.choice_zone.contains(pt):
