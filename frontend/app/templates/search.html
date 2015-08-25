@@ -17,11 +17,11 @@
             <div data-ng-repeat="level in levels" class="school-group {{ level }}">
                 <div class="schoolLevelWrapper" data-ng-show="(schools | filter:{'level': level}).length">
                     <h3 class="{{ level }}">{{ level }}</h3>
-                    <div data-ng-repeat="school in schools | filter:{'level': level}" class="school-group-item item-{{ school.id }}" data-ng-mouseenter="highlight_school(school.id);" data-ng-mouseleave="clear_highlight();" ng-class="{'last':$last, detail: school.selected == true}" >
+                    <div data-ng-repeat="school in schools | filter:{'level': level} | orderBy:['preference', 'distance']:true" class="school-group-item item-{{ school.id }}" data-ng-mouseenter="highlight_school(school.id);" data-ng-mouseleave="clear_highlight();" ng-class="{'last':$last, detail: school.selected == true}" >
                         <div class="row-content" data-ng-hide="school.selected == 'hide'" data-ng-click="selectSchool( school )">
                             <div class="school-group-item-heading">
                                 <h4 class="school-group-item-heading"><div class="school_point legends text-center" data-ng-class="[school.type, school.level, (school.year_round ? 'year-round' : '')]">
-                                    <span>{{ school.short_name }}</span></div> {{ school.name }} <small>{{ school.preference }}</small></h4>
+                                    <span>{{ school.short_name }}</span></div> {{ school.name }} <small class="preference">{{ school.preference }}</small></h4>
                                 <span data-ng-if="school.year_round == true" class="school-badge year-round" data-toggle="tooltip" data-placement="top" title="Year-round School">YR</span>
                             </div>
                             <div class="distance">{{ school.distance | number:2 }} mi</div>
