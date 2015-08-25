@@ -36,6 +36,7 @@ class Command(BaseCommand):
         'Lakewood': 'Lakewood Elementary School',
         'Southern': 'Southern School of Energy and Sustainability',
         'Y.E. Smith': 'Y.E. Smith Elementary Museum School',
+        'Performance Learning Center': 'Durham Performance Learning Center',
     }
 
     def get_school(self, name, schools):
