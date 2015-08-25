@@ -120,9 +120,10 @@ class Command(BaseCommand):
         api_section = 'DPS_ElementaryStudentAssignment'
         for school in query_api2(api_end_point, api_section):
             if school['attributes']['SR_TRANSPO'] == 'Sandy Ridge Transportation Services Area':
-                s = self.get_school('Sandy Ridge', schools)
+                name = 'Sandy Ridge'
+                s = self.get_school(name, schools)
                 s.priority_zone = Polygon(school['geometry']['rings'][0])
-            schools[name] = s
+                schools[name] = s
         return schools
 
     def handle(self, *args, **options):
