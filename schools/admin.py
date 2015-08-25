@@ -6,7 +6,8 @@ from .models import School
 
 
 class SchoolAdmin(LeafletGeoAdmin):
-    list_display = ('name', 'level', 'has_mission_statement', 'photo', 'school_hours', 'type', 'year_round')
+    list_display = ('name', 'level', 'has_mission_statement', 'photo',
+            'school_hours', 'type', 'year_round', 'grade_min', 'grade_max')
     ordering = ('name',)
     list_filter = ('year_round', 'level', 'type')
 
