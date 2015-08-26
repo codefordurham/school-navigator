@@ -281,3 +281,7 @@ div#schools-wrapper ul.nav li.active a, div#schools-wrapper ul.nav li a:hover {
 .navbar {
     margin-bottom: 0;
 }
+
+.preference {
+    font-weight: bold;
+}
