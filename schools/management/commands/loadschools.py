@@ -31,16 +31,26 @@ def query_api2(api_endpoint_id, api_section):
 class Command(BaseCommand):
     help = 'Load up the data from GeoJSON into the models'
 
+    SCHOOL_NORMALIZED_NAMES = {
+        'Club Blvd': 'Club Boulevard',
+        'Lakewood': 'Lakewood Elementary School',
+        'Southern': 'Southern School of Energy and Sustainability',
+        'Y.E. Smith': 'Y.E. Smith Elementary Museum School',
+        'Performance Learning Center': 'Durham Performance Learning Center',
+        'W.G. Pearson School - Student Services Center': 'W. G. Pearson Magnet Middle School ',
+    }
+
     def get_school(self, name, schools):
-        if name in schools:
-            return schools[name]
+        name_normalized = self.SCHOOL_NORMALIZED_NAMES.get(name, name)
+        if name_normalized in schools:
+            return schools[name_normalized]
         else:
             defaults = {
                 'location': Point(0,0),
                 'grade_max': -100,
                 'grade_min': -100,
             }
-            school, created = schools_models.School.objects.get_or_create(name=name, defaults=defaults)
+            school, created = schools_models.School.objects.get_or_create(name=name_normalized, defaults=defaults)
             return school
 
     def load_school_points(self, schools={}):
