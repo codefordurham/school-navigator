@@ -127,7 +127,6 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     'django.contrib.gis',
     # External apps
-    # 'south',
     'compressor',
     'leaflet',
     'rest_framework',
@@ -199,8 +198,6 @@ LOGGING = {
 }
 
 # Application settings
-SKIP_SOUTH_TESTS = True
-
 COMPRESS_PRECOMPILERS = (
    ('text/less', 'lessc {infile} {outfile}'),
 )
