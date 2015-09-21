@@ -63,8 +63,7 @@ def get_schools(address):
     return ret
 
 
-def develop():
-    address = ' '.join(sys.argv[1:])
+def develop(address):
     print(address)
     
     parcel = step1(address)
@@ -79,7 +78,7 @@ def develop():
     print(geolocation)
     
     schools = step3(geolocation)
-    #print(json.dumps(schools, indent=2))
+    print(json.dumps(schools, indent=2))
 
     for result in schools['results']:
         id = result['layerId']
