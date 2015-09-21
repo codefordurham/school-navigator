@@ -1,6 +1,8 @@
 import sys
+import time
 import json
 import requests
+import csv
 
 def step1(address):
     url = 'http://gisweb2.durhamnc.gov/ArcGIS/rest/services/SharedMaps/Parcels/MapServer/3/query'
@@ -41,7 +43,27 @@ def step3(geolocation):
     r = requests.get(url, params=params)
     return r.json()
 
-if __name__ == '__main__':
+def get_schools(address):
+    ret = {}
+    parcel = step1(address)
+    addr = parcel['features'][0]['attributes']['SITE_ADDRE'].strip()
+    rings = parcel['features'][0]['geometry']['rings']
+
+    location = step2(rings)
+    geolocation = location['labelPoints'][0]
+    
+    schools = step3(geolocation)
+
+    for result in schools['results']:
+        id = result['layerId']
+        type = result['layerName']
+        name = result['value']
+        ret[id] = name
+
+    return ret
+
+
+def develop():
     address = ' '.join(sys.argv[1:])
     print(address)
     
@@ -64,3 +86,20 @@ if __name__ == '__main__':
         type = result['layerName']
         name = result['value']
         print(id, type, ':', name)
+
+if __name__ == '__main__':
+    writer = csv.writer(sys.stdout)
+    writer.writerow(('address', 'lookup', 'middle school', 'high school',
+                     'elementary school', 'year round elementary',
+                     'year round middle school', 'elementary walk zone',
+                     'holt easley traditional option'))
+    for i, line in enumerate(sys.stdin):
+        address = line.strip()
+        sys.stderr.write('{} {}\n'.format(i, address))
+        try:
+            d = get_schools(address)
+            writer.writerow((address, 'OK', d[1], d[2], d[3], d.get(4, ''), d.get(5, ''),
+                             d.get(6, ''), d.get(7, '')))
+        except Exception as ex:
+            writer.writerow((address, str(ex)))
+        time.sleep(1)
