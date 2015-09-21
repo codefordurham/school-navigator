@@ -31,7 +31,11 @@ def get_schools(location):
     ret = {}
     for school in r.json():
         if school['eligibility'] == 'assigned':
-            ret[(school['level'], school['preference_type'])] = school['name']
+            if school['preference'] == 'neighborhood':
+                pref = 'neighborhood'
+            else:
+                pref = school['preference_type']
+            ret[(school['level'], pref)] = school['name']
             #print('\t'.join([school['level'], school['preference_type'], school['name']]))
     return ret
 
@@ -57,4 +61,4 @@ if __name__ == '__main__':
             d.get(('elementary', 'walk zone'), ''),
             '',
         ))
-        time.sleep(1)
+        time.sleep(0.2)
