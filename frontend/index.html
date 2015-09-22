@@ -14,32 +14,16 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
         <script src="libs/leaflet.js"></script>
+        <script type="text/javascript" async src="//api.usersnap.com/load/9d8f62dc-a163-4e7e-bc85-c4fab1070f54.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.15/angular.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.17/angular-resource.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.17/angular-route.min.js"></script>
         <script src="//maps.googleapis.com/maps/api/js?v=3.exp&region=ES"></script>
         <script type="text/javascript" src="app/app.js"></script>
-        <script type="text/javascript" src="app/services/schools.js"></script>
-        <script type="text/javascript" src="app/services/geodecoder.js"></script>
-        <script type="text/javascript" src="app/controllers/schoolsMap.js"></script>
-        <script type="text/javascript" src="app/controllers/schoolDetail.js"></script>
-        <script type="text/javascript" src="app/directives/MapDirectives.js"></script>
-        <script type="text/javascript" src="app/directives/SearchDirectives.js"></script>
-        <script type="text/javascript" src="app/directives/NavDirectives.js"></script>
+        <script type="text/javascript" src="app/directives/angular-leaflet-directive.js"></script>
     </head>
     <body>
         <div data-ng-view></div>
-        <script type="text/javascript">
-            (function() {
-                var s = document.createElement("script");
-                s.type = "text/javascript";
-                s.async = true;
-                s.src = '//api.usersnap.com/load/'+
-                            '9d8f62dc-a163-4e7e-bc85-c4fab1070f54.js';
-                var x = document.getElementsByTagName('script')[0];
-                x.parentNode.insertBefore(s, x);
-            })();
-        </script>
         <script>
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

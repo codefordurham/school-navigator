@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html data-ng-app="schoolsApp">
+  <head>
+  <title>Durham School Navigator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href='//fonts.googleapis.com/css?family=Roboto:500,900,300,700,400' type='text/css'>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.15/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.17/angular-route.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.17/angular-resource.min.js"></script>
+    <script src="libs/leaflet.js"></script>
+    <script src="//maps.googleapis.com/maps/api/js?v=3.exp&region=ES"></script>
+    <script type="text/javascript" src="app/mainApp.js"></script>
+    <script type="text/javascript" src="app/services/geodecoder.js"></script>
+    <script type="text/javascript" src="app/services/schools.js"></script>
+    <script type="text/javascript" src="app/services/geodecoder.js"></script>
+    <script type="text/javascript" src="app/controllers/schoolsMap.js"></script>
+    <script type="text/javascript" src="app/controllers/schoolDetail.js"></script>
+    <script type="text/javascript" src="app/directives/MapDirectives.js"></script>
+    <script type="text/javascript" src="app/directives/SearchDirectives.js"></script>
+    <script type="text/javascript" src="app/directives/NavDirectives.js"></script>
+    <script type="text/javascript" src="app/directives/angular-leaflet-directive.js"></script>
+  </head>
+  <body ng-controller="MarkersSimpleController">
+  <simple-nav class="ng-scope"><nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <div id="logo">
+          <img id="icon" src="img/marker.svg">
+          <h1 class="name">Durham School Navigator</h1>
+        </div>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#/">Map</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#navigating">Navigating DPS</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+  </simple-nav>
+    <!-- <p>
+    Actual marker position (lat/lng): <strong  ng-bind="durham.lat"></strong> / <strong ng-bind="durham.lng"></strong><button ng-click="userLocation()">Use GPS</button>
+    </p> -->
+      <form ng-submit="placeAddress()" id="search-form">
+        <input id="search-box" ng-model="address" placeholder="Enter a Durham address">
+        <button class="btn btn-default">Search</button>
+      </form>
+    <leaflet defaults="defaults" center="durham" event-broadcast="events" geojson="geojson" markers="markers" height="880px" width="100%" tiles="tiles"></leaflet>
+  </body>
+</html>
