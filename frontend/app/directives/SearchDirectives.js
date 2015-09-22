@@ -23,7 +23,7 @@ angular.module('SchoolsApp.searchDirectives', [])
             };
 
             scope.relocate = function() {
-                var lookup_address = (scope.address.indexOf("durham") == -1) ? scope.address + " Durham NC": scope.address;
+                var lookup_address = (scope.address.indexOf("durham") == -1) ? scope.address + " Durham County NC": scope.address;
                 Geodecoder.geocode( { 'address': lookup_address}, function(results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                         // always get the first result returned
