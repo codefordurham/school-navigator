@@ -31,7 +31,28 @@ angular.module('SchoolsApp.searchDirectives', [])
                         $location.path('/location/' + geo.lat() + '/' + geo.lng() + '/');
                         scope.$apply();
                     } else {
-                        alert('Geocode was not successful for the following reason: ' + status);
+                        switch(status) {
+                            /*
+                             * https://developers.google.com/maps/documentation/javascript/geocoding?hl=en#GeocodingStatusCodes 
+                             * */
+                            case google.maps.GeocoderStatus.ZERO_RESULTS:
+                                alert('No results found for address search');
+                                break;
+                            case google.maps.GeocoderStatus.OVER_QUERY_LIMIT:
+                                alert('Over query limit');
+                                break;
+                            case google.maps.GeocoderStatus.REQUEST_DENIED:
+                                alert('Request denied');
+                                break;
+                            case google.maps.GeocoderStatus.INVALID_REQUEST:
+                                alert('Invalid request');
+                                break;
+                            case google.maps.GeocoderStatus.UNKNOWN_ERROR:
+                                alert('Unknown server error');
+                                break;
+                            default:
+                                alert('Other unknown error');
+                        }
                     }
                 });
             };
