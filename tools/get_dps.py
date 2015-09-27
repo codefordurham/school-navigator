@@ -133,4 +133,4 @@ if __name__ == '__main__':
             writer.writerow(d)
         except ScrapeException as ex:
             writer.writerow(dict(address=address, lookup=str(ex)))
-        time.sleep(1)
+        time.sleep(0.5)
