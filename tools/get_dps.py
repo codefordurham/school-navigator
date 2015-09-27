@@ -32,7 +32,7 @@ def step2(rings):
 def step3(geolocation):
     url = 'http://gisweb2.durhamnc.gov/arcgis/rest/services/DurhamMaps/DPS_Schools_test/MapServer/identify'
     params = {
-        'geometry': repr(geolocation),
+        'geometry': '{{x: {}, y: {}}}'.format(geolocation['x'], geolocation['y']),
         'layers': 'all:1,2,3,4,5,6,7,8',
         'tolerance': '0',
         'mapExtent': '1878717.4182397667,767235.8877083337,2199711.8626842108,935757.9710416669',
