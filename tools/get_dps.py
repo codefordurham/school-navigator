@@ -65,18 +65,21 @@ def get_schools(address):
 
 def develop(address):
     print(address)
-    
+
+    print('--call step1--')
     parcel = step1(address)
-    #print(json.dumps(parcel, indent=2))
+    print(json.dumps(parcel, indent=2))
     addr = parcel['features'][0]['attributes']['SITE_ADDRE'].strip()
     rings = parcel['features'][0]['geometry']['rings']
     print(addr)
 
+    print('--call step2--')
     location = step2(rings)
-    #print(json.dumps(location, indent=2))
+    print(json.dumps(location, indent=2))
     geolocation = location['labelPoints'][0]
     print(geolocation)
     
+    print('--call step3--')
     schools = step3(geolocation)
     print(json.dumps(schools, indent=2))
 
