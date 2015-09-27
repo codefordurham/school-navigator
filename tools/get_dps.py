@@ -73,6 +73,8 @@ def get_schools(address):
 
     for result in schools['results']:
         r = parse_result(result)
+        if r['id'] == 8:
+            continue
         type = r['type']
         name = r['name']
         ret[MAP[type]] = name
