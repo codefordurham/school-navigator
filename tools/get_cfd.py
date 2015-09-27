@@ -46,7 +46,10 @@ if __name__ == '__main__':
         address = line.strip()
         sys.stderr.write('{} {}'.format(i, address))
         sys.stderr.write('\n')
-        loc = geolocate(address + ' durham nc')
+        if 'durham' in address.lower():
+            loc = geolocate(address)
+        else:
+            loc = geolocate(address + ' durham county nc')
 
         d = get_schools(loc)
 
