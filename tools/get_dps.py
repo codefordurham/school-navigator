@@ -43,8 +43,21 @@ def step3(geolocation):
     r = requests.get(url, params=params)
     return r.json()
 
+MAP = {
+    'Middle School Districts': 'middle school',
+    'High School Districts': 'high school',
+    'Elementary School Districts': 'elementary school',
+    'Year-Round Elementary School Zones': 'year round elementary',
+    'Year-Round Middle School Zones': 'year round middle school',
+    'Elementary Magnet Walk Zone': 'elementary walk zone',
+    'Elementary Magnet Priority Zone': 'elementary priority zone',
+    'Elementary Magnet Choice Zone': 'elementary choice zone',
+    'Holt_Easley_Traditional_Options': 'holt easley traditional option',
+}
+
 def get_schools(address):
     ret = {}
+    ret['address'] = address
     parcel = step1(address)
     addr = parcel['features'][0]['attributes']['SITE_ADDRE'].strip()
     rings = parcel['features'][0]['geometry']['rings']
@@ -55,13 +68,11 @@ def get_schools(address):
     schools = step3(geolocation)
 
     for result in schools['results']:
-        id = result['layerId']
-        type = result['layerName']
-        name = result['value']
-        ret[id] = name
-
+        r = parse_result(result)
+        type = r['type']
+        name = r['name']
+        ret[MAP[type]] = name
     return ret
-
 
 def develop(address):
     print(address)
@@ -84,24 +95,36 @@ def develop(address):
     print(json.dumps(schools, indent=2))
 
     for result in schools['results']:
+        r = parse_result(result)
+        print(r['id'], r['type'], ':', r['name'])
+
+def parse_result(result):
         id = result['layerId']
         type = result['layerName']
+        type2 = result['attributes'].get('TYPE_', None)
         name = result['value']
-        print(id, type, ':', name)
+        if (type2 == name) or (type2 in ('Elementary', 'Middle', 'High')):
+            type2 = None
+        if type == 'Elementary Magnet Walk Zones':
+            type = 'Elementary Magnet {}'.format(type2)
+        return dict(id=id, type=type, name=name)
 
 if __name__ == '__main__':
-    writer = csv.writer(sys.stdout)
-    writer.writerow(('address', 'lookup', 'middle school', 'high school',
-                     'elementary school', 'year round elementary',
-                     'year round middle school', 'elementary walk zone',
-                     'holt easley traditional option'))
+    fields = ('address', 'lookup', 'middle school', 'high school',
+              'elementary school', 'year round elementary',
+              'year round middle school', 'elementary walk zone',
+              'elementary priority zone',
+              'elementary choice zone',
+              'holt easley traditional option')
+    writer = csv.DictWriter(sys.stdout, fields, extrasaction='ignore')
+    writer.writeheader()
     for i, line in enumerate(sys.stdin):
         address = line.strip()
         sys.stderr.write('{} {}\n'.format(i, address))
         try:
             d = get_schools(address)
-            writer.writerow((address, 'OK', d[1], d[2], d[3], d.get(4, ''), d.get(5, ''),
-                             d.get(6, ''), d.get(7, '')))
+            d['lookup'] = 'OK'
+            writer.writerow(d)
         except Exception as ex:
-            writer.writerow((address, str(ex)))
+            writer.writerow(dict(address=address, lookup=str(ex)))
         time.sleep(1)
