@@ -4,6 +4,10 @@ import json
 import requests
 import csv
 
+class ScrapeException(Exception):
+    pass
+
+
 def step1(address):
     url = 'http://gisweb2.durhamnc.gov/ArcGIS/rest/services/SharedMaps/Parcels/MapServer/3/query'
     params = {
@@ -16,7 +20,7 @@ def step1(address):
     }
     r = requests.get(url, params=params)
     if len(r.json()['features']) == 0:
-        raise Exception('Address entered: "{}" not found'.format(address))
+        raise ScrapeException('Address entered: "{}" not found'.format(address))
     return r.json()
 
 def step2(rings):
@@ -125,6 +129,6 @@ if __name__ == '__main__':
             d = get_schools(address)
             d['lookup'] = 'OK'
             writer.writerow(d)
-        except Exception as ex:
+        except ScrapeException as ex:
             writer.writerow(dict(address=address, lookup=str(ex)))
         time.sleep(1)
