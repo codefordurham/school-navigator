@@ -32,6 +32,8 @@ print('\n\nyear round middle school\n', qry(j, 'year round middle school'))
 print('\n\nelementary school\n', qry(j, 'elementary school'))
 print('\n\nyear round elementary\n', qry(j, 'year round elementary'))
 print('\n\nelementary walk zone\n', qry(j, 'elementary walk zone'))
+print('\n\nelementary choice zone\n', qry(j, 'elementary choice zone'))
+print('\n\nelementary priority zone\n', qry(j, 'elementary priority zone'))
 
 print('\n\nholt easley traditional option\n', qry(j, 'holt easley traditional option'))
 
