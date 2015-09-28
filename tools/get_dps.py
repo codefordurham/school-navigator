@@ -108,7 +108,10 @@ def parse_result(result):
         id = result['layerId']
         type = result['layerName']
         type2 = result['attributes'].get('TYPE_', None)
-        name = result['value']
+        if id == 7:
+            name = result['attributes']['TRAD_OPT']
+        else:
+            name = result['value']
         if (type2 == name) or (type2 in ('Elementary', 'Middle', 'High')):
             type2 = None
         if type == 'Elementary Magnet Walk Zones':
