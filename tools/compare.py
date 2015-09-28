@@ -13,6 +13,17 @@ cfd = pd.read_csv('cfd.csv')
 # filter out dps to found addresses
 dps = dps[dps['lookup'] == 'OK']
 
+# match DPS tool by showing assigned year round elementary as 
+# year round option too.
+def yr(row):
+    if row['elementary school'] in ('Holt', 'Easley'):
+        return row['elementary school']
+    else:
+        return row['year round elementary']
+
+cfd['year round elementary'] = cfd.apply(yr, axis=1)
+
+# join cfd and dps so we can compare
 j = cfd.join(dps, how='inner', lsuffix=' cfd')
 
 # normalize some names
