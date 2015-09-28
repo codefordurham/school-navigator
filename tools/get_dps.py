@@ -4,6 +4,10 @@ import json
 import requests
 import csv
 
+class ScrapeException(Exception):
+    pass
+
+
 def step1(address):
     url = 'http://gisweb2.durhamnc.gov/ArcGIS/rest/services/SharedMaps/Parcels/MapServer/3/query'
     params = {
@@ -16,7 +20,7 @@ def step1(address):
     }
     r = requests.get(url, params=params)
     if len(r.json()['features']) == 0:
-        raise Exception('Address entered: "{}" not found'.format(address))
+        raise ScrapeException('Address entered: "{}" not found'.format(address))
     return r.json()
 
 def step2(rings):
@@ -32,7 +36,7 @@ def step2(rings):
 def step3(geolocation):
     url = 'http://gisweb2.durhamnc.gov/arcgis/rest/services/DurhamMaps/DPS_Schools_test/MapServer/identify'
     params = {
-        'geometry': repr(geolocation),
+        'geometry': '{{x: {}, y: {}}}'.format(geolocation['x'], geolocation['y']),
         'layers': 'all:1,2,3,4,5,6,7,8',
         'tolerance': '0',
         'mapExtent': '1878717.4182397667,767235.8877083337,2199711.8626842108,935757.9710416669',
@@ -43,8 +47,21 @@ def step3(geolocation):
     r = requests.get(url, params=params)
     return r.json()
 
+MAP = {
+    'Middle School Districts': 'middle school',
+    'High School Districts': 'high school',
+    'Elementary School Districts': 'elementary school',
+    'Year-Round Elementary School Zones': 'year round elementary',
+    'Year-Round Middle School Zones': 'year round middle school',
+    'Elementary Magnet Walk Zone': 'elementary walk zone',
+    'Elementary Magnet Priority Zone': 'elementary priority zone',
+    'Elementary Magnet Choice Zone': 'elementary choice zone',
+    'Holt_Easley_Traditional_Options': 'holt easley traditional option',
+}
+
 def get_schools(address):
     ret = {}
+    ret['address'] = address
     parcel = step1(address)
     addr = parcel['features'][0]['attributes']['SITE_ADDRE'].strip()
     rings = parcel['features'][0]['geometry']['rings']
@@ -55,50 +72,68 @@ def get_schools(address):
     schools = step3(geolocation)
 
     for result in schools['results']:
-        id = result['layerId']
-        type = result['layerName']
-        name = result['value']
-        ret[id] = name
-
+        r = parse_result(result)
+        if r['id'] == 8:
+            continue
+        type = r['type']
+        name = r['name']
+        ret[MAP[type]] = name
     return ret
-
 
 def develop(address):
     print(address)
-    
+
+    print('--call step1--')
     parcel = step1(address)
-    #print(json.dumps(parcel, indent=2))
+    print(json.dumps(parcel, indent=2))
     addr = parcel['features'][0]['attributes']['SITE_ADDRE'].strip()
     rings = parcel['features'][0]['geometry']['rings']
     print(addr)
 
+    print('--call step2--')
     location = step2(rings)
-    #print(json.dumps(location, indent=2))
+    print(json.dumps(location, indent=2))
     geolocation = location['labelPoints'][0]
     print(geolocation)
     
+    print('--call step3--')
     schools = step3(geolocation)
     print(json.dumps(schools, indent=2))
 
     for result in schools['results']:
+        r = parse_result(result)
+        print(r['id'], r['type'], ':', r['name'])
+
+def parse_result(result):
         id = result['layerId']
         type = result['layerName']
-        name = result['value']
-        print(id, type, ':', name)
+        type2 = result['attributes'].get('TYPE_', None)
+        if id == 7:
+            name = result['attributes']['TRAD_OPT']
+        else:
+            name = result['value']
+        if (type2 == name) or (type2 in ('Elementary', 'Middle', 'High')):
+            type2 = None
+        if type == 'Elementary Magnet Walk Zones':
+            type = 'Elementary Magnet {}'.format(type2)
+        return dict(id=id, type=type, name=name)
 
 if __name__ == '__main__':
-    writer = csv.writer(sys.stdout)
-    writer.writerow(('address', 'lookup', 'middle school', 'high school',
-                     'elementary school', 'year round elementary',
-                     'year round middle school', 'elementary walk zone',
-                     'holt easley traditional option'))
+    fields = ('address', 'lookup', 'middle school', 'high school',
+              'elementary school', 'year round elementary',
+              'year round middle school', 'elementary walk zone',
+              'elementary priority zone',
+              'elementary choice zone',
+              'holt easley traditional option')
+    writer = csv.DictWriter(sys.stdout, fields, extrasaction='ignore')
+    writer.writeheader()
     for i, line in enumerate(sys.stdin):
         address = line.strip()
         sys.stderr.write('{} {}\n'.format(i, address))
         try:
             d = get_schools(address)
-            writer.writerow((address, 'OK', d[1], d[2], d[3], d.get(4, ''), d.get(5, ''),
-                             d.get(6, ''), d.get(7, '')))
-        except Exception as ex:
-            writer.writerow((address, str(ex)))
-        time.sleep(1)
+            d['lookup'] = 'OK'
+            writer.writerow(d)
+        except ScrapeException as ex:
+            writer.writerow(dict(address=address, lookup=str(ex)))
+        time.sleep(0.5)

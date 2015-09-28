@@ -13,6 +13,17 @@ cfd = pd.read_csv('cfd.csv')
 # filter out dps to found addresses
 dps = dps[dps['lookup'] == 'OK']
 
+# match DPS tool by showing assigned year round elementary as 
+# year round option too.
+def yr(row):
+    if row['elementary school'] in ('Holt', 'Easley'):
+        return row['elementary school']
+    else:
+        return row['year round elementary']
+
+cfd['year round elementary'] = cfd.apply(yr, axis=1)
+
+# join cfd and dps so we can compare
 j = cfd.join(dps, how='inner', lsuffix=' cfd')
 
 # normalize some names
@@ -32,6 +43,8 @@ print('\n\nyear round middle school\n', qry(j, 'year round middle school'))
 print('\n\nelementary school\n', qry(j, 'elementary school'))
 print('\n\nyear round elementary\n', qry(j, 'year round elementary'))
 print('\n\nelementary walk zone\n', qry(j, 'elementary walk zone'))
+print('\n\nelementary choice zone\n', qry(j, 'elementary choice zone'))
+print('\n\nelementary priority zone\n', qry(j, 'elementary priority zone'))
 
 print('\n\nholt easley traditional option\n', qry(j, 'holt easley traditional option'))
 

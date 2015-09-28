@@ -36,12 +36,35 @@ def get_schools(location):
             else:
                 pref = school['preference_type']
             ret[(school['level'], pref)] = school['name']
-            #print('\t'.join([school['level'], school['preference_type'], school['name']]))
+        if school['eligibility'] == 'option':
+            pref = school['preference']
+            if pref == 'priority':
+                ret[(school['level'], pref)] = school['name']
+
+        #print('\t'.join([school['level'], school['preference_type'], school['name']]))
     return ret
 
+MAP = {
+    'address': 'address',
+    ('middle', 'neighborhood'): 'middle school',
+    ('high', 'neighborhood'): 'high school',
+    ('elementary', 'neighborhood'): 'elementary school',
+    ('elementary', 'year round option'): 'year round elementary',
+    ('middle', 'year round option'): 'year round middle school',
+    ('elementary', 'walk zone'): 'elementary walk zone',
+    ('elementary', 'choice zone'): 'elementary choice zone',
+    ('elementary', 'priority'): 'elementary priority zone',
+}
+
 if __name__ == '__main__':
-    writer = csv.writer(sys.stdout)
-    writer.writerow(('address','lookup','middle school','high school','elementary school','year round elementary','year round middle school','elementary walk zone','holt easley traditional option'))
+    fields = ('address', 'lookup', 'middle school', 'high school',
+              'elementary school', 'year round elementary',
+              'year round middle school', 'elementary walk zone',
+              'elementary priority zone',
+              'elementary choice zone',
+              'holt easley traditional option')
+    writer = csv.DictWriter(sys.stdout, fields, extrasaction='ignore')
+    writer.writeheader()
     for i, line in enumerate(sys.stdin):
         address = line.strip()
         sys.stderr.write('{} {}'.format(i, address))
@@ -52,16 +75,6 @@ if __name__ == '__main__':
             loc = geolocate(address + ' durham county nc')
 
         d = get_schools(loc)
-
-        writer.writerow((
-            address,
-            '',
-            d.get(('middle', 'neighborhood'), ''),
-            d.get(('high', 'neighborhood'), ''),
-            d.get(('elementary', 'neighborhood'), ''),
-            d.get(('elementary', 'year round option'), ''),
-            d.get(('middle', 'year round option'), ''),
-            d.get(('elementary', 'walk zone'), ''),
-            '',
-        ))
+        d['address'] = address
+        writer.writerow({MAP[k]: d.get(k, '') for k in d})
         time.sleep(0.2)
