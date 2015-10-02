@@ -19,3 +19,5 @@ PyYAML==3.10
 # pycrypto==2.6.1
 # ecdsa==0.11
 Sphinx==1.2.3
+
+django-extensions==1.5.7
