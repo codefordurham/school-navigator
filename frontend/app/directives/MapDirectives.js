@@ -20,7 +20,7 @@ angular.module('SchoolsApp.directives', [])
             d = $q.defer();
             d.resolve(map);
             d.promise.then(function() {
-                L.tileLayer('https://api.mapbox.com/v4/mapbox.light/{z}/{x}/{y}.png32?access_token=pk.eyJ1IjoiY29wZWxjbyIsImEiOiI5LThDNHJFIn0.caHTatdFSK8ecKgge7QnOw', {
+                L.tileLayer('https://{s}.tiles.mapbox.com/v3/vrocha.j3fib8g6/{z}/{x}/{y}.png', {
                     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
                     maxZoom: 18
                 }).addTo(map);
