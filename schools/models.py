@@ -33,13 +33,13 @@ class School(models.Model):
     grade_max = models.IntegerField()
 
     location = models.PointField()
-    district = models.PolygonField(null=True, blank=True)
+    district = models.MultiPolygonField(null=True, blank=True)
 
     # Zones per http://dpsncapplication.com/site327.php
-    walk_zone = models.PolygonField(null=True, blank=True)
-    choice_zone =  models.PolygonField(null=True, blank=True)
-    priority_zone = models.PolygonField(null=True, blank=True)
-    year_round_zone = models.PolygonField(null=True, blank=True)
+    walk_zone = models.MultiPolygonField(null=True, blank=True)
+    choice_zone =  models.MultiPolygonField(null=True, blank=True)
+    priority_zone = models.MultiPolygonField(null=True, blank=True)
+    year_round_zone = models.MultiPolygonField(null=True, blank=True)
 
     # Override default manager for gis
     objects = models.GeoManager()

@@ -1,8 +1,9 @@
 import requests
 
 from django.core.management.base import BaseCommand
-from django.contrib.gis.geos import Point, Polygon
+from django.contrib.gis.geos import Point, MultiPolygon, Polygon
 import schools.models as schools_models
+
 
 def query_api(api_endpoint_id):
     api_base  = 'http://gisweb2.ci.durham.nc.us/arcgis/rest/services/DurhamMaps/DPS_Schools/MapServer'
@@ -16,6 +17,7 @@ def query_api(api_endpoint_id):
     doc = requests.get(url, params=api_get_params)
     return doc.json()['features']
 
+
 def query_api2(api_endpoint_id, api_section):
     api_base = 'http://gisweb2.ci.durham.nc.us/arcgis/rest/services/DurhamMaps/{api_section}/MapServer'.format(api_section=api_section)
     api_get_params = {
@@ -27,6 +29,14 @@ def query_api2(api_endpoint_id, api_section):
     url = "%s/%s/query" % (api_base, api_endpoint_id)
     doc = requests.get(url, params=api_get_params)
     return doc.json()['features']
+
+
+def to_multipolygon(rings):
+    polys = []
+    for ring in rings:
+        polys.append(Polygon(ring))
+    return MultiPolygon(polys)
+
 
 class Command(BaseCommand):
     help = 'Load up the data from GeoJSON into the models'
@@ -80,7 +90,7 @@ class Command(BaseCommand):
             for district_json in query_api(api_id):
                 name = district_json['attributes']['DISTRICT'].strip()
                 s = self.get_school(name, schools)
-                s.district = Polygon(district_json['geometry']['rings'][0])
+                s.district = to_multipolygon(district_json['geometry']['rings'])
                 s.type = 'neighborhood'
                 schools[name] = s
         return schools
@@ -91,7 +101,7 @@ class Command(BaseCommand):
             name = school['attributes']['NAME'].strip()
             s = self.get_school(name, schools)
             s.type = 'magnet'
-            zone = Polygon(school['geometry']['rings'][0])
+            zone = to_multipolygon(school['geometry']['rings'])
             zone_type = school['attributes']['TYPE_']
             if zone_type == "Walk Zone":
                 s.walk_zone = zone
@@ -109,7 +119,7 @@ class Command(BaseCommand):
             name = school['attributes']['YEARRND_ES'].strip()
             s = self.get_school(name, schools)
             s.type = 'magnet'
-            s.year_round_zone = Polygon(school['geometry']['rings'][0])
+            s.year_round_zone = to_multipolygon(school['geometry']['rings'])
             schools[name] = s
         return schools
 
@@ -120,7 +130,7 @@ class Command(BaseCommand):
             name = school['attributes']['YEARRND_MS'].strip()
             s = self.get_school(name, schools)
             s.type = 'magnet'
-            s.year_round_zone = Polygon(school['geometry']['rings'][0])
+            s.year_round_zone = to_multipolygon(school['geometry']['rings'])
             schools[name] = s
         return schools
 
@@ -132,7 +142,7 @@ class Command(BaseCommand):
             if school['attributes']['SR_TRANSPO'] == 'Sandy Ridge Transportation Services Area':
                 name = 'Sandy Ridge'
                 s = self.get_school(name, schools)
-                s.priority_zone = Polygon(school['geometry']['rings'][0])
+                s.priority_zone = to_multipolygon(school['geometry']['rings'])
                 schools[name] = s
         return schools
 

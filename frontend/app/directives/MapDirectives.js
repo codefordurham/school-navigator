@@ -97,18 +97,11 @@ angular.module('SchoolsApp.directives', [])
                     var fields = ['district', 'priority_zone', 'walk_zone', 'choice_zone', 'year_round_zone'];
                     angular.forEach(fields, function(field) {
                         if (school[field]) {
-                            angular.forEach(school[field].coordinates[0], function(coordinates, key) {
-                                // HACK: coordinates need to be inverted.
-                                // just the django things.
-                                district_bounderies.push([coordinates[1], coordinates[0]]);
-                            });
+                            district_bounderies = L.geoJson(school[field], {color: school.color, className: school.type + ' ' + school.level});
                         }
-
                     });
-
                     if (district_bounderies) {
-                        map_highlights.addLayer(L.polygon(district_bounderies, {color: school.color, className: school.type + ' ' + school.level}));
-
+                        map_highlights.addLayer(district_bounderies);
                     }
                 });
             };
