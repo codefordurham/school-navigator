@@ -37,7 +37,7 @@ body {
     z-index: 1000000;
     top: 90px;
     left: 40px;
-    width: 460px;
+    width: 480px;
 }
 #search-form button {
     padding: 10px 24px;
@@ -46,7 +46,7 @@ body {
 }
 
 #search-box {
-    width: 320px;
+    width: 375px;
     height: 44px;
     font-size: 18px;
 }
@@ -55,7 +55,7 @@ body {
     z-index: 1000000;
     top: 165px;
     left: 40px;
-    width: 420px;
+    width: 480px;
     background: white;
     max-height: 800px;
 }
@@ -141,7 +141,7 @@ body {
 .school-group .school-group-item .school-group-item-heading {
     margin: 15px 0;
     vertical-align: middle;
-    width: 330px;
+    width: 380px;
 }
 .school-group .school-group-item .school-group-item-heading .legends {
     border-radius: 50%;
