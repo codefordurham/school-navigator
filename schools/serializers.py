@@ -35,6 +35,8 @@ class SchoolListSerializer(geo_serializers.GeoModelSerializer):
             return 'assigned'
         if obj.year_round_zone is not None and obj.year_round_zone.contains(pt):
             return 'assigned'
+        if obj.traditional_option_zone is not None and obj.traditional_option_zone.contains(pt):
+            return 'assigned'
         if obj.type in ('magnet', 'charter', 'speciality'):
             return 'option'
         raise Exception
@@ -49,6 +51,8 @@ class SchoolListSerializer(geo_serializers.GeoModelSerializer):
             return 'priority'
         if obj.choice_zone is not None and obj.choice_zone.contains(pt):
             return 'choice'
+        if obj.traditional_option_zone is not None and obj.traditional_option_zone.contains(pt):
+            return 'traditional calendar option'
 
     def get_short_name(self, obj):
         if obj.short_name:

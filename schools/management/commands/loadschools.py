@@ -146,6 +146,16 @@ class Command(BaseCommand):
                 schools[name] = s
         return schools
 
+    def load_traditional_option_zones(self, schools={}):
+        api_endpoint_id = 7
+        api_section = 'Holt_Easley_Traditional_Options'
+        for school in query_api(api_endpoint_id):
+            name = school['attributes']['TRAD_OPT'].strip()
+            s = self.get_school(name, schools)
+            s.traditional_option_zone = to_multipolygon(school['geometry']['rings'])
+            schools[name] = s
+        return schools
+
     def handle(self, *args, **options):
         schools = {}
         schools = self.load_school_points(schools)
@@ -154,5 +164,6 @@ class Command(BaseCommand):
         schools = self.load_year_round_elementary(schools)
         schools = self.load_year_round_middle(schools)
         schools = self.load_sandy_ridge_priority_zone(schools)
+        schools = self.load_traditional_option_zones(schools)
         for name in schools.keys():
             schools[name].save()

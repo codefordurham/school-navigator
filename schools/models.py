@@ -40,6 +40,7 @@ class School(models.Model):
     choice_zone =  models.MultiPolygonField(null=True, blank=True)
     priority_zone = models.MultiPolygonField(null=True, blank=True)
     year_round_zone = models.MultiPolygonField(null=True, blank=True)
+    traditional_option_zone = models.MultiPolygonField(null=True, blank=True)
 
     # Override default manager for gis
     objects = models.GeoManager()
