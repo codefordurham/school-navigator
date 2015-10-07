@@ -33,6 +33,8 @@ def get_schools(location):
         if school['eligibility'] == 'assigned':
             if school['preference'] == 'neighborhood':
                 pref = 'neighborhood'
+            elif school['preference'] == 'traditional calendar option':
+                pref = 'traditional calendar option'
             else:
                 pref = school['preference_type']
             ret[(school['level'], pref)] = school['name']
@@ -54,6 +56,7 @@ MAP = {
     ('elementary', 'walk zone'): 'elementary walk zone',
     ('elementary', 'choice zone'): 'elementary choice zone',
     ('elementary', 'priority'): 'elementary priority zone',
+    ('elementary', 'traditional calendar option'): 'holt easley traditional option',
 }
 
 if __name__ == '__main__':
