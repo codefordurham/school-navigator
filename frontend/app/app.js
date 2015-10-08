@@ -46,24 +46,28 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
         })
 }]);
 
+app.constants
 angular.module('SchoolsApp.services', [])
-    .service('Schools', function($http) {
-    this.get_schools = function(location) {
-      var url = 'https://schools.codefordurham.com/api/schools/';
-      return $http({
-          method: 'GET',
-          url: url,
-          params: {
-              longitude: location.lng,
-              latitude: location.lat
-          }
-      });
-    };
-    this.get = function(id) {
-      var url = 'https://schools.codefordurham.com/api/schools/detail/' + id + '/';
-      return $http({ method: 'GET', url: url });
-    }
-});
+    .service('Schools', ['$http', '$location', function($http, $location) {
+        var endpoint = location.search.indexOf('env') === -1? 'https://schools.codefordurham.com/' : 'http://localhost:8000/',
+            url;
+
+        this.get_schools = function(location) {
+          url = endpoint + 'api/schools/';
+          return $http({
+              method: 'GET',
+              url: url,
+              params: {
+                  longitude: location.lng,
+                  latitude: location.lat
+              }
+          });
+        };
+        this.get = function(id) {
+          url = endpoint + 'api/schools/detail/' + id + '/';
+          return $http({ method: 'GET', url: url });
+        }
+}]);
 
 angular.module('SchoolsApp.geoDecoder', [])
     .service('Geodecoder', google.maps.Geocoder);
