@@ -118,15 +118,20 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
             },
             levels:  ['elementary', 'secondary', 'middle', 'high'],
             durham: {
-              lat: 36, lng: -78.9, zoom: 13,
+              //TODO Decide whether we want to limit map scrolling to Durham county area
+              /*
               maxbounds: {
                 southWest: { lat: 35.83, lng: -79.1},
                 northEast: { lat: 36.28, lng: -78.6}
-              }
+              },
+              */
+              lat: 36, lng: -78.9, zoom: 13
             },
             markers: {
               home: {
-                lat: 36, lng: -78.9,
+                //TODO Decide whether to allow for dragging before address input
+                //TODO Where to put icon before having an address? Near search input?
+                //lat: 36, lng: -78.9, // center of default map
                 focus: false, draggable: true, mouseover: false,
                 zIndexOffset: 1000,
                 icon: {

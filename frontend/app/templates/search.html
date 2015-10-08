@@ -4,9 +4,12 @@
           <input data-ng-model='address' class="form-control" id="search-box" placeholder="Enter a Durham address">
           <button class="btn btn-default" data-ng-click="relocate()">Search</button>
         </form>
-        <div ng-if="!schools">
+        <!-- //TODO Would we like a Find Me button which attempts to estimate users current location?
+              Currently removes button once a valid location is given
+        <div ng-if="!schools.length">
           <button class="btn btn-default" data-ng-click="userLocation()">Find Me</button>
         </div>
+        -->
     </div>
 
     <div id="schools-wrapper" data-ng-show="all_schools.length">
