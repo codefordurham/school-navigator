@@ -1,3 +1,4 @@
+*.sw[po]
 *.py[co]
 .project
 .pydevproject
@@ -16,3 +17,6 @@ _build
 *.swp
 .ipynb_checkpoints
 *.tar
+conf/pillar/*/deploy
+*.priv
+.env

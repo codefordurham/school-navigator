@@ -1,3 +1,2 @@
 -r base.txt
-gunicorn==18.0
 python3-memcached==1.51
