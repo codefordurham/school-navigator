@@ -3,9 +3,7 @@ var app = angular.module("schoolsApp", [
     'SchoolsApp.directives',
     'SchoolsApp.geoDecoder',
     'SchoolsApp.services',
-    'SchoolsApp.controllers',
-    'SchoolsApp.searchDirectives',
-    'SchoolsApp.navDirectives'
+    'SchoolsApp.controllers'
 ]);
 
 app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
@@ -203,7 +201,8 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
                   icon: {
                     type: 'div',
                     iconSize: [50, 50],
-                    iconAnchor: [16, 16],
+                    iconAnchor: [25, 25],
+                    popupAnchor:  [0, -10],
                     html: school.short_name,
                     className: "school_point " + school.level,
                   }
@@ -243,28 +242,6 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
         }]);
 
 angular.module('SchoolsApp.directives', [])
-    .directive('schoolsMap', ['$q', 'Schools', '$location', '$rootScope', function($q, Schools, $location, $rootScope) {
-        var linker = function(scope, element, attrs) {
-            // do all map rendering and interactions here
-            var navbar_height = 52;
-            element.height($(window).height()-navbar_height).width($(window).width());
-
-            // resize map to fit current window
-            $(window).bind('resize', function() {
-                element.css({
-                    "height": (document.documentElement.clientHeight - navbar_height) + "px",
-                    "width": (document.documentElement.clientWidth) + "px"
-                });
-            });
-        };
-
-        return {
-            restrict: 'A',
-            link: linker
-        };
-    }]);
-
-angular.module('SchoolsApp.navDirectives', [])
     .directive('navMenu', [function() {
         return {
             restrict: 'AE',
@@ -276,9 +253,7 @@ angular.module('SchoolsApp.navDirectives', [])
             restrict: 'AE',
             templateUrl: 'app/templates/simpleNav.html'
         }
-    }]);
-
-angular.module('SchoolsApp.searchDirectives', [])
+    }])
     .directive('search', [function() {
         return {
             restrict: 'AE',
