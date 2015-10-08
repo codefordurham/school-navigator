@@ -1,9 +1,12 @@
 <div class="search-directive">
     <div id="search-form">
         <form class="form-inline">
-            <input data-ng-model='address' class="form-control" id="search-box" placeholder="Enter a Durham address">
-            <button class="btn btn-default" data-ng-click="relocate()">Search</button>
+          <input data-ng-model='address' class="form-control" id="search-box" placeholder="Enter a Durham address">
+          <button class="btn btn-default" data-ng-click="relocate()">Search</button>
         </form>
+        <div ng-if="!schools">
+          <button class="btn btn-default" data-ng-click="userLocation()">Find Me</button>
+        </div>
     </div>
 
     <div id="schools-wrapper" data-ng-show="all_schools.length">

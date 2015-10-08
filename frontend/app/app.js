@@ -77,7 +77,6 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
               minZoom: 11,
               zoomControlPosition: 'bottomright'
             },
-            schools: [],
             eligibility: "assigned",
             selectSchool: function (school) {
                 angular.forEach($scope.all_schools, function(obj) {
@@ -90,7 +89,7 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
               })
             },
             maxHeight: function () {
-                return $(window).height() - 150 + 'px';
+                return $(window).height() - 220 + 'px';
             },
             NavigationActive: function(tab) {
                 $scope.tab_name = tab;
@@ -99,7 +98,8 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
               $scope.durham.autoDiscover = true;
               var unbindWatch = $scope.$watch('durham.autoDiscover', function() {
                 if(!$scope.durham.autoDiscover) {
-                  $scope.durham.zoom = 18;
+                  $scope.address = '';
+                  $scope.durham.zoom = 15;
                   moveLoc($scope.durham.lat, $scope.durham.lng);
                   unbindWatch();
                 }
