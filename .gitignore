@@ -11,6 +11,8 @@
 public/static/
 public/media/
 secrets.sls*
-*.log
+*.log*
 _build
 *.swp
+.ipynb_checkpoints
+*.tar
