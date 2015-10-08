@@ -1,8 +1,24 @@
+html, body {
+  height: 100%;
+}
 body {
     margin: 0;
     position: relative;
     font-family: 'Roboto', sans-serif;
-    padding-top: 50px;
+}
+#app_content {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+}
+.content-row {
+  flex: 0 1 50px;
+}
+.content-row#simple-nav {
+  flex: 0 1 auto;
+}
+.content-row#leaflet-map {
+  flex: 1 1 auto;
 }
 #logo h1 {
     display: inline;
