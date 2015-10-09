@@ -20,7 +20,7 @@
           <li data-ng-class="{active: eligibility == 'charter'}"><a data-ng-click="switchTab('charter'); deselectSchools();">Charters</a></li>
         </ul>
         <div id="my-schools" data-ng-mouseleave="clear_highlight();" style="max-height: {{maxHeight()}}">
-            <div data-ng-repeat="level in levels" class="school-group {{ level }}">
+          <div data-ng-repeat="level in levels" class="school-group {{ level }}">
                 <div class="schoolLevelWrapper" data-ng-show="(schools | filter:{'level': level}).length">
                     <h3 class="{{ level }}">{{ level }}</h3>
                     <div data-ng-repeat="school in schools | filter:{'level': level} | orderBy:['preference', 'distance']:true" class="school-group-item item-{{ school.id }}" data-ng-mouseenter="highlight_school(school.id);" data-ng-mouseleave="clear_highlight();" ng-class="{hover: school.hover, 'last':$last, detail: school.selected == true}" >

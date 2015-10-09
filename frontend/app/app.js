@@ -119,7 +119,6 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
                 }
               });
             },
-            levels:  ['elementary', 'secondary', 'middle', 'high'],
             durham: {
               //TODO Decide whether we want to limit map scrolling to Durham county area
               /*
@@ -176,15 +175,34 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
               loadMarkers($scope.all_schools);
               $scope.deselectSchools();
             },
+            levelStyles: {
+              'elementary': '#48BC6B',
+              'secondary': '#3F899E',
+              'middle': '#3F899E',
+              'high': '#4F61AD'
+            },
+            levels: ['elementary', 'secondary', 'middle', 'high'],
+            zoneTypes: {
+              'district': 'black',
+              'traditional_option_zone': 'purple',
+              'year_round_zone': 'blue',
+              'priority_zone': 'red',
+              'choice_zone': 'yellow',
+              'walk_zone': 'green'
+            },
+            legend: {
+              position: 'topright',
+              colors: [ 'black', 'purple', 'blue', 'red', 'yellow', 'green' ],
+              labels: [ 'District', 'Traditional Option', 'Year Round', 'Priority', 'Choice', 'Walk' ]
+            },
             geojson: {
               data: [],
               style: function(feature) {
-                switch(feature.properties.level) {
-                  case 'middle': return {color: '#3F899E'};
-                  case 'high': return {color: '#4F61AD'};
-                  case 'elementary': return {color: '#48BC6B'};
-                }
-              }
+                return {
+                  fillColor: $scope.levelStyles[feature.properties.level],
+                  color: $scope.zoneTypes[feature.properties.zoneType]
+                };
+              },
             }
           });
           if ($params.addr) {
@@ -232,12 +250,11 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
               }).forEach(function(school) {
                 var districtArray = this;
                 Schools.get(school.id).success(function(this_school) {
-                  var zones = ['district','traditional_option_zone','year_round_zone','priority_zone','choice_zone','walk_zone'];
-                  zones.forEach(function(zone) {
+                  Object.keys($scope.zoneTypes).forEach(function(zone) {
                     if(this_school.hasOwnProperty(zone)) {
                       var district = {
                         id: school.id, type: 'Feature',
-                        properties: { level: this_school.level },
+                        properties: { level: this_school.level, zoneType: zone },
                         geometry: this_school[zone]
                       };
                       districtArray.push(district);
