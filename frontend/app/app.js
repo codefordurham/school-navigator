@@ -293,7 +293,22 @@ angular.module('SchoolsApp.directives', [])
             restrict: 'AE',
             templateUrl: 'app/templates/search.html'
         }
+    }])
+    .directive('tooltip', [function(){
+      return {
+          restrict: 'A',
+          link: function(scope, element, attrs){
+              $(element).hover(function(){
+                  // on mouseenter
+                  $(element).tooltip('show');
+              }, function(){
+                  // on mouseleave
+                  $(element).tooltip('hide');
+              });
+          }
+      };
     }]);
+
 
 app.filter('gradeString', [function() {
     var gradeNames = ['PreK3', 'PreK4', 'K', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
