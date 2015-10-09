@@ -309,7 +309,6 @@ angular.module('SchoolsApp.directives', [])
       };
     }]);
 
-
 app.filter('gradeString', [function() {
     var gradeNames = ['PreK3', 'PreK4', 'K', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
     return function (gradeNumber) {
