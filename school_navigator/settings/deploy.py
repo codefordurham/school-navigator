@@ -42,11 +42,18 @@ SESSION_COOKIE_HTTPONLY = True
 ALLOWED_HOSTS = [os.environ['DOMAIN']]
 
 # Uncomment if using celery worker configuration
-# CELERY_SEND_TASK_ERROR_EMAILS = True
-# BROKER_URL = 'amqp://school_navigator_%(ENVIRONMENT)s:%(BROKER_PASSWORD)s@%(BROKER_HOST)s/school_navigator_%(ENVIRONMENT)s' % os.environ  # noqa
+CELERY_SEND_TASK_ERROR_EMAILS = True
+BROKER_URL = 'amqp://school_navigator_%(ENVIRONMENT)s:%(BROKER_PASSWORD)s@%(BROKER_HOST)s/school_navigator_%(ENVIRONMENT)s' % os.environ  # noqa
 
 # Environment overrides
 # These should be kept to an absolute minimum
 if ENVIRONMENT.upper() == 'LOCAL':
     # Don't send emails from the Vagrant boxes
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+ADMINS = (
+    ('Colin Copeland', 'ccopeland@codeforamerica.org'),
+)
+MANAGERS = ADMINS
+
+LOGGING['handlers']['file']['filename'] = '/var/www/school_navigator/log/schools.log'
