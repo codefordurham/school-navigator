@@ -23,7 +23,7 @@ install:
 before_script:
   - createdb -E UTF-8 school_navigator -U postgres -O $USER
   # Uncomment for PostGIS support
-  - psql service_info -c "CREATE EXTENSION postgis;" -U postgres
+  - psql school_navigator -c "CREATE EXTENSION postgis;" -U postgres
 
 script:
   - python manage.py makemigrations --dry-run | grep 'No changes detected' || (echo 'There are changes which require migrations.' && exit 1)
