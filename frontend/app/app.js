@@ -205,6 +205,9 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
               },
             }
           });
+          if ($params.addr) {
+              $scope.address = $params.addr;
+          }
           if($params.lat && $params.lng) {
             moveLoc($params.lat, $params.lng);
           }
@@ -216,7 +219,7 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
             Schools.get_schools($scope.position).success(function(data) {
               loadMarkers(data);
             });
-          };
+          }
           function loadMarkers(data) {
               $scope.markers = { home: $scope.markers.home };
               $scope.districts = [];
@@ -259,7 +262,7 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
                   });
                 });
               }, $scope.districts);
-          };
+          }
           $scope.$on("leafletDirectiveMarker.dragend", function(event, args) {
             moveLoc(args.model.lat, args.model.lng);
             $scope.address = '';
