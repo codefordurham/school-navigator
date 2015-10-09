@@ -94,7 +94,7 @@ we need to install that globally in our Python2 environment::
 To setup your local environment you should create a virtualenv and install the
 necessary requirements::
 
-    mkvirtualenv --python=/usr/bin/python3.4 school_inspector
+    mkvirtualenv school_inspector mkvirtualenv school_inspector -p `which python3.4`
     $VIRTUAL_ENV/bin/pip install -r $PWD/requirements/dev.txt
 
 Then create a local settings file and set your ``DJANGO_SETTINGS_MODULE`` to use it::
