@@ -48,7 +48,7 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
 
 angular.module('SchoolsApp.services', [])
     .service('Schools', ['$http', function($http) {
-        var endpoint = location.search.indexOf('env') === -1? 'https://schools.codefordurham.com' : 'http://localhost:8000',
+        var endpoint = location.search.indexOf('env') === -1? 'https://schools.codefordurham.com' : 'http://localhost:8001',
             url;
 
         this.get_schools = function(location) {
@@ -194,7 +194,7 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
           function moveLoc(lat, lng) {
             $scope.markers.home.lat = $scope.durham.lat = $scope.position.lat = Number(lat);
             $scope.markers.home.lng = $scope.durham.lng = $scope.position.lng = Number(lng);
-            $location.search({lat: lat, lng: lng});
+            $location.search({lat: lat, lng: lng, addr: $scope.address});
             Schools.get_schools($scope.position).success(function(data) {
               loadMarkers(data);
             });
