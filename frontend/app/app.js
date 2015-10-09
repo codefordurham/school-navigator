@@ -154,6 +154,9 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
             },
             events: { markers:{ enable: [ 'click', 'dragend', 'mouseover', 'mouseout' ] } },
             highlight_school: function(schoolId) {
+              $scope.schools.forEach(function(school) {
+                school.hover = (school.id === schoolId);
+              });
               var districts = $scope.districts.filter(function(a) {
                 return a.id === schoolId;
               });
@@ -162,6 +165,9 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
               });
             },
             clear_highlight: function() {
+              $scope.schools.forEach(function(school) {
+                school.hover = false;
+              });
               $scope.geojson.data = [];
             },
             districts: [],
@@ -245,7 +251,7 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
             $scope.highlight_school(args.model.id);
           });
           $scope.$on("leafletDirectiveMarker.mouseout", function(event, args) {
-            $scope.geojson.data = [];
+            $scope.clear_highlight();
           });
         }]);
 
