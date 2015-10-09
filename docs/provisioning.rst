@@ -5,11 +5,11 @@ Server Provisioning
 Overview
 ------------------------
 
-School_Inspector is deployed on the following stack.
+School_Navigator is deployed on the following stack.
 
-- OS: Ubuntu 12.04 LTS
+- OS: Ubuntu 14.04 LTS
 - Python: 3.4
-- Database: Postgres 9.1
+- Database: Postgres 9.3
 - Application Server: Gunicorn
 - Frontend Server: Nginx
 - Cache: Memcached
@@ -18,12 +18,47 @@ These services can configured to run together on a single machine or on differen
 `Supervisord <http://supervisord.org/>`_ manages the application server process.
 
 
-Initial Setup
+Salt Master
+------------------------
+
+Each project needs a Salt Master per environment (staging, production, etc).
+The master is configured with Fabric. ``env.master`` should be set to the IP
+of this server in the environment where it will be used::
+
+    @task
+    def staging():
+        ...
+        env.master = <ip-of-master>
+
+You will need to be able to connect to the server as a root user.
+How this is done will depend on where the server is hosted.
+VPS providers such as Linode will give you a username/password combination. Amazon's
+EC2 uses a private key. These credentials will be passed as command line arguments.::
+
+    # Template of the command
+    fab -u <root-user> <environment> setup_master
+    # Example of provisioning a Linode VM for staging
+    fab -u root staging setup_master
+    # Example of provisioning an AWS VM for production
+    fab -u ubuntu production setup_master -i aws-private.pem
+
+This will install salt-master and update the master configuration file. The master will use a
+set of base states from https://github.com/caktus/margarita checked out
+at ``/srv/margarita``.
+
+As part of the master setup, a new GPG public/private key pair is generated. The private
+key remains on the master but the public version is exported and fetched back to the
+developer's machine. This will be put in ``conf/<environment>.pub.gpg``. This will
+be used by all developers to encrypt secrets for the environment and needs to be
+committed into the repo.
+
+
+Pillar Setup
 ------------------------
 
 Before your project can be deployed to a server, the code needs to be
 accessible in a git repository. Once that is done you should update
-``conf/pillar/<environment>/env.sls`` to set the repo and branch for the environment.
+``conf/pillar/<environment>.sls`` to set the repo and branch for the environment.
 E.g., change this::
 
     # FIXME: Update to the correct project repo
@@ -34,43 +69,14 @@ E.g., change this::
 to this::
 
     repo:
-      url: git@github.com:codefordurham/school-inspector.git
+      url: git@github.com:account/reponame.git
       branch: master
 
-The repo will also need a deployment key generated so that the Salt minion can
-access the repository. You can generate a deployment key locally for the new
-server like so::
-
-    ssh-keygen -t rsa -b 4096 -f <servername>
-
-This will generate two files named ``<servername>`` and ``<servername>.pub``.
-The first file contains the private key and the second file contains the public
-key. The public key needs to be added to the "Deploy keys" in the GitHub repository.
-For more information, see the Github docs on managing deploy keys:
-https://help.github.com/articles/managing-deploy-keys
-
-The text in the private key file should be added to `conf/pillar/<environment>/secrets.sls``
-under the label `github_deploy_key`, e.g.::
-
-    github_deploy_key: |
-      -----BEGIN RSA PRIVATE KEY-----
-      foobar
-      -----END RSA PRIVATE KEY-----
-
-There will be more information on the secrets in a later section. You may choose
-to include the public SSH key inside the repo itself as well, but this is not
-strictly required.
-
 You also need to set ``project_name`` and ``python_version`` in ``conf/pillar/project.sls``.
-Currently we support using Python 2.7 or Python 3.3. The project template is set up for 2.7 by
-default. If you want to use 3.3, you will need to change ``python_version`` and make a few changes
-to requirements. In ``requirements/production.txt``, change python-memcached to python3-memcached.
-In ``requirements/dev.txt``, remove Fabric and all its dependencies. Instead you will need Fabric
-installed on your laptop "globally" so that when you run ``fab``, it will not be found in your
-virtualenv, but will then be found in your global environment.
+The project template is set up for 3.4 by default. If you want to use 2.7, you will need to change ``python_version`` and make a few changes to requirements. In ``requirements/production.txt``, change python3-memcached to python-memcached.
 
 For the environment you want to setup you will need to set the ``domain`` in
-``conf/pillar/<environment>/env.sls``.
+``conf/pillar/<environment>.sls``.
 
 You will also need add the developer's user names and SSH keys to ``conf/pillar/devs.sls``. Each
 user record (under the parent ``users:`` key) should match the format::
@@ -86,32 +92,115 @@ yourself.
 Managing Secrets
 ------------------------
 
-Secret information such as passwords and API keys should never be committed to the
-source repository. Instead, each environment manages its secrets in ``conf/pillar/<environment>/secrets.sls``.
-These ``secrets.sls`` files are excluded from the source control and need to be passed
-to the developers out of band. There are example files given in ``conf/pillar/<environment>/secrets.ex``.
-They have the format::
+Secret information such as passwords and API keys must be encrypted before being added
+to the pillar files. As previously noted, provisioning the master for the environment
+generates a public GPG key which is added to repo under ``conf/<environment>.pub.gpg``
+To encrypt a new secret using this key, you can use the ``encrypt`` fab command::
+
+    # Example command
+    fab <environment> encrypt:<key>=<secret-value>
+    # Encrypt the SECRET_KEY for the staging environment
+    fab staging encrypt:SECRET_KEY='thisismysecretkey'
+
+The output of this command will look something like::
+
+    "SECRET_KEY": |-
+      -----BEGIN PGP MESSAGE-----
+      Version: GnuPG v1.4.11 (GNU/Linux)
+
+      hQEMA87BIemwflZuAQf/XDTq6pdZsS07zw88lvGcWbcy5pj5CLueVldE+NLAHilv
+      YaFb1qPM1W+yrnxFQgsapcHUM82ULkXbMskYoK5qp5Or2ujwzAVRpbSrFTq19Frz
+      sasFTPNNREgThLB8oyQIHN2XfqSvIqi6RkqXGf+eQDXLyl9Guu+7EhFtW5PJRo3i
+      BSBVEuMi4Du60uAssQswNuit7lkEqxFprZDb9aHmjVBi+DAipmBuJ+FIyK0ePFAf
+      dVfp/Es/y4/hWkM7TXDw5JMFtVfCo6Dm1LE53N339eJX01w19exB/Sek6HVwDsL4
+      d45c1dm7qBiXN0zO8Yadhm520J0H9NcIPO47KyRkCtJAARsY5eu8cHxYW4DcYWLu
+      PRr2CLuI8At1Q2KqlRgdEm17lV5HOEcMoT1SyvMzaWOnbpul5PoLCAebJ0zcJZT5
+      Pw==
+      =V1Uh
+      -----END PGP MESSAGE-----
+
+where ``SECRET_KEY`` would be replace with the key you were trying to encrypt. This
+block of text should be added to the environment pillar ``conf/pillar/<environment>.sls``
+under the ``secrets`` block::
 
     secrets:
-      DB_PASSWORD: XXXXXX
+      "SECRET_KEY": |-
+        -----BEGIN PGP MESSAGE-----
+        Version: GnuPG v1.4.11 (GNU/Linux)
 
-Each key/value pair given in the ``secrets`` dictionary will be added to the OS environment
-and can retrieved in the Python code via::
+        hQEMA87BIemwflZuAQf/XDTq6pdZsS07zw88lvGcWbcy5pj5CLueVldE+NLAHilv
+        YaFb1qPM1W+yrnxFQgsapcHUM82ULkXbMskYoK5qp5Or2ujwzAVRpbSrFTq19Frz
+        sasFTPNNREgThLB8oyQIHN2XfqSvIqi6RkqXGf+eQDXLyl9Guu+7EhFtW5PJRo3i
+        BSBVEuMi4Du60uAssQswNuit7lkEqxFprZDb9aHmjVBi+DAipmBuJ+FIyK0ePFAf
+        dVfp/Es/y4/hWkM7TXDw5JMFtVfCo6Dm1LE53N339eJX01w19exB/Sek6HVwDsL4
+        d45c1dm7qBiXN0zO8Yadhm520J0H9NcIPO47KyRkCtJAARsY5eu8cHxYW4DcYWLu
+        PRr2CLuI8At1Q2KqlRgdEm17lV5HOEcMoT1SyvMzaWOnbpul5PoLCAebJ0zcJZT5
+        Pw==
+        =V1Uh
+        -----END PGP MESSAGE-----
 
-    import os
+The ``Makefile`` has a make command for generating a random secret. By default
+this is 32 characters long but can be adjusted using the ``length`` argument.::
 
-    password = os.environ['DB_PASSWORD']
+    make generate-secret
+    make generate-secret length=64
 
-Secrets for other environments will not be available. That is, the staging server
-will not have access to the production secrets. As such there is no need to namespace the
-secrets by their environment.
+This can be combined with the above encryption command to generate a random
+secret and immediately encrypt it.::
+
+    fab staging encrypt:SECRET_KEY=`make generate-secret length=64`
+
+By default the project will use the ``SECRET_KEY`` if it is set. You can also
+optionally set a ``DB_PASSWORD``. If not set, you can only connect to the database
+server on localhost so this will only work for single server setups.
+
+
+Github Deploy Keys
+------------------------
+
+The repo will also need a deployment key generated so that the Salt minion can
+access the repository. You can generate a deployment key locally for the new
+server like so::
+
+    # Example command
+    make <environment>-deploy-key
+    # Generating the staging deploy key
+    make staging-deploy-key
+
+This will generate two files named ``<environment>.priv`` and ``conf/<environment>.pub.ssh``.
+The first file contains the private key and the second file contains the public
+key. The public key needs to be added to the "Deploy keys" in the GitHub repository.
+For more information, see the Github docs on managing deploy keys:
+https://help.github.com/articles/managing-deploy-keys
+
+The text in the private key file should be added to `conf/pillar/<environment>.sls``
+under the label `github_deploy_key` but it must be encrypted first. To encrypt
+the file you can use the same ``encrypt`` fab command as before passing the filename
+rather than a key/value pair::
+
+    fab staging encrypt:staging.priv
+
+This will create a new file with appends ``.asc`` to the end of the original filename
+(i.e. staging.priv.asc). The entire contents of this file should be added to the
+``github_deploy_key`` section of the pillar file.::
+
+    github_deploy_key: |
+      -----BEGIN PGP MESSAGE-----
+      Version: GnuPG v1.4.11 (GNU/Linux)
+
+      hQEMA87BIemwflZuAQf/RW2bXuUpg5QuwuY9dLqLpdpKz+/971FHqM1Kz5NXgJHo
+      hir8yh/wxlKlMbSpiyri6QPigj8DZLrGLi+VTwWCXJ
+      ...
+      -----END PGP MESSAGE-----
+
+Do not commit the original ``*.priv`` files into the repo.
 
 
 Environment Variables
 ------------------------
 
 Other environment variables which need to be configured but aren't secret can be added
-to the ``env`` dictionary in ``conf/pillar/<environment>/env.sls``:
+to the ``env`` dictionary in ``conf/pillar/<environment>.sls`` without encryption.
 
   # Additional public environment variables to set for the project
   env:
@@ -131,65 +220,11 @@ Setup Checklist
 
 To summarize the steps above, you can use the following checklist
 
-- ``repo`` is set in ``conf/pillar/<environment>/env.sls``
+- ``repo`` is set in ``conf/pillar/<environment>.sls``
 - Developer user names and SSH keys have been added to ``conf/pillar/devs.sls``
 - Project name has been set in ``conf/pillar/project.sls``
-- Environment domain name has been set in ``conf/pillar/<environment>/env.sls``
-- Environment secrets including the deploy key have been set in ``conf/pillar/<environment>/secrets.sls``
-
-
-Salt Master
-------------------------
-
-Each project needs to have at least one Salt Master. There can be one per environment or
-a single Master which manages both staging and production. The master is configured with Fabric.
-You will need to be able to connect to the server as a root user.
-How this is done will depend on where the server is hosted.
-VPS providers such as Linode will give you a username/password combination. Amazon's
-EC2 uses a private key. These credentials will be passed as command line arguments.::
-
-    # Template of the command
-    fab -H <fresh-server-ip> -u <root-user> setup_master
-    # Example of provisioning 33.33.33.10 as the Salt Master
-    fab -H 33.33.33.10 -u root setup_master
-    # Example DO setup
-    fab -H 107.170.136.182 -u root setup_master
-    # Example AWS setup
-    fab -H 54.86.14.136 -u ubuntu -i ~/.ssh/aws-cfa.pem setup_master
-
-This will install salt-master and update the master configuration file. The master will use a
-set of base states from https://github.com/caktus/margarita using the gitfs root. Once the master
-has been provisioned you should set::
-
-    env.master = '<ip-of-master>'
-
-in the top of the fabfile.
-
-If each environment has its own master then it should be set with the environment setup function ``staging`` or ``production``.
-In these case most commands will need to be preceded with the environment to ensure that ``env.master``
-is set.
-
-Additional states and pillar information are contained in this repo and must be rsync'd to the master via::
-
-    fab -u <root-user> sync
-
-This must be done each time a state or pillar is updated. This will be called on each deploy to
-ensure they are always up to date.
-
-To provision the master server itself with salt you need to create a minion on the master::
-
-    fab -H <ip-of-new-master> -u <root-user> --set environment=master setup_minion:salt-master
-    fab -u <root-user> accept_key:<server-name>
-    fab -u <root-user> --set environment=master deploy
-    # Example DO (may have to run a second time to catch key)
-    fab -H 107.170.136.182 -u root --set environment=master setup_minion:salt-master
-    fab -H 107.170.136.182 -u root --set environment=master deploy
-    # Example AWS setup
-    fab -H 54.86.14.136 -u ubuntu -i ~/.ssh/aws-cfa.pem --set environment=master setup_minion:salt-master
-    fab -H 54.86.14.136 -u ubuntu -i ~/.ssh/aws-cfa.pem --set environment=master deploy
-
-This will create developer users on the master server so you will no longer have to connect
-as the root user.
+- Environment domain name has been set in ``conf/pillar/<environment>.sls``
+- Environment secrets including the deploy key have been set in ``conf/pillar/<environment>.sls``
 
 
 Provision a Minion
@@ -202,14 +237,10 @@ to complete the provisioning. To setup a minion you call the Fabric command::
 
     fab <environment> setup_minion:<roles> -H <ip-of-new-server> -u <root-user>
     fab staging setup_minion:web,balancer,db-master,cache -H  33.33.33.10 -u root
-    # Example DO
-    fab production setup_minion:web,balancer,db-master,cache,queue,worker -H 107.170.136.182
-    # Example AWS setup
-    fab production setup_minion:web,balancer,db-master,cache,queue,worker -H 54.86.14.136
 
 The available roles are ``salt-master``, ``web``, ``worker``, ``balancer``, ``db-master``,
 ``queue`` and ``cache``. If you are running everything on a single server you need to enable
-the ``web``, ``balancer``, ``db-master``, and ``cache`` roles. The ``worker``
+the ``salt-master``, ``web``, ``balancer``, ``db-master``, and ``cache`` roles. The ``worker``
 and ``queue`` roles are only needed to run Celery which is explained in more detail later.
 
 Additional roles can be added later to a server via ``add_role``. Note that there is no
@@ -220,13 +251,17 @@ remove the configuration files of the deleted role::
 
 After that you can run the deploy/highstate to provision the new server::
 
-    fab <environment> deploy
+    fab <environment> deploy -u <root-user>
 
 The first time you run this command, it may complete before the server is set up.
 It is most likely still completing in the background. If the server does not become
 accessible or if you encounter errors during the process, review the Salt logs for
 any hints in ``/var/log/salt`` on the minion and/or master. For more information about
 deployment, see the `server setup </server-setup>` documentation.
+
+The initial deployment will create developer users for the server so you should not
+need to connect as root after the first deploy.
+
 
 Optional Configuration
 ------------------------
@@ -238,13 +273,34 @@ are not enabled by default.
 HTTP Auth
 ________________________
 
-The ``secrets.sls`` can also contain a section to enable HTTP basic authentication. This
+The ``<environment>.sls`` can also contain a section to enable HTTP basic authentication. This
 is useful for staging environments where you want to limit who can see the site before it
 is ready. This will also prevent bots from crawling and indexing the pages. To enable basic
-auth simply add a section called ``http_auth`` in the relevant ``conf/pillar/<environment>/secrets.sls``::
+auth simply add a section called ``http_auth`` in the relevant ``conf/pillar/<environment>.sls``.
+As with other passwords this should be encrypted before it is added::
+
+    # Example encryption
+    fab <environment> encrypt:<username>=<password>
+    # Encrypt admin/abc123 for the staging environment
+    fab staging encrypt:admin=abc123
+
+This would be added in ``conf/pillar/<environment>.sls`` under ``http_auth``:
 
     http_auth:
-      admin: 123456
+      "admin": |-
+        -----BEGIN PGP MESSAGE-----
+        Version: GnuPG v1.4.11 (GNU/Linux)
+
+        hQEMA87BIemwflZuAQf+J4+G74ZSfrUPRF7z7+DPAmhBlK//A6dvplrsY2RsfEE4
+        Tfp7QPrHZc5V/gS3FXvlIGWzJOEFscKslzgzlccCHqsNUKE96qqnTNjsIoGOBZ4z
+        tmZV2F3AXzOVv4bOgipKIrjJDQcFJFjZKMAXa4spOAUp4cyIV/AQBu0Gwe9EUkfp
+        yXD+C/qTB0pCdAv5C4vyl+TJ5RE4fGnuPsOqzy4Q0mv+EkXf6EHL1HUywm3UhUaa
+        wbFdS7zUGrdU1BbJNuVAJTVnxAoM+AhNegLK9yAVDweWK6pApz3jN6YKfVLFWg1R
+        +miQe9hxGa2C/9X9+7gxeUagqPeOU3uX7pbUtJldwdJBAY++dkerVIihlbyWOkn4
+        0HYlzMI27ezJ9WcOV4ywTWwOE2+8dwMXE1bWlMCC9WAl8VkDDYup2FNzmYX87Kl4
+        9EY=
+        =PrGi
+        -----END PGP MESSAGE-----
 
 This should be a list of key/value pairs. The keys will serve as the usernames and
 the values will be the password. As with all password usage please pick a strong
@@ -254,40 +310,95 @@ password.
 Celery
 ________________________
 
-Many Django projects make use of `Celery <http://celery.readthedocs.org/en/latest/>`_
-for handling long running task outside of request/response cycle. Enabling a worker
-makes use of `Django setup for Celery <http://celery.readthedocs.org/en/latest/django/first-steps-with-django.html>`_.
-As documented you should create/import your Celery app in ``school_inspector/__init__.py`` so that you
-can run the worker via::
+Many Django projects make use of `Celery <http://celery.readthedocs.org/en/latest/>`_ for handling
+long running tasks outside of the request/response cycle. Enabling a worker makes use of `Django
+setup for Celery <http://celery.readthedocs.org/en/latest/django/first-steps-with-django.html>`_. As
+documented on that page, you need to create a new file in ``school_navigator/celery.py`` and then
+modify ``school_navigator/__init__.py`` to import that file. You'll also need to customize ``{{
+project_name}}/celery.py`` to import the environment variables from ``.env``. Add this (before the
+``os.environ.setdefault`` call)::
 
-    celery -A school_inspector worker
+    from . import load_env
+    load_env.load_env()
 
-Additionally you will need to configure the project settings for Celery::
+You should now be able to run the worker locally via (once you've added ``celery`` to your
+``requirements/base.txt`` and installed it)::
 
-    # school_inspector.settings.staging.py
-    import os
-    from school_inspector.settings.base import *
+    celery -A school_navigator worker
 
-    # Other settings would be here
-    BROKER_URL = 'amqp://school_inspector_staging:%(BROKER_PASSWORD)s@%(BROKER_HOST)s/school_inspector_staging' % os.environ
+Additionally you will need to uncomment the ``BROKER_URL`` setting in the project settings::
 
-You will also need to add the ``BROKER_URL`` to the ``school_inspector.settings.production`` so
-that the vhost is set correctly. These are the minimal settings to make Celery work. Refer to the
-`Celery documentation <http://docs.celeryproject.org/en/latest/configuration.html>`_ for additional
-configuration options.
+    # school_navigator/settings/deploy.py
+    from .base import *
+
+    # ...
+    BROKER_URL = 'amqp://school_navigator_%(ENVIRONMENT)s:%(BROKER_PASSWORD)s@%(BROKER_HOST)s/school_navigator_%(ENVIRONMENT)s' % os.environ
+
+These are the minimal settings to make Celery work. Refer to the `Celery documentation
+<http://docs.celeryproject.org/en/latest/configuration.html>`_ for additional configuration options.
 
 ``BROKER_HOST`` defaults to ``127.0.0.1:5672``. If the queue server is configured on a separate host
 that will need to be reflected in the ``BROKER_URL`` setting. This is done by setting the ``BROKER_HOST``
-environment variable in the ``env`` dictionary of ``conf/pillar/<environment>/env.sls``.
+environment variable in the ``env`` dictionary of ``conf/pillar/<environment>.sls``.
 
-To add the states you should add the ``worker`` role when provisioning the minion.
-At least one server in the stack should be provisioned with the ``queue`` role as well.
-This will use RabbitMQ as the broker by default. The
-RabbitMQ user will be named school_inspector_<environment> and the vhost will be named school_inspector_<environment>
-for each environment. It requires that you add a password for the RabbitMQ user to each of
-the ``conf/pillar/<environment>/secrets.sls``::
-
-    secrets:
-      BROKER_PASSWORD: thisisapasswordforrabbitmq
+To add the states you should add the ``worker`` role when provisioning the minion. At least one
+server in the stack should be provisioned with the ``queue`` role as well. This will use RabbitMQ as
+the broker by default. The RabbitMQ user will be named ``school_navigator_<environment>`` and the
+vhost will be named ``school_navigator_<environment>`` for each environment. It requires that you
+add a password for the RabbitMQ user to each of the ``conf/pillar/<environment>.sls`` under the
+secrets using the key ``BROKER_PASSWORD``. As with all secrets this must be encrypted.
 
 The worker will run also run the ``beat`` process which allows for running periodic tasks.
+
+
+SSL
+________________________
+
+The default configuration expects the site to run under HTTPS everywhere. However, unless
+an SSL certificate is provided, the site will use a self-signed certificate. To include
+a certificate signed by a CA you must update the ``ssl_key`` and ``ssl_cert`` pillars
+in the environment secrets. The ``ssl_cert`` should contain the intermediate certificates
+provided by the CA. It is recommended that this pillar is only pushed to servers
+using the ``balancer`` role. See the ``secrets.ex`` file for an example.
+
+You can use the below OpenSSL commands to generate the key and signing request::
+
+  # Generate a new 2048 bit RSA key
+  openssl genrsa -out school_navigator.key 2048
+  # Make copy of the key with the passphrase
+  cp school_navigator.key school_navigator.key.secure
+  # Remove any passphrase
+  openssl rsa -in school_navigator.secure -out school_navigator.key
+  # Generate signing request
+  openssl req -nodes -sha256 -new -key school_navigator.key -out school_navigator.csr
+
+The last command will prompt you for information for the signing request including
+the organization for which the request is being made, the location (country, city, state),
+email, etc. The most important field in this request is the common name which must
+match the domain for which the certificate is going to be deployed (i.e example.com).
+
+This signing request (.csr) will be handed off to a trusted Certificate Authority (CA) such as
+StartSSL, NameCheap, GoDaddy, etc. to purchase the signed certificate. The contents of
+the *.key file will be added to the ``ssl_key`` pillar and the signed certificate
+from the CA will be added to the ``ssl_cert`` pillar. These should be encrypted using
+the same proceedure as with the private SSH deploy key.
+
+
+Quickstart
+----------
+
+Production
+__________
+
+.. code-block:: bash
+
+    fab -u ubuntu production setup_master -i ~/.ssh/aws-cfa.pem
+    fab production encrypt:DB_PASSWORD=`make generate-secret`
+    fab production encrypt:SECRET_KEY=`make generate-secret length=64`
+    fab production encrypt:BROKER_PASSWORD=`make generate-secret`
+    fab production encrypt:production-ssl.cert && cat production-ssl.cert.asc
+    fab production encrypt:production-ssl.key && cat production-ssl.key.asc
+    fab production encrypt:newrelic_license_key='<fill-me-in>'
+    fab production setup_minion:salt-master,web,balancer,db-master,cache,queue,worker -H 54.172.183.193 -u ubuntu -i ~/.ssh/aws-cfa.pem
+    fab production deploy -H 54.172.183.193 -u ubuntu -i ~/.ssh/aws-cfa.pem
+    fab production deploy

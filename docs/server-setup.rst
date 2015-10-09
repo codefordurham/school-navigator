@@ -10,7 +10,7 @@ states are managed in a `common repo <https://github.com/caktus/margarita>`_ and
 states specific to this project are contained within the ``conf`` directory at the root
 of the repository.
 
-For more information see the doc:`provisioning guide </provisioning>`.
+For more information see the :doc:`provisioning guide </provisioning>`.
 
 
 Layout
@@ -18,7 +18,7 @@ Layout
 
 Below is the server layout created by this provisioning process::
 
-    /var/www/school_inspector/
+    /var/www/school_navigator/
         source/
         env/
         log/
