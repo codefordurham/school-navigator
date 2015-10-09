@@ -46,14 +46,13 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
         })
 }]);
 
-app.constants
 angular.module('SchoolsApp.services', [])
-    .service('Schools', ['$http', '$location', function($http, $location) {
-        var endpoint = location.search.indexOf('env') === -1? 'https://schools.codefordurham.com/' : 'http://localhost:8000/',
+    .service('Schools', ['$http', function($http) {
+        var endpoint = location.search.indexOf('env') === -1? 'https://schools.codefordurham.com' : 'http://localhost:8000',
             url;
 
         this.get_schools = function(location) {
-          url = endpoint + 'api/schools/';
+          url = endpoint + '/api/schools/';
           return $http({
               method: 'GET',
               url: url,
@@ -64,7 +63,7 @@ angular.module('SchoolsApp.services', [])
           });
         };
         this.get = function(id) {
-          url = endpoint + 'api/schools/detail/' + id + '/';
+          url = endpoint + '/api/schools/detail/' + id + '/';
           return $http({ method: 'GET', url: url });
         }
 }]);
