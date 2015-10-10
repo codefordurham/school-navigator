@@ -94,14 +94,15 @@ we need to install that globally in our Python2 environment::
 To setup your local environment you should create a virtualenv and install the
 necessary requirements::
 
-    mkvirtualenv school_inspector -p `which python3.4`
-    $VIRTUAL_ENV/bin/pip install -r $PWD/requirements/dev.txt
+    # Check that you have python3.4 installed
+    $ which python3.4
+    $ mkvirtualenv school_navigator -p `which python3.4`
+    (school_navigator)$ $VIRTUAL_ENV/bin/pip install -r $PWD/requirements/dev.txt
 
 Then create a local settings file and set your ``DJANGO_SETTINGS_MODULE`` to use it::
 
-    cp school_inspector/settings/local.example.py school_inspector/settings/local.py
-    echo "export DJANGO_SETTINGS_MODULE=school_inspector.settings.local" >> $VIRTUAL_ENV/bin/postactivate
-    echo "unset DJANGO_SETTINGS_MODULE" >> $VIRTUAL_ENV/bin/postdeactivate
+    (school_navigator)$ cp school_navigator/settings/local.example.py school_navigator/settings/local.py
+    (school_navigator)$ echo "DJANGO_SETTINGS_MODULE=school_navigator.settings.local" > .env
 
 Exit the virtualenv and reactivate it to activate the settings just changed::
 
@@ -116,9 +117,8 @@ packages before you can create the db and set up the postgis extension::
 
 Now, create the Postgres database and run the initial syncdb/migrate::
 
-    createdb -E UTF-8 school_inspector
-    psql school_inspector -c "CREATE EXTENSION postgis;"
-    python manage.py syncdb
+    (school_navigator)$ createdb -E UTF-8 school_navigator
+    (school_navigator)$ python manage.py migrate
 
 You should now be able to run the development server::
 

@@ -1,22 +1,36 @@
 language: python
+
+sudo: false
+
 python:
- - "3.4"
+  - "3.4"
+
+# Match postgresql version to that in conf/pillar/project.sls
 addons:
   postgresql: "9.3"
+
+cache:
+  directories:
+    - $HOME/.cache/pip
+
 env:
-  - DJANGO_SETTINGS_MODULE="school_inspector.settings.dev"
+  - DJANGO_SETTINGS_MODULE="school_navigator.settings.dev"
+
 install:
-  - pip install -r requirements/dev.txt --use-mirrors
-  - pip install coveralls
+  - pip install -U pip
+  - pip install -U -r requirements/dev.txt
+
 before_script:
-  - createdb -E UTF-8 school_inspector -U postgres -O $USER
-  - psql school_inspector -c "CREATE EXTENSION postgis;"
-  - python manage.py syncdb --noinput
+  - createdb -E UTF-8 school_navigator -U postgres -O $USER
+  # Uncomment for PostGIS support
+  - psql school_navigator -c "CREATE EXTENSION postgis;" -U postgres
+
 script:
+  - python manage.py makemigrations --dry-run | grep 'No changes detected' || (echo 'There are changes which require migrations.' && exit 1)
   - coverage run manage.py test
-  - coverage report -m --fail-under 30
-after_success:
-  - coveralls
+  - coverage report -m --fail-under 20
+  # - flake8 .
+
 notifications:
   email:
     - school-inspector@googlegroups.com
