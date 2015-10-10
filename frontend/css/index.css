@@ -128,15 +128,15 @@ body {
 
 /* http://paletton.com/#uid=53o0u0kjPvU9VPsfmFjnPsIrNn+ */
 
-.school-group.elementary .school-group-item:hover {
+.school-group.elementary .school-group-item.hover {
     background-color: #9FE7B5;
 }
 
-.school-group.middle .school-group-item:hover, .school-group.secondary .school-group-item:hover {
+.school-group.middle .school-group-item.hover, .school-group.secondary .school-group-item.hover {
     background-color: #9ACDDC;
 }
 
-.school-group.high .school-group-item:hover {
+.school-group.high .school-group-item.hover {
     background-color: #A4B0E2;
 }
 .school-group.elementary .school-group-item.active {
@@ -200,6 +200,27 @@ body {
 }
 #map .fa-home {
     color: rgb(24, 24, 24);
+}
+
+.legend {
+    padding: 6px 8px;
+    font: 1.5em Arial, Helvetica, sans-serif;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    background: rgba(255,255,255, 0.9);
+    line-height: 2em;
+    border-radius: 5px;
+    color: #555;
+    margin-top: 56px !important;
+    width: 205px !important;
+}
+
+.legend i {
+    color: #777;
+    width: 1.5em;
+    height: 1.5em;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
 }
 
 .leaflet-left {

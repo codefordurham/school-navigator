@@ -41,10 +41,12 @@ class ActiveSchools(SchoolAPIView):
     def get_queryset(self):
         qs = super(ActiveSchools, self).get_queryset()
         point_in_district = ~Q(district=None) & Q(district__contains=self.pt)
-        option_schools = Q(type__in=('magnet', 'speciality', 'charter'))
+        option_schools = Q(type__in=('speciality', 'charter')) | (Q(type='magnet') & Q(year_round=False))
+        # see https://github.com/codefordurham/school-navigator/issues/186
+        option_magnet_year_round = Q(type='magnet') & Q(year_round_zone__contains=self.pt) & Q(year_round=True)
         # see https://github.com/codefordurham/school-navigator/issues/147
         traditional_options = Q(type="neighborhood") & Q(traditional_option_zone__contains=self.pt)
-        q = point_in_district | option_schools | traditional_options
+        q = point_in_district | option_schools | traditional_options | option_magnet_year_round
         qs = qs.filter(q)
         qs = qs.filter(active=True)
         return qs.distance(self.pt)

@@ -47,23 +47,26 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
 }]);
 
 angular.module('SchoolsApp.services', [])
-    .service('Schools', function($http) {
-    this.get_schools = function(location) {
-      var url = 'https://schools.codefordurham.com/api/schools/';
-      return $http({
-          method: 'GET',
-          url: url,
-          params: {
-              longitude: location.lng,
-              latitude: location.lat
-          }
-      });
-    };
-    this.get = function(id) {
-      var url = 'https://schools.codefordurham.com/api/schools/detail/' + id + '/';
-      return $http({ method: 'GET', url: url });
-    }
-});
+    .service('Schools', ['$http', function($http) {
+        var endpoint = location.search.indexOf('env') === -1? 'https://schools.codefordurham.com' : 'http://localhost:8001',
+            url;
+
+        this.get_schools = function(location) {
+          url = endpoint + '/api/schools/';
+          return $http({
+              method: 'GET',
+              url: url,
+              params: {
+                  longitude: location.lng,
+                  latitude: location.lat
+              }
+          });
+        };
+        this.get = function(id) {
+          url = endpoint + '/api/schools/detail/' + id + '/';
+          return $http({ method: 'GET', url: url });
+        }
+}]);
 
 angular.module('SchoolsApp.geoDecoder', [])
     .service('Geodecoder', google.maps.Geocoder);
@@ -116,7 +119,6 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
                 }
               });
             },
-            levels:  ['elementary', 'secondary', 'middle', 'high'],
             durham: {
               //TODO Decide whether we want to limit map scrolling to Durham county area
               /*
@@ -151,6 +153,9 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
             },
             events: { markers:{ enable: [ 'click', 'dragend', 'mouseover', 'mouseout' ] } },
             highlight_school: function(schoolId) {
+              $scope.schools.forEach(function(school) {
+                school.hover = (school.id === schoolId);
+              });
               var districts = $scope.districts.filter(function(a) {
                 return a.id === schoolId;
               });
@@ -159,6 +164,9 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
               });
             },
             clear_highlight: function() {
+              $scope.schools.forEach(function(school) {
+                school.hover = false;
+              });
               $scope.geojson.data = [];
             },
             districts: [],
@@ -167,17 +175,39 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
               loadMarkers($scope.all_schools);
               $scope.deselectSchools();
             },
+            levelStyles: {
+              'elementary': '#48BC6B',
+              'secondary': '#3F899E',
+              'middle': '#3F899E',
+              'high': '#4F61AD'
+            },
+            levels: ['elementary', 'secondary', 'middle', 'high'],
+            zoneTypes: {
+              'district': 'black',
+              'traditional_option_zone': 'purple',
+              'year_round_zone': 'blue',
+              'priority_zone': 'red',
+              'choice_zone': 'yellow',
+              'walk_zone': 'green'
+            },
+            legend: {
+              position: 'topright',
+              colors: [ 'black', 'purple', 'blue', 'red', 'yellow', 'green' ],
+              labels: [ 'District', 'Traditional Option', 'Year Round', 'Priority', 'Choice', 'Walk' ]
+            },
             geojson: {
               data: [],
               style: function(feature) {
-                switch(feature.properties.level) {
-                  case 'middle': return {color: '#3F899E'};
-                  case 'high': return {color: '#4F61AD'};
-                  case 'elementary': return {color: '#48BC6B'};
-                }
+                return {
+                  fillColor: $scope.levelStyles[feature.properties.level],
+                  color: $scope.zoneTypes[feature.properties.zoneType]
+                };
               },
             }
           });
+          if ($params.addr) {
+              $scope.address = $params.addr;
+          }
           if($params.lat && $params.lng) {
             moveLoc($params.lat, $params.lng);
           }
@@ -185,11 +215,11 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
           function moveLoc(lat, lng) {
             $scope.markers.home.lat = $scope.durham.lat = $scope.position.lat = Number(lat);
             $scope.markers.home.lng = $scope.durham.lng = $scope.position.lng = Number(lng);
-            $location.search({lat: lat, lng: lng});
+            $location.search({lat: lat, lng: lng, addr: $scope.address});
             Schools.get_schools($scope.position).success(function(data) {
               loadMarkers(data);
             });
-          };
+          }
           function loadMarkers(data) {
               $scope.markers = { home: $scope.markers.home };
               $scope.districts = [];
@@ -220,12 +250,11 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
               }).forEach(function(school) {
                 var districtArray = this;
                 Schools.get(school.id).success(function(this_school) {
-                  var zones = ['district','traditional_option_zone','year_round_zone','priority_zone','choice_zone','walk_zone'];
-                  zones.forEach(function(zone) {
+                  Object.keys($scope.zoneTypes).forEach(function(zone) {
                     if(this_school.hasOwnProperty(zone)) {
                       var district = {
                         id: school.id, type: 'Feature',
-                        properties: { level: this_school.level },
+                        properties: { level: this_school.level, zoneType: zone },
                         geometry: this_school[zone]
                       };
                       districtArray.push(district);
@@ -233,7 +262,7 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
                   });
                 });
               }, $scope.districts);
-          };
+          }
           $scope.$on("leafletDirectiveMarker.dragend", function(event, args) {
             moveLoc(args.model.lat, args.model.lng);
             $scope.address = '';
@@ -242,7 +271,7 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
             $scope.highlight_school(args.model.id);
           });
           $scope.$on("leafletDirectiveMarker.mouseout", function(event, args) {
-            $scope.geojson.data = [];
+            $scope.clear_highlight();
           });
         }]);
 
