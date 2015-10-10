@@ -13,8 +13,6 @@ repo:
 # Addtional public environment variables to set for the project
 env:
   NEW_RELIC_APP_NAME: school navigator production
-  NEW_RELIC_MONITOR_MODE: "true"
-  NEW_RELIC_HIGH_SECURITY: "false"
 
 # Uncomment and update username/password to enable HTTP basic auth
 # Password must be GPG encrypted.
