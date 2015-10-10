@@ -5,8 +5,9 @@ import time
 
 import yaml
 
-from fabric.api import env, execute, get, hide, local, put, require, run, settings, sudo, task
-from fabric.contrib import files, project
+from fabric.api import (env, execute, get, hide, local, put, require, run,
+                        settings, sudo, task)
+from fabric.contrib import files, project, console
 from fabric.utils import abort
 
 DEFAULT_SALT_LOGLEVEL = 'info'
@@ -365,11 +366,11 @@ def reset_local_db(confirm_first=True):
     if confirm_first:
         question = 'Are you sure you want to reset your local ' \
                    'database with the %(environment)s database?' % env
-        if not confirm(question, default=False):
+        if not console.confirm(question, default=False):
             abort('Local database reset aborted.')
     with settings(warn_only=True):
-        local('dropdb school_inspector')
-    local('createdb -E UTF-8 school_inspector')
-    local('psql school_inspector -c "CREATE EXTENSION postgis;"')
-    remote_db = 'school_inspector_production'
-    local('ssh -C %s sudo -u postgres pg_dump -Ox %s | psql school_inspector' % (env.master, remote_db, ))
+        local('dropdb school_navigator')
+    local('createdb -E UTF-8 school_navigator')
+    local('psql school_navigator -c "CREATE EXTENSION postgis;"')
+    remote_db = 'school_navigator_production'
+    local('ssh -C %s sudo -u postgres pg_dump -Ox %s | psql school_navigator' % (env.master, remote_db, ))
