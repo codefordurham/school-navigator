@@ -393,14 +393,17 @@ __________
 .. code-block:: bash
 
     fab -u ubuntu production setup_master -i ~/.ssh/aws-cfa.pem
+    rm production*.asc
+
     fab production encrypt:DB_PASSWORD=`make generate-secret`
     fab production encrypt:SECRET_KEY=`make generate-secret length=64`
     fab production encrypt:BROKER_PASSWORD=`make generate-secret`
-    fab production encrypt:production-ssl.cert && cat production-ssl.cert.asc
+    fab production encrypt:NEW_RELIC_LICENSE_KEY='<fill-me-in>'
     fab production encrypt:production-ssl.key && cat production-ssl.key.asc
-    fab production encrypt:newrelic_license_key='<fill-me-in>'
-    fab production setup_minion:salt-master,web,balancer,db-master,cache,queue,worker -H 54.172.183.193 -u ubuntu -i ~/.ssh/aws-cfa.pem
-    fab production deploy -H 54.172.183.193 -u ubuntu -i ~/.ssh/aws-cfa.pem
+    fab production encrypt:production-ssl.cert && cat production-ssl.cert.asc
+
+    fab production setup_minion:salt-master,web,balancer,db-master,cache,queue,worker -H ec2-52-2-56-101.compute-1.amazonaws.com -u ubuntu -i ~/.ssh/aws-cfa.pem
+    fab production deploy -H ec2-52-2-56-101.compute-1.amazonaws.com -u ubuntu -i ~/.ssh/aws-cfa.pem
     fab production deploy
 
     # load db dump (run on server)
@@ -408,7 +411,7 @@ __________
     sudo -u postgres dropdb school_navigator_production
     sudo -u postgres createdb -E UTF-8 -O school_navigator_production school_navigator_production
     sudo -u postgres psql -c 'CREATE EXTENSION postgis;' school_navigator_production
-    wget https://s3.amazonaws.com/school-navigator/db-2015-10-09.tar.zip
-    unzip db-2015-10-09.tar.zip
-    sudo -u postgres pg_restore -Ox -Ft --no-data-for-failed-tables -U school_navigator_production -d school_navigator_production school_navigator.tar
+    wget https://s3.amazonaws.com/school-navigator/db-2015-10-10.tar.zip
+    unzip db-2015-10-10.tar.zip
+    sudo -u postgres pg_restore -Ox -Ft --no-data-for-failed-tables -U school_navigator_production -d school_navigator_production school_navigator_production.tar
     sudo supervisorctl start all
