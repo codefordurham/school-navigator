@@ -8,7 +8,7 @@ domain: schools.codefordurham.com
 # FIXME: Update to the correct project repo
 repo:
   url: https://github.com/codefordurham/school-navigator.git
-  branch: upgrade-template
+  branch: master
 
 # Addtional public environment variables to set for the project
 env:
