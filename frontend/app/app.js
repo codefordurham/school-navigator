@@ -156,11 +156,10 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
               $scope.schools.forEach(function(school) {
                 school.hover = (school.id === schoolId);
               });
-              var districts = $scope.districts.filter(function(a) {
-                return a.id === schoolId;
-              });
-              districts.forEach(function(district) {
-                $scope.geojson.data.push(district);
+              $scope.districts.forEach(function(district) {
+                if(district.id === schoolId) {
+                  $scope.geojson.data.push(district);
+                }
               });
             },
             clear_highlight: function() {
@@ -169,6 +168,7 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
               });
               $scope.geojson.data = [];
             },
+            prevDistricts: [],
             districts: [],
             switchTab: function (eligibility) {
               $scope.eligibility = eligibility;
@@ -222,7 +222,6 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
           }
           function loadMarkers(data) {
               $scope.markers = { home: $scope.markers.home };
-              $scope.districts = [];
               $scope.all_schools = data;
               $scope.schools = [];
               data.filter(function(a) {
@@ -246,8 +245,12 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
                 $scope.schools.push(school);
               }, $scope.markers);
               data.filter(function(a) {
-                return a.eligibility === $scope.eligibility || (a.eligibility === "option" && a.type === $scope.eligibility);
+                return $scope.prevDistricts.indexOf(a.id) === -1 && // Have we already fetched district?
+                  a.type !== 'charter' && // Is it a charter? (doesn't have a geographic zone)
+                  (a.eligibility === $scope.eligibility || // Is eligibility 'assigned'?
+                  (a.eligibility === "option" && a.type === $scope.eligibility)); // Is type 'magnet' or 'charter'?
               }).forEach(function(school) {
+                $scope.prevDistricts.push(school.id);
                 var districtArray = this;
                 Schools.get(school.id).success(function(this_school) {
                   Object.keys($scope.zoneTypes).forEach(function(zone) {
