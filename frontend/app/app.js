@@ -193,7 +193,7 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
             legend: {
               position: 'topright',
               colors: [ 'black', 'purple', 'blue', 'red', 'yellow', 'green' ],
-              labels: [ 'District', 'Traditional Option', 'Year Round', 'Priority', 'Choice', 'Walk' ]
+              labels: [ 'Neighborhood', 'Traditional Option', 'Year Round', 'Priority', 'Choice', 'Walk' ]
             },
             geojson: {
               data: [],
