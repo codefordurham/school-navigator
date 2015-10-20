@@ -54,6 +54,7 @@ MAP = {
     ('elementary', 'neighborhood'): 'elementary school',
     ('elementary', 'year round option'): 'year round elementary',
     ('middle', 'year round option'): 'year round middle school',
+    ('secondary', 'year round option'): 'year round middle school',
     ('elementary', 'walk zone'): 'elementary walk zone',
     ('elementary', 'choice zone'): 'elementary choice zone',
     ('elementary', 'priority'): 'elementary priority zone',
