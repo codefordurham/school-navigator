@@ -53,6 +53,8 @@ class SchoolListSerializer(geo_serializers.GeoModelSerializer):
             return 'choice'
         if obj.priority_zone is not None and obj.priority_zone.contains(pt):
             return 'priority'
+        if obj.year_round_zone is not None and obj.year_round_zone.contains(pt):
+            return 'year round option'
         if obj.traditional_option_zone is not None and obj.traditional_option_zone.contains(pt):
             return 'traditional calendar option'
 
