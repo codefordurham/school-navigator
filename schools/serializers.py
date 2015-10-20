@@ -45,7 +45,6 @@ class SchoolListSerializer(geo_serializers.GeoModelSerializer):
         pt = self.context['point']
         # return auto-assigned (walk/choice) before other zones
         # see https://github.com/codefordurham/school-navigator/pull/217
-        the order is important - see https://github.com/codefordurham/school-navigator/pull/217
         if obj.district is not None and obj.district.contains(pt):
             return 'neighborhood'
         if obj.walk_zone is not None and obj.walk_zone.contains(pt):
