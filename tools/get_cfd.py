@@ -40,8 +40,9 @@ def get_schools(location):
             ret[(school['level'], pref)] = school['name']
         if school['eligibility'] == 'option':
             pref = school['preference']
-            if pref == 'priority':
+            if pref in ('priority', 'year round option'):
                 ret[(school['level'], pref)] = school['name']
+
 
         #print('\t'.join([school['level'], school['preference_type'], school['name']]))
     return ret
