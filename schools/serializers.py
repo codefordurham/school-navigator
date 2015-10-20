@@ -43,14 +43,16 @@ class SchoolListSerializer(geo_serializers.GeoModelSerializer):
 
     def get_preference(self, obj):
         pt = self.context['point']
+        # return auto-assigned (walk/choice) before other zones
+        # see https://github.com/codefordurham/school-navigator/pull/217
         if obj.district is not None and obj.district.contains(pt):
             return 'neighborhood'
         if obj.walk_zone is not None and obj.walk_zone.contains(pt):
             return 'walk zone'
-        if obj.priority_zone is not None and obj.priority_zone.contains(pt):
-            return 'priority'
         if obj.choice_zone is not None and obj.choice_zone.contains(pt):
             return 'choice'
+        if obj.priority_zone is not None and obj.priority_zone.contains(pt):
+            return 'priority'
         if obj.traditional_option_zone is not None and obj.traditional_option_zone.contains(pt):
             return 'traditional calendar option'
 
