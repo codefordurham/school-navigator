@@ -326,6 +326,7 @@ div#schools-wrapper ul.nav li.active a, div#schools-wrapper ul.nav li a:hover {
 
 .tooltip {
     font-size: 1.1em;
+    width: 200px;
 }
 
 @media only screen and (max-width : 740px) {
