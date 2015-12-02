@@ -22,6 +22,7 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
             templateUrl: 'app/templates/map.html'
             })
         .when('/school/:school/', {
+            controller: 'schoolsDetailCtrl',
             templateUrl: 'app/templates/details.html'
             })
         .when('/about', {
@@ -71,7 +72,16 @@ angular.module('SchoolsApp.services', [])
 angular.module('SchoolsApp.geoDecoder', [])
     .service('Geodecoder', google.maps.Geocoder);
 
+
 angular.module('SchoolsApp.controllers', ["leaflet-directive"])
+    .controller('schoolsDetailCtrl', ['$scope', '$routeParams', 'Schools',
+        function($scope, $params, Schools) {
+            $scope.school = {};
+            Schools.get($params.school).success(function(data) {
+                $scope.school = data;
+            });
+        }
+    ])
     .controller('schoolsMapCtrl', ['$scope', '$filter', '$routeParams', '$location', 'Geodecoder', 'Schools',
         function($scope, $filter, $params, $location, Geodecoder, Schools) {
           angular.extend($scope, {
