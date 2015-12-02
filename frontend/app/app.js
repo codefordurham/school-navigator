@@ -21,7 +21,7 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
             controller: 'schoolsMapCtrl',
             templateUrl: 'app/templates/map.html'
             })
-        .when('/schools/:school/', {
+        .when('/school/:school/', {
             templateUrl: 'app/templates/details.html'
             })
         .when('/about', {
