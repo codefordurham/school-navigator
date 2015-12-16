@@ -47,3 +47,55 @@ class School(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class SchoolProfile(models.Models):
+    school = models.ForeignKey('School')
+
+    # Pictures
+    # - School.photo
+    
+    # School Data
+    # - School.type
+    # - School.level
+    # - School.grade_min
+    # - School.grade_max
+    speciality_type = models.TextField(null=True, blank=True)
+    phone_number = models.TextField(null=True, blank=True)
+    # - School.website_url
+    # - School.school_hours
+    total_enrollment = models.IntegerField(null=True)
+    breakfast_served = models.BooleanField(null=True)
+    lunch_served = models.BooleanField(null=True)
+    
+    # About
+    # - School.mission_statement
+    points_of_pride = models.TextField(null=True, blank=True)
+
+    # Admissions Info
+
+    # Leadership & Teacher Info
+    principal_name = models.TextField(null=True, blank=True)
+    principal_bio = models.TextField(null=True, blank=True)
+    principal_start_year = models.IntegerField(null=True)
+
+    # Extracurriculars
+    extracurriculars = models.TextField(null=True)
+    
+    # Course Offerings
+    courses_offered = models.TextField(null=True)
+    special_education = models.TextField(null=True)
+    gifted_education = models.TextField(null=True)
+
+    # Before & After Care
+    extended_care_start = models.TimeField(null=True)
+    extended_care_end = models.TimeField(null=True)
+
+    # Parent Involvement
+    parental_involvement = models.TextField(null=True)
+    
+    
+    def __str__(self):
+        return self.name
+
+    
