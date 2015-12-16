@@ -86,7 +86,7 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
               defaults: {
               },
               center: {
-                lat: 36, lng: -78.9, zoom: 13
+                lat: 36, lng: -78.9, zoom: 12
               },
               tiles: {
                 name: 'School Mapbox',
@@ -94,15 +94,28 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
                 attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
                 type: 'xyz'
               },
-              markers: {
-                school: {
-                  lat: 36, lng: -78.9
-                }
-              }
+              markers: { }
             });
-            Schools.get($params.school).success(function(data) {
-                $scope.school = data;
-                $scope.center = { lat: data.location.coordinates[1], lng: data.location.coordinates[0] };
+            Schools.get($params.school).success(function(school) {
+                $scope.school = school;
+                $scope.center.lat = school.location.coordinates[1];
+                $scope.center.lng = school.location.coordinates[0];
+                $scope.markers = {};
+                var schoolObj = {
+                  lat: school.location.coordinates[1],
+                  lng: school.location.coordinates[0],
+                  id: school.id,
+                  message: school.name,
+                  icon: {
+                    type: 'div',
+                    iconSize: [50, 50],
+                    iconAnchor: [25, 25],
+                    popupAnchor:  [0, -10],
+                    html: school.short_name,
+                    className: "school_point " + school.level
+                  }
+                };
+                $scope.markers.school = schoolObj;
             });
         }
     ])
