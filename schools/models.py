@@ -49,7 +49,7 @@ class School(models.Model):
         return self.name
 
 
-class SchoolProfile(models.Models):
+class SchoolProfile(models.Model):
     school = models.ForeignKey('School')
 
     # Pictures
@@ -65,8 +65,8 @@ class SchoolProfile(models.Models):
     # - School.website_url
     # - School.school_hours
     total_enrollment = models.IntegerField(null=True)
-    breakfast_served = models.BooleanField(null=True)
-    lunch_served = models.BooleanField(null=True)
+    breakfast_served = models.NullBooleanField()
+    lunch_served = models.NullBooleanField()
     
     # About
     # - School.mission_statement
