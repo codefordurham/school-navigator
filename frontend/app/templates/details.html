@@ -1,5 +1,71 @@
 <simple-nav></simple-nav>
 
 <div class="container">
-    <h1>Content goes here</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <h1>{{ school.name }}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <img data-ng-src="http://placehold.it/350x150"/>
+
+            <div class="school-details">
+                <h2>Mission</h2>
+                <div class="">
+
+                </div>
+                <h2>Point of pride</h2>
+                <div class="">
+
+                </div>
+                <h2>Admission Information</h2>
+                <div class="">
+
+                </div>
+                <h2>Leadership + teachers</h2>
+                <div class="">
+
+                </div>
+                <h2>Mission</h2>
+                <div class="">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <leaflet class="content-row" id="leaflet-map" defaults="defaults" center="center" markers="markers" tiles="tiles" school="school" height=150 width=350></leaflet>
+
+            <h2>School Details</h2>
+            <div class="keypair">
+                <div class="key">
+                    School Type
+                </div>
+                <div class="value">
+                    School Type
+                </div>
+            </div>
+            <div class="keypair">
+                <div class="key">
+                    Specialty Type
+                </div>
+                <div class="value">
+                    Specialty Type
+                </div>
+            </div>
+            <div class="keypair">
+                <div class="key">
+                    School Type
+                </div>
+                <div class="value">
+                    School Type
+                </div>
+            </div>
+
+            <div class="reflexions-wrapper">
+                <reflexions></reflexions>
+            </div>
+        </div>
+    </div>
 </div>

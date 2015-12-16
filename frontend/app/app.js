@@ -21,7 +21,8 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
             controller: 'schoolsMapCtrl',
             templateUrl: 'app/templates/map.html'
             })
-        .when('/schools/:school/', {
+        .when('/school/:school/', {
+            controller: 'schoolsDetailCtrl',
             templateUrl: 'app/templates/details.html'
             })
         .when('/about', {
@@ -62,16 +63,62 @@ angular.module('SchoolsApp.services', [])
               }
           });
         };
+
         this.get = function(id) {
           url = endpoint + '/api/schools/detail/' + id + '/';
           return $http({ method: 'GET', url: url });
+        };
+
+        this.get_reflexions = function(id) {
+            url = endpoint + '/api/schools/reflexions/' + id + '/';
+            return $http({ method: 'GET', url: url });
         }
 }]);
 
 angular.module('SchoolsApp.geoDecoder', [])
     .service('Geodecoder', google.maps.Geocoder);
 
+
 angular.module('SchoolsApp.controllers', ["leaflet-directive"])
+    .controller('schoolsDetailCtrl', ['$scope', '$routeParams', 'Schools',
+        function($scope, $params, Schools) {
+            angular.extend($scope, {
+              defaults: {
+              },
+              center: {
+                lat: 36, lng: -78.9, zoom: 12
+              },
+              tiles: {
+                name: 'School Mapbox',
+                url: 'https://{s}.tiles.mapbox.com/v4/vrocha.j3fib8g6/{z}/{x}/{y}.png32?access_token=pk.eyJ1IjoidnJvY2hhIiwiYSI6Ijc4VTRqNlkifQ.IAL1V6TtIekAMo2sP61J3Q',
+                attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                type: 'xyz'
+              },
+              markers: { }
+            });
+            Schools.get($params.school).success(function(school) {
+                $scope.school = school;
+                $scope.center.lat = school.location.coordinates[1];
+                $scope.center.lng = school.location.coordinates[0];
+                $scope.markers = {};
+                var schoolObj = {
+                  lat: school.location.coordinates[1],
+                  lng: school.location.coordinates[0],
+                  id: school.id,
+                  message: school.name,
+                  icon: {
+                    type: 'div',
+                    iconSize: [50, 50],
+                    iconAnchor: [25, 25],
+                    popupAnchor:  [0, -10],
+                    html: school.short_name,
+                    className: "school_point " + school.level
+                  }
+                };
+                $scope.markers.school = schoolObj;
+            });
+        }
+    ])
     .controller('schoolsMapCtrl', ['$scope', '$filter', '$routeParams', '$location', 'Geodecoder', 'Schools',
         function($scope, $filter, $params, $location, Geodecoder, Schools) {
           angular.extend($scope, {
@@ -307,6 +354,18 @@ angular.module('SchoolsApp.directives', [])
               }, function(){
                   // on mouseleave
                   $(element).tooltip('hide');
+              });
+          }
+      };
+    }])
+    .directive('reflexions', ['Schools', function(Schools) {
+      return {
+          restrict: 'AE',
+          templateUrl: 'app/templates/reflexions.html',
+          link: function(scope, element, attrs){
+              console.log(attrs);
+              Schools.get_reflexions().success(function(data) {
+                  scope.reflexions = data;
               });
           }
       };
