@@ -63,9 +63,15 @@ angular.module('SchoolsApp.services', [])
               }
           });
         };
+
         this.get = function(id) {
           url = endpoint + '/api/schools/detail/' + id + '/';
           return $http({ method: 'GET', url: url });
+        };
+
+        this.get_reflexions = function(id) {
+            url = endpoint + '/api/schools/reflexions/' + id + '/';
+            return $http({ method: 'GET', url: url });
         }
 }]);
 
@@ -335,6 +341,18 @@ angular.module('SchoolsApp.directives', [])
               }, function(){
                   // on mouseleave
                   $(element).tooltip('hide');
+              });
+          }
+      };
+    }])
+    .directive('reflexions', ['Schools', function(Schools) {
+      return {
+          restrict: 'AE',
+          templateUrl: 'app/templates/reflexions.html',
+          link: function(scope, element, attrs){
+              console.log(attrs);
+              Schools.get_reflexions().success(function(data) {
+                  scope.reflexions = data;
               });
           }
       };

@@ -37,7 +37,7 @@ class School(models.Model):
 
     # Zones per http://dpsncapplication.com/site327.php
     walk_zone = models.MultiPolygonField(null=True, blank=True)
-    choice_zone =  models.MultiPolygonField(null=True, blank=True)
+    choice_zone = models.MultiPolygonField(null=True, blank=True)
     priority_zone = models.MultiPolygonField(null=True, blank=True)
     year_round_zone = models.MultiPolygonField(null=True, blank=True)
     traditional_option_zone = models.MultiPolygonField(null=True, blank=True)
@@ -47,3 +47,8 @@ class School(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Reflexions(models.Model):
+    content = models.TextField(blank=True)
+    school = models.ForeignKey(School)
