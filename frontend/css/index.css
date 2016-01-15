@@ -6,6 +6,9 @@ body {
     position: relative;
     font-family: 'Roboto', sans-serif;
 }
+img {
+    max-width:100%;
+}
 #app_content {
   height: 100%;
   display: flex;
@@ -387,4 +390,16 @@ div#schools-wrapper ul.nav li.active a, div#schools-wrapper ul.nav li a:hover {
     }
     /*.content-row#simple-nav {*/
     /*}*/
+}
+
+
+ /*SCHOOL DETAIL PAGE*/
+.at-a-glance {
+    padding: 20px 0;
+}
+.school-detail-page ol {
+    padding-left: 20px;
+}
+.school-detail-page {
+    margin-bottom: 40px;
 }

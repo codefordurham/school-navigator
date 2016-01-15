@@ -49,7 +49,7 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
 
 angular.module('SchoolsApp.services', [])
     .service('Schools', ['$http', function($http) {
-        var endpoint = location.search.indexOf('env') === -1? 'https://schools.codefordurham.com' : 'http://localhost:8001',
+        var endpoint = location.search.indexOf('env') === -1? 'https://durhamschoolnavigator.org' : 'http://localhost:8001',
             url;
 
         this.get_schools = function(location) {
@@ -82,6 +82,77 @@ angular.module('SchoolsApp.geoDecoder', [])
 angular.module('SchoolsApp.controllers', ["leaflet-directive"])
     .controller('schoolsDetailCtrl', ['$scope', '$routeParams', 'Schools',
         function($scope, $params, Schools) {
+            var mocked_school = {
+                name: 'Sample School Elementary',
+                school_type: 'Magnet School',
+                grades: 'PK - 5',
+                enrollment: '346 students',
+                theme: 'Language focus',
+
+                mission_statement: 'We strive to educate students and to assist them in realizing their full potential as responsible, productive, contributing members of society',
+                photo: 'http://durhamme.com/wp-content/uploads/2010/09/durham_maine_school2.jpg',
+                points_of_pride: [
+                    " We have the only spanish immersion program in Durham's public school system.",
+                    "Principal McCowen has been with our school for 5 years and remains committed to our students' growth and development.",
+                    "We have a very active PTA.  Families play a huge role in supporting our students and learning community."
+                ],
+
+                address: '1000 North Duke St.',
+                phone_number: '919-705-555',
+                website: 'www.sampleschooleleementary.org',
+                calendar_year: 'Regular Calendar',
+                school_day: '8:00am - 3:30pm',
+                uniform_required: 'No',
+
+                services: {
+                    transportation_provided: true,
+                    extended_care_hours: '3:30pm - 5:30pm',
+                    breakfast_provided: true,
+                    lunch_provided: true
+                },
+                school_leadership: {
+                    name: 'Teresa Allen',
+                    years_of_service: 2013,
+                    bio: "Teresa Allen began her educational career in the Charlotte-Mecklenberg School District in 2001 as a second grade teacher at Jefferson Elementary School. Ms. Allen spent six years teaching within the district as a second and third grade teacher at both Jefferson Elementary and Gill Hall Elementary before accepting his first principal position in the Orange County School District. Over the next four years, Ms. Allen served as an elementary building principal in both Orange County and Durham School Districts, respectively. In 2013, Ms. Allen returned to DPS as principal of Sample School Elementary. This year marks her second year as principal of SSE and eighth as an elementary building principal. Ms. Allen has received a Bachelor’s Degree in Biology from the Pennsylvania State University in 1999 and a Master’s Degree in Elementary Education in from the University of Chapel Hill in 2001. "
+                },
+                teacher_satisfaction: {
+
+                },
+                admission_policy: {
+                    policy_type: "This school gaurantees admission for children who live in the walk zone.  The remaining spots are filled through an open lottery.",
+                    lottery_priorities: [
+                        "Siblings of enrolled students",
+                        "Children of staff"
+                    ],
+                    lottery_deadline: "February 1st ",
+                    lottery_acceptance_rate: "38% of students who applied to the lottery in 2014-15 were accepted.",
+                    learn_more: "LEARN MORE BUTTON"
+                },
+                targeted_academics: {
+                    special_education: "We have a special education teacher and instrucional aide for each grade who provide push-in and pull-out services.  We also provide robust interventions for students who need extra support but do not have an IEP",
+                    gifted_students: "Students identified as intellectually gifted receives services through the APEX Program.",
+                    ell: "One bilingual teacher in each grade provides an hour of language training each day to our students identified as ELL.  In addition all school resources are available in Spanish and English."
+
+                },
+                other_programs: {
+                    foreign_language: 'We have a spanish immersion program open to all students who enter in kindergarten that continues through 5th grade.',
+                    math_science: 'STEM club, Abacus Math club',
+                    arts: 'elective classes for band, choir, fine arts, drama',
+                    sports: 'basketball, soccer, baseball for 4th and 5th graders',
+                    other: 'chess after-school club'
+                },
+                parent_involvement: {
+                    pta: true,
+                    learn_more: 'www.sampleschoolelementary.org/pta'
+                },
+                reflections: [
+                    {
+                        reflection: "I have two kids at SSE and have been very satisfied with their experience.  The teachers are committed to students' learning and both have become fluent in spanish as a result of their enrollment.  My only complaint is that I wish there were more extracurricular offerings.",
+                        who: "Parent of 3rd grader (1/12/15)"
+                    }
+                ]
+
+            };
             angular.extend($scope, {
               defaults: {
               },
@@ -116,6 +187,7 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
                   }
                 };
                 $scope.markers.school = schoolObj;
+                angular.extend($scope.school, mocked_school);
             });
         }
     ])
