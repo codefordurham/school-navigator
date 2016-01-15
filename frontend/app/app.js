@@ -116,7 +116,9 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
                     bio: "Teresa Allen began her educational career in the Charlotte-Mecklenberg School District in 2001 as a second grade teacher at Jefferson Elementary School. Ms. Allen spent six years teaching within the district as a second and third grade teacher at both Jefferson Elementary and Gill Hall Elementary before accepting his first principal position in the Orange County School District. Over the next four years, Ms. Allen served as an elementary building principal in both Orange County and Durham School Districts, respectively. In 2013, Ms. Allen returned to DPS as principal of Sample School Elementary. This year marks her second year as principal of SSE and eighth as an elementary building principal. Ms. Allen has received a Bachelor’s Degree in Biology from the Pennsylvania State University in 1999 and a Master’s Degree in Elementary Education in from the University of Chapel Hill in 2001. "
                 },
                 teacher_satisfaction: {
-
+                    'Overall, my school is a good place to work and learn.': [68, 62],
+                    'The school leadership consistently supports teachers': [81, 66],
+                    'Teachers are allowed to focus on educating students with minimal interruptions': [75, 54]
                 },
                 admission_policy: {
                     policy_type: "This school gaurantees admission for children who live in the walk zone.  The remaining spots are filled through an open lottery.",

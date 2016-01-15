@@ -9,6 +9,9 @@ body {
 img {
     max-width:100%;
 }
+.title-case {
+    text-transform: capitalize;
+}
 #app_content {
   height: 100%;
   display: flex;
@@ -400,6 +403,63 @@ div#schools-wrapper ul.nav li.active a, div#schools-wrapper ul.nav li a:hover {
 .school-detail-page ol {
     padding-left: 20px;
 }
+.school-detail-page ul {
+    list-style: none;
+    padding-left: 0;
+}
+.school-detail-page ul li {
+    padding-bottom: 10px;
+}
 .school-detail-page {
     margin-bottom: 40px;
+}
+
+div.avgline span.actual {
+    background-color: rgb(64, 208, 136);
+}
+div.avgline span.actual {
+    border-radius: 5px;
+    height: 15px;
+    display: block;
+}
+div.avgline {
+    border-radius: 5px;
+    height: 15px;
+    width: 100%;
+    position: relative;
+    box-shadow: inset 0px 0px 3px 0px rgba(0,0,0,0.09);
+    margin-bottom: 10px;
+    border: 1px solid rgb(235, 235, 235);
+}
+div.avgline span.avg {
+    display: block;
+    width: 150px;
+    font-size: 10px;
+    line-height: 10px;
+    margin-left: -75px;
+    left: 0%;
+    top: 10px;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    position: absolute;
+}
+.metrics {
+    margin-top: 40px;
+}
+.metric {
+    margin-bottom: 60px;
+}
+.metric .score {
+    font-size: 24px;
+    float: right;
+}
+.map-row {
+    min-height: 155px;
+}
+.map-row textarea {
+    width: 100%;
+    height: 80px;
+}
+.map-row .angular-leaflet-map {
+    margin-top: 20px;
 }

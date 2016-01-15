@@ -54,6 +54,7 @@
 
             <div class="bio">
                 <h3>{{ school.school_leadership.name }}</h3>
+                <p class="lead" title="Year of service">{{ school.school_leadership.years_of_service }}</p>
                 <div class="">
                     {{ school.school_leadership.bio }}
                 </div>
@@ -62,6 +63,17 @@
         </div>
         <div class="col-md-6">
             <h2>Teacher info</h2>
+            <p>The following percentage of teachers responded that they "agree" or "strongly agree" to the following statements</p>
+            <div class="metrics">
+                <div class="metric" data-ng-repeat="(question, percentage) in school.teacher_satisfaction">
+                    <p class="score">{{ percentage.0 }}%</p>
+                    <p><em>{{ question }}</em></p>
+                    <div class="avgline">
+                        <span class="actual" style="width:{{ percentage.0 }}%;"></span>
+                        <span class="avg" style="left:{{ percentage.1 }}%;">|<br>Durham Public Schools Avg.</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -80,6 +92,11 @@
         </div>
         <div class="col-md-6">
             <h2>Extracurriculars</h2>
+            <div class="">
+                <ul>
+                    <li data-ng-repeat="(name, description) in school.other_programs"><strong class="title-case">{{ name }}: </strong> {{ description }}</li>
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -100,18 +117,18 @@
             <h2>Academic Offerings</h2>
             <div class="">
                 <ul>
-                    <li data-ng-repeat="(name, description) in school.other_programs"><strong>{{ name }}: </strong> {{ description }}</li>
+                    <li data-ng-repeat="(name, description) in school.targeted_academics"><strong class="title-case">{{ name }}: </strong> {{ description }}</li>
                 </ul>
             </div>
         </div>
     </div>
 
-    <div class="row">
+    <div class="row map-row">
         <div class="col-md-6">
             <reflexions></reflexions>
         </div>
         <div class="col-md-6">
-            <leaflet class="content-row" id="leaflet-map" defaults="defaults" center="center" markers="markers" tiles="tiles" school="school" height=150 width=350></leaflet>
+            <leaflet class="content-row" id="leaflet-map" defaults="defaults" center="center" markers="markers" tiles="tiles" school="school" height=250 width=550></leaflet>
         </div>
     </div>
 </div>
