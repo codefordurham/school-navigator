@@ -26,12 +26,12 @@
                     <div data-ng-repeat="school in schools | filter:{'level': level} | orderBy:['preference', 'distance']:true" class="school-group-item item-{{ school.id }}" data-ng-mouseenter="highlight_school(school.id);" data-ng-mouseleave="clear_highlight();" ng-class="{hover: school.hover, 'last':$last, detail: school.selected == true}" >
                         <div class="row-content" data-ng-hide="school.selected == 'hide'" data-ng-click="selectSchool( school )">
                             <div class="school-group-item-heading">
-                                <h4 class="school-group-item-heading"><div class="school_point legends text-center" data-ng-class="[school.type, school.level, (school.year_round ? 'year-round' : '')]">
+                                <h4 class="school-group-item-heading" data-ng-click="deselectSchools(); $event.stopPropagation()"  ><div class="school_point legends text-center" data-ng-class="[school.type, school.level, (school.year_round ? 'year-round' : '')]">
                                     <span>{{ school.short_name }}</span></div> {{ school.name }} <small class="preference">{{ school.preference }}</small></h4>
                                 <span data-ng-if="school.year_round == true" class="school-badge year-round" data-toggle="tooltip" data-placement="top" title="Year-round School">YR</span>
                             </div>
                             <div class="distance">{{ school.distance | number:2 }} mi</div>
-                            <div class="close" data-ng-click="deselectSchools(); $event.stopPropagation()"></div>
+                            <div class="close" ></div>
                             <div data-ng-show="school.selected == true">
                                 <p class="school-group-item-text">
                                     Grades {{ school.grade_min | gradeString }}-{{ school.grade_max | gradeString}} &mdash; {{ school.address }}
