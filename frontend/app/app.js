@@ -209,12 +209,9 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
             },
             deselectSchools: function() {
               angular.forEach($scope.schools, function(school) {
-
+                // Logic that allows for the deselectSchools function to toggle
                 school.selected = school.selected === true ? false: true;
               })
-            },
-            toggleSchools: function(){
-              $scope.selected = $scope.selected === false ? true: false;
             },
             maxHeight: function () {
                 return $(window).height() - 220 + 'px';
