@@ -31,7 +31,6 @@
                                 <span data-ng-if="school.year_round == true" class="school-badge year-round" data-toggle="tooltip" data-placement="top" title="Year-round School">YR</span>
                             </div>
                             <div class="distance">{{ school.distance | number:2 }} mi</div>
-                            <div class="close" ></div>
                             <div data-ng-show="school.selected == true">
                                 <p class="school-group-item-text">
                                     Grades {{ school.grade_min | gradeString }}-{{ school.grade_max | gradeString}} &mdash; {{ school.address }}
