@@ -1,5 +1,8 @@
 from django.contrib.gis.db import models
 
+from hashids import Hashids
+from django.conf import settings
+
 SCHOOL_LEVELS = (
     ('elementary', 'Elementary'),
     ('middle', 'Middle'),
@@ -48,7 +51,6 @@ class School(models.Model):
     def __str__(self):
         return self.name
 
-
 class SchoolProfile(models.Model):
     school = models.ForeignKey('School')
 
@@ -94,7 +96,10 @@ class SchoolProfile(models.Model):
     # Parent Involvement
     parental_involvement = models.TextField(null=True)
     
-    
+    def url(self):
+        hashids = Hashids(salt=settings.SECRET_KEY, min_length=10)
+        return hashids.encode(self.id)
+
     def __str__(self):
         return self.name
 
