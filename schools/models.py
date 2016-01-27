@@ -56,7 +56,7 @@ class SchoolProfile(models.Model):
 
     # Pictures
     # - School.photo
-    
+
     # School Data
     # - School.type
     # - School.level
@@ -69,7 +69,7 @@ class SchoolProfile(models.Model):
     total_enrollment = models.IntegerField(null=True)
     breakfast_served = models.NullBooleanField()
     lunch_served = models.NullBooleanField()
-    
+
     # About
     # - School.mission_statement
     points_of_pride = models.TextField(null=True, blank=True)
@@ -83,7 +83,7 @@ class SchoolProfile(models.Model):
 
     # Extracurriculars
     extracurriculars = models.TextField(null=True)
-    
+
     # Course Offerings
     courses_offered = models.TextField(null=True)
     special_education = models.TextField(null=True)
@@ -95,10 +95,15 @@ class SchoolProfile(models.Model):
 
     # Parent Involvement
     parental_involvement = models.TextField(null=True)
-    
+
     def url(self):
         hashids = Hashids(salt=settings.SECRET_KEY, min_length=10)
         return hashids.encode(self.id)
+
+    @classmethod
+    def decode_url(self, url):
+        hashids = Hashids(salt=settings.SECRET_KEY, min_length=10)
+        return hashids.decode(url)[0]
 
     def __str__(self):
         return self.name
