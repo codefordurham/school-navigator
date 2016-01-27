@@ -85,7 +85,7 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
             var mocked_school = {
                 name: 'Sample School Elementary',
                 school_type: 'Magnet School',
-                grades: 'PK - 5',
+                grades: 'PK-5',
                 enrollment: '346 students',
                 theme: 'Language focus',
 
@@ -99,8 +99,10 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
 
                 address: '1000 North Duke St.',
                 phone_number: '919-705-555',
-                website: 'www.sampleschooleleementary.org',
-                calendar_year: 'Regular Calendar',
+                website: 'sampleschooleleementary.org',
+                year_opened: 1980,
+                avg_class_size: 23,
+                calendar_year: 'Regular',
                 school_day: '8:00am - 3:30pm',
                 uniform_required: 'No',
 
@@ -120,40 +122,55 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
                     'The school leadership consistently supports teachers': [81, 66],
                     'Teachers are allowed to focus on educating students with minimal interruptions': [75, 54]
                 },
+                survey: {
+                  percent: 100,
+                  year: "2014-15",
+                  name: "North Carolina Teacher Conditions Survey",
+                  link: "http://ncteachers.org/survey/404/results.html"
+                },
                 admission_policy: {
-                    policy_type: "This school gaurantees admission for children who live in the walk zone.  The remaining spots are filled through an open lottery.",
+                    policy_type: "This school guarantees admission for children who live in the walk zone.  The remaining spots are filled through an open lottery.",
                     lottery_priorities: [
-                        "Siblings of enrolled students",
-                        "Children of staff"
+                      { name: "Walk zone",
+                        desc: "(guaranteed admission)"},
+                        { name: "Siblings of enrolled students"},
+                        { name: "Children of staff"},
+                        { name: "General applicant pool"}
                     ],
                     lottery_deadline: "February 1st ",
                     lottery_acceptance_rate: "38% of students who applied to the lottery in 2014-15 were accepted.",
                     learn_more: "LEARN MORE BUTTON"
                 },
-                targeted_academics: {
-                    special_education: "We have a special education teacher and instrucional aide for each grade who provide push-in and pull-out services.  We also provide robust interventions for students who need extra support but do not have an IEP",
-                    gifted_students: "Students identified as intellectually gifted receives services through the APEX Program.",
-                    ell: "One bilingual teacher in each grade provides an hour of language training each day to our students identified as ELL.  In addition all school resources are available in Spanish and English."
-
-                },
-                other_programs: {
-                    foreign_language: 'We have a spanish immersion program open to all students who enter in kindergarten that continues through 5th grade.',
-                    math_science: 'STEM club, Abacus Math club',
-                    arts: 'elective classes for band, choir, fine arts, drama',
-                    sports: 'basketball, soccer, baseball for 4th and 5th graders',
-                    other: 'chess after-school club'
-                },
+                targeted_academics: [
+                  { name: 'English Language Learner',
+                    desc: "One bilingual teacher in each grade provides an hour of language training each day to our students identified as ELL.  In addition all school resources are available in Spanish and English."},
+                  { name: 'Gifted Students',
+                    desc: "Students identified as intellectually gifted receives services through the APEX Program."},
+                  { name: 'Special Education',
+                    desc: "We have a special education teacher and instrucional aide for each grade who provide push-in and pull-out services.  We also provide robust interventions for students who need extra support but do not have an IEP"}
+                ],
+                other_programs: [
+                  { name: 'Math Science',
+                    desc: 'STEM club, Abacus Math club'},
+                  { name: 'Arts',
+                    desc: 'drama club'},
+                  { name: 'Sports',
+                    desc: 'basketball, soccer, baseball for 4th and 5th graders'},
+                  { name: 'Other',
+                    desc: 'chess after-school club'}
+                ],
                 parent_involvement: {
                     pta: true,
-                    learn_more: 'www.sampleschoolelementary.org/pta'
+                    learn_more: 'http://www.sampleschoolelementary.org/pta'
                 },
                 reflections: [
                     {
                         reflection: "I have two kids at SSE and have been very satisfied with their experience.  The teachers are committed to students' learning and both have become fluent in spanish as a result of their enrollment.  My only complaint is that I wish there were more extracurricular offerings.",
                         who: "Parent of 3rd grader (1/12/15)"
                     }
-                ]
-
+                ],
+                reflection_link: "http://durhamschoolnavigator.com/reflections/404",
+                report_card_link: "http://ncschoolreportcard.com/school/404"
             };
             angular.extend($scope, {
               defaults: {

@@ -8,7 +8,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <p class="lead">{{ school.school_type }} - {{ school.grades }} - {{ school.enrollment }}</p>
+            <p class="lead">{{ school.school_type }} &mdash; Grades {{ school.grades }} &mdash; {{ school.enrollment }}</p>
         </div>
     </div>
 
@@ -19,12 +19,17 @@
                 <div class="">
                 {{ school.mission_statement }}
                 </div>
-                <h2>Points of pride</h2>
+                <h2>Points of Pride</h2>
                 <div class="">
                     <ol>
                         <li data-ng-repeat="point in school.points_of_pride">{{ point }}</li>
                     </ol>
                 </div>
+          <h2>School Services</h2>
+          <p>This school provides the following services to students:</p>
+            <p><strong>Transportation: </strong> <span data-ng-show="school.services.transportation_provided" title="Breakfast provided">Yes</span></p>
+            <p><strong>Lunch: </strong><span data-ng-show="school.services.lunch_provided" title="Lunch provided">Yes</span></p>
+            <p><strong>Breakfast: </strong><span data-ng-show="school.services.breakfast_provided" title="Breakfast provided">Yes</span></p>
             </div>
         </div>
 
@@ -34,17 +39,22 @@
     </div>
 
     <div class="row at-a-glance">
+        <div class="col-md-12">
+          <h2>At a Glance</h2>
+        </div>
         <div class="col-md-6">
             <p><strong>Address: </strong> {{ school.address }}</p>
             <p><strong>Phone Number: </strong> {{ school.phone_number }}</p>
-            <p><strong>Website: </strong> {{ school.website }}</p>
-            <p><strong>Transportation Provided: </strong> <span data-ng-show="school.services.transportation_provided" title="Breakfast provided">Yes</span></p>
+            <p><strong>Website: </strong> <a href="http://{{ school.website }}">{{ school.website }}</a></p>
+            <p><strong>Year Opened: </strong> {{ school.year_opened }}</p>
+            <p><strong>Calendar: </strong> {{ school.calendar_year }}</p>
         </div>
         <div class="col-md-6">
-
-            <p><strong>School Hours: </strong> {{ school.school_hours }}</p>
+            <p><strong>Theme: </strong> {{ school.theme }}</p>
+            <p><strong>Average Class Size: </strong> {{ school.avg_class_size }} students</p>
+            <p><strong>Uniform: </strong> {{ school.uniform_required }}</p>
+            <p><strong>School Day: </strong> {{ school.school_hours }}</p>
             <p><strong>Extended Care Hours: </strong>{{ school.services.extended_care_hours }}</p>
-            <p><strong>Breakfast Provided: </strong><span data-ng-show="school.services.breakfast_provided" title="Breakfast provided">Yes</span></p>
         </div>
     </div>
 
@@ -54,7 +64,7 @@
 
             <div class="bio">
                 <h3>{{ school.school_leadership.name }}</h3>
-                <p class="lead" title="Year of service">{{ school.school_leadership.years_of_service }}</p>
+                <p class="lead" title="Year of service">(since {{ school.school_leadership.years_of_service }})</p>
                 <div class="">
                     {{ school.school_leadership.bio }}
                 </div>
@@ -62,7 +72,7 @@
 
         </div>
         <div class="col-md-6">
-            <h2>Teacher info</h2>
+            <h2>Teacher Satisfaction</h2>
             <p>The following percentage of teachers responded that they "agree" or "strongly agree" to the following statements</p>
             <div class="metrics">
                 <div class="metric" data-ng-repeat="(question, percentage) in school.teacher_satisfaction">
@@ -74,15 +84,19 @@
                     </div>
                 </div>
             </div>
+            <p><small>{{ school.survey.percent }}% of {{ school.name }}'s teachers answered these questions and more in the <a href="{{ school.survey.link }}">{{ school.survey.year }} {{ school.survey.name }}</a></small>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-6">
             <h2>Admission Policy</h2>
-
             <div class="">
-                <p><strong>Lottery Zones</strong></p>
+              <p>{{ school.admission_policy.policy_type }}</p>
+              <p><strong>Lottery Priorities</strong>:</p>
+              <ol>
+                <li data-ng-repeat="priority in school.admission_policy.lottery_priorities">{{ priority.name }} {{ priority.desc }}</li>
+              </ol>
                 <p><strong>Acceptance rate</strong></p>
                 <p>{{ school.admission_policy.lottery_acceptance_rate }}</p>
                 <p><strong>Deadline</strong></p>
@@ -91,10 +105,10 @@
 
         </div>
         <div class="col-md-6">
-            <h2>Extracurriculars</h2>
+            <h2>Targeted Academic Offerings</h2>
             <div class="">
                 <ul>
-                    <li data-ng-repeat="(name, description) in school.other_programs"><strong class="title-case">{{ name }}: </strong> {{ description }}</li>
+                  <li data-ng-repeat="offering in school.targeted_academics"><strong class="title-case">{{ offering.name }}</strong>: {{ offering.desc }}</li>
                 </ul>
             </div>
         </div>
@@ -114,21 +128,28 @@
 
         </div>
         <div class="col-md-6">
-            <h2>Academic Offerings</h2>
-            <div class="">
-                <ul>
-                    <li data-ng-repeat="(name, description) in school.targeted_academics"><strong class="title-case">{{ name }}: </strong> {{ description }}</li>
-                </ul>
-            </div>
+            <h2>Other Academic & Extracurricular Offerings</h2>
+            <ul>
+              <li data-ng-repeat="offering in school.other_programs"><strong class="title-case">{{ offering.name }}</strong>: {{ offering.desc }}</li>
+            </ul>
         </div>
     </div>
 
     <div class="row map-row">
         <div class="col-md-6">
-            <reflexions></reflexions>
+            <h2>Reflections</h2>
+            <p><a href="{{ school.reflection_link }}">Are you a parent or teacher at this school? Click here to share your own reflection.</a></p>
+
+            <p data-ng-repeat="entry in school.reflections">{{ entry.reflection }}<br/>
+            <i>{{ entry.who }}</i></p>
         </div>
         <div class="col-md-6">
             <leaflet class="content-row" id="leaflet-map" defaults="defaults" center="center" markers="markers" tiles="tiles" school="school" height=250 width=550></leaflet>
+        </div>
+    </div>
+    <div class="row map-row">
+        <div class="col-md-6">
+            <p><a href="{{ school.report_card_link }}">To view the state report card for this school, click here.</a></p>
         </div>
     </div>
 </div>
