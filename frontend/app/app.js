@@ -306,6 +306,10 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
               });
               $scope.geojson.data = [];
             },
+            focus: function(school) {
+              $scope.durham.lat = school.lat || school.location.coordinates[1];
+              $scope.durham.lng = school.lng || school.location.coordinates[0];
+            },
             prevDistricts: [],
             districts: [],
             switchTab: function (eligibility) {
@@ -413,6 +417,9 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
           });
           $scope.$on("leafletDirectiveMarker.mouseout", function(event, args) {
             $scope.clear_highlight();
+          });
+          $scope.$on("leafletDirectiveMarker.click", function(event, args) {
+            $scope.focus(args.model);
           });
         }]);
 
