@@ -219,15 +219,9 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
               zoomControlPosition: 'bottomright'
             },
             eligibility: "assigned",
-            selectSchool: function (school) {
-                angular.forEach($scope.all_schools, function(obj) {
-                  obj.selected = (obj.id === school.id) || "hide";
-                });
-            },
-            deselectSchools: function() {
-              angular.forEach($scope.schools, function(school) {
-                school.selected = false;
-              })
+            toggleSelectSchool: function (school) {
+              var selFunction = school.selected ? function(scl) { scl.selected = false; } : function(scl) { scl.selected = (scl.id === school.id) || "hide"; };
+              angular.forEach($scope.all_schools, selFunction);
             },
             maxHeight: function () {
                 return $(window).height() - 220 + 'px';
