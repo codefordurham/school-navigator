@@ -36,11 +36,7 @@
                                 <p class="school-group-item-text">
                                     Grades {{ school.grade_min | gradeString }}-{{ school.grade_max | gradeString}} &mdash; {{ school.address }}
                                 </p>
-                                <img class="photo" data-ng-src="{{ school.photo_url }}">
-                                <p>Website: <a href="{{ school.website_url }}" target="_blank">{{ school.website_url }}</a></p>
-                                <p class='description'>
-                                    {{ school.mission_statement }}
-                                </p>
+                                <p><a class="btn btn-default" ng-href="#/school/{{ school.id }}" target="_blank">Profile page for {{ school.name }}</a></p>
                             </div>
                         </div>
                         <div class="school-group-separator" data-ng-hide="school.selected == 'hide'"></div>
