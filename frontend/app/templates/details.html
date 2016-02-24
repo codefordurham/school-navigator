@@ -101,6 +101,8 @@
                 <p>{{ school.admission_policy.lottery_acceptance_rate }}</p>
                 <p><strong>Deadline</strong></p>
                 <p>{{ school.admission_policy.lottery_deadline }}</p>
+                <p><strong>Applying</strong></p>
+                <a class="btn btn-success" href="{{ school.admission_policy.learn_more }}">Learn more</a>
             </div>
 
         </div>
@@ -123,12 +125,12 @@
                     <span data-ng-if="school.parent_involvement.pta">Yes</span>
                     <span data-ng-hide="school.parent_involvement.pta">No</span>
                 </p>
-                <p data-ng-if="school.parent_involvement.learn_more"><a href="{{ school.parent_involvement.learn_more }}">{{ school.parent_involvement.learn_more }}</a></p>
+                <p data-ng-if="school.parent_involvement.learn_more"><a href="{{ school.parent_involvement.learn_more }}">Learn more about this school's PTA</a></p>
             </div>
 
         </div>
         <div class="col-md-6">
-            <h2>Other Academic & Extracurricular Offerings</h2>
+            <h2>Extracurricular Offerings</h2>
             <ul>
               <li data-ng-repeat="offering in school.other_programs"><strong class="title-case">{{ offering.name }}</strong>: {{ offering.desc }}</li>
             </ul>

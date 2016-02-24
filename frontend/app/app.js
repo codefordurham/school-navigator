@@ -139,7 +139,7 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
                     ],
                     lottery_deadline: "February 1st ",
                     lottery_acceptance_rate: "38% of students who applied to the lottery in 2014-15 were accepted.",
-                    learn_more: "LEARN MORE BUTTON"
+                    learn_more: "http://dpsncapplication.com/site.php"
                 },
                 targeted_academics: [
                   { name: 'English Language Learner',
@@ -424,6 +424,21 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
         }]);
 
 angular.module('SchoolsApp.directives', [])
+    .directive( 'goClick', function ( $location ) {
+      return function ( scope, element, attrs ) {
+        var path;
+
+        attrs.$observe( 'goClick', function (val) {
+          path = val;
+        });
+
+        element.bind( 'click', function () {
+          scope.$apply( function () {
+            $location.path( path );
+          });
+        });
+      };
+    })
     .directive('simpleNav', [function() {
         return {
             restrict: 'AE',
