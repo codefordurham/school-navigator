@@ -1,11 +1,27 @@
 from django.contrib.gis.geos import Point
 from django.db.models import Q
 
-from rest_framework import generics
+from rest_framework import generics, serializers
 from rest_framework.exceptions import ParseError
 
 from schools.serializers import SchoolDetailSerializer, SchoolListSerializer
 from schools import models as schools_models
+
+class SchoolProfileDetail(generics.RetrieveAPIView):
+    model = schools_models.SchoolProfile
+
+    def get_object(self):
+        try:
+            hashid = self.kwargs['pk']
+            pk = schools_models.SchoolProfile.decode_url(hashid)
+        except:
+            raise ParseError("Bad survey reference")
+        try:
+            queryset = schools_models.SchoolProfile.objects.get(pk=pk)
+        except:
+            raise ParseError("Could not find survey")
+        return queryset
+
 
 class SchoolDetail(generics.RetrieveAPIView):
     model = schools_models.School

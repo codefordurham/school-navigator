@@ -103,12 +103,15 @@ class SchoolProfile(models.Model):
     @classmethod
     def decode_url(self, url):
         hashids = Hashids(salt=settings.SECRET_KEY, min_length=10)
-        return hashids.decode(url)[0]
+        decoded = hashids.decode(url)
+        if not decoded:
+            raise Exception("Could not decode hashid to pk")
+        return decoded[0]
 
     def __str__(self):
-        return self.name
+        return self.school.name + '-' + self.url()
 
-    
+
 class Reflexions(models.Model):
     content = models.TextField(blank=True)
     school = models.ForeignKey(School)
