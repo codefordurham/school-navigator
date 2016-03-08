@@ -17,13 +17,22 @@ class SchoolListSerializer(geo_serializers.GeoModelSerializer):
     short_name = serializers.SerializerMethodField('get_short_name')
     distance = serializers.SerializerMethodField('get_distance')
     preference_type = serializers.SerializerMethodField('get_preference_type')
+    survey_hash = serializers.SerializerMethodField('get_survey_hash')
 
     class Meta:
         model = schools_models.School
         fields = ('id', 'name', 'level', 'address', 'type', 'eligibility',
                   'location', 'preference', 'short_name', 'distance',
                   'year_round', 'grade_min', 'grade_max', 'website_url',
-                  'active', 'mission_statement', 'preference_type')
+                  'active', 'mission_statement', 'preference_type',
+                  'survey_hash')
+
+    def get_survey_hash(self, obj):
+        survey = obj.schoolprofile_set.order_by('submitted_at').last()
+        if survey:
+            return survey.url()
+        else:
+            return ''
 
     def get_eligibility(self, obj):
         pt = self.context['point']
