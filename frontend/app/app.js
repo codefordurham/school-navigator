@@ -288,17 +288,22 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
               $scope.schools.forEach(function(school) {
                 school.hover = (school.id === schoolId);
               });
+              var legend = { position: 'topright', colors: [], labels: [] };
               $scope.districts.forEach(function(district) {
-                if(district.id === schoolId) {
+                if(district.id === schoolId && district.geometry !== null) {
                   $scope.geojson.data.push(district);
+                  legend.colors.push($scope.zoneTypes[district.properties.zoneType].color);
+                  legend.labels.push($scope.zoneTypes[district.properties.zoneType].label);
                 }
               });
+              $scope.legend = legend.colors.length ? legend : null;
             },
             clear_highlight: function() {
               $scope.schools.forEach(function(school) {
                 school.hover = false;
               });
               $scope.geojson.data = [];
+              $scope.legend = null;
             },
             focus: function(school) {
               $scope.durham.lat = school.lat || school.location.coordinates[1];
@@ -309,7 +314,7 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
             switchTab: function (eligibility) {
               $scope.eligibility = eligibility;
               loadMarkers($scope.all_schools);
-              $scope.deselectSchools();
+              $scope.toggleSelectSchool({selected: true});
             },
             levelStyles: {
               'elementary': '#48BC6B',
@@ -319,24 +324,20 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
             },
             levels: ['elementary', 'secondary', 'middle', 'high'],
             zoneTypes: {
-              'district': 'black',
-              'traditional_option_zone': 'purple',
-              'year_round_zone': 'blue',
-              'priority_zone': 'red',
-              'choice_zone': 'yellow',
-              'walk_zone': 'green'
+              'district': { color: 'black', label: 'Neighborhood' },
+              'traditional_option_zone': { color: 'purple', label: 'Traditional Option'},
+              'year_round_zone': { color: 'blue', label: 'Year Round'},
+              'priority_zone': { color: 'red', label: 'Priority'},
+              'choice_zone': { color: 'yellow', label: 'Choice'},
+              'walk_zone': { color: 'green', label: 'Walk'}
             },
-            legend: {
-              position: 'topright',
-              colors: [ 'black', 'purple', 'blue', 'red', 'yellow', 'green' ],
-              labels: [ 'Neighborhood', 'Traditional Option', 'Year Round', 'Priority', 'Choice', 'Walk' ]
-            },
+            legend: null,
             geojson: {
               data: [],
               style: function(feature) {
                 return {
                   fillColor: $scope.levelStyles[feature.properties.level],
-                  color: $scope.zoneTypes[feature.properties.zoneType]
+                  color: $scope.zoneTypes[feature.properties.zoneType].color
                 };
               },
             }
@@ -402,17 +403,17 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
                 });
               }, $scope.districts);
           }
-          $scope.$on("leafletDirectiveMarker.dragend", function(event, args) {
+          $scope.$on("leafletDirectiveMarker.leaflet-map.dragend", function(event, args) {
             moveLoc(args.model.lat, args.model.lng);
             $scope.address = '';
           });
-          $scope.$on("leafletDirectiveMarker.mouseover", function(event, args) {
+          $scope.$on("leafletDirectiveMarker.leaflet-map.mouseover", function(event, args) {
             $scope.highlight_school(args.model.id);
           });
-          $scope.$on("leafletDirectiveMarker.mouseout", function(event, args) {
+          $scope.$on("leafletDirectiveMarker.leaflet-map.mouseout", function(event, args) {
             $scope.clear_highlight();
           });
-          $scope.$on("leafletDirectiveMarker.click", function(event, args) {
+          $scope.$on("leafletDirectiveMarker.leaflet-map.click", function(event, args) {
             $scope.focus(args.model);
           });
         }]);
