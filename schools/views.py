@@ -15,5 +15,5 @@ def survey_form(request, hash):
     if profile.submitted_at and \
             profile.submitted_at > datetime.datetime.now() + timedelta(days=1):
         raise Http404("Survey Already Completed")
-    form = schools_forms.SchoolProfileForm(instance=profile)
-    return render(request, 'survey_form.html', {'survey_form': form})
+    form = schools_forms.SchoolProfileForm()
+    return render(request, 'survey_form.html', {'form': form})
