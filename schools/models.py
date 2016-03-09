@@ -96,8 +96,8 @@ class SchoolProfile(models.Model):
     # Parent Involvement
     parental_involvement = models.TextField(null=True)
 
-    submitted_at = models.DateTimeField(null=True)
-    created_at = models.DateTimeField()
+    submitted_at = models.DateTimeField(null=True, auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def url(self):
         hashids = Hashids(salt=settings.SECRET_KEY, min_length=10)
