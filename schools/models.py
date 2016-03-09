@@ -96,7 +96,7 @@ class SchoolProfile(models.Model):
     # Parent Involvement
     parental_involvement = models.TextField(null=True)
 
-    submitted_at = models.DateTimeField()
+    submitted_at = models.DateTimeField(null=True)
     created_at = models.DateTimeField()
 
     def url(self):
