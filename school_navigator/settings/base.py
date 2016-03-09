@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'compressor',
     'leaflet',
     'rest_framework',
-    'widget_tweaks',
     'corsheaders',
     'regions',
     'schools',
