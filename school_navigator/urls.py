@@ -20,8 +20,10 @@ from django.contrib import admin
 
 from schools.urls import school_urls
 
+from schools.views import survey_form
 
 urlpatterns = [
     url(r'^api/schools/', include(school_urls)),
+    url(r'survey_form/(?P<hash>\w+)/$', survey_form, name='school-survey-form'),
     url(r'^admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
