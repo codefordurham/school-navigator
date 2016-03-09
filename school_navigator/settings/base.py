@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'regions',
     'schools',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE_CLASSES = [
