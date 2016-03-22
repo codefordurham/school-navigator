@@ -18,6 +18,11 @@ SCHOOL_TYPES = (
 )
 
 
+class SchoolManager(models.Manager):
+    def last(self):
+        return self.schoolprofile_set.order_by('-created_at').first()
+
+
 class School(models.Model):
     name = models.CharField(max_length=100, unique=True)
     short_name = models.CharField(max_length=5, blank=True)
@@ -47,6 +52,9 @@ class School(models.Model):
 
     # Override default manager for gis
     objects = models.GeoManager()
+
+    # school_profiles
+    profiles = SchoolManager()
 
     def __str__(self):
         return self.name
@@ -110,6 +118,10 @@ class SchoolProfile(models.Model):
         if not decoded:
             raise Exception("Could not decode hashid to pk")
         return decoded[0]
+
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('school-survey-form', kwargs={'hash': self.url()})
 
     def __str__(self):
         return self.school.name + '-' + self.url()
