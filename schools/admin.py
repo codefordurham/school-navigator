@@ -37,3 +37,4 @@ class SchoolAdmin(LeafletGeoAdmin):
     actions = [send_survey]
 
 admin.site.register(School, SchoolAdmin)
+admin.site.disable_action('delete_selected')
