@@ -52,57 +52,81 @@ class School(models.Model):
     def __str__(self):
         return self.name
 
+BREAKFAST = (
+    ('all', 'Breakfast is available for all students.'),
+    ('some', 'Breakfast is available for some students.'),
+    ('none', 'We do not provide breakfast for students'),
+)
+
+LUNCH = (
+    ('all', 'Lunch is available for all students.'),
+    ('some', 'Lunch is available for some students.'),
+    ('none', 'We do not provide lunch for students'),
+)
+
 class SchoolProfile(models.Model):
     school = models.ForeignKey('School')
 
-    website_url = models.CharField(max_length=500, blank=True) # move to SchoolProfile
-    mission_statement = models.TextField(null=True, blank=True) # move to SchoolProfile
-    school_hours = models.TextField(null=True, blank=True) # move to SchoolProfile
-    level = models.CharField(choices=SCHOOL_LEVELS, max_length=20) # move to SchoolProfile
-    year_round = models.BooleanField(default=False) # move to SchoolProfile
-    grade_min = models.IntegerField() # move to SchoolProfile
-    grade_max = models.IntegerField() # move to SchoolProfile
-
-    # Pictures
-    # - School.photo
-
-
-    # - School.level
-    # - School.grade_min
-    # - School.grade_max
+    level = models.CharField(choices=SCHOOL_LEVELS, max_length=20)
+    year_round = models.BooleanField(default=False)
+    school_hours = models.TextField(null=True, blank=True)
+    grade_min = models.IntegerField()
+    grade_max = models.IntegerField()
+    website_url = models.CharField(max_length=500, blank=True)
+    phone_number = models.TextField(null=True, blank=True) # validation??
+    year_opened = models.IntegerField(blank=True) # make sure it is 4 digits
     speciality_type = models.TextField(null=True, blank=True)
-    phone_number = models.TextField(null=True, blank=True)
-    # - School.website_url
-    # - School.school_hours
-    total_enrollment = models.IntegerField(null=True)
-    breakfast_served = models.NullBooleanField()
-    lunch_served = models.NullBooleanField()
-
+    theme = models.TextField(null=True, blank=True) # want to have choices and a free response
+                                                    # see cell F17 in sarah google docs
+    uniform_required = models.NullBooleanField()
+    mission_statement = models.TextField(null=True, blank=True)
+    
     # About
-    # - School.mission_statement
-    points_of_pride = models.TextField(null=True, blank=True)
+    points_of_pride1 = models.TextField(null=True, blank=True)
+    points_of_pride2 = models.TextField(null=True, blank=True)
+    points_of_pride3 = models.TextField(null=True, blank=True)
+    
+    # School Services
+    tranportation = models.TextField(null=True, blank=True) # want to have choices and a free response
+                                                            # see cell F23
+    tranportation_explanation(TextField, blank=True)
+    breakfast_served = models.CharField(choices=BREAKFAST)
+    breakfast_explanation = models.TextField(null=True, blank=True)
+    breakfast_free_and_reduced = models.NullBooleanField()
+    lunch_served = models.CharField(choices=LUNCH)
+    lunch_explanation = models.TextField(null=True, blank=True)
+    lunch_free_and_reduced = models.NullBooleanField()
+    extended_care_offered = models.NullBooleanField()
+    extended_care_cost = models.TextField(null=True, blank=True)
+    extended_care_fiancial_assistance = models.TextField()
+    before_care_hours = models.TextField(null=True, blank=True)
+    after_care_hours = models.TextField(null=True, blank=True)
 
     # Admissions Info
+    # FIXME
 
     # Leadership & Teacher Info
     principal_name = models.TextField(null=True, blank=True)
     principal_bio = models.TextField(null=True, blank=True)
     principal_start_year = models.IntegerField(null=True)
 
-    # Extracurriculars
-    extracurriculars = models.TextField(null=True)
+    # Targeted Academic Offerings
+    english_langaue_learner = models.TextField(null=True, blank=True)
+    special_education = models.TextField(null=True, blank=True)
+    gifted_education = models.TextField(null=True, blank=True)
+    # are there others? FIXME
 
-    # Course Offerings
-    courses_offered = models.TextField(null=True)
-    special_education = models.TextField(null=True)
-    gifted_education = models.TextField(null=True)
-
-    # Before & After Care
-    extended_care_start = models.TimeField(null=True)
-    extended_care_end = models.TimeField(null=True)
+    # Extracurricular
+    academic = models.TextField(null=True, blank=True)
+    arts = models.TextField(null=True, blank=True)
+    sports = models.TextField(null=True, blank=True)
+    service_leadership = models.TextField(null=True, blank=True)
+    other = models.TextField(null=True, blank=True)
 
     # Parent Involvement
-    parental_involvement = models.TextField(null=True)
+    pta = models.NullBooleanField()
+    pta_website = models.TextField(null=True, blank=True)
+    parental_involvement_notes = models.TextField(null=True, blank=True)
 
     submitted_at = models.DateTimeField(null=True, auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
