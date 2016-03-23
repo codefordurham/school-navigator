@@ -16,12 +16,13 @@ def send_survey(modeladmin, request, queryset):
         #to = [school.principal_email],
         from_email = settings.FROM_EMAIL
 
-        school_profile = SchoolProfile.objects.create(school=school)
+        school_profile = school.new_profile()
+        school_profile.save()
         school_profile_url = request.build_absolute_uri(school_profile.get_absolute_url())
 
         context = {
             'principal_name': 'principal_name',
-            'due_date': 'due_date',
+            'due_date': school_profile.due_date(),
             'school_profile_url': school_profile_url,
         }
         body = render_to_string('survey_email.txt', context)

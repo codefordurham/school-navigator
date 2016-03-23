@@ -1,7 +1,9 @@
 from django.contrib.gis.db import models
+from django.conf import settings
 
 from hashids import Hashids
-from django.conf import settings
+
+import datetime
 
 SCHOOL_LEVELS = (
     ('elementary', 'Elementary'),
@@ -16,11 +18,6 @@ SCHOOL_TYPES = (
     ('charter', 'Charter'),
     ('speciality', 'Specialty')
 )
-
-
-class SchoolManager(models.Manager):
-    def last(self):
-        return self.schoolprofile_set.order_by('-created_at').first()
 
 
 class School(models.Model):
@@ -43,11 +40,19 @@ class School(models.Model):
     year_round_zone = models.MultiPolygonField(null=True, blank=True)
     traditional_option_zone = models.MultiPolygonField(null=True, blank=True)
 
+    def new_profile(self):
+        profile = self.profile()
+        if profile:
+            profile.pk = None
+        else:
+            profile = SchoolProfile.objects.create(school=self)
+        return profile
+
+    def profile(self):
+        return self.schoolprofile_set.order_by('-created_at').first()
+
     # Override default manager for gis
     objects = models.GeoManager()
-
-    # school_profiles
-    profiles = SchoolManager()
 
     def __str__(self):
         return self.name
@@ -60,8 +65,8 @@ class SchoolProfile(models.Model):
     school_hours = models.TextField(null=True, blank=True) # move to SchoolProfile
     level = models.CharField(choices=SCHOOL_LEVELS, max_length=20) # move to SchoolProfile
     year_round = models.BooleanField(default=False) # move to SchoolProfile
-    grade_min = models.IntegerField() # move to SchoolProfile
-    grade_max = models.IntegerField() # move to SchoolProfile
+    grade_min = models.IntegerField(default=0) # move to SchoolProfile
+    grade_max = models.IntegerField(default=0) # move to SchoolProfile
 
     # Pictures
     # - School.photo
@@ -107,6 +112,9 @@ class SchoolProfile(models.Model):
     submitted_at = models.DateTimeField(null=True, auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def due_date(self):
+        return self.created_at + datetime.timedelta(30)
+
     def url(self):
         hashids = Hashids(salt=settings.SECRET_KEY, min_length=10)
         return hashids.encode(self.id)
@@ -124,7 +132,7 @@ class SchoolProfile(models.Model):
         return reverse('school-survey-form', kwargs={'hash': self.url()})
 
     def __str__(self):
-        return self.school.name + '-' + self.url()
+        return '{:s}'.format(self.school.name)
 
 
 class Reflexions(models.Model):

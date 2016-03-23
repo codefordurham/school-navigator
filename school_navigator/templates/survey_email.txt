@@ -4,7 +4,5 @@ Your school survey submission is due on {{ due_date }}.
 
 {{ school_profile_url }}
 
-Once you fill out the survey, you have 24 hours to correct any mistakes before your answers are locked in.
-
 Thanks!
 School Navigator Team
