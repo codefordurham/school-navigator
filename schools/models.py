@@ -28,17 +28,10 @@ class School(models.Model):
     short_name = models.CharField(max_length=5, blank=True)
     address = models.CharField(max_length=100, blank=True)
     zip_code = models.CharField(max_length=5, blank=True)
-    website_url = models.CharField(max_length=500, blank=True)
-    mission_statement = models.TextField(null=True, blank=True)
-    school_hours = models.TextField(null=True, blank=True)
-    photo = models.ImageField(null=True, blank=True)
     active = models.BooleanField(default=False)
+    photo = models.ImageField(null=True, blank=True)
 
-    level = models.CharField(choices=SCHOOL_LEVELS, max_length=20)
     type = models.CharField(choices=SCHOOL_TYPES, max_length=20)
-    year_round = models.BooleanField(default=False)
-    grade_min = models.IntegerField()
-    grade_max = models.IntegerField()
 
     location = models.PointField()
     district = models.MultiPolygonField(null=True, blank=True)
@@ -62,11 +55,18 @@ class School(models.Model):
 class SchoolProfile(models.Model):
     school = models.ForeignKey('School')
 
+    website_url = models.CharField(max_length=500, blank=True) # move to SchoolProfile
+    mission_statement = models.TextField(null=True, blank=True) # move to SchoolProfile
+    school_hours = models.TextField(null=True, blank=True) # move to SchoolProfile
+    level = models.CharField(choices=SCHOOL_LEVELS, max_length=20) # move to SchoolProfile
+    year_round = models.BooleanField(default=False) # move to SchoolProfile
+    grade_min = models.IntegerField() # move to SchoolProfile
+    grade_max = models.IntegerField() # move to SchoolProfile
+
     # Pictures
     # - School.photo
 
-    # School Data
-    # - School.type
+
     # - School.level
     # - School.grade_min
     # - School.grade_max
