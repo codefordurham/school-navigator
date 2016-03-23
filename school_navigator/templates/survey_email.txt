@@ -1,0 +1,8 @@
+{{ principal_name }},
+
+Your school survey submission is due on {{ due_date }}.
+
+{{ school_profile_url }}
+
+Thanks!
+School Navigator Team
