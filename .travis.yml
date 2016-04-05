@@ -32,5 +32,4 @@ script:
   # - flake8 .
 
 notifications:
-  email:
-    - school-inspector@googlegroups.com
+  slack: 'cfnc:BWgMyJlZQqASDbzDd9pOpC7A#schoolnavigator'
