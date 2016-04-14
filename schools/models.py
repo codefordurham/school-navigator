@@ -69,6 +69,20 @@ LUNCH = (
     ('none', 'We do not provide lunch for students'),
 )
 
+TRANSPORTATION = (
+    ('all', 'Transportation is available for all students.'),
+    ('some', 'Transportation is available for some students.'),
+    ('none', 'We do not provide transportation for students.'),
+)
+
+LOTTERY = (
+    ('a', 'Walk zone (guaranteed admission)'),
+    ('b', 'Siblings of enrolled students'),
+    ('c', 'Children of staff'),
+    ('d', 'General applicant pool'),
+    # FIXME: list the others 
+)   
+
 class SchoolProfile(models.Model):
     school = models.ForeignKey('School')
 
@@ -77,12 +91,18 @@ class SchoolProfile(models.Model):
     school_hours = models.TextField(null=True, blank=True)
     grade_min = models.IntegerField()
     grade_max = models.IntegerField()
-    website_url = models.CharField(max_length=500, blank=True)
-    phone_number = models.TextField(null=True, blank=True) # validation??
-    year_opened = models.IntegerField(blank=True) # make sure it is 4 digits
+    website_url = models.CharField(max_length=500, blank=True, null=True)
+    phone_number = models.TextField(null=True, blank=True,
+            help_text='Please enter phone number in the format (919) XXX-XXXX.')
+    year_opened = models.IntegerField(null=True, 
+            help_text='Please use 4 digit years')
     speciality_type = models.TextField(null=True, blank=True)
-    theme = models.TextField(null=True, blank=True) # want to have choices and a free response
-                                                    # see cell F17 in sarah google docs
+    theme = models.TextField(null=True, blank=True,
+            help_text='Please Enter: '
+            'STEM (Science, Technology, Engineering, Math), '
+            'Arts, Language, Humanities, College Ready, '
+            'Montessori, Project-Based, Vocational Training, '
+            'or write in answer')
     uniform_required = models.NullBooleanField()
     mission_statement = models.TextField(null=True, blank=True)
     
@@ -92,34 +112,37 @@ class SchoolProfile(models.Model):
     points_of_pride3 = models.TextField(null=True, blank=True)
     
     # School Services
-    tranportation = models.TextField(null=True, blank=True) # want to have choices and a free response
-                                                            # see cell F23
-    tranportation_explanation = models.TextField(null=True, blank=True)
-    breakfast_served = models.CharField(max_length=4, choices=BREAKFAST)
+    transportation = models.CharField(choices=TRANSPORTATION, max_length=4, blank=True)
+    tranportation_explanation = models.TextField(null=True, blank=True,
+            help_text='If you provide transportation, please describe how it is provided and for whom (I.E. one pick-up per neighborhood hub, city bus tickets provided to students)')
+    breakfast_served = models.CharField(max_length=4, choices=BREAKFAST, blank=True, null=True)
     breakfast_explanation = models.TextField(null=True, blank=True)
     breakfast_free_and_reduced = models.NullBooleanField()
-    lunch_served = models.CharField(max_length=4, choices=LUNCH)
+    lunch_served = models.CharField(max_length=4, choices=LUNCH, blank=True, null=True)
     lunch_explanation = models.TextField(null=True, blank=True)
     lunch_free_and_reduced = models.NullBooleanField()
     extended_care_offered = models.NullBooleanField()
     extended_care_cost = models.TextField(null=True, blank=True)
-    extended_care_fiancial_assistance = models.TextField()
+    extended_care_fiancial_assistance = models.TextField(null=True, blank=True)
     before_care_hours = models.TextField(null=True, blank=True)
     after_care_hours = models.TextField(null=True, blank=True)
 
     # Admissions Info
-    admissions_policy_type = models.TextField(null=True, blank=True)  # Develop statements for neighborhood zone, YR zone, pure lottery, etc. 
-                                                                      # FK ???
-                                                                      # FIXME
-    # lottery_priorities  FIXME
-    lottery_deadline = models.DateTimeField(null=True)
+    admissions_policy_type = models.TextField(null=True, blank=True,
+            help_text= 'Develop statements for neighborhood zone, YR zone, pure lottery, etc.')  #FIXME
+    lottery_priority_1 = models.CharField(choices=LOTTERY, max_length=20, blank=True)
+    lottery_priority_2 = models.CharField(choices=LOTTERY, max_length=20, blank=True)
+    lottery_priority_3 = models.CharField(choices=LOTTERY, max_length=20, blank=True)
+    lottery_priority_4 = models.CharField(choices=LOTTERY, max_length=20, blank=True)
+    lottery_priority_5 = models.CharField(choices=LOTTERY, max_length=20, blank=True)
+    lottery_deadline = models.DateTimeField(null=True, blank=True)
     # lottery_acceptance_rate  FIXME
     learn_more_link = models.TextField(null=True, blank=True)
 
     # Leadership & Teacher Info
     principal_name = models.TextField(null=True, blank=True)
     principal_bio = models.TextField(null=True, blank=True)
-    principal_start_year = models.IntegerField(null=True)
+    principal_start_year = models.IntegerField(null=True, blank=True)
 
     # Targeted Academic Offerings
     english_langaue_learner = models.TextField(null=True, blank=True)

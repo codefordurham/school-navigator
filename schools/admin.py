@@ -38,3 +38,4 @@ class SchoolAdmin(LeafletGeoAdmin):
 
 admin.site.register(School, SchoolAdmin)
 admin.site.disable_action('delete_selected')
+admin.site.register(SchoolProfile)
