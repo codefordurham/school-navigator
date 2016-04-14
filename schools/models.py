@@ -108,7 +108,13 @@ class SchoolProfile(models.Model):
     after_care_hours = models.TextField(null=True, blank=True)
 
     # Admissions Info
-    # FIXME
+    admissions_policy_type = models.TextField(null=True, blank=True)  # Develop statements for neighborhood zone, YR zone, pure lottery, etc. 
+                                                                      # FK ???
+                                                                      # FIXME
+    # lottery_priorities  FIXME
+    lottery_deadline = models.DateTimeField(null=True)
+    # lottery_acceptance_rate  FIXME
+    learn_more_link = models.TextField(null=True, blank=True)
 
     # Leadership & Teacher Info
     principal_name = models.TextField(null=True, blank=True)
