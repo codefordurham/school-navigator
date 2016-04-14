@@ -94,11 +94,11 @@ class SchoolProfile(models.Model):
     # School Services
     tranportation = models.TextField(null=True, blank=True) # want to have choices and a free response
                                                             # see cell F23
-    tranportation_explanation(TextField, blank=True)
-    breakfast_served = models.CharField(choices=BREAKFAST)
+    tranportation_explanation = models.TextField(null=True, blank=True)
+    breakfast_served = models.CharField(max_length=4, choices=BREAKFAST)
     breakfast_explanation = models.TextField(null=True, blank=True)
     breakfast_free_and_reduced = models.NullBooleanField()
-    lunch_served = models.CharField(choices=LUNCH)
+    lunch_served = models.CharField(max_length=4, choices=LUNCH)
     lunch_explanation = models.TextField(null=True, blank=True)
     lunch_free_and_reduced = models.NullBooleanField()
     extended_care_offered = models.NullBooleanField()
