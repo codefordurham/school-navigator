@@ -12,6 +12,8 @@ from .models import School, SchoolProfile
 def send_survey(modeladmin, request, queryset):
     for school in queryset:
         subject = 'Durham School Navigator Survey: {:s}'.format(school.name)
+        if school.principal_email is None:
+            school.principal_email = ''
         to = [school.principal_email]
         from_email = settings.FROM_EMAIL
 
@@ -41,5 +43,4 @@ admin.site.disable_action('delete_selected')
 class SchoolProfileAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'due_date', 'created_at', 'submitted_at')
     ordering = ('created_at', )
-    filter = ('submitted_at', )
 admin.site.register(SchoolProfile, SchoolProfileAdmin)
