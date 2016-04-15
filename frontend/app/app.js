@@ -69,6 +69,11 @@ angular.module('SchoolsApp.services', [])
           return $http({ method: 'GET', url: url });
         };
 
+        this.get_profile = function(hash) {
+            url = endpoint + '/api/schools/survey/' + hash + '/';
+            return $http({ method: 'GET', url: url });
+        };
+
         this.get_reflexions = function(id) {
             url = endpoint + '/api/schools/reflexions/' + id + '/';
             return $http({ method: 'GET', url: url });
@@ -97,6 +102,11 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
               markers: { }
             });
             Schools.get($params.school).success(function(school) {
+                Schools.get_profile(school.survey_hash).success(function(profile) {
+                    profile.id = school.id
+                    angular.extend(school, profile);
+                    console.log(profile);
+                });
                 $scope.school = school;
                 $scope.center.lat = school.location.coordinates[1];
                 $scope.center.lng = school.location.coordinates[0];

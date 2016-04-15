@@ -126,9 +126,17 @@ class SchoolListSerializer(geo_serializers.GeoModelSerializer):
 
 class SchoolDetailSerializer(geo_serializers.GeoModelSerializer):
     color = serializers.SerializerMethodField('get_color')
+    survey_hash = serializers.SerializerMethodField('get_survey_hash')
 
     class Meta:
         model = schools_models.School
 
     def get_color(self, obj):
         return COLOR_MAP.get(obj.profile().level, 'purple')
+
+    def get_survey_hash(self, obj):
+        survey = obj.schoolprofile_set.order_by('submitted_at').last()
+        if survey:
+            return survey.url()
+        else:
+            return ''
