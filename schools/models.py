@@ -27,6 +27,7 @@ class School(models.Model):
     zip_code = models.CharField(max_length=5, blank=True)
     active = models.BooleanField(default=False)
     photo = models.ImageField(null=True, blank=True)
+    principal_email = models.CharField(max_length=100, null=True, blank=True)
 
     type = models.CharField(choices=SCHOOL_TYPES, max_length=20)
 
