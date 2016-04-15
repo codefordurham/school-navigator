@@ -15,7 +15,7 @@
     <div id="schools-wrapper" data-ng-show="all_schools.length">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs nav-justified" role="tablist">
-          <li data-ng-class="{active: eligibility == 'assigned'}"><a data-ng-click="switchTab('assigned');" title="You are automatically assigned to your neighborhood schools regardless of the lottery. This includes walk and assigned attendance zones." data-toggle="tooltip" data-placement="top" tooltip>Neighborhood</a></li>
+          <li data-ng-class="{active: eligibility == 'assigned'}"><a data-ng-click="switchTab('assigned');" title="You are automatically assigned to your neighborhood schools regardless of the lottery. This includes walk and assigned attendance zones." data-toggle="tooltip" data-placement="top" tooltip>Assigned</a></li>
           <li data-ng-class="{active: eligibility == 'magnet'}"><a data-ng-click="switchTab('magnet'); deselectSchools();" title="You are eligible to apply to all magnets in this list. You have a better chance in the lottery for priority and choice zones." data-placement="top" tooltip>Magnets</a></li>
           <li data-ng-class="{active: eligibility == 'charter'}"><a data-ng-click="switchTab('charter'); deselectSchools();" title="You are eligible to apply to all charters in Durham." data-placement="top" tooltip>Charters</a></li>
         </ul>
@@ -24,20 +24,19 @@
                 <div class="schoolLevelWrapper" data-ng-show="(schools | filter:{'level': level}).length">
                     <h3 class="{{ level }}">{{ level }}</h3>
                     <div data-ng-repeat="school in schools | filter:{'level': level} | orderBy:['preference', 'distance']:true" class="school-group-item item-{{ school.id }}" data-ng-mouseenter="highlight_school(school.id);" data-ng-mouseleave="clear_highlight();" ng-class="{hover: school.hover, 'last':$last, detail: school.selected == true}" >
-                        <div class="row-content" data-ng-hide="school.selected == 'hide'" data-ng-click="selectSchool( school )">
+                        <div class="row-content" data-ng-hide="school.selected == 'hide'" data-ng-click="toggleSelectSchool( school )">
                             <div class="school-group-item-heading">
-                                <h4 class="school-group-item-heading"><div class="school_point legends text-center" data-ng-class="[school.type, school.level, (school.year_round ? 'year-round' : '')]">
+                                <h4 class="school-group-item-heading"><div data-ng-click="focus(school)" class="school_point legends text-center" data-ng-class="[school.type, school.level, (school.year_round ? 'year-round' : '')]">
                                     <span>{{ school.short_name }}</span></div> {{ school.name }} <small class="preference">{{ school.preference }}</small></h4>
                                 <span data-ng-if="school.year_round == true" class="school-badge year-round" data-toggle="tooltip" data-placement="top" title="Year-round School">YR</span>
                             </div>
                             <div class="distance">{{ school.distance | number:2 }} mi</div>
-                            <div class="close" data-ng-click="deselectSchools(); $event.stopPropagation()"></div>
                             <div data-ng-show="school.selected == true">
                                 <p class="school-group-item-text">
                                     Grades {{ school.grade_min | gradeString }}-{{ school.grade_max | gradeString}} &mdash; {{ school.address }}
                                 </p>
                                 <img class="photo" data-ng-src="{{ school.photo_url }}">
-                                <p>Website: <a href="{{ school.website_url }}">{{ school.website_url }}</a></p>
+                                <p>Website: <a href="{{ school.website_url }}" target="_blank">{{ school.website_url }}</a></p>
                                 <p class='description'>
                                     {{ school.mission_statement }}
                                 </p>

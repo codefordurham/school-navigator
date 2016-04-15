@@ -49,7 +49,7 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
 
 angular.module('SchoolsApp.services', [])
     .service('Schools', ['$http', function($http) {
-        var endpoint = location.search.indexOf('env') === -1? 'https://schools.codefordurham.com' : 'http://localhost:8001',
+        var endpoint = location.search.indexOf('env') === -1? 'https://durhamschoolnavigator.org' : 'http://localhost:8001',
             url;
 
         this.get_schools = function(location) {
@@ -87,6 +87,96 @@ angular.module('SchoolsApp.geoDecoder', [])
 angular.module('SchoolsApp.controllers', ["leaflet-directive"])
     .controller('schoolsDetailCtrl', ['$scope', '$routeParams', 'Schools',
         function($scope, $params, Schools) {
+            var mocked_school = {
+                name: 'Sample School Elementary',
+                school_type: 'Magnet School',
+                grades: 'PK-5',
+                enrollment: '346 students',
+                theme: 'Language focus',
+
+                mission_statement: 'We strive to educate students and to assist them in realizing their full potential as responsible, productive, contributing members of society',
+                photo: 'http://durhamme.com/wp-content/uploads/2010/09/durham_maine_school2.jpg',
+                points_of_pride: [
+                    " We have the only spanish immersion program in Durham's public school system.",
+                    "Principal McCowen has been with our school for 5 years and remains committed to our students' growth and development.",
+                    "We have a very active PTA.  Families play a huge role in supporting our students and learning community."
+                ],
+
+                address: '1000 North Duke St.',
+                phone_number: '919-705-555',
+                website: 'sampleschooleleementary.org',
+                year_opened: 1980,
+                avg_class_size: 23,
+                calendar_year: 'Regular',
+                school_day: '8:00am - 3:30pm',
+                uniform_required: 'No',
+
+                services: {
+                    transportation_provided: true,
+                    extended_care_hours: '3:30pm - 5:30pm',
+                    breakfast_provided: true,
+                    lunch_provided: true
+                },
+                school_leadership: {
+                    name: 'Teresa Allen',
+                    years_of_service: 2013,
+                    bio: "Teresa Allen began her educational career in the Charlotte-Mecklenberg School District in 2001 as a second grade teacher at Jefferson Elementary School. Ms. Allen spent six years teaching within the district as a second and third grade teacher at both Jefferson Elementary and Gill Hall Elementary before accepting his first principal position in the Orange County School District. Over the next four years, Ms. Allen served as an elementary building principal in both Orange County and Durham School Districts, respectively. In 2013, Ms. Allen returned to DPS as principal of Sample School Elementary. This year marks her second year as principal of SSE and eighth as an elementary building principal. Ms. Allen has received a Bachelor’s Degree in Biology from the Pennsylvania State University in 1999 and a Master’s Degree in Elementary Education in from the University of Chapel Hill in 2001. "
+                },
+                teacher_satisfaction: {
+                    'Overall, my school is a good place to work and learn.': [68, 62],
+                    'The school leadership consistently supports teachers': [81, 66],
+                    'Teachers are allowed to focus on educating students with minimal interruptions': [75, 54]
+                },
+                survey: {
+                  percent: 100,
+                  year: "2014-15",
+                  name: "North Carolina Teacher Conditions Survey",
+                  link: "http://ncteachers.org/survey/404/results.html"
+                },
+                admission_policy: {
+                    policy_type: "This school guarantees admission for children who live in the walk zone.  The remaining spots are filled through an open lottery.",
+                    lottery_priorities: [
+                      { name: "Walk zone",
+                        desc: "(guaranteed admission)"},
+                        { name: "Siblings of enrolled students"},
+                        { name: "Children of staff"},
+                        { name: "General applicant pool"}
+                    ],
+                    lottery_deadline: "February 1st ",
+                    lottery_acceptance_rate: "38% of students who applied to the lottery in 2014-15 were accepted.",
+                    learn_more: "http://dpsncapplication.com/site.php"
+                },
+                targeted_academics: [
+                  { name: 'English Language Learner',
+                    desc: "One bilingual teacher in each grade provides an hour of language training each day to our students identified as ELL.  In addition all school resources are available in Spanish and English."},
+                  { name: 'Gifted Students',
+                    desc: "Students identified as intellectually gifted receives services through the APEX Program."},
+                  { name: 'Special Education',
+                    desc: "We have a special education teacher and instrucional aide for each grade who provide push-in and pull-out services.  We also provide robust interventions for students who need extra support but do not have an IEP"}
+                ],
+                other_programs: [
+                  { name: 'Math Science',
+                    desc: 'STEM club, Abacus Math club'},
+                  { name: 'Arts',
+                    desc: 'drama club'},
+                  { name: 'Sports',
+                    desc: 'basketball, soccer, baseball for 4th and 5th graders'},
+                  { name: 'Other',
+                    desc: 'chess after-school club'}
+                ],
+                parent_involvement: {
+                    pta: true,
+                    learn_more: 'http://www.sampleschoolelementary.org/pta'
+                },
+                reflections: [
+                    {
+                        reflection: "I have two kids at SSE and have been very satisfied with their experience.  The teachers are committed to students' learning and both have become fluent in spanish as a result of their enrollment.  My only complaint is that I wish there were more extracurricular offerings.",
+                        who: "Parent of 3rd grader (1/12/15)"
+                    }
+                ],
+                reflection_link: "http://durhamschoolnavigator.com/reflections/404",
+                report_card_link: "http://ncschoolreportcard.com/school/404"
+            };
             angular.extend($scope, {
               defaults: {
               },
@@ -126,6 +216,7 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
                   }
                 };
                 $scope.markers.school = schoolObj;
+                angular.extend($scope.school, mocked_school);
             });
         }
     ])
@@ -138,15 +229,9 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
               zoomControlPosition: 'bottomright'
             },
             eligibility: "assigned",
-            selectSchool: function (school) {
-                angular.forEach($scope.all_schools, function(obj) {
-                  obj.selected = (obj.id === school.id) || "hide";
-                });
-            },
-            deselectSchools: function() {
-              angular.forEach($scope.schools, function(school) {
-                school.selected = false;
-              })
+            toggleSelectSchool: function (school) {
+              var selFunction = school.selected ? function(scl) { scl.selected = false; } : function(scl) { scl.selected = (scl.id === school.id) || "hide"; };
+              angular.forEach($scope.all_schools, selFunction);
             },
             maxHeight: function () {
                 return $(window).height() - 220 + 'px';
@@ -213,24 +298,33 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
               $scope.schools.forEach(function(school) {
                 school.hover = (school.id === schoolId);
               });
+              var legend = { position: 'topright', colors: [], labels: [] };
               $scope.districts.forEach(function(district) {
-                if(district.id === schoolId) {
+                if(district.id === schoolId && district.geometry !== null) {
                   $scope.geojson.data.push(district);
+                  legend.colors.push($scope.zoneTypes[district.properties.zoneType].color);
+                  legend.labels.push($scope.zoneTypes[district.properties.zoneType].label);
                 }
               });
+              $scope.legend = legend.colors.length ? legend : null;
             },
             clear_highlight: function() {
               $scope.schools.forEach(function(school) {
                 school.hover = false;
               });
               $scope.geojson.data = [];
+              $scope.legend = null;
+            },
+            focus: function(school) {
+              $scope.durham.lat = school.lat || school.location.coordinates[1];
+              $scope.durham.lng = school.lng || school.location.coordinates[0];
             },
             prevDistricts: [],
             districts: [],
             switchTab: function (eligibility) {
               $scope.eligibility = eligibility;
               loadMarkers($scope.all_schools);
-              $scope.deselectSchools();
+              $scope.toggleSelectSchool({selected: true});
             },
             levelStyles: {
               'elementary': '#48BC6B',
@@ -240,24 +334,20 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
             },
             levels: ['elementary', 'secondary', 'middle', 'high'],
             zoneTypes: {
-              'district': 'black',
-              'traditional_option_zone': 'purple',
-              'year_round_zone': 'blue',
-              'priority_zone': 'red',
-              'choice_zone': 'yellow',
-              'walk_zone': 'green'
+              'district': { color: 'black', label: 'Neighborhood' },
+              'traditional_option_zone': { color: 'purple', label: 'Traditional Option'},
+              'year_round_zone': { color: 'blue', label: 'Year Round'},
+              'priority_zone': { color: 'red', label: 'Priority'},
+              'choice_zone': { color: 'yellow', label: 'Choice'},
+              'walk_zone': { color: 'green', label: 'Walk'}
             },
-            legend: {
-              position: 'topright',
-              colors: [ 'black', 'purple', 'blue', 'red', 'yellow', 'green' ],
-              labels: [ 'Neighborhood', 'Traditional Option', 'Year Round', 'Priority', 'Choice', 'Walk' ]
-            },
+            legend: null,
             geojson: {
               data: [],
               style: function(feature) {
                 return {
                   fillColor: $scope.levelStyles[feature.properties.level],
-                  color: $scope.zoneTypes[feature.properties.zoneType]
+                  color: $scope.zoneTypes[feature.properties.zoneType].color
                 };
               },
             }
@@ -323,25 +413,37 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
                 });
               }, $scope.districts);
           }
-          $scope.$on("leafletDirectiveMarker.dragend", function(event, args) {
+          $scope.$on("leafletDirectiveMarker.leaflet-map.dragend", function(event, args) {
             moveLoc(args.model.lat, args.model.lng);
             $scope.address = '';
           });
-          $scope.$on("leafletDirectiveMarker.mouseover", function(event, args) {
+          $scope.$on("leafletDirectiveMarker.leaflet-map.mouseover", function(event, args) {
             $scope.highlight_school(args.model.id);
           });
-          $scope.$on("leafletDirectiveMarker.mouseout", function(event, args) {
+          $scope.$on("leafletDirectiveMarker.leaflet-map.mouseout", function(event, args) {
             $scope.clear_highlight();
+          });
+          $scope.$on("leafletDirectiveMarker.leaflet-map.click", function(event, args) {
+            $scope.focus(args.model);
           });
         }]);
 
 angular.module('SchoolsApp.directives', [])
-    .directive('navMenu', [function() {
-        return {
-            restrict: 'AE',
-            templateUrl: 'app/templates/nav-menu.html'
-        }
-    }])
+    .directive( 'goClick', function ( $location ) {
+      return function ( scope, element, attrs ) {
+        var path;
+
+        attrs.$observe( 'goClick', function (val) {
+          path = val;
+        });
+
+        element.bind( 'click', function () {
+          scope.$apply( function () {
+            $location.path( path );
+          });
+        });
+      };
+    })
     .directive('simpleNav', [function() {
         return {
             restrict: 'AE',
