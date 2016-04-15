@@ -7,6 +7,8 @@
     {% for field in form %}
         <div class="form-group">
             {{ field.label_tag }}
+            <br />
+            {{ field.help_text }}
             {% render_field field placeholder=field.label class+="form-control" %}
             {{ field.errors }}
         </div>
