@@ -1,8 +1,8 @@
 from django.core.mail import EmailMessage
 from django.conf import settings
 from django.contrib import admin
-from django.template import Context
-from django.template.loader import render_to_string, get_template
+from django.contrib import messages
+from django.template.loader import render_to_string
 
 from leaflet.admin import LeafletGeoAdmin
 
@@ -29,6 +29,8 @@ def send_survey(modeladmin, request, queryset):
         body = render_to_string('survey_email.txt', context)
 
         EmailMessage(subject, body, to=to, from_email=from_email).send()
+    message = "Tried to send {0!s} email(s)".format(queryset.count())
+    messages.info(request, message)
 
 
 class SchoolAdmin(LeafletGeoAdmin):
