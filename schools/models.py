@@ -30,6 +30,7 @@ class School(models.Model):
     principal_email = models.CharField(max_length=100, null=True, blank=True)
 
     type = models.CharField(choices=SCHOOL_TYPES, max_length=20)
+    year_round = models.BooleanField(default=False)
 
     location = models.PointField()
     district = models.MultiPolygonField(null=True, blank=True)
@@ -81,21 +82,21 @@ LOTTERY = (
     ('b', 'Siblings of enrolled students'),
     ('c', 'Children of staff'),
     ('d', 'General applicant pool'),
-    # FIXME: list the others 
+    # FIXME: list the others
 )
+
 
 class SchoolProfile(models.Model):
     school = models.ForeignKey('School')
 
     level = models.CharField(choices=SCHOOL_LEVELS, max_length=20)
-    year_round = models.BooleanField(default=False)
     school_hours = models.TextField(null=True, blank=True)
     grade_min = models.IntegerField()
     grade_max = models.IntegerField()
     website_url = models.CharField(max_length=500, blank=True, null=True)
     phone_number = models.TextField(null=True, blank=True,
             help_text='Please enter phone number in the format (919) XXX-XXXX.')
-    year_opened = models.IntegerField(null=True, 
+    year_opened = models.IntegerField(null=True,
             help_text='Please use 4 digit years')
     speciality_type = models.TextField(null=True, blank=True)
     theme = models.TextField(null=True, blank=True,
