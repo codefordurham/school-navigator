@@ -38,4 +38,8 @@ class SchoolAdmin(LeafletGeoAdmin):
 admin.site.register(School, SchoolAdmin)
 admin.site.disable_action('delete_selected')
 
-admin.site.register(SchoolProfile)
+class SchoolProfileAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'due_date', 'created_at', 'submitted_at')
+    ordering = ('created_at', )
+    filter = ('submitted_at', )
+admin.site.register(SchoolProfile, SchoolProfileAdmin)
