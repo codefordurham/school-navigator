@@ -48,6 +48,7 @@ class School(models.Model):
             profile.pk = None
         else:
             profile = SchoolProfile.objects.create(school=self)
+            profile.submitted_at = None
         return profile
 
     def profile(self):
@@ -164,7 +165,7 @@ class SchoolProfile(models.Model):
     pta_website = models.TextField(null=True, blank=True)
     parental_involvement_notes = models.TextField(null=True, blank=True)
 
-    submitted_at = models.DateTimeField(null=True)
+    submitted_at = models.DateTimeField(null=True, default=None)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def due_date(self):
