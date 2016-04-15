@@ -60,6 +60,24 @@ class School(models.Model):
     def __str__(self):
         return self.name
 
+GRADE_LEVELS = (
+    (-2, '3 year old prekindergarden'),
+    (-1, '4 year old prekindergarden'),
+    (0, 'kindergarden'),
+    (1, '1st grade'),
+    (2, '2nd grade'),
+    (3, '3rd grade'),
+    (4, '4th grade'),
+    (5, '5th grade'),
+    (6, '6th grade'),
+    (7, '7th grade'),
+    (8, '8th grade'),
+    (9, '9th grade'),
+    (10, '10th grade'),
+    (11, '11th grade'),
+    (12, '12th grade'),
+)
+
 BREAKFAST = (
     ('all', 'Breakfast is available for all students.'),
     ('some', 'Breakfast is available for some students.'),
@@ -92,8 +110,8 @@ class SchoolProfile(models.Model):
 
     level = models.CharField(choices=SCHOOL_LEVELS, max_length=20)
     school_hours = models.TextField(null=True, blank=True)
-    grade_min = models.IntegerField()
-    grade_max = models.IntegerField()
+    grade_min = models.IntegerField(choices=GRADE_LEVELS)
+    grade_max = models.IntegerField(choices=GRADE_LEVELS)
     website_url = models.CharField(max_length=500, blank=True, null=True)
     phone_number = models.TextField(null=True, blank=True,
             help_text='Please enter phone number in the format (919) XXX-XXXX.')
