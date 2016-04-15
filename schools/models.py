@@ -85,6 +85,7 @@ LOTTERY = (
     # FIXME: list the others
 )
 
+
 class SchoolProfile(models.Model):
     school = models.ForeignKey('School')
 
@@ -163,11 +164,11 @@ class SchoolProfile(models.Model):
     pta_website = models.TextField(null=True, blank=True)
     parental_involvement_notes = models.TextField(null=True, blank=True)
 
-    submitted_at = models.DateTimeField(null=True, auto_now=True)
+    submitted_at = models.DateTimeField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def due_date(self):
-        return self.created_at + datetime.timedelta(30)
+        return (self.created_at + datetime.timedelta(30)).date()
 
     def url(self):
         hashids = Hashids(salt=settings.SECRET_KEY, min_length=10)

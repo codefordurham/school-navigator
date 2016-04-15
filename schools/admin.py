@@ -12,8 +12,7 @@ from .models import School, SchoolProfile
 def send_survey(modeladmin, request, queryset):
     for school in queryset:
         subject = 'Durham School Navigator Survey: {:s}'.format(school.name)
-        to = ['principal_email']
-        #to = [school.principal_email],
+        to = [school.principal_email]
         from_email = settings.FROM_EMAIL
 
         school_profile = school.new_profile()
@@ -21,7 +20,7 @@ def send_survey(modeladmin, request, queryset):
         school_profile_url = request.build_absolute_uri(school_profile.get_absolute_url())
 
         context = {
-            'principal_name': 'principal_name',
+            'principal_name': school_profile.principal_name,
             'due_date': school_profile.due_date(),
             'school_profile_url': school_profile_url,
         }
@@ -38,4 +37,5 @@ class SchoolAdmin(LeafletGeoAdmin):
 
 admin.site.register(School, SchoolAdmin)
 admin.site.disable_action('delete_selected')
+
 admin.site.register(SchoolProfile)

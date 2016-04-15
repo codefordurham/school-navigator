@@ -1,4 +1,8 @@
-{{ principal_name }},
+{% if principal_name %}
+Hello {{ principal_name }},
+{% else %}
+Hello,
+{% endif %}
 
 Your school survey submission is due on {{ due_date }}.
 
