@@ -16,6 +16,8 @@ class SchoolListSerializer(geo_serializers.GeoModelSerializer):
     preference = serializers.SerializerMethodField('get_preference')
     short_name = serializers.SerializerMethodField('get_short_name')
     distance = serializers.SerializerMethodField('get_distance')
+    level = serializers.SerializerMethodField('get_level')
+    year_round = serializers.SerializerMethodField('get_level')
     preference_type = serializers.SerializerMethodField('get_preference_type')
     survey_hash = serializers.SerializerMethodField('get_survey_hash')
 
@@ -26,6 +28,14 @@ class SchoolListSerializer(geo_serializers.GeoModelSerializer):
                   'year_round', 'grade_min', 'grade_max', 'website_url',
                   'active', 'mission_statement', 'preference_type',
                   'survey_hash')
+
+    def get_level(self, obj):
+        school_profile = obj.profile
+        return school_profile.level if school_profile else ''
+
+    def get_year_round(self, obj):
+        school_profile = obj.profile
+        return school_profile.year_round if school_profile else ''
 
     def get_survey_hash(self, obj):
         survey = obj.schoolprofile_set.order_by('submitted_at').last()
