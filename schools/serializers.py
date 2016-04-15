@@ -18,6 +18,10 @@ class SchoolListSerializer(geo_serializers.GeoModelSerializer):
     distance = serializers.SerializerMethodField('get_distance')
     level = serializers.SerializerMethodField('get_level')
     year_round = serializers.SerializerMethodField('get_level')
+    grade_min = serializers.SerializerMethodField('get_grade_min')
+    grade_max = serializers.SerializerMethodField('get_grade_max')
+    website_url = serializers.SerializerMethodField('get_website_url')
+    mission_statement = serializers.SerializerMethodField('get_mission_statement')
     preference_type = serializers.SerializerMethodField('get_preference_type')
     survey_hash = serializers.SerializerMethodField('get_survey_hash')
 
@@ -30,12 +34,28 @@ class SchoolListSerializer(geo_serializers.GeoModelSerializer):
                   'survey_hash')
 
     def get_level(self, obj):
-        school_profile = obj.profile
+        school_profile = obj.profile()
         return school_profile.level if school_profile else ''
 
+    def get_grade_min(self, obj):
+        school_profile = obj.profile()
+        return school_profile.grade_min if school_profile else ''
+
     def get_year_round(self, obj):
-        school_profile = obj.profile
+        school_profile = obj.profile()
         return school_profile.year_round if school_profile else ''
+
+    def get_grade_max(self, obj):
+        school_profile = obj.profile()
+        return school_profile.grade_max if school_profile else ''
+
+    def get_website_url(self, obj):
+        school_profile = obj.profile()
+        return school_profile.website_url if school_profile else ''
+
+    def get_mission_statement(self, obj):
+        school_profile = obj.profile()
+        return school_profile.mission_statement if school_profile else ''
 
     def get_survey_hash(self, obj):
         survey = obj.schoolprofile_set.order_by('submitted_at').last()
@@ -111,4 +131,4 @@ class SchoolDetailSerializer(geo_serializers.GeoModelSerializer):
         model = schools_models.School
 
     def get_color(self, obj):
-        return COLOR_MAP.get(obj.level, 'purple')
+        return COLOR_MAP.get(obj.profile().level, 'purple')
