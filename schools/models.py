@@ -116,72 +116,149 @@ class SchoolProfile(models.Model):
     phone_number = models.TextField(null=True, blank=True,
             help_text='Please enter phone number in the format (919) XXX-XXXX.')
     year_opened = models.IntegerField(null=True,
-            help_text='Please use 4 digit years')
-    speciality_type = models.TextField(null=True, blank=True)
+            help_text='In what year was your school opened?')
+    speciality_type = models.TextField(null=True, blank=True)  # Is this still needed?  FIXME
     theme = models.TextField(null=True, blank=True,
-            help_text='Please Enter: '
-            'STEM (Science, Technology, Engineering, Math), '
-            'Arts, Language, Humanities, College Ready, '
-            'Montessori, Project-Based, Vocational Training, '
-            'or write in answer')
-    uniform_required = models.NullBooleanField()
-    mission_statement = models.TextField(null=True, blank=True)
+            help_text='If your school has a particular theme or focus area, '
+                'please select from the appropriate theme from the following list: '
+                'Math & Science, '
+                'Arts, '
+                'Language, '
+                'College Ready, '
+                'Montessori, '
+                'Project-Based, '
+                'Vocational Training, '
+                'Not Applicable - our school is for students of all backgrounds and interests, '
+                'or Other [write in answer] '
+    )
+    uniform_required = models.NullBooleanField(
+            help_text='Does your school have a uniform for students?'
+    )
+    mission_statement = models.TextField(null=True, blank=True,
+            help_text='What is your school’s mission statement?'                                    
+    )
 
     # About
-    points_of_pride1 = models.TextField(null=True, blank=True)
+    points_of_pride1 = models.TextField(null=True, blank=True,
+            help_text='Please share three unique and specific Points of Pride about your school that families would want to know.'        
+    )
     points_of_pride2 = models.TextField(null=True, blank=True)
     points_of_pride3 = models.TextField(null=True, blank=True)
 
     # School Services
-    transportation = models.CharField(choices=TRANSPORTATION, max_length=4, blank=True)
+    transportation = models.CharField(choices=TRANSPORTATION, max_length=4, blank=True,
+            help_text='Do you provide transportation for students?'                                 
+    )
     tranportation_explanation = models.TextField(null=True, blank=True,
-            help_text='If you provide transportation, please describe how it is provided and for whom (I.E. one pick-up per neighborhood hub, city bus tickets provided to students)')
-    breakfast_served = models.CharField(max_length=4, choices=BREAKFAST, blank=True, null=True)
-    breakfast_explanation = models.TextField(null=True, blank=True)
-    breakfast_free_and_reduced = models.NullBooleanField()
-    lunch_served = models.CharField(max_length=4, choices=LUNCH, blank=True, null=True)
-    lunch_explanation = models.TextField(null=True, blank=True)
-    lunch_free_and_reduced = models.NullBooleanField()
-    extended_care_offered = models.NullBooleanField()
-    extended_care_cost = models.TextField(null=True, blank=True)
-    extended_care_fiancial_assistance = models.TextField(null=True, blank=True)
-    before_care_hours = models.TextField(null=True, blank=True)
-    after_care_hours = models.TextField(null=True, blank=True)
-
+            help_text='If you provide transportation, please describe how it is provided and for whom '
+            '(I.E. one pick-up per neighborhood hub, city bus tickets provided to students)'
+    )
+    breakfast_served = models.CharField(max_length=4, choices=BREAKFAST, blank=True, null=True,
+            help_text='Select the option that best describes your breakfast service.' 
+    )
+    breakfast_explanation = models.TextField(null=True, blank=True,
+            help_text='Please share any additional information that parents would like to know about your breakfast program.'                                        
+    )
+    breakfast_free_and_reduced = models.NullBooleanField(
+            help_text='Do you participate in the National Free and Reduced Breakfast Program?'
+    )
+    lunch_served = models.CharField(max_length=4, choices=LUNCH, blank=True, null=True,
+            help_text='Select the option that best describes your lunch service.'                               
+    )
+    lunch_explanation = models.TextField(null=True, blank=True,
+            help_text='Please share any additional information that parents would like to know about your lunch program.'                                    
+    )
+    lunch_free_and_reduced = models.NullBooleanField(
+            help_text='Do you participate in the National Free and Reduced Lunch Program?'
+    )
+    extended_care_offered = models.NullBooleanField(
+            help_text=' Do you provide before or after care?'
+    )
+    extended_care_cost = models.TextField(null=True, blank=True, 
+            help_text='What is the fee for before and/or after care?'
+    )
+    extended_care_fiancial_assistance = models.TextField(null=True, blank=True,
+            help_text='Please describe any financial assistance available for before/after care.'                                                    
+    )
+    before_care_hours = models.TextField(null=True, blank=True,
+            help_text='If you provide before care, please enter in the hours for care.'
+    )
+    after_care_hours = models.TextField(null=True, blank=True,
+            help_text='If you provide after care, please enter in the hours for care.'
+    )
     # Admissions Info
     admissions_policy_type = models.TextField(null=True, blank=True,
-            help_text= 'Develop statements for neighborhood zone, YR zone, pure lottery, etc.')  #FIXME
-    lottery_priority_1 = models.CharField(choices=LOTTERY, max_length=20, blank=True)
+            help_text= 'Please write 1-2 sentences summarizing your admission policy.  Typically one of the following apply: '
+            'Admission is guaranteed for all students who live in the designated zone for this school; '
+            'Admission is guaranteed for students who live in the walk zone.  The remaining spots are filled through an open lottery; '
+            'Admission is determined through an open lottery system.'
+    )
+    # FIXME make lottery_priority_X not a choice field??
+    lottery_priority_1 = models.CharField(choices=LOTTERY, max_length=20, blank=True,
+            help_text='If you have an admissions lottery, please list any groups (one group per box) that are given priority over the general applicant pool in the lottery (e.g. students in the walk zone, siblings of enrolled students, children of staff)'
+    )
     lottery_priority_2 = models.CharField(choices=LOTTERY, max_length=20, blank=True)
     lottery_priority_3 = models.CharField(choices=LOTTERY, max_length=20, blank=True)
     lottery_priority_4 = models.CharField(choices=LOTTERY, max_length=20, blank=True)
     lottery_priority_5 = models.CharField(choices=LOTTERY, max_length=20, blank=True)
-    lottery_deadline = models.DateTimeField(null=True, blank=True)
+    lottery_deadline = models.DateTimeField(null=True, blank=True,
+            help_text='If you school has a lottery, what is the deadline for applying?'                                       
+    )
     # lottery_acceptance_rate  FIXME
-    learn_more_link = models.TextField(null=True, blank=True)
+    learn_more_link = models.TextField(null=True, blank=True,
+            help_text="Please provide a link where parents can learn more about your school’s admission process and apply."
+    )
 
     # Leadership & Teacher Info
-    principal_name = models.TextField(null=True, blank=True)
-    principal_bio = models.TextField(null=True, blank=True)
-    principal_start_year = models.IntegerField(null=True, blank=True)
+    principal_name = models.TextField(null=True, blank=True,
+            help_text='Name of Principal'                                 
+    )
+    principal_bio = models.TextField(null=True, blank=True,
+            help_text='Please provide a brief bio for the pricipal.'                                
+    )
+    principal_start_year = models.IntegerField(null=True, blank=True,
+            help_text='Year that current principal began at this school:'                                          
+    )
 
     # Targeted Academic Offerings
-    english_langaue_learner = models.TextField(null=True, blank=True)
-    special_education = models.TextField(null=True, blank=True)
-    gifted_education = models.TextField(null=True, blank=True)
-    # are there others? FIXME
+    english_langaue_learner = models.TextField(null=True, blank=True,
+            help_text='Please describe the offerings, staff and additional resources that you have for English Language Learners.'
+    )
+    special_education = models.TextField(null=True, blank=True,
+            help_text='Please describe the offerings, staff and additional resources that you have for Exceptional Children.'
+    )
+    gifted_education = models.TextField(null=True, blank=True,
+            help_text='Please describe the offerings, staff and additional resources that you have for the Academically & Intellectually Gifted.'
+    )
+    # are there others? FIXME  (add other)
 
     # Extracurricular
-    academic = models.TextField(null=True, blank=True)
-    arts = models.TextField(null=True, blank=True)
-    sports = models.TextField(null=True, blank=True)
-    service_leadership = models.TextField(null=True, blank=True)
-    other = models.TextField(null=True, blank=True)
+    academic = models.TextField(null=True, blank=True,
+            help_text='Please describe your academic extracurricular offerings.'
+    )
+    arts = models.TextField(null=True, blank=True,
+            help_text='Please describe your arts extracurricular offerings.'
+    )
+    sports = models.TextField(null=True, blank=True,
+            help_text='Please describe your sports extracurricular offerings.'
+    )
+    service_leadership = models.TextField(null=True, blank=True,
+            help_text='Please describe your service & leadership extracurricular offerings.'
+    )
+    other = models.TextField(null=True, blank=True,
+            help_text='Please describe your other extracurricular offerings.'
+    )
 
     # Parent Involvement
-    pta = models.NullBooleanField()
-    pta_website = models.TextField(null=True, blank=True)
-    parental_involvement_notes = models.TextField(null=True, blank=True)
+    pta = models.NullBooleanField(
+            help_text='Do you have a parent teacher association?'
+    )
+    pta_website = models.TextField(null=True, blank=True,
+            help_text='If yes, please share the website or social media page for the PTA.'                              
+    )
+    parental_involvement_notes = models.TextField(null=True, blank=True)  # FIXME delete?
+
+    # FIXME add survey feedback notes
 
     submitted_at = models.DateTimeField(null=True, default=None)
     created_at = models.DateTimeField(auto_now_add=True)
