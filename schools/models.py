@@ -120,7 +120,7 @@ class SchoolProfile(models.Model):
     speciality_type = models.TextField(null=True, blank=True)  # Is this still needed?  FIXME
     theme = models.TextField(null=True, blank=True,
             help_text='If your school has a particular theme or focus area, '
-                'please select from the appropriate theme from the following list: '
+                'please wnter the appropriate theme from the following list: '
                 'Math & Science, '
                 'Arts, '
                 'Language, '
@@ -202,7 +202,7 @@ class SchoolProfile(models.Model):
     lottery_priority_4 = models.CharField(choices=LOTTERY, max_length=20, blank=True)
     lottery_priority_5 = models.CharField(choices=LOTTERY, max_length=20, blank=True)
     lottery_deadline = models.DateTimeField(null=True, blank=True,
-            help_text='If you school has a lottery, what is the deadline for applying?'                                       
+            help_text='If your school has a lottery, what is the deadline for applying?'                                       
     )
     # lottery_acceptance_rate  FIXME
     learn_more_link = models.TextField(null=True, blank=True,
