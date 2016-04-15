@@ -18,16 +18,15 @@ def survey_form(request, hash):
     overdue = profile.due_date() < tomorrow
 
     if overdue:
-            raise Http404("Survey Period Has Closed")
+        raise Http404("Survey Period Has Closed")
 
     if request.POST:
         form = schools_forms.SchoolProfileForm(request.POST, instance=profile)
         if form.is_valid():
             survey = form.save(commit=False)
             survey.school = profile.school
+            survey.submitted_at = timezone.now()
             survey.save()
-            print("save")
-            print(survey.id)
     else:
         form = schools_forms.SchoolProfileForm(instance=profile)
     context = {

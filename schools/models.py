@@ -82,7 +82,7 @@ LOTTERY = (
     ('c', 'Children of staff'),
     ('d', 'General applicant pool'),
     # FIXME: list the others 
-)   
+)
 
 class SchoolProfile(models.Model):
     school = models.ForeignKey('School')
@@ -106,12 +106,12 @@ class SchoolProfile(models.Model):
             'or write in answer')
     uniform_required = models.NullBooleanField()
     mission_statement = models.TextField(null=True, blank=True)
-    
+
     # About
     points_of_pride1 = models.TextField(null=True, blank=True)
     points_of_pride2 = models.TextField(null=True, blank=True)
     points_of_pride3 = models.TextField(null=True, blank=True)
-    
+
     # School Services
     transportation = models.CharField(choices=TRANSPORTATION, max_length=4, blank=True)
     tranportation_explanation = models.TextField(null=True, blank=True,
@@ -163,7 +163,7 @@ class SchoolProfile(models.Model):
     pta_website = models.TextField(null=True, blank=True)
     parental_involvement_notes = models.TextField(null=True, blank=True)
 
-    submitted_at = models.DateTimeField(null=True, auto_now=True)
+    submitted_at = models.DateTimeField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def due_date(self):
