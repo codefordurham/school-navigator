@@ -12,7 +12,13 @@ def survey_form(request, hash):
         pk = schools_models.SchoolProfile.decode_url(hash)
     except:
         raise Http404("Survey does not exist")
+
     profile = schools_models.SchoolProfile.objects.get(pk=pk)
+    tomorrow = (timezone.now() + timedelta(days=1)).date()
+    overdue = profile.due_date() < tomorrow
+
+    if overdue:
+            raise Http404("Survey Period Has Closed")
 
     if request.POST:
         form = schools_forms.SchoolProfileForm(request.POST, instance=profile)
@@ -23,8 +29,8 @@ def survey_form(request, hash):
             print("save")
             print(survey.id)
     else:
-        if profile.submitted_at and \
-                profile.submitted_at > timezone.now() + timedelta(days=1):
-            raise Http404("Survey Already Completed")
         form = schools_forms.SchoolProfileForm(instance=profile)
+    context = {
+        'form': form,
+    }
     return render(request, 'survey_form.html', {'form': form})

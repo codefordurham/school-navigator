@@ -167,7 +167,7 @@ class SchoolProfile(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def due_date(self):
-        return self.created_at + datetime.timedelta(30)
+        return (self.created_at + datetime.timedelta(30)).date()
 
     def url(self):
         hashids = Hashids(salt=settings.SECRET_KEY, min_length=10)
