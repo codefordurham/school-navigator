@@ -16,10 +16,10 @@ class SchoolProfileForm(ModelForm):
             'points_of_pride1', 'points_of_pride2', 'points_of_pride3',
         ]),
         ('School Services', [
-            'transportation', 'tranportation_explanation',
+            'transportation', 'transportation_explanation',
             'extended_care_offered', 'before_care_hours',
             'after_care_hours', 'extended_care_cost',
-            'extended_care_fiancial_assistance',
+            'extended_care_financial_assistance',
             'breakfast_served', 'breakfast_free_and_reduced',
             'breakfast_explanation', 
             'lunch_served', 'lunch_free_and_reduced',
@@ -35,7 +35,7 @@ class SchoolProfileForm(ModelForm):
             'lottery_deadline', 'learn_more_link',
         ]),
         ('Targeted Academic Offerings', [
-            'english_langaue_learner',
+            'english_language_learner',
             'special_education',
             'gifted_education',
             'other_academic',

@@ -149,7 +149,7 @@ class SchoolProfile(models.Model):
     transportation = models.CharField(choices=TRANSPORTATION, max_length=4, blank=True,
             help_text='Do you provide transportation for students?'                                 
     )
-    tranportation_explanation = models.TextField(null=True, blank=True,
+    transportation_explanation = models.TextField(null=True, blank=True,
             help_text='If you provide transportation, please describe how it is provided and for whom '
             '(I.E. one pick-up per neighborhood hub, city bus tickets provided to students)'
     )
@@ -177,7 +177,7 @@ class SchoolProfile(models.Model):
     extended_care_cost = models.TextField(null=True, blank=True, 
             help_text='What is the fee for before and/or after care?'
     )
-    extended_care_fiancial_assistance = models.TextField(null=True, blank=True,
+    extended_care_financial_assistance = models.TextField(null=True, blank=True,
             help_text='Please describe any financial assistance available for before/after care.'                                                    
     )
     before_care_hours = models.TextField(null=True, blank=True,
@@ -221,7 +221,7 @@ class SchoolProfile(models.Model):
     )
 
     # Targeted Academic Offerings
-    english_langaue_learner = models.TextField(null=True, blank=True,
+    english_language_learner = models.TextField(null=True, blank=True,
             help_text='Please describe the offerings, staff and additional resources that you have for English Language Learners.'
     )
     special_education = models.TextField(null=True, blank=True,
@@ -231,7 +231,7 @@ class SchoolProfile(models.Model):
             help_text='Please describe the offerings, staff and additional resources that you have for the Academically & Intellectually Gifted.'
     )
     other_academic = models.TextField(null=True, blank=True,
-            help_text='Please describe the offerings, staff and additional resources that you have for the Academically & Intellectually Gifted.'
+            help_text='Please describe any other offerings, staff and additional resources that you provide.'
     )
 
     # are there others? FIXME  (add other)
