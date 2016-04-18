@@ -230,6 +230,10 @@ class SchoolProfile(models.Model):
     gifted_education = models.TextField(null=True, blank=True,
             help_text='Please describe the offerings, staff and additional resources that you have for the Academically & Intellectually Gifted.'
     )
+    other_academic = models.TextField(null=True, blank=True,
+            help_text='Please describe the offerings, staff and additional resources that you have for the Academically & Intellectually Gifted.'
+    )
+
     # are there others? FIXME  (add other)
 
     # Extracurricular
@@ -258,7 +262,8 @@ class SchoolProfile(models.Model):
     )
     parental_involvement_notes = models.TextField(null=True, blank=True)  # FIXME delete?
 
-    # FIXME add survey feedback notes
+    # Survey Feedback
+    survey_feedback = models.TextField(null=True, blank=True)
 
     submitted_at = models.DateTimeField(null=True, default=None)
     created_at = models.DateTimeField(auto_now_add=True)
