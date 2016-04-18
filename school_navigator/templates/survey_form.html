@@ -2,16 +2,22 @@
 {% load widget_tweaks %}
 
 {% block content %}
+<h1>Survey Instructions</h1>
+[add on Tues (Sarah)]
+FIXME: add school name
 <form action="." method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {% for field in form %}
-        <div class="form-group">
-            {{ field.label_tag }}
-            <br />
-            {{ field.help_text }}
-            {% render_field field placeholder=field.label class+="form-control" %}
-            {{ field.errors }}
-        </div>
+    {% for description, fields in form.fieldsets %}
+        <h2> {{ description }} </h2>
+        {% for field in fields %}
+            <div class="form-group">
+                {{ field.label_tag }}
+                <br />
+                {{ field.help_text }}
+                {% render_field field placeholder=field.label class+="form-control" %}
+                {{ field.errors }}
+            </div>
+        {% endfor %}
     {% endfor %}
 
     <div class="submit-wrapper">
