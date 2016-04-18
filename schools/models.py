@@ -61,9 +61,9 @@ class School(models.Model):
         return self.name
 
 GRADE_LEVELS = (
-    (-2, '3 year old prekindergarden'),
-    (-1, '4 year old prekindergarden'),
-    (0, 'kindergarden'),
+    (-2, '3 year old prekindergarten'),
+    (-1, '4 year old prekindergarten'),
+    (0, 'Kindergarten'),
     (1, '1st grade'),
     (2, '2nd grade'),
     (3, '3rd grade'),
@@ -120,7 +120,7 @@ class SchoolProfile(models.Model):
     speciality_type = models.TextField(null=True, blank=True)  # Is this still needed?  FIXME
     theme = models.TextField(null=True, blank=True,
             help_text='If your school has a particular theme or focus area, '
-                'please wnter the appropriate theme from the following list: '
+                'please enter the appropriate theme from the following list: '
                 'Math & Science, '
                 'Arts, '
                 'Language, '
@@ -140,10 +140,15 @@ class SchoolProfile(models.Model):
 
     # About
     points_of_pride1 = models.TextField(null=True, blank=True,
-            help_text='Please share three unique and specific Points of Pride about your school that families would want to know.'        
+            help_text='Please share three unique and specific Points of Pride about your school that families would want to know.',
+            verbose_name='Point of Pride #1',
     )
-    points_of_pride2 = models.TextField(null=True, blank=True)
-    points_of_pride3 = models.TextField(null=True, blank=True)
+    points_of_pride2 = models.TextField(null=True, blank=True,
+            verbose_name='Point of Pride #2',
+    )
+    points_of_pride3 = models.TextField(null=True, blank=True,
+            verbose_name='Point of Pride #3',
+    )
 
     # School Services
     transportation = models.CharField(choices=TRANSPORTATION, max_length=4, blank=True,
@@ -234,8 +239,6 @@ class SchoolProfile(models.Model):
             help_text='Please describe any other offerings, staff and additional resources that you provide.'
     )
 
-    # are there others? FIXME  (add other)
-
     # Extracurricular
     academic = models.TextField(null=True, blank=True,
             help_text='Please describe your academic extracurricular offerings.'
@@ -255,12 +258,16 @@ class SchoolProfile(models.Model):
 
     # Parent Involvement
     pta = models.NullBooleanField(
-            help_text='Do you have a parent teacher association?'
+            help_text='Do you have a Parent Teacher Association?',
+            verbose_name='PTA',
     )
     pta_website = models.TextField(null=True, blank=True,
-            help_text='If yes, please share the website or social media page for the PTA.'                              
+            help_text='If yes, please share the website or social media page for the PTA.',
+            verbose_name='PTA website',
     )
-    parental_involvement_notes = models.TextField(null=True, blank=True)  # FIXME delete?
+    parental_involvement_notes = models.TextField(null=True, blank=True,
+            help_text='Please provide any other information on parental involvement you would like parents to know.'
+    )  # FIXME delete?
 
     # Survey Feedback
     survey_feedback = models.TextField(null=True, blank=True)

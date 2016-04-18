@@ -1,10 +1,43 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, TextInput, URLInput, Textarea
 import schools.models as schools_models
 
 class SchoolProfileForm(ModelForm):
     class Meta:
         model = schools_models.SchoolProfile
         exclude = ('school', 'created_at', 'submitted_at', )
+        widgets = {
+            'phone_number': TextInput,
+            'website_url': URLInput,
+            'theme': TextInput,
+            'mission_statement': Textarea(attrs={'rows': 8}),
+            'transportation_explanation': TextInput,
+            'before_care_hours': TextInput,
+            'after_care_hours': TextInput,
+            'points_of_pride1': Textarea(attrs={'rows': 4}),
+            'points_of_pride2': Textarea(attrs={'rows': 4}),
+            'points_of_pride3': Textarea(attrs={'rows': 4}),
+            'extended_care_cost': TextInput,
+            'extended_care_financial_assistance': Textarea(attrs={'rows': 4}),
+            'breakfast_explanation': Textarea(attrs={'rows': 4}),
+            'lunch_explanation': Textarea(attrs={'rows': 4}),
+            'principal_name': TextInput,
+            'principal_bio': Textarea(attrs={'rows': 8}),
+            'admissions_policy_type': Textarea(attrs={'rows': 2}),
+            'learn_more_link': URLInput,
+            'english_language_learner': Textarea(attrs={'rows': 4}),
+            'special_education': Textarea(attrs={'rows': 4}),
+            'gifted_education': Textarea(attrs={'rows': 4}),
+            'other_academic': Textarea(attrs={'rows': 4}),
+            'academic': Textarea(attrs={'rows': 4}),
+            'arts': Textarea(attrs={'rows': 4}),
+            'sports': Textarea(attrs={'rows': 4}),
+            'service_leadership': Textarea(attrs={'rows': 4}),
+            'other': Textarea(attrs={'rows': 4}),
+            'pta_website': URLInput,
+            'parental_involvement_notes': Textarea(attrs={'rows': 4}),
+
+
+        }
 
     _fieldsets = (
         ('Basic Facts', [
