@@ -2,9 +2,16 @@
 {% load widget_tweaks %}
 
 {% block content %}
-<h1>Survey Instructions</h1>
+<h1> {{ school.name }} School Profile </h1>
+<ul>
+    <li><b>Name:</b> {{ school.name }}</li>
+    <li><b>School type:</b> {{ school.type }}</li>
+    <li><b>Year round calendar:</b> {{ school.year_round }}</li>
+    <li><b>Address:</b> {{school.address}}</li>
+</ul>
+
+<h2>Survey Instructions</h1>
 [add on Tues (Sarah)]
-FIXME: add school name
 <form action="." method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {% for description, fields in form.fieldsets %}

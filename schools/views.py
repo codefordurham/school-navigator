@@ -32,4 +32,5 @@ def survey_form(request, hash):
     context = {
         'form': form,
     }
-    return render(request, 'survey_form.html', {'form': form})
+    school = profile.school
+    return render(request, 'survey_form.html', {'form': form, 'school': school})
