@@ -1,5 +1,6 @@
 from django.contrib.gis.db import models
 from django.conf import settings
+from django.core.urlresolvers import reverse
 
 from hashids import Hashids
 
@@ -53,6 +54,9 @@ class School(models.Model):
 
     def profile(self):
         return self.schoolprofile_set.order_by('-created_at').first()
+
+    def get_absolute_url(self):
+        return '/#/school/{0}/'.format(self.pk)
 
     # Override default manager for gis
     objects = models.GeoManager()
@@ -291,7 +295,6 @@ class SchoolProfile(models.Model):
         return decoded[0]
 
     def get_absolute_url(self):
-        from django.core.urlresolvers import reverse
         return reverse('school-survey-form', kwargs={'hash': self.url()})
 
     def __str__(self):
