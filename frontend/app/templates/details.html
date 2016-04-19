@@ -8,7 +8,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <p class="lead">{{ school.school_type }} &mdash; Grades {{ school.grade }} &mdash; {{ school.enrollment }}</p>
+            <p class="lead">{{ school.school_type }} &mdash; Grades {{ school.grades }} &mdash;</p>
         </div>
     </div>
 
@@ -29,7 +29,7 @@
                 </div>
           <h2>School Services</h2>
           <p>This school provides the following services to students:</p>
-            <p><strong>Transportation: </strong> <span title="Transportation provided">{{ school.profile.transportation }}</span></p>
+            <p><strong>Transportation: </strong> <span title="Transportation provided">{{ school.profile.transportation_display }}</span></p>
             <p><strong>Lunch: </strong><span title="Lunch provided">{{ school.profile.lunch_served }}</span></p>
             <p><strong>Breakfast: </strong><span title="Breakfast provided">{{ school.profile.breakfast_served }}</span></p>
             </div>
