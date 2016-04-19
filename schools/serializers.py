@@ -130,6 +130,7 @@ class SchoolDetailSerializer(geo_serializers.GeoModelSerializer):
     color = serializers.SerializerMethodField('get_color')
     survey_hash = serializers.SerializerMethodField('get_survey_hash')
     grades = serializers.SerializerMethodField('get_grades')
+    transportation_display = serializers.SerializerMethodField('get_transportation_display')
     school_type = serializers.SerializerMethodField('get_school_type')
     profile = SchoolProfileSerilaizer()
 
@@ -147,7 +148,10 @@ class SchoolDetailSerializer(geo_serializers.GeoModelSerializer):
             return ''
 
     def get_grades(self, obj):
-        return "{0} - {1}".format(obj.profile.get_grade_min_display(), obj.profile.get_grade_max_display())
+        return "{0} - {1}".format(obj.profile().get_grade_min_display(), obj.profile().get_grade_max_display())
 
     def get_school_type(self, obj):
-        return obj.profile.get_type_display()
+        return obj.get_type_display()
+
+    def get_transportation_display(self, obj):
+        return obj.profile().get_transportation_display()
