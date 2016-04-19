@@ -8,7 +8,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <p class="lead">{{ school.school_type }} &mdash; Grades {{ school.grades }} &mdash; {{ school.enrollment }}</p>
+            <p class="lead">{{ school.school_type }} &mdash; Grades {{ school.grades }} &mdash;</p>
         </div>
     </div>
 
@@ -17,19 +17,21 @@
             <div class="school-details">
                 <h2>Mission</h2>
                 <div class="">
-                {{ school.mission_statement }}
+                {{ school.profile.mission_statement }}
                 </div>
                 <h2>Points of Pride</h2>
                 <div class="">
                     <ol>
-                        <li data-ng-repeat="point in school.points_of_pride">{{ point }}</li>
+                        <li data-ng-repeat="point in school.points_of_pride">{{ school.profile.points_of_pride1 }}</li>
+                        <li data-ng-repeat="point in school.points_of_pride">{{ school.profile.points_of_pride3 }}</li>
+                        <li data-ng-repeat="point in school.points_of_pride">{{ school.profile.points_of_pride3 }}</li>
                     </ol>
                 </div>
           <h2>School Services</h2>
           <p>This school provides the following services to students:</p>
-            <p><strong>Transportation: </strong> <span data-ng-show="school.services.transportation_provided" title="Breakfast provided">Yes</span></p>
-            <p><strong>Lunch: </strong><span data-ng-show="school.services.lunch_provided" title="Lunch provided">Yes</span></p>
-            <p><strong>Breakfast: </strong><span data-ng-show="school.services.breakfast_provided" title="Breakfast provided">Yes</span></p>
+            <p><strong>Transportation: </strong> <span title="Transportation provided">{{ school.profile.transportation_display }}</span></p>
+            <p><strong>Lunch: </strong><span title="Lunch provided">{{ school.profile.lunch_served }}</span></p>
+            <p><strong>Breakfast: </strong><span title="Breakfast provided">{{ school.profile.breakfast_served }}</span></p>
             </div>
         </div>
 
@@ -46,13 +48,13 @@
             <p><strong>Address: </strong> {{ school.address }}</p>
             <p><strong>Phone Number: </strong> {{ school.phone_number }}</p>
             <p><strong>Website: </strong> <a href="http://{{ school.website }}">{{ school.website }}</a></p>
-            <p><strong>Year Opened: </strong> {{ school.year_opened }}</p>
+            <p><strong>Year Opened: </strong> {{ school.profile.year_opened }}</p>
             <p><strong>Calendar: </strong> {{ school.calendar_year }}</p>
         </div>
         <div class="col-md-6">
-            <p><strong>Theme: </strong> {{ school.theme }}</p>
+            <p><strong>Theme: </strong> {{ school.profile.theme }}</p>
             <p><strong>Average Class Size: </strong> {{ school.avg_class_size }} students</p>
-            <p><strong>Uniform: </strong> {{ school.uniform_required }}</p>
+            <p><strong>Uniform: </strong> {{ school.profile.uniform_required }}</p>
             <p><strong>School Day: </strong> {{ school.school_hours }}</p>
             <p><strong>Extended Care Hours: </strong>{{ school.services.extended_care_hours }}</p>
         </div>
@@ -92,7 +94,7 @@
         <div class="col-md-6">
             <h2>Admission Policy</h2>
             <div class="">
-              <p>{{ school.admission_policy.policy_type }}</p>
+              <p>{{ school.profile.admissions_policy_type }}</p>
               <p><strong>Lottery Priorities</strong>:</p>
               <ol>
                 <li data-ng-repeat="priority in school.admission_policy.lottery_priorities">{{ priority.name }} {{ priority.desc }}</li>

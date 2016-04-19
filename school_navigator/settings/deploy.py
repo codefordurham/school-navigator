@@ -52,7 +52,7 @@ if ENVIRONMENT.upper() == 'LOCAL':
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ADMINS = (
-    ('Colin Copeland', 'ccopeland@codeforamerica.org'),
+    ('Code for Durham', 'school-inspector@googlegroups.com'),
 )
 MANAGERS = ADMINS
 
