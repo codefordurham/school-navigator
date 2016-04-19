@@ -146,4 +146,4 @@ class SchoolDetailSerializer(geo_serializers.GeoModelSerializer):
             return ''
 
     def get_grades(self, obj):
-        return "{0} - {1}".format(obj.get_grade_min_display(), obj.get_grade_max_display())
+        return "{0} - {1}".format(obj.profile.get_grade_min_display(), obj.profile.get_grade_max_display())
