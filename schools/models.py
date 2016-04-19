@@ -120,7 +120,7 @@ class SchoolProfile(models.Model):
     speciality_type = models.TextField(null=True, blank=True)  # Is this still needed?  FIXME
     theme = models.TextField(null=True, blank=True,
             help_text='If your school has a particular theme or focus area, '
-                'please enter the appropriate theme from the following list: '
+                'please enter the appropriate theme.  Typically one from the following list will apply: '
                 'Math & Science, '
                 'Arts, '
                 'Language, '
@@ -128,8 +128,7 @@ class SchoolProfile(models.Model):
                 'Montessori, '
                 'Project-Based, '
                 'Vocational Training, '
-                'Not Applicable - our school is for students of all backgrounds and interests, '
-                'or Other [write in answer] '
+                'or Not Applicable - our school is for students of all backgrounds and interests.'
     )
     uniform_required = models.NullBooleanField(
             help_text='Does your school have a uniform for students?'
@@ -176,8 +175,11 @@ class SchoolProfile(models.Model):
     lunch_free_and_reduced = models.NullBooleanField(
             help_text='Do you participate in the National Free and Reduced Lunch Program?'
     )
-    extended_care_offered = models.NullBooleanField(
-            help_text=' Do you provide before or after care?'
+    before_care_offered = models.NullBooleanField(
+            help_text=' Do you provide before care?'
+    )
+    after_care_offered = models.NullBooleanField(
+            help_text=' Do you provide after care?'
     )
     extended_care_cost = models.TextField(null=True, blank=True, 
             help_text='What is the fee for before and/or after care?'
@@ -207,7 +209,7 @@ class SchoolProfile(models.Model):
     lottery_priority_4 = models.CharField(choices=LOTTERY, max_length=20, blank=True)
     lottery_priority_5 = models.CharField(choices=LOTTERY, max_length=20, blank=True)
     lottery_deadline = models.DateTimeField(null=True, blank=True,
-            help_text='If your school has a lottery, what is the deadline for applying?'                                       
+            help_text='If your school has a lottery, what is the deadline for applying for the 2016-2017 school year?'                                       
     )
     # lottery_acceptance_rate  FIXME
     learn_more_link = models.TextField(null=True, blank=True,
@@ -219,7 +221,7 @@ class SchoolProfile(models.Model):
             help_text='Name of Principal'                                 
     )
     principal_bio = models.TextField(null=True, blank=True,
-            help_text='Please provide a brief bio for the pricipal.'                                
+            help_text='Please provide a brief bio for the principal.'                                
     )
     principal_start_year = models.IntegerField(null=True, blank=True,
             help_text='Year that current principal began at this school:'                                          
@@ -236,7 +238,8 @@ class SchoolProfile(models.Model):
             help_text='Please describe the offerings, staff and additional resources that you have for the Academically & Intellectually Gifted.'
     )
     other_academic = models.TextField(null=True, blank=True,
-            help_text='Please describe any other offerings, staff and additional resources that you provide.'
+            help_text="Please describe any unique offerings, staff and additional resources that relate to your school's academic theme.",
+            verbose_name='Academic theme',
     )
 
     # Extracurricular
@@ -250,7 +253,8 @@ class SchoolProfile(models.Model):
             help_text='Please describe your sports extracurricular offerings.'
     )
     service_leadership = models.TextField(null=True, blank=True,
-            help_text='Please describe your service & leadership extracurricular offerings.'
+            help_text='Please describe your service & leadership extracurricular offerings.',
+            verbose_name='Service & leadership',
     )
     other = models.TextField(null=True, blank=True,
             help_text='Please describe your other extracurricular offerings.'
@@ -270,7 +274,9 @@ class SchoolProfile(models.Model):
     )  # FIXME delete?
 
     # Survey Feedback
-    survey_feedback = models.TextField(null=True, blank=True)
+    survey_feedback = models.TextField(null=True, blank=True,
+            help_text='Thank you for taking the time to complete this survey!  Please let us know if you have any feedback on the process or on specific questions so we can improve next year.'
+    )
 
     submitted_at = models.DateTimeField(null=True, default=None)
     created_at = models.DateTimeField(auto_now_add=True)
