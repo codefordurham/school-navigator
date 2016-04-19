@@ -96,15 +96,6 @@ TRANSPORTATION = (
     ('none', 'We do not provide transportation for students.'),
 )
 
-LOTTERY = (
-    ('a', 'Walk zone (guaranteed admission)'),
-    ('b', 'Siblings of enrolled students'),
-    ('c', 'Children of staff'),
-    ('d', 'General applicant pool'),
-    # FIXME: list the others
-)
-
-
 class SchoolProfile(models.Model):
     school = models.ForeignKey('School')
 
@@ -201,13 +192,13 @@ class SchoolProfile(models.Model):
             'Admission is determined through an open lottery system.'
     )
     # FIXME make lottery_priority_X not a choice field??
-    lottery_priority_1 = models.CharField(choices=LOTTERY, max_length=20, blank=True,
+    lottery_priority_1 = models.CharField(max_length=250, blank=True, null=True,
             help_text='If you have an admissions lottery, please list any groups (one group per box) that are given priority over the general applicant pool in the lottery (e.g. students in the walk zone, siblings of enrolled students, children of staff)'
     )
-    lottery_priority_2 = models.CharField(choices=LOTTERY, max_length=20, blank=True)
-    lottery_priority_3 = models.CharField(choices=LOTTERY, max_length=20, blank=True)
-    lottery_priority_4 = models.CharField(choices=LOTTERY, max_length=20, blank=True)
-    lottery_priority_5 = models.CharField(choices=LOTTERY, max_length=20, blank=True)
+    lottery_priority_2 = models.CharField(max_length=250, blank=True, null=True)
+    lottery_priority_3 = models.CharField(max_length=250, blank=True, null=True)
+    lottery_priority_4 = models.CharField(max_length=250, blank=True, null=True)
+    lottery_priority_5 = models.CharField(max_length=250, blank=True, null=True)
     lottery_deadline = models.DateTimeField(null=True, blank=True,
             help_text='If your school has a lottery, what is the deadline for applying for the 2016-2017 school year?'                                       
     )
