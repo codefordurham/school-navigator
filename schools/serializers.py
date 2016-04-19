@@ -10,7 +10,6 @@ COLOR_MAP = {
     'high': '#4F61AD'
 }
 
-
 class SchoolListSerializer(geo_serializers.GeoModelSerializer):
     eligibility = serializers.SerializerMethodField('get_eligibility')
     preference = serializers.SerializerMethodField('get_preference')
@@ -123,10 +122,14 @@ class SchoolListSerializer(geo_serializers.GeoModelSerializer):
             return u'neighborhood'
         return ''
 
+class SchoolProfileSerilaizer(serializers.ModelSerializer):
+    class Meta:
+        model = schools_models.SchoolProfile
 
 class SchoolDetailSerializer(geo_serializers.GeoModelSerializer):
     color = serializers.SerializerMethodField('get_color')
     survey_hash = serializers.SerializerMethodField('get_survey_hash')
+    profile = SchoolProfileSerilaizer()
 
     class Meta:
         model = schools_models.School
