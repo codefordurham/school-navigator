@@ -4,7 +4,7 @@ from django.db.models import Q
 from rest_framework import generics, serializers
 from rest_framework.exceptions import ParseError
 
-from schools.serializers import SchoolDetailSerializer, SchoolListSerializer
+from schools.serializers import SchoolDetailSerializer, LocalSchoolListSerializer, SchoolListSerializer
 from schools import models as schools_models
 
 class SchoolProfileDetail(generics.RetrieveAPIView):
@@ -27,12 +27,16 @@ class SchoolDetail(generics.RetrieveAPIView):
     model = schools_models.School
     serializer_class = SchoolDetailSerializer
 
-class SchoolAPIView(generics.ListAPIView):
+class SchoolList(generics.ListAPIView):
     model = schools_models.School
     serializer_class = SchoolListSerializer
 
+class LocalSchoolAPIView(generics.ListAPIView):
+    model = schools_models.School
+    serializer_class = LocalSchoolListSerializer
+
     def get_queryset(self):
-        queryset = super(SchoolAPIView, self).get_queryset()
+        queryset = super(LocalSchoolAPIView, self).get_queryset()
         try:
             lat = self.request.GET['latitude']
             lon = self.request.GET['longitude']
@@ -45,17 +49,28 @@ class SchoolAPIView(generics.ListAPIView):
         return queryset
 
     def get_serializer_context(self):
-        context = super(SchoolAPIView, self).get_serializer_context()
+        context = super(LocalSchoolAPIView, self).get_serializer_context()
         context['point'] = self.pt
         return context
 
-class ActiveSchools(SchoolAPIView):
+class AllSchools(SchoolList):
+    """
+    List all active schools.
+    """
+
+    def get_queryset(self):
+        qs = super(AllSchools, self).get_queryset()
+        qs = qs.filter(active=True)
+        qs = qs.order_by('name')
+        return qs
+
+class LocalSchools(LocalSchoolAPIView):
     """
     Both Assigned And Option Schools
     """
 
     def get_queryset(self):
-        qs = super(ActiveSchools, self).get_queryset()
+        qs = super(LocalSchools, self).get_queryset()
         point_in_district = ~Q(district=None) & Q(district__contains=self.pt)
         option_schools = Q(type__in=('speciality', 'charter')) | (Q(type='magnet') & Q(year_round=False))
         # see https://github.com/codefordurham/school-navigator/issues/186

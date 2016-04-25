@@ -1,0 +1,44 @@
+<simple-nav></simple-nav>
+
+<div class="container">
+    <div class="row">
+        <tabs>
+            <tab title="{{ level | uppercase }}" data-ng-repeat="level in levels">
+                <div ng-init="filtered_schools = (all_schools | filter:{level:level})"></div>
+                <div ng-init="schools_per_column = ceil(filtered_schools.length/3)"></div>
+                <div class="row">
+                    <p></p>
+                    <div data-ng-repeat="start in [0, schools_per_column, schools_per_column*2]">
+                        <div ng-init="schools = filtered_schools.slice(start,start+schools_per_column)"></div>
+                        <div class="col-xs-12 col-md-4">
+                            <div class="list-group">
+                                <a class="list-group-item borderless" title="{{ school.mission_statement }}" href="{{ school.website_url }}" data-ng-repeat="school in schools">
+                                  <h4>{{ school.name }}</h4>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </tab>
+            <tab title="{{ type | uppercase }}" data-ng-repeat="type in types">
+                <div ng-init="filtered_schools = (all_schools | filter:{type:type})"></div>
+                <div ng-init="schools_per_column = ceil(filtered_schools.length/3)"></div>
+                <div class="row">
+                    <p></p>
+                    <div data-ng-repeat="start in [0, schools_per_column, schools_per_column*2]">
+                        <div ng-init="schools = filtered_schools.slice(start,start+schools_per_column)"></div>
+                        <div class="col-xs-12 col-md-4">
+                            <div class="list-group">
+                                <a class="list-group-item borderless" title="{{ school.mission_statement }}" href="{{ school.website_url }}" data-ng-repeat="school in schools">
+                                  <h4>{{ school.name }}</h4>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </tab>
+        </tabs>
+    </div>
+ <hr>
+  <footer> <p>&copy; Code For Durham 2016</p> </footer>
+</div> <!-- /container -->
