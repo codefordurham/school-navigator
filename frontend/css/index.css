@@ -110,6 +110,10 @@ img {
     background-color: #4F61AD;
 }
 
+.borderless {
+  border: 0;
+}
+
 .school-group .school-group-item {
     background-color: transparent;
     overflow: hidden;
