@@ -338,62 +338,80 @@ div#schools-wrapper ul.nav li.active a, div#schools-wrapper ul.nav li a:hover {
     width: 200px;
 }
 
-@media only screen and (max-width : 740px) {
-    /* Styles */
-    #leaflet-map,
-    .tooltip {
-        display: none !important;
-    }
-    a#us_report_button {
-        bottom: 0!important;
-    }
-    #logo h1 {
-        font-size: 16px;
-        left: 0;
-    }
-    #search-form {
-        top: 80px;
-        left: 10px;
-        width: 100%;
-        z-index: 0;
-    }
-    #search-box {
-        width: 65%;
-        float: left;
-    }
-    #schools-wrapper {
-        position: absolute;
-        z-index: 0;
-        top: 150px;
-        left: 10px;
-        width: 95%;
-        background: rgb(255, 255, 255);
-    }
-    div#schools-wrapper ul.nav li a {
-        font-size: 14px;
-    }
-    .nav-tabs.nav-justified>li {
-        float: left;
-    }
-    .school-group .school-group-item .school-group-item-heading {
-         width: auto;
-    }
-    .school_point {
-        display: none !important;
-    }
-    .school-group .school-group-item .school-group-item-heading h4 {
-        font-size: 16px;
-        word-wrap: break-word;
-    }
-    .school-group .school-group-item .distance {
-        top: 5px;
-    }
-    #my-schools {
-        overflow-y: visible;
-    }
-    /*.content-row#simple-nav {*/
-    /*}*/
-}
+                @media only screen and (max-width : 740px) {
+                    /* Styles */
+
+                    /*#leaflet-map,
+                    .tooltip {
+                        display: none !important;
+                    }*/
+                    /*.tooltip{
+                      display: none !important;
+                    }*/
+
+
+                    .content-row#simple-nav {
+                    flex: 4 1 auto;
+                    overflow-y:visible;;
+                    }
+
+                    #leaflet-map {
+                      width: 100%;
+                      height: 400px;
+                    }
+
+
+
+                    a#us_report_button {
+                        bottom: 0!important;
+                    }
+                    #logo h1 {
+                        font-size: 16px;
+                        left: 0;
+                    }
+                    #search-form {
+                        top: 55px;
+                        left: 10px;
+                        width: 100%;
+                        z-index: 0;
+                    }
+                    #search-box {
+                        width: 65%;
+                        float: left;
+                    }
+                    #schools-wrapper {
+                        position: static;
+                        z-index: 0;
+                        top: 150px;
+                        left: 10px;
+                        width: 95%;
+                        background: rgb(255, 255, 255);
+                    }
+                    div#schools-wrapper ul.nav li a {
+                        font-size: 14px;
+                    }
+                    .nav-tabs.nav-justified>li {
+                        float: left;
+                    }
+                    .school-group .school-group-item .school-group-item-heading {
+                         width: auto;
+                    }
+                    .school_point {
+                        display: none !important;
+                    }
+                    .school-group .school-group-item .school-group-item-heading h4 {
+                        font-size: 16px;
+                        word-wrap: break-word;
+                    }
+                    .school-group .school-group-item .distance {
+                        top: 5px;
+                    }
+                    #my-schools {
+                        overflow-y: visible;
+                    }
+                    /*.content-row#simple-nav {*/
+                    /*}*/
+                }
 
 
  /*SCHOOL DETAIL PAGE*/
