@@ -463,3 +463,12 @@ app.filter('gradeString', [function() {
       return gradeNames[gradeNumber + 2];
     }
 }]);
+
+app.filter('true_false', function() {
+    return function(text, length, end) {
+        if (text) {
+            return 'Yes';
+        }
+        return 'No';
+    }
+});

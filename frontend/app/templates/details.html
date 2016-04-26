@@ -22,16 +22,16 @@
                 <h2>Points of Pride</h2>
                 <div class="">
                     <ol>
-                        <li data-ng-repeat="point in school.points_of_pride">{{ school.profile.points_of_pride1 }}</li>
-                        <li data-ng-repeat="point in school.points_of_pride">{{ school.profile.points_of_pride3 }}</li>
-                        <li data-ng-repeat="point in school.points_of_pride">{{ school.profile.points_of_pride3 }}</li>
+                        <li data-ng-show="school.profile.points_of_pride1">{{ school.profile.points_of_pride1 }}</li>
+                        <li data-ng-show="school.profile.points_of_pride2">{{ school.profile.points_of_pride3 }}</li>
+                        <li data-ng-show="school.profile.points_of_pride3">{{ school.profile.points_of_pride3 }}</li>
                     </ol>
                 </div>
           <h2>School Services</h2>
           <p>This school provides the following services to students:</p>
             <p><strong>Transportation: </strong> <span title="Transportation provided">{{ school.profile.transportation_display }}</span></p>
-            <p><strong>Lunch: </strong><span title="Lunch provided">{{ school.profile.lunch_served }}</span></p>
-            <p><strong>Breakfast: </strong><span title="Breakfast provided">{{ school.profile.breakfast_served }}</span></p>
+            <p><strong>Lunch: </strong><span title="Lunch provided">{{ school.profile.lunch_served_display }}</span></p>
+            <p><strong>Breakfast: </strong><span title="Breakfast provided">{{ school.profile.breakfast_served_display }}</span></p>
             </div>
         </div>
 
@@ -46,16 +46,14 @@
         </div>
         <div class="col-md-6">
             <p><strong>Address: </strong> {{ school.address }}</p>
-            <p><strong>Phone Number: </strong> {{ school.phone_number }}</p>
-            <p><strong>Website: </strong> <a href="http://{{ school.website }}">{{ school.website }}</a></p>
+            <p><strong>Phone Number: </strong> {{ school.profile.phone_number }}</p>
+            <p><strong>Website: </strong> <a href="http://{{ school.profile.website_url }}">{{ school.profile.website_url }}</a></p>
             <p><strong>Year Opened: </strong> {{ school.profile.year_opened }}</p>
-            <p><strong>Calendar: </strong> {{ school.calendar_year }}</p>
         </div>
         <div class="col-md-6">
             <p><strong>Theme: </strong> {{ school.profile.theme }}</p>
-            <p><strong>Average Class Size: </strong> {{ school.avg_class_size }} students</p>
-            <p><strong>Uniform: </strong> {{ school.profile.uniform_required }}</p>
-            <p><strong>School Day: </strong> {{ school.school_hours }}</p>
+            <p><strong>Uniform: </strong> {{ school.profile.uniform_required | true_false }}</p>
+            <p><strong>School Day: </strong> {{ school.profile.school_hours }}</p>
             <p><strong>Extended Care Hours: </strong>{{ school.services.extended_care_hours }}</p>
         </div>
     </div>
@@ -96,15 +94,21 @@
             <div class="">
               <p>{{ school.profile.admissions_policy_type }}</p>
               <p><strong>Lottery Priorities</strong>:</p>
-              <ol>
-                <li data-ng-repeat="priority in school.admission_policy.lottery_priorities">{{ priority.name }} {{ priority.desc }}</li>
-              </ol>
+                <div class="">
+                    <ol>
+                        <li data-ng-show="school.profile.get_lottery_priority_1_display">{{ school.profile.get_lottery_priority_1_display }}</li>
+                        <li data-ng-show="school.profile.get_lottery_priority_2_display">{{ school.profile.get_lottery_priority_2_display }}</li>
+                        <li data-ng-show="school.profile.get_lottery_priority_3_display">{{ school.profile.get_lottery_priority_3_display }}</li>
+                        <li data-ng-show="school.profile.get_lottery_priority_4_display">{{ school.profile.get_lottery_priority_4_display }}</li>
+                        <li data-ng-show="school.profile.get_lottery_priority_5_display">{{ school.profile.get_lottery_priority_5_display }}</li>
+                    </ol>
+                </div>
                 <p><strong>Acceptance rate</strong></p>
-                <p>{{ school.admission_policy.lottery_acceptance_rate }}</p>
+                <p>{{ school.profile.learn_more_link }}</p>
                 <p><strong>Deadline</strong></p>
-                <p>{{ school.admission_policy.lottery_deadline }}</p>
+                <p>{{ school.profile.lottery_deadline | date:format:'MMMM d, y' }}</p>
                 <p><strong>Applying</strong></p>
-                <a class="btn btn-success" href="{{ school.admission_policy.learn_more }}">Learn more</a>
+                <a class="btn btn-success" href="{{ school.profile.learn_more_link }}">Learn more</a>
             </div>
 
         </div>
@@ -124,10 +128,9 @@
 
             <div class="">
                 <p><strong>PTA: </strong>
-                    <span data-ng-if="school.parent_involvement.pta">Yes</span>
-                    <span data-ng-hide="school.parent_involvement.pta">No</span>
+                    <span>{{ school.profile.pta | true_false }}</span>
                 </p>
-                <p data-ng-if="school.parent_involvement.learn_more"><a href="{{ school.parent_involvement.learn_more }}">Learn more about this school's PTA</a></p>
+                <p data-ng-if="school.parent_involvement.learn_more"><a href="{{ school.profile.pta_website }}">Learn more about this school's PTA</a></p>
             </div>
 
         </div>

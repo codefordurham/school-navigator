@@ -138,15 +138,25 @@ class LocalSchoolListSerializer(SchoolListSerializer):
 
 
 class SchoolProfileSerilaizer(serializers.ModelSerializer):
+    lunch_served_display = serializers.CharField(source='get_lunch_served_display')
+    transportation_display = serializers.CharField(source='get_transportation_display')
+    breakfast_served_display = serializers.CharField(source='get_breakfast_served_display')
+    get_lottery_priority_1_display = serializers.CharField(source='get_lottery_priority_1_display')
+    get_lottery_priority_2_display = serializers.CharField(source='get_lottery_priority_2_display')
+    get_lottery_priority_3_display = serializers.CharField(source='get_lottery_priority_3_display')
+    get_lottery_priority_4_display = serializers.CharField(source='get_lottery_priority_4_display')
+    get_lottery_priority_5_display = serializers.CharField(source='get_lottery_priority_5_display')
+
     class Meta:
         model = schools_models.SchoolProfile
+
+
 
 class SchoolDetailSerializer(geo_serializers.GeoModelSerializer):
     color = serializers.SerializerMethodField('get_color')
     survey_hash = serializers.SerializerMethodField('get_survey_hash')
     grades = serializers.SerializerMethodField('get_grades')
-    transportation_display = serializers.SerializerMethodField('get_transportation_display')
-    school_type = serializers.SerializerMethodField('get_school_type')
+    school_type = serializers.CharField(source='get_type_display')
     profile = SchoolProfileSerilaizer()
 
     class Meta:
@@ -164,9 +174,3 @@ class SchoolDetailSerializer(geo_serializers.GeoModelSerializer):
 
     def get_grades(self, obj):
         return "{0} - {1}".format(obj.profile().get_grade_min_display(), obj.profile().get_grade_max_display())
-
-    def get_school_type(self, obj):
-        return obj.get_type_display()
-
-    def get_transportation_display(self, obj):
-        return obj.profile().get_transportation_display()
