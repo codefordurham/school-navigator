@@ -20,8 +20,9 @@ def send_email(school, request):
     school_profile_url = request.build_absolute_uri(school_profile.get_absolute_url())
 
     context = {
+        'school': school,
+        'school_profile': school_profile,
         'principal_name': school_profile.principal_name,
-        'due_date': school_profile.due_date(),
         'school_profile_url': school_profile_url,
     }
     body = render_to_string('survey_email.txt', context)
