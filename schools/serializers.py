@@ -146,9 +146,27 @@ class SchoolProfileSerilaizer(serializers.ModelSerializer):
     get_lottery_priority_3_display = serializers.CharField(source='get_lottery_priority_3_display')
     get_lottery_priority_4_display = serializers.CharField(source='get_lottery_priority_4_display')
     get_lottery_priority_5_display = serializers.CharField(source='get_lottery_priority_5_display')
+    lunch_free_and_reduced = serializers.SerializerMethodField('free_and_reduced_display')
+    breakfast_free_and_reduced = serializers.SerializerMethodField('breakfast_free_and_reduced_display')
+    # extended_care_offered = serializers.SerializerMethodField('extended_care_offered_display')
 
     class Meta:
         model = schools_models.SchoolProfile
+
+    def free_and_reduced_display(self, obj):
+        if obj.lunch_free_and_reduced:
+            return "This school participates in the National Free and Reduced Lunch Program."
+        return "This school does not participates in the National Free and Reduced Lunch Program."
+
+    def breakfast_free_and_reduced_display(self, obj):
+        if obj.lunch_free_and_reduced:
+            return "This school participates in the National Free and Reduced Breakfast Program."
+        return "This school does not participates in the National Free and Reduced Breakfast Program."
+
+    # def extended_care_offered_display(self, obj):
+    #     if obj.lunch_free_and_reduced:
+    #         return "This school offers before."
+    #     return "This school does not offer ."
 
 
 
