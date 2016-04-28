@@ -399,6 +399,7 @@ __________
     fab production encrypt:SECRET_KEY=`make generate-secret length=64`
     fab production encrypt:BROKER_PASSWORD=`make generate-secret`
     fab production encrypt:NEW_RELIC_LICENSE_KEY='<fill-me-in>'
+    fab production encrypt:EMAIL_HOST_PASSWORD='<fill-me-in>'
     fab production encrypt:production-ssl.key && cat production-ssl.key.asc
     fab production encrypt:production-ssl.cert && cat production-ssl.cert.asc
 
