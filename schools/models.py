@@ -1,6 +1,7 @@
 from django.contrib.gis.db import models
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.utils import timezone
 
 from hashids import Hashids
 
@@ -283,6 +284,10 @@ class SchoolProfile(models.Model):
 
     def due_date(self):
         return (self.created_at + datetime.timedelta(30)).date()
+
+    def overdue(self):
+        tomorrow = (timezone.now() + datetime.timedelta(days=1)).date()
+        return self.due_date() < tomorrow
 
     def url(self):
         hashids = Hashids(salt=settings.SECRET_KEY, min_length=10)
