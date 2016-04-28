@@ -30,7 +30,7 @@
                 <p><strong>Transportation: </strong> <span title="Transportation provided">{{ school.profile.transportation_display }} {{ school.profile.transportation_explanation }}</span></p>
                 <p><strong>Lunch: </strong><span title="Lunch provided">{{ school.profile.lunch_served_display }}</span> {{ school.profile.lunch_free_and_reduced }} {{ school.profile.lunch_explanation }}</p>
                 <p><strong>Breakfast: </strong><span title="Breakfast provided">{{ school.profile.breakfast_served_display }}</span> {{ school.profile.breakfast_free_and_reduced }} {{ school.profile.breakfast_explanation }}</p>
-                <p><strong>Extended care: </strong><span title="extended care provided">{{ school.profile.extended_care_offered }}</span></p>
+                <p><strong>Extended care: </strong><span title="extended care provided">{{ school.profile.before_care_offered }} {{ school.profile.after_care_offered }}</span></p>
             </div>
         </div>
 
@@ -85,11 +85,11 @@
               <p><strong>Lottery Priorities</strong>:</p>
                 <div class="">
                     <ol>
-                        <li data-ng-show="school.profile.get_lottery_priority_1_display">{{ school.profile.get_lottery_priority_1_display }}</li>
-                        <li data-ng-show="school.profile.get_lottery_priority_2_display">{{ school.profile.get_lottery_priority_2_display }}</li>
-                        <li data-ng-show="school.profile.get_lottery_priority_3_display">{{ school.profile.get_lottery_priority_3_display }}</li>
-                        <li data-ng-show="school.profile.get_lottery_priority_4_display">{{ school.profile.get_lottery_priority_4_display }}</li>
-                        <li data-ng-show="school.profile.get_lottery_priority_5_display">{{ school.profile.get_lottery_priority_5_display }}</li>
+                        <li data-ng-show="school.profile.lottery_priority_1">{{ school.profile.lottery_priority_1 }}</li>
+                        <li data-ng-show="school.profile.lottery_priority_2">{{ school.profile.lottery_priority_2 }}</li>
+                        <li data-ng-show="school.profile.lottery_priority_3">{{ school.profile.lottery_priority_3 }}</li>
+                        <li data-ng-show="school.profile.lottery_priority_4">{{ school.profile.lottery_priority_4 }}</li>
+                        <li data-ng-show="school.profile.lottery_priority_5">{{ school.profile.lottery_priority_5 }}</li>
                     </ol>
                 </div>
                 <p><strong>Acceptance rate</strong></p>
