@@ -8,7 +8,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <p class="lead">{{ school.school_type }} &mdash; Grades {{ school.grades }} &mdash;</p>
+            <p class="lead">{{ school.school_type }} | {{ school.grades }}</p>
         </div>
     </div>
 
@@ -16,9 +16,7 @@
         <div class="col-md-6">
             <div class="school-details">
                 <h2>Mission</h2>
-                <div class="">
-                {{ school.profile.mission_statement }}
-                </div>
+                <div class="">{{ school.profile.mission_statement }}</div>
                 <h2>Points of Pride</h2>
                 <div class="">
                     <ol>
@@ -27,16 +25,17 @@
                         <li data-ng-show="school.profile.points_of_pride3">{{ school.profile.points_of_pride3 }}</li>
                     </ol>
                 </div>
-          <h2>School Services</h2>
-          <p>This school provides the following services to students:</p>
-            <p><strong>Transportation: </strong> <span title="Transportation provided">{{ school.profile.transportation_display }}</span></p>
-            <p><strong>Lunch: </strong><span title="Lunch provided">{{ school.profile.lunch_served_display }}</span></p>
-            <p><strong>Breakfast: </strong><span title="Breakfast provided">{{ school.profile.breakfast_served_display }}</span></p>
+                <h2>School Services</h2>
+                <p>This school provides the following services to students:</p>
+                <p><strong>Transportation: </strong> <span title="Transportation provided">{{ school.profile.transportation_display }} {{ school.profile.transportation_explanation }}</span></p>
+                <p><strong>Lunch: </strong><span title="Lunch provided">{{ school.profile.lunch_served_display }}</span> {{ school.profile.lunch_free_and_reduced }} {{ school.profile.lunch_explanation }}</p>
+                <p><strong>Breakfast: </strong><span title="Breakfast provided">{{ school.profile.breakfast_served_display }}</span> {{ school.profile.breakfast_free_and_reduced }} {{ school.profile.breakfast_explanation }}</p>
+                <p><strong>Extended care: </strong><span title="extended care provided">{{ school.profile.before_care_offered }} {{ school.profile.after_care_offered }}</span></p>
             </div>
         </div>
 
         <div class="col-md-6">
-            <img data-ng-src="{{ school.photo }}" />
+            <img data-ng-src="http://durhamme.com/wp-content/uploads/2010/09/durham_maine_school2.jpg" />
         </div>
     </div>
 
@@ -63,10 +62,9 @@
             <h2>School Leadership</h2>
 
             <div class="bio">
-                <h3>{{ school.school_leadership.name }}</h3>
-                <p class="lead" title="Year of service">(since {{ school.school_leadership.years_of_service }})</p>
+                <p>{{ school.profile.principal_name }} (since {{ school.profile.principal_start_year }})</p>
                 <div class="">
-                    {{ school.school_leadership.bio }}
+                    {{ school.profile.english_language_learner }}
                 </div>
             </div>
 
@@ -75,16 +73,7 @@
             <h2>Teacher Satisfaction</h2>
             <p>The following percentage of teachers responded that they "agree" or "strongly agree" to the following statements</p>
             <div class="metrics">
-                <div class="metric" data-ng-repeat="(question, percentage) in school.teacher_satisfaction">
-                    <p class="score">{{ percentage.0 }}%</p>
-                    <p><em>{{ question }}</em></p>
-                    <div class="avgline">
-                        <span class="actual" style="width:{{ percentage.0 }}%;"></span>
-                        <span class="avg" style="left:{{ percentage.1 }}%;">|<br>Durham Public Schools Avg.</span>
-                    </div>
-                </div>
-            </div>
-            <p><small>{{ school.survey.percent }}% of {{ school.name }}'s teachers answered these questions and more in the <a href="{{ school.survey.link }}">{{ school.survey.year }} {{ school.survey.name }}</a></small>
+                <h3>Coming soon from North Carolina Teacher Working Conditions survey</h3>
         </div>
     </div>
 
@@ -96,11 +85,11 @@
               <p><strong>Lottery Priorities</strong>:</p>
                 <div class="">
                     <ol>
-                        <li data-ng-show="school.profile.get_lottery_priority_1_display">{{ school.profile.get_lottery_priority_1_display }}</li>
-                        <li data-ng-show="school.profile.get_lottery_priority_2_display">{{ school.profile.get_lottery_priority_2_display }}</li>
-                        <li data-ng-show="school.profile.get_lottery_priority_3_display">{{ school.profile.get_lottery_priority_3_display }}</li>
-                        <li data-ng-show="school.profile.get_lottery_priority_4_display">{{ school.profile.get_lottery_priority_4_display }}</li>
-                        <li data-ng-show="school.profile.get_lottery_priority_5_display">{{ school.profile.get_lottery_priority_5_display }}</li>
+                        <li data-ng-show="school.profile.lottery_priority_1">{{ school.profile.lottery_priority_1 }}</li>
+                        <li data-ng-show="school.profile.lottery_priority_2">{{ school.profile.lottery_priority_2 }}</li>
+                        <li data-ng-show="school.profile.lottery_priority_3">{{ school.profile.lottery_priority_3 }}</li>
+                        <li data-ng-show="school.profile.lottery_priority_4">{{ school.profile.lottery_priority_4 }}</li>
+                        <li data-ng-show="school.profile.lottery_priority_5">{{ school.profile.lottery_priority_5 }}</li>
                     </ol>
                 </div>
                 <p><strong>Acceptance rate</strong></p>
@@ -156,6 +145,7 @@
     </div>
     <div class="row map-row">
         <div class="col-md-6">
+            <h2>State Report Card</h2>
             <p><a href="{{ school.report_card_link }}">To view the state report card for this school, click here.</a></p>
         </div>
     </div>

@@ -141,15 +141,38 @@ class SchoolProfileSerilaizer(serializers.ModelSerializer):
     lunch_served_display = serializers.CharField(source='get_lunch_served_display')
     transportation_display = serializers.CharField(source='get_transportation_display')
     breakfast_served_display = serializers.CharField(source='get_breakfast_served_display')
-    get_lottery_priority_1_display = serializers.CharField(source='get_lottery_priority_1_display')
-    get_lottery_priority_2_display = serializers.CharField(source='get_lottery_priority_2_display')
-    get_lottery_priority_3_display = serializers.CharField(source='get_lottery_priority_3_display')
-    get_lottery_priority_4_display = serializers.CharField(source='get_lottery_priority_4_display')
-    get_lottery_priority_5_display = serializers.CharField(source='get_lottery_priority_5_display')
+    lottery_priority_1 = serializers.CharField()
+    lottery_priority_2 = serializers.CharField()
+    lottery_priority_3 = serializers.CharField()
+    lottery_priority_4 = serializers.CharField()
+    lottery_priority_5 = serializers.CharField()
+    lunch_free_and_reduced = serializers.SerializerMethodField('free_and_reduced_display')
+    breakfast_free_and_reduced = serializers.SerializerMethodField('breakfast_free_and_reduced_display')
+    before_care_offered = serializers.SerializerMethodField('before_care_offered_display')
+    after_care_offered = serializers.SerializerMethodField('after_care_offered_display')
 
     class Meta:
         model = schools_models.SchoolProfile
 
+    def free_and_reduced_display(self, obj):
+        if obj.lunch_free_and_reduced:
+            return "This school participates in the National Free and Reduced Lunch Program."
+        return "This school does not participates in the National Free and Reduced Lunch Program."
+
+    def breakfast_free_and_reduced_display(self, obj):
+        if obj.lunch_free_and_reduced:
+            return "This school participates in the National Free and Reduced Breakfast Program."
+        return "This school does not participates in the National Free and Reduced Breakfast Program."
+
+    def before_care_offered_display(self, obj):
+        if obj.before_care_offered:
+            return "This school offers before care."
+        return "This school does not offer before care."
+
+    def after_care_offered_display(self, obj):
+        if obj.after_care_offered:
+            return "This school offers after care."
+        return "This school does not offer after care."
 
 
 class SchoolDetailSerializer(geo_serializers.GeoModelSerializer):
