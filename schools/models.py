@@ -28,7 +28,7 @@ class School(models.Model):
     address = models.CharField(max_length=100, blank=True)
     zip_code = models.CharField(max_length=5, blank=True)
     active = models.BooleanField(default=False)
-    photo = models.ImageField(null=True, blank=True)
+    photo = models.ImageField(upload_to="school_photos/",null=True, blank=True)
     principal_email = models.CharField(max_length=100, null=True, blank=True)
 
     type = models.CharField(choices=SCHOOL_TYPES, max_length=20)
@@ -108,8 +108,8 @@ class SchoolProfile(models.Model):
 
     level = models.CharField(choices=SCHOOL_LEVELS, max_length=20)
     school_hours = models.TextField(null=True, blank=True)
-    grade_min = models.IntegerField(choices=GRADE_LEVELS)
-    grade_max = models.IntegerField(choices=GRADE_LEVELS)
+    grade_min = models.IntegerField(choices=GRADE_LEVELS, default=-2)
+    grade_max = models.IntegerField(choices=GRADE_LEVELS, default=-2)
     website_url = models.CharField(max_length=500, blank=True, null=True)
     phone_number = models.TextField(null=True, blank=True,
             help_text='Please enter phone number in the format (919) XXX-XXXX.')
