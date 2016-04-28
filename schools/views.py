@@ -4,6 +4,8 @@ from schools import models as schools_models
 from django.shortcuts import render
 from django.http import Http404
 
+from django.utils import timezone
+
 def survey_form(request, hash):
     try:
         pk = schools_models.SchoolProfile.decode_url(hash)
