@@ -323,7 +323,7 @@ def encrypt(*args, **kwargs):
         for name, value in kwargs.items():
             updates[name] = '{}'.format(
                 local(
-                    'echo -n "{}" | '
+                    '/bin/echo -n "{}" | '
                     'gpg --no-default-keyring --keyring {} '
                     '--trust-model always -aer {}_salt_key'.format(
                         value, temp_key, env.environment), capture=True))
