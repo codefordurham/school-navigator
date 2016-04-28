@@ -106,9 +106,11 @@
             <div class="col-md-6">
                 <h2>Targeted Academic Offerings</h2>
                 <div class="">
-                    <ul>
-                        <li data-ng-repeat="offering in school.targeted_academics"><strong class="title-case">{{ offering.name }}</strong>: {{ offering.desc }}</li>
-                    </ul>
+                    <p>Staff and additional resources that you have for:</p>
+                    <p><strong>Your Academic Theme: </strong> {{ school.profile.other_academic }}</p>
+                    <p><strong>English Language Learners: </strong> {{ school.profile.english_language_learner }}</p>
+                    <p><strong>Exceptional Children: </strong> {{ school.profile.special_education }}</p>
+                    <p><strong>Academically & Intellectually Gifted: </strong> {{ school.profile.gifted_education }}</p>
                 </div>
             </div>
         </div>
@@ -128,9 +130,11 @@
             </div>
             <div class="col-md-6">
                 <h2>Extracurricular Offerings</h2>
-                <ul>
-                    <li data-ng-repeat="offering in school.other_programs"><strong class="title-case">{{ offering.name }}</strong>: {{ offering.desc }}</li>
-                </ul>
+                <p><strong>Academic: </strong> {{ school.profile.academic }}</p>
+                <p><strong>Arts: </strong> {{ school.profile.arts }}</p>
+                <p><strong>Sports: </strong> {{ school.profile.sports }}</p>
+                <p><strong>Service & leadership: </strong> {{ school.profile.service_leadership }}</p>
+                <p><strong>Other: </strong> {{ school.profile.other }}</p>
             </div>
         </div>
 
