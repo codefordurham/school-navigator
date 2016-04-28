@@ -1,11 +1,8 @@
-from datetime import timedelta
-
 from schools import forms as schools_forms
 from schools import models as schools_models
 
 from django.shortcuts import render
 from django.http import Http404
-from django.utils import timezone
 
 def survey_form(request, hash):
     try:
@@ -14,10 +11,8 @@ def survey_form(request, hash):
         raise Http404("Survey does not exist")
 
     profile = schools_models.SchoolProfile.objects.get(pk=pk)
-    tomorrow = (timezone.now() + timedelta(days=1)).date()
-    overdue = profile.due_date() < tomorrow
 
-    if overdue:
+    if profile.overdue():
         raise Http404("Survey Period Has Closed")
 
     if request.POST:
