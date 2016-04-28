@@ -9,3 +9,6 @@ users:
   ablemann:
     public_key:
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC8VOj3av7O1K7eQvEVgqDSjcZP4vtY88xhYRZvEg0qH2NK8cirXbQHV+AxB95zxXkD7I0J1WoTATNygeAFUEuvr1HovGARsFokF/FwEVJCWcV8RsK3Ra3NaGuASn1o5ZOl63VXFhQvb0Sm4cc0Pa1EJZnyQ6nF2eMrmmw7LlxYZF+R22gXr5MzKX8cmXrIeKP6vkiMXTV581XDWrYiDwAsWuhBK0m8xjVdDVKbF97gk98BzGMZafBrU2YcN9XtQgwZYkKDbfaSy3eea4PghKmPb3B+j7jwAKWIPjKQo3ShoZTmsGhcVjTIAfK/oIt4y2XsMO6mPCi3bOiC7xYouqjZ ablemann@mba4.caktus.lan
+  jeremy:
+    public_key:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC8TRUcv9unoe3fmt+2DhpWIYGTA/p8hm9o5vFseHJxUyLDmhG2CcxDvePcD+sl+JGbptXqnbAzDayJxd9B2cdRxPb1Q1c0gh2jEWRZ+b9otXyjekKNNZNzBSgakD+OREIRY4BMD+xrIe0ZVfr5+iGSGtXwrM3MZ7Eud/0bByYup6Ymu+lvu57H011QIyj6JE/hSMA8xIkJy5A2SbQ+DzZLx3IuWmrhOd14LXebWd5jpZ0XECShgjpli8R51CrjJ/KUP0mxOUK63wnbmcrxEOmBZaOKDKPM7Aq7G9Q5FefHJf7w6w3ezAxMK+lpAjc0uH5c7RJirnGeiuhFhLKqc5ul jeremy@172-20-0-124.caktus.lan
