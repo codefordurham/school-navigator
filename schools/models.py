@@ -262,8 +262,8 @@ class SchoolProfile(models.Model):
 
     # Parent Involvement
     pta = models.NullBooleanField(
-            help_text='Do you have a Parent Teacher Association?',
-            verbose_name='PTA',
+            help_text='Do you have a Parent Teacher Association or Parent Teacher Organization?',
+            verbose_name='PTA/PTO',
     )
     pta_website = models.TextField(null=True, blank=True,
             help_text='If yes, please share the website or social media page for the PTA.',
