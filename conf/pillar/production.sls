@@ -81,6 +81,20 @@ secrets:
     bjSgtwVr1ewZZ35WXsWLC78HZGsjMNhyOREbwZv00Mw8Pu93
     =typs
     -----END PGP MESSAGE-----
+  "EMAIL_HOST_PASSWORD": |-
+    -----BEGIN PGP MESSAGE-----
+    Version: GnuPG v1
+
+    hQEMA8VrrxEeDTagAQf9GWBBIUEQb1r93KPllR/mMREBTQYkwdqDpU8Z53XpyidN
+    gscU1oqExdic63ig0ChHnLZ+oGwat4TjrqzXF+uru7sEUCqHr2KNUOfxn/nIS83H
+    fSFlXG0R1N0gzQgkcpVI171Jl2qLBMG9MLfOROtGAI8jUa1xvzspjHyrkY9YW6pl
+    Dn8TnC2wvzVoYM5CbEhUwQ8G8jWW7sKssw1Zr94jeVRWGUgV373D+FdPhbXQJyE/
+    jTzbszrwE/5G0JIO/UQlteWeL2w6J9BZUAx07wLRHPEeLi88G8xfbAVGY4FQt6VV
+    +jAQkE7ZYVF5Sowz/dR11W6Tn9peVpv/YI2epVtLPNJnAUBVIjsX+sI17O2vHtzu
+    ivxmp3+jIaDfxx0cM5haynKEFQaipHdqSIHc8hNoMXLeoy98pH1zS8WC3f0YWoKg
+    FOx60IB/mi9NpsG5tW+L1lKg3Wat4m1LRo6IP51CEIJv+Iv2iSD10g==
+    =ToBn
+    -----END PGP MESSAGE-----
 
 # Private deploy key. Must be GPG encrypted.
 # github_deploy_key: |-

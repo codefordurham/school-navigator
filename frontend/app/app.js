@@ -41,7 +41,8 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
             templateUrl: 'app/templates/magnet.html'
             })
         .when('/schools', {
-            templateUrl: 'app/templates/navigating.html'
+            controller: 'schoolsListCtrl',
+            templateUrl: 'app/templates/schools.html'
             })
         .when('search', {
         })
@@ -52,8 +53,17 @@ angular.module('SchoolsApp.services', [])
         var endpoint = location.search.indexOf('env') === -1? 'https://durhamschoolnavigator.org' : 'http://localhost:8001',
             url;
 
-        this.get_schools = function(location) {
+        this.get_all_schools = function(location) {
           url = endpoint + '/api/schools/';
+          var params = {
+              method: 'GET',
+              url: url
+          };
+          return $http(params);
+        };
+
+        this.get_local_schools = function(location) {
+          url = endpoint + '/api/schools/local/';
           return $http({
               method: 'GET',
               url: url,
@@ -83,6 +93,9 @@ angular.module('SchoolsApp.services', [])
 angular.module('SchoolsApp.geoDecoder', [])
     .service('Geodecoder', google.maps.Geocoder);
 
+
+var levels = ['elementary', 'secondary', 'middle', 'high'];
+var types = ['speciality', 'magnet'];
 
 angular.module('SchoolsApp.controllers', ["leaflet-directive"])
     .controller('schoolsDetailCtrl', ['$scope', '$routeParams', 'Schools',
@@ -121,6 +134,16 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
                   }
                 };
                 angular.extend($scope.school);
+            });
+        }
+    ])
+    .controller('schoolsListCtrl', ['$scope', 'Schools',
+        function($scope, Schools) {
+            Schools.get_all_schools().success(function(data) {
+              $scope.all_schools = data;
+              $scope.levels = levels;
+              $scope.types = types;
+              $scope.ceil = Math.ceil;
             });
         }
     ])
@@ -236,7 +259,7 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
               'middle': '#3F899E',
               'high': '#4F61AD'
             },
-            levels: ['elementary', 'secondary', 'middle', 'high'],
+            levels: levels,
             zoneTypes: {
               'district': { color: 'black', label: 'Neighborhood' },
               'traditional_option_zone': { color: 'purple', label: 'Traditional Option'},
@@ -267,7 +290,7 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
             $scope.markers.home.lat = $scope.durham.lat = $scope.position.lat = Number(lat);
             $scope.markers.home.lng = $scope.durham.lng = $scope.position.lng = Number(lng);
             $location.search({lat: lat, lng: lng, addr: $scope.address});
-            Schools.get_schools($scope.position).success(function(data) {
+            Schools.get_local_schools($scope.position).success(function(data) {
               loadMarkers(data);
             });
           }
@@ -385,7 +408,53 @@ angular.module('SchoolsApp.directives', [])
               });
           }
       };
-    }]);
+    }])
+    .directive('tabs', function() {
+      return {
+        restrict: 'E',
+        transclude: true,
+        scope: {},
+        controller: [ "$scope", function($scope) {
+          var panes = $scope.panes = [];
+
+          $scope.select = function(pane) {
+            angular.forEach(panes, function(pane) {
+              pane.selected = false;
+            });
+            pane.selected = true;
+          }
+
+          this.addPane = function(pane) {
+            if (panes.length == 0) $scope.select(pane);
+            panes.push(pane);
+          }
+        }],
+        template:
+          '<div class="tabbable">' +
+            '<ul class="nav nav-tabs">' +
+              '<li ng-repeat="pane in panes" ng-class="{active:pane.selected}">'+
+                '<a href="" ng-click="select(pane)">{{pane.title}}</a>' +
+              '</li>' +
+            '</ul>' +
+            '<div class="tab-content" ng-transclude></div>' +
+          '</div>',
+        replace: true
+      };
+    }).directive('tab', function() {
+      return {
+        require: '^tabs',
+        restrict: 'E',
+        transclude: true,
+        scope: { title: '@' },
+        link: function(scope, element, attrs, tabsCtrl) {
+          tabsCtrl.addPane(scope);
+        },
+        template:
+          '<div class="tab-pane" ng-class="{active: selected}" ng-transclude>' +
+          '</div>',
+        replace: true
+      };
+    });
 
 app.filter('gradeString', [function() {
     var gradeNames = ['PreK3', 'PreK4', 'K', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -394,3 +463,12 @@ app.filter('gradeString', [function() {
       return gradeNames[gradeNumber + 2];
     }
 }]);
+
+app.filter('true_false', function() {
+    return function(text, length, end) {
+        if (text) {
+            return 'Yes';
+        }
+        return 'No';
+    }
+});

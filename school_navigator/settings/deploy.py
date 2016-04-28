@@ -29,6 +29,11 @@ CACHES = {
     }
 }
 
+EMAIL_HOST = "email-smtp.us-east-1.amazonaws.com"
+EMAIL_HOST_USER = "AKIAJ7B33FCWH5FMSOBA"
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 EMAIL_SUBJECT_PREFIX = '[School_Navigator %s] ' % ENVIRONMENT.title()
 DEFAULT_FROM_EMAIL = 'noreply@%(DOMAIN)s' % os.environ
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
@@ -52,7 +57,7 @@ if ENVIRONMENT.upper() == 'LOCAL':
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ADMINS = (
-    ('Colin Copeland', 'ccopeland@codeforamerica.org'),
+    ('Code for Durham', 'school-inspector@googlegroups.com'),
 )
 MANAGERS = ADMINS
 

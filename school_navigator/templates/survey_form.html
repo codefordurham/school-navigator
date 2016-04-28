@@ -8,6 +8,8 @@
     <li><b>School type:</b> {{ school.type }}</li>
     <li><b>Year round calendar:</b> {{ school.year_round }}</li>
     <li><b>Address:</b> {{school.address}}</li>
+    <li style="color: red;"><b>Survey Due Date:</b> {{ school.profile.due_date }}</li>
+    <li><a href="{{ school.get_absolute_url }}">School Profile</a></li>
 </ul>
 
 <h2>Survey Instructions</h1>

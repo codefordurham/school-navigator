@@ -122,4 +122,8 @@ Now, create the Postgres database and run the initial syncdb/migrate::
 
 You should now be able to run the development server::
 
-    python manage.py runserver
+    python manage.py runserver 8001
+
+If you're serving the frontend locally (via `frontend-setup`_) in a separate
+terminal, append ``?env=dev/`` to your browser URI to make the frontend hit the
+locally running API on port 8001: http://localhost:8000/?env=dev/

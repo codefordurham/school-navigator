@@ -18,7 +18,6 @@ def send_survey(modeladmin, request, queryset):
         from_email = settings.FROM_EMAIL
 
         school_profile = school.new_profile()
-        school_profile.save()
         school_profile_url = request.build_absolute_uri(school_profile.get_absolute_url())
 
         context = {
