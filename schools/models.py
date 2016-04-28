@@ -49,7 +49,9 @@ class School(models.Model):
             profile.pk = None
         else:
             profile = SchoolProfile.objects.create(school=self)
-            profile.submitted_at = None
+
+        profile.submitted_at = None
+        profile.save()
         return profile
 
     def profile(self):
