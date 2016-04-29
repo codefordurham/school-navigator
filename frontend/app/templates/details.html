@@ -31,17 +31,19 @@
                 <p><strong>Lunch: </strong><span title="Lunch provided">{{ school.profile.lunch_served_display }}</span> {{ school.profile.lunch_free_and_reduced }} {{ school.profile.lunch_explanation }}</p>
                 <p><strong>Breakfast: </strong><span title="Breakfast provided">{{ school.profile.breakfast_served_display }}</span> {{ school.profile.breakfast_free_and_reduced }} {{ school.profile.breakfast_explanation }}</p>
                 <p><strong>Extended care: </strong><span title="extended care provided">{{ school.profile.before_care_offered }} {{ school.profile.after_care_offered }}</span></p>
+                <p><strong>Extended care cost: </strong>{{ school.profile.extended_care_cost }}</p>
+                <p><strong>Extended care financial assistance: </strong> {{ school.profile.extended_care_financial_assistance }}</p>
             </div>
         </div>
 
         <div class="col-md-6">
-            <img data-ng-src="http://durhamme.com/wp-content/uploads/2010/09/durham_maine_school2.jpg" />
+            <img data-ng-src="/media/{{ school.photo }}"/>
         </div>
     </div>
 
     <div class="row at-a-glance">
         <div class="col-md-12">
-          <h2>At a Glance</h2>
+            <h2>At a Glance</h2>
         </div>
         <div class="col-md-6">
             <p><strong>Address: </strong> {{ school.address }}</p>
@@ -53,7 +55,7 @@
             <p><strong>Theme: </strong> {{ school.profile.theme }}</p>
             <p><strong>Uniform: </strong> {{ school.profile.uniform_required | true_false }}</p>
             <p><strong>School Day: </strong> {{ school.profile.school_hours }}</p>
-            <p><strong>Extended Care Hours: </strong>{{ school.services.extended_care_hours }}</p>
+            <p><strong>Before Care Hours: </strong> {{ school.profile.before_care_hours }} <strong> After Care Hours: </strong>{{ school.profile.after_care_hours }}</p>
         </div>
     </div>
 
@@ -64,7 +66,7 @@
             <div class="bio">
                 <p>{{ school.profile.principal_name }} (since {{ school.profile.principal_start_year }})</p>
                 <div class="">
-                    {{ school.profile.english_language_learner }}
+                    {{ school.profile.principal_bio }}
                 </div>
             </div>
 
@@ -74,79 +76,85 @@
             <p>The following percentage of teachers responded that they "agree" or "strongly agree" to the following statements</p>
             <div class="metrics">
                 <h3>Coming soon from North Carolina Teacher Working Conditions survey</h3>
+            </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            <h2>Admission Policy</h2>
-            <div class="">
-              <p>{{ school.profile.admissions_policy_type }}</p>
-              <p><strong>Lottery Priorities</strong>:</p>
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Admission Policy</h2>
                 <div class="">
-                    <ol>
-                        <li data-ng-show="school.profile.lottery_priority_1">{{ school.profile.lottery_priority_1 }}</li>
-                        <li data-ng-show="school.profile.lottery_priority_2">{{ school.profile.lottery_priority_2 }}</li>
-                        <li data-ng-show="school.profile.lottery_priority_3">{{ school.profile.lottery_priority_3 }}</li>
-                        <li data-ng-show="school.profile.lottery_priority_4">{{ school.profile.lottery_priority_4 }}</li>
-                        <li data-ng-show="school.profile.lottery_priority_5">{{ school.profile.lottery_priority_5 }}</li>
-                    </ol>
+                    <p>{{ school.profile.admissions_policy_type }}</p>
+                    <p><strong>Lottery Priorities</strong>:</p>
+                    <div class="">
+                        <ol>
+                            <li data-ng-show="school.profile.lottery_priority_1">{{ school.profile.lottery_priority_1 }}</li>
+                            <li data-ng-show="school.profile.lottery_priority_2">{{ school.profile.lottery_priority_2 }}</li>
+                            <li data-ng-show="school.profile.lottery_priority_3">{{ school.profile.lottery_priority_3 }}</li>
+                            <li data-ng-show="school.profile.lottery_priority_4">{{ school.profile.lottery_priority_4 }}</li>
+                            <li data-ng-show="school.profile.lottery_priority_5">{{ school.profile.lottery_priority_5 }}</li>
+                        </ol>
+                    </div>
+                    <p><strong>Acceptance rate</strong></p>
+                    <p>{{ school.profile.learn_more_link }}</p>
+                    <p><strong>Deadline</strong></p>
+                    <p>{{ school.profile.lottery_deadline | date:format:'MMMM d, y' }}</p>
+                    <p><strong>Applying</strong></p>
+                    <a class="btn btn-success" href="{{ school.profile.learn_more_link }}">Learn more</a>
                 </div>
-                <p><strong>Acceptance rate</strong></p>
-                <p>{{ school.profile.learn_more_link }}</p>
-                <p><strong>Deadline</strong></p>
-                <p>{{ school.profile.lottery_deadline | date:format:'MMMM d, y' }}</p>
-                <p><strong>Applying</strong></p>
-                <a class="btn btn-success" href="{{ school.profile.learn_more_link }}">Learn more</a>
-            </div>
 
-        </div>
-        <div class="col-md-6">
-            <h2>Targeted Academic Offerings</h2>
-            <div class="">
-                <ul>
-                  <li data-ng-repeat="offering in school.targeted_academics"><strong class="title-case">{{ offering.name }}</strong>: {{ offering.desc }}</li>
-                </ul>
+            </div>
+            <div class="col-md-6">
+                <h2>Targeted Academic Offerings</h2>
+                <div class="">
+                    <p>Staff and additional resources that you have for:</p>
+                    <p><strong>Your Academic Theme: </strong> {{ school.profile.other_academic }}</p>
+                    <p><strong>English Language Learners: </strong> {{ school.profile.english_language_learner }}</p>
+                    <p><strong>Exceptional Children: </strong> {{ school.profile.special_education }}</p>
+                    <p><strong>Academically & Intellectually Gifted: </strong> {{ school.profile.gifted_education }}</p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            <h2>Parent Involvement</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Parent Involvement</h2>
 
-            <div class="">
-                <p><strong>PTA: </strong>
-                    <span>{{ school.profile.pta | true_false }}</span>
-                </p>
-                <p data-ng-if="school.parent_involvement.learn_more"><a href="{{ school.profile.pta_website }}">Learn more about this school's PTA</a></p>
+                <div class="">
+                    <p><strong>PTA/PTO: </strong>
+                        <span>{{ school.profile.pta | true_false }}</span>
+                    </p>
+                    <p data-ng-if="school.profile.pta_website"><a href="{{ school.profile.pta_website }}">Learn more about this school's PTA</a></p>
+                    <p>{{ school.profile.parental_involvement_notes }}</p>
+                </div>
+
             </div>
+            <div class="col-md-6">
+                <h2>Extracurricular Offerings</h2>
+                <p><strong>Academic: </strong> {{ school.profile.academic }}</p>
+                <p><strong>Arts: </strong> {{ school.profile.arts }}</p>
+                <p><strong>Sports: </strong> {{ school.profile.sports }}</p>
+                <p><strong>Service & leadership: </strong> {{ school.profile.service_leadership }}</p>
+                <p><strong>Other: </strong> {{ school.profile.other }}</p>
+            </div>
+        </div>
 
-        </div>
-        <div class="col-md-6">
-            <h2>Extracurricular Offerings</h2>
-            <ul>
-              <li data-ng-repeat="offering in school.other_programs"><strong class="title-case">{{ offering.name }}</strong>: {{ offering.desc }}</li>
-            </ul>
-        </div>
-    </div>
+        <div class="row map-row">
+            <div class="col-md-6">
+                <h2>Reflections</h2>
+                <p><a href="{{ school.reflection_link }}">Are you a parent or teacher at this school? Click here to share your own reflection.</a></p>
 
-    <div class="row map-row">
-        <div class="col-md-6">
-            <h2>Reflections</h2>
-            <p><a href="{{ school.reflection_link }}">Are you a parent or teacher at this school? Click here to share your own reflection.</a></p>
-
-            <p data-ng-repeat="entry in school.reflections">{{ entry.reflection }}<br/>
-            <i>{{ entry.who }}</i></p>
+                <p data-ng-repeat="entry in school.reflections">{{ entry.reflection }}<br/>
+                    <i>{{ entry.who }}</i></p>
+            </div>
+            <div class="col-md-6">
+                <leaflet class="content-row" id="leaflet-map" defaults="defaults" center="center" markers="markers" tiles="tiles" school="school" height=250 width=550></leaflet>
+            </div>
         </div>
-        <div class="col-md-6">
-            <leaflet class="content-row" id="leaflet-map" defaults="defaults" center="center" markers="markers" tiles="tiles" school="school" height=250 width=550></leaflet>
-        </div>
-    </div>
-    <div class="row map-row">
-        <div class="col-md-6">
-            <h2>State Report Card</h2>
-            <p><a href="{{ school.report_card_link }}">To view the state report card for this school, click here.</a></p>
+        <div class="row map-row">
+            <div class="col-md-6">
+                <h2>State Report Card</h2>
+                <p><a href="{{ school.report_card_link }}">To view the state report card for this school, click here.</a></p>
+            </div>
         </div>
     </div>
 </div>
