@@ -16,7 +16,7 @@ def send_email(school, request):
     to = [school.principal_email]
     from_email = settings.FROM_EMAIL
 
-    school_profile = school.new_profile()
+    school_profile = school.profile()
     school_profile_url = request.build_absolute_uri(school_profile.get_absolute_url())
 
     context = {
@@ -31,6 +31,7 @@ def send_email(school, request):
 
 def send_survey(modeladmin, request, queryset):
     for school in queryset:
+        school.new_profile()
         send_email(school, request)
     message = "Tried to send {0!s} survey(s)".format(queryset.count())
     messages.info(request, message)
