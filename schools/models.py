@@ -113,7 +113,7 @@ class SchoolProfile(models.Model):
     website_url = models.CharField(max_length=500, blank=True, null=True)
     phone_number = models.TextField(null=True, blank=True,
             help_text='Please enter phone number in the format (919) XXX-XXXX.')
-    year_opened = models.IntegerField(null=True,
+    year_opened = models.IntegerField(null=True, blank=True,
             help_text='In what year was your school opened?')
     speciality_type = models.TextField(null=True, blank=True)  # Is this still needed?  FIXME
     theme = models.TextField(null=True, blank=True,
