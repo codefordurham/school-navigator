@@ -2,6 +2,20 @@
 {% load widget_tweaks %}
 
 {% block content %}
+<div class="text-danger">
+    {% if form.errors %}
+    <div class="form-error alert alert-danger" role="alert">
+        <p>The operation could not be performed because one or more error(s) occurred.<br />Please resubmit the form after making the following changes:</p>
+        <ul>
+        {% for field in form %}
+            {% if field.errors %}
+                <li><strong>{{ field.label }}: </strong>{{ field.errors|striptags }}</li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</div>
 <h1> {{ school.name }} School Profile </h1>
 <ul>
     <li><b>Name:</b> {{ school.name }}</li>
