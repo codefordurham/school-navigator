@@ -6,6 +6,7 @@ class SchoolProfileForm(ModelForm):
         model = schools_models.SchoolProfile
         exclude = ('school', 'created_at', 'submitted_at', )
         widgets = {
+            'school_hours': TextInput,
             'phone_number': TextInput,
             'website_url': URLInput,
             'theme': TextInput,
@@ -41,7 +42,7 @@ class SchoolProfileForm(ModelForm):
 
     _fieldsets = (
         ('Basic Facts', [
-            'level', 'grade_min', 'grade_max', 'phone_number',
+            'level', 'grade_min', 'grade_max', 'school_hours', 'phone_number',
             'website_url', 'year_opened', 'mission_statement',
             'theme', 'uniform_required',
         ]),
