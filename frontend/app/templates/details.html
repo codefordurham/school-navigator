@@ -31,7 +31,7 @@
                 <p><strong>Lunch: </strong><span title="Lunch provided">{{ school.profile.lunch_served_display }}</span> {{ school.profile.lunch_free_and_reduced }} {{ school.profile.lunch_explanation }}</p>
                 <p><strong>Breakfast: </strong><span title="Breakfast provided">{{ school.profile.breakfast_served_display }}</span> {{ school.profile.breakfast_free_and_reduced }} {{ school.profile.breakfast_explanation }}</p>
                 <p><strong>Extended care: </strong><span title="extended care provided">{{ school.profile.before_care_offered }} {{ school.profile.after_care_offered }}</span></p>
-                <p><strong>Extended care cost: </strong>{{ school.profile.extended_care_cost | NA }}</p>
+                <p><strong>Extended care cost: </strong>{{ school.profile.extended_care_cost }}</p>
                 <p><strong>Extended care financial assistance: </strong> {{ school.profile.extended_care_financial_assistance }}</p>
             </div>
         </div>
@@ -46,17 +46,17 @@
             <h2>At a Glance</h2>
         </div>
         <div class="col-md-6">
-            <p><strong>Address: </strong> {{ school.address | NA }}</p>
-            <p><strong>Phone Number: </strong> {{ school.profile.phone_number | NA }}</p>
-            <p><strong>Website: </strong> <a href="http://{{ school.profile.website_url }}">{{ school.profile.website_url | NA }}</a></p>
-            <p><strong>Year Opened: </strong> {{ school.profile.year_opened | NA }}</p>
+            <p><strong>Address: </strong> {{ school.address }}</p>
+            <p><strong>Phone Number: </strong> {{ school.profile.phone_number }}</p>
+            <p><strong>Website: </strong> <a href="http://{{ school.profile.website_url }}">{{ school.profile.website_url }}</a></p>
+            <p><strong>Year Opened: </strong> {{ school.profile.year_opened }}</p>
         </div>
         <div class="col-md-6">
-            <p><strong>Theme: </strong> {{ school.profile.theme | NA }}</p>
+            <p><strong>Theme: </strong> {{ school.profile.theme }}</p>
             <p><strong>Uniform: </strong> {{ school.profile.uniform_required | true_false }}</p>
-            <p><strong>School Day: </strong> {{ school.profile.school_hours | NA }}</p>
-            <p><span><strong>Before Care Hours: </strong>{{ school.profile.before_care_hours | NA }}</span>
-                <span><strong> After Care Hours: </strong>{{ school.profile.after_care_hours | NA }}</span></p>
+            <p><strong>School Day: </strong> {{ school.profile.school_hours }}</p>
+            <p><span><strong>Before Care Hours: </strong>{{ school.profile.before_care_hours }}</span>
+                <span><strong> After Care Hours: </strong>{{ school.profile.after_care_hours }}</span></p>
         </div>
     </div>
 
@@ -65,9 +65,9 @@
             <h2>School Leadership</h2>
 
             <div class="bio">
-                <p>{{ school.profile.principal_name | NA }} (since {{ school.profile.principal_start_year | NA }})</p>
+                <p>{{ school.profile.principal_name }} (since {{ school.profile.principal_start_year }})</p>
                 <div class="">
-                    {{ school.profile.principal_bio | NA }}
+                    {{ school.profile.principal_bio }}
                 </div>
             </div>
 
@@ -84,7 +84,7 @@
             <div class="col-md-6">
                 <h2>Admission Policy</h2>
                 <div class="">
-                    <p>{{ school.profile.admissions_policy_type | NA }}</p>
+                    <p>{{ school.profile.admissions_policy_type }}</p>
                     <p><strong>Lottery Priorities</strong>:</p>
                     <div class="">
                         <ol>
