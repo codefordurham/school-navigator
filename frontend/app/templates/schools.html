@@ -12,7 +12,7 @@
                         <div ng-init="schools = filtered_schools.slice(start,start+schools_per_column)"></div>
                         <div class="col-xs-12 col-md-4">
                             <div class="list-group">
-                                <a class="list-group-item borderless" title="{{ school.mission_statement }}" href="{{ school.website_url }}" data-ng-repeat="school in schools">
+                                <a class="list-group-item borderless" title="{{ school.mission_statement }}" href="#/school/{{ school.id }}/" data-ng-repeat="school in schools">
                                   <h4>{{ school.name }}</h4>
                                 </a>
                             </div>
@@ -29,7 +29,7 @@
                         <div ng-init="schools = filtered_schools.slice(start,start+schools_per_column)"></div>
                         <div class="col-xs-12 col-md-4">
                             <div class="list-group">
-                                <a class="list-group-item borderless" title="{{ school.mission_statement }}" href="{{ school.website_url }}" data-ng-repeat="school in schools">
+                                <a class="list-group-item borderless" title="{{ school.mission_statement }}" href="#/school/{{ school.id }}/" data-ng-repeat="school in schools">
                                   <h4>{{ school.name }}</h4>
                                 </a>
                             </div>
