@@ -472,3 +472,12 @@ app.filter('true_false', function() {
         return 'No';
     }
 });
+
+app.filter('NA', function() {
+    return function(text, length, end) {
+        if (text) {
+            return text;
+        }
+        return 'N/A';
+    }
+});
