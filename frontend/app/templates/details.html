@@ -48,7 +48,7 @@
         <div class="col-md-6">
             <p><strong>Address: </strong> {{ school.address }}</p>
             <p><strong>Phone Number: </strong> {{ school.profile.phone_number }}</p>
-            <p><strong>Website: </strong> <a href="http://{{ school.profile.website_url }}">{{ school.profile.website_url }}</a></p>
+            <p><strong>Website: </strong> <a href="{{ school.profile.website_url | uri }}">{{ school.profile.website_url | uri }}</a></p>
             <p><strong>Year Opened: </strong> {{ school.profile.year_opened }}</p>
         </div>
         <div class="col-md-6">
@@ -124,7 +124,7 @@
                     <p><strong>PTA/PTO: </strong>
                         <span>{{ school.profile.pta | true_false }}</span>
                     </p>
-                    <p data-ng-if="school.profile.pta_website"><a href="{{ school.profile.pta_website }}">Learn more about this school's PTA</a></p>
+                    <p data-ng-if="school.profile.pta_website"><a href="{{ school.profile.pta_website | uri }}">Learn more about this school's PTA</a></p>
                     <p>{{ school.profile.parental_involvement_notes }}</p>
                 </div>
 

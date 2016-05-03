@@ -481,3 +481,18 @@ app.filter('NA', function() {
         return 'N/A';
     }
 });
+
+app.filter('uri', function() {
+    return function(text, length, end) {
+        var isAbsolute = new RegExp('^([a-z]+://|//)', 'i');
+
+        if (text) {
+            if (isAbsolute.test(text)) {
+                return text
+            } else {
+                return 'http://' + text
+            }
+        }
+        return '';
+    }
+});
