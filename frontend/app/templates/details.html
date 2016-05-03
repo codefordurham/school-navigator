@@ -96,7 +96,7 @@
                         </ol>
                     </div>
                     <p><strong>Acceptance rate</strong></p>
-                    <p><a href="{{ school.profile.learn_more_link }}">{{ school.profile.learn_more_link }}</a></p>
+                    <p><a href="{{ school.profile.learn_more_link | uri }}">{{ school.profile.learn_more_link | uri }}</a></p>
                     <p><strong>Deadline</strong></p>
                     <p>{{ school.profile.lottery_deadline | date:format:'MMMM d, y' }}</p>
                     <p><strong>Applying</strong></p>
