@@ -467,3 +467,32 @@ div.avgline span.avg {
 .map-row .angular-leaflet-map {
     margin-top: 20px;
 }
+
+.overlay {
+    display: none;
+}
+
+.coming-soon .overlay {
+    opacity: 1;
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 999;
+    overflow: hidden;
+}
+.coming-soon .overlay span {
+    display: inline-block;
+    position: absolute;
+    transform: rotate(35deg);
+    text-align: center;
+    padding: 5px 10px;
+    right: -10px;
+    top: 30px;
+    color: white;
+    font-weight: bold;
+    font-size: 22px;
+}

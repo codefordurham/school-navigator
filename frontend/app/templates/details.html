@@ -73,12 +73,13 @@
                 </div>
 
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 coming-soon">
                 <h2>Teacher Satisfaction</h2>
                 <p>The following percentage of teachers responded that they "agree" or "strongly agree" to the following statements</p>
                 <div class="metrics">
                     <h3>Coming soon from North Carolina Teacher Working Conditions survey</h3>
                 </div>
+                <div class="overlay"><span class="label label-danger">Coming Soon</span></div>
             </div>
         </div>
 
@@ -142,12 +143,14 @@
         </div>
 
         <div class="row map-row">
-            <div class="col-md-6">
+            <div class="col-md-6 coming-soon">
                 <h2>Reflections</h2>
                 <p><a href="{{ school.reflection_link }}">Are you a parent or teacher at this school? Click here to share your own reflection.</a></p>
 
                 <p data-ng-repeat="entry in school.reflections">{{ entry.reflection }}<br/>
                     <i>{{ entry.who }}</i></p>
+
+                <div class="overlay"><span class="label label-danger">Coming Soon</span></div>
             </div>
             <div class="col-md-6">
                 <leaflet class="content-row" id="leaflet-map" defaults="defaults" center="center" markers="markers" tiles="tiles" school="school" height=250 width=550></leaflet>
