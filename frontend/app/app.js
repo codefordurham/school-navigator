@@ -496,3 +496,11 @@ app.filter('uri', function() {
         return '';
     }
 });
+
+app.filter('newline', function($sce) {
+    return function(text, length, end) {
+        if (text) {
+           return $sce.trustAsHtml(text.replace(/\n/g, "<br>"));
+        }
+    }
+});

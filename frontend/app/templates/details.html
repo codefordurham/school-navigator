@@ -16,7 +16,7 @@
         <div class="col-md-6">
             <div class="school-details">
                 <h2>Mission</h2>
-                <div class="">{{ school.profile.mission_statement }}</div>
+		<div ng-bind-html="school.profile.mission_statement | newline" class=""></div>
                 <h2>Points of Pride</h2>
                 <div class="">
                     <ol>
@@ -67,9 +67,7 @@
 
                 <div class="bio">
                     <p>{{ school.profile.principal_name }} (since {{ school.profile.principal_start_year }})</p>
-                    <div class="">
-                        {{ school.profile.principal_bio }}
-                    </div>
+		    <div ng-bind-html="school.profile.principal_bio | newline" class=""></div>
                 </div>
 
             </div>
