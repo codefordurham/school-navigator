@@ -73,13 +73,44 @@
                 </div>
 
             </div>
-            <div class="col-md-6 coming-soon">
+            <div class="col-md-6 coming-soon teacher-survey">
                 <h2>Teacher Satisfaction</h2>
                 <p>The following percentage of teachers responded that they "agree" or "strongly agree" to the following statements</p>
+
                 <div class="metrics">
-                    <h3>Coming soon from North Carolina Teacher Working Conditions survey</h3>
+                    <!-- ngRepeat: (question, percentage) in school.teacher_satisfaction -->
+                    <div class="metric">
+                        <p class="score">68%</p>
+                        <p><em class="">Overall, my school is a good place to work and learn.</em></p>
+                        <div class="avgline">
+                            <span class="actual" style="width:68%;"></span>
+                            <span class="avg" style="left:62%;">|<br>Durham Public Schools Avg.</span>
+                        </div>
+                    </div><!-- end ngRepeat: (question, percentage) in school.teacher_satisfaction -->
+                    <div class="metric">
+                        <p class="score">75%</p>
+                        <p><em>Teachers are allowed to focus on educating students with minimal interruptions</em></p>
+                        <div class="avgline">
+                            <span class="actual" style="width:75%;"></span>
+                            <span class="avg" style="left:54%;">|<br>Durham Public Schools Avg.</span>
+                        </div>
+                    </div><!-- end ngRepeat: (question, percentage) in school.teacher_satisfaction -->
+                    <div class="metric">
+                        <p class="score">81%</p>
+                        <p><em class="">The school leadership consistently supports teachers</em></p>
+                        <div class="avgline">
+                            <span class="actual" style="width:81%;"></span>
+                            <span class="avg" style="left:66%;">|<br>Durham Public Schools Avg.</span>
+                        </div>
+                    </div><!-- end ngRepeat: (question, percentage) in school.teacher_satisfaction -->
                 </div>
-                <div class="overlay"><span class="label label-danger">Coming Soon</span></div>
+                <div class="overlay">
+                    <span class="label label-danger">Coming Soon</span>
+                    <div class="text">
+                        <span>Sample Data</span><br>
+                        <span class="opacity">Coming soon from North Carolina Teacher Working Conditions survey</span>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -99,7 +130,6 @@
                         </ol>
                     </div>
                     <p><strong>Acceptance rate</strong></p>
-		    <p>Coming Soon</p>
                     <p><strong>Deadline</strong></p>
                     <p>{{ school.profile.lottery_deadline | date:format:'MMMM d, y' }}</p>
                     <p><strong>Applying</strong></p>

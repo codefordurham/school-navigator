@@ -484,7 +484,7 @@ div.avgline span.avg {
     z-index: 999;
     overflow: hidden;
 }
-.coming-soon .overlay span {
+.coming-soon .overlay span.label {
     display: inline-block;
     position: absolute;
     transform: rotate(35deg);
@@ -495,4 +495,18 @@ div.avgline span.avg {
     color: white;
     font-weight: bold;
     font-size: 22px;
+}
+.coming-soon .overlay div.text {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    font-size: 46px;
+    font-weight: bold;
+}
+.coming-soon.teacher-survey .overlay {
+    height: 458px;
+}
+.coming-soon.teacher-survey .overlay .opacity {
+    opacity: 0.7;
 }
