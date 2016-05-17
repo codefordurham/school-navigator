@@ -9,6 +9,11 @@ body {
 img {
     max-width:100%;
 }
+hr.no-border {
+    border: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 .title-case {
     text-transform: capitalize;
 }

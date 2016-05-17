@@ -514,7 +514,7 @@ app.filter('uri', function() {
 app.filter('newline', function($sce) {
     return function(text, length, end) {
         if (text) {
-           return $sce.trustAsHtml(text.replace(/\n/g, "<br>"));
+           return $sce.trustAsHtml(text.replace(/\n/g, "<hr class='no-border'>"));
         }
     }
 });
