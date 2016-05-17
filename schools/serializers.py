@@ -157,12 +157,12 @@ class SchoolProfileSerilaizer(serializers.ModelSerializer):
     def free_and_reduced_display(self, obj):
         if obj.lunch_free_and_reduced:
             return "This school participates in the National Free and Reduced Lunch Program."
-        return "This school does not participates in the National Free and Reduced Lunch Program."
+        return "This school does not participate in the National Free and Reduced Lunch Program."
 
     def breakfast_free_and_reduced_display(self, obj):
         if obj.lunch_free_and_reduced:
             return "This school participates in the National Free and Reduced Breakfast Program."
-        return "This school does not participates in the National Free and Reduced Breakfast Program."
+        return "This school does not participate in the National Free and Reduced Breakfast Program."
 
     def before_care_offered_display(self, obj):
         if obj.before_care_offered:

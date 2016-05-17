@@ -133,6 +133,20 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive"])
                     className: "school_point " + school.level
                   }
                 };
+                $scope.extendedCare = function(profile) {
+                    var display;
+                    if (profile.after_care_offered && profile.before_care_offered) {
+                        display = 'This school offers before and after care.';
+                    } else if (profile.after_care_offered) {
+                        display = 'This school offers after care and does not offer before care.';
+                    } else if (profile.before_care_offered) {
+                        display = "This school offers before care and does not offer after care.";
+                    } else {
+                        display = "This school does not offer extended care.";
+                    }
+                    return display;
+                };
+
                 angular.extend($scope.school);
             });
         }

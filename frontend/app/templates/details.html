@@ -30,7 +30,7 @@
                 <p><strong>Transportation: </strong> <span title="Transportation provided">{{ school.profile.transportation_display }} {{ school.profile.transportation_explanation }}</span></p>
                 <p><strong>Lunch: </strong><span title="Lunch provided">{{ school.profile.lunch_served_display }}</span> {{ school.profile.lunch_free_and_reduced }} {{ school.profile.lunch_explanation }}</p>
                 <p><strong>Breakfast: </strong><span title="Breakfast provided">{{ school.profile.breakfast_served_display }}</span> {{ school.profile.breakfast_free_and_reduced }} {{ school.profile.breakfast_explanation }}</p>
-                <p><strong>Extended care: </strong><span title="extended care provided">{{ school.profile.before_care_offered }} {{ school.profile.after_care_offered }}</span></p>
+                <p><strong>Extended care: </strong><span title="extended care provided">{{ extendedCare(school.profile) }}</span></p>
                 <p><strong>Extended care cost: </strong>{{ school.profile.extended_care_cost }}</p>
                 <p><strong>Extended care financial assistance: </strong> {{ school.profile.extended_care_financial_assistance }}</p>
             </div>
@@ -141,10 +141,10 @@
             <div class="col-md-6">
                 <h2>Targeted Academic Offerings</h2>
                 <div class="">
-                    <p>Staff and additional resources that you have for:</p>
-                    <p><strong>Your Academic Theme: </strong> {{ school.profile.other_academic }}</p>
+                    <p>Staff and additional resources provided for:</p>
+                    <p><strong>Our Theme: </strong> {{ school.profile.other_academic }}</p>
                     <p><strong>English Language Learners: </strong> {{ school.profile.english_language_learner }}</p>
-                    <p><strong>Exceptional Children: </strong> {{ school.profile.special_education }}</p>
+                    <p><strong>Special Education (Exceptional Children): </strong> {{ school.profile.special_education }}</p>
                     <p><strong>Academically & Intellectually Gifted: </strong> {{ school.profile.gifted_education }}</p>
                 </div>
             </div>
@@ -158,7 +158,7 @@
                     <p><strong>PTA/PTO: </strong>
                         <span>{{ school.profile.pta | true_false }}</span>
                     </p>
-                    <p data-ng-if="school.profile.pta_website"><a href="{{ school.profile.pta_website | uri }}">Learn more about this school's PTA</a></p>
+                    <p data-ng-if="school.profile.pta_website"><a href="{{ school.profile.pta_website | uri }}">Learn more about this school's PTA/PTO</a></p>
                     <p>{{ school.profile.parental_involvement_notes }}</p>
                 </div>
 
@@ -175,7 +175,7 @@
 
         <div class="row map-row">
             <div class="col-md-6 coming-soon">
-                <h2>Reflections</h2>
+                <h2>Testimonials</h2>
                 <p><a href="{{ school.reflection_link }}">Are you a parent or teacher at this school? Click here to share your own reflection.</a></p>
 
                 <p data-ng-repeat="entry in school.reflections">{{ entry.reflection }}<br/>
