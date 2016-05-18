@@ -3,7 +3,8 @@ var app = angular.module("schoolsApp", [
     'SchoolsApp.directives',
     'SchoolsApp.geoDecoder',
     'SchoolsApp.services',
-    'SchoolsApp.controllers'
+    'SchoolsApp.controllers',
+    'ngSanitize',
 ]);
 
 app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
@@ -97,7 +98,7 @@ angular.module('SchoolsApp.geoDecoder', [])
 var levels = ['elementary', 'secondary', 'middle', 'high'];
 var types = ['speciality', 'magnet'];
 
-angular.module('SchoolsApp.controllers', ["leaflet-directive"])
+angular.module('SchoolsApp.controllers', ["leaflet-directive", "ngSanitize"])
     .controller('schoolsDetailCtrl', ['$scope', '$routeParams', 'Schools',
         function($scope, $params, Schools) {
             angular.extend($scope, {
