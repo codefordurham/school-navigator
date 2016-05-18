@@ -28,7 +28,7 @@
                 <h2>School Services</h2>
                 <p>This school provides the following services to students:</p>
                 <p><strong>Transportation: </strong> <span title="Transportation provided">{{ school.profile.transportation_display }} {{ school.profile.transportation_explanation }}</span></p>
-                <p><strong>Lunch: </strong><span title="Lunch provided">{{ school.profile.lunch_served_display }}</span> {{ school.profile.lunch_free_and_reduced }} {{ school.profile.lunch_explanation }}</p>
+                <p><strong>Lunch: </strong><span title="Lunch provided">{{ school.profile.lunch_served_display }}</span> {{ school.profile.lunch_free_and_reduced }} <span ng-bind-html="school.profile.lunch_explanation | linky"></span> </p>
                 <p><strong>Breakfast: </strong><span title="Breakfast provided">{{ school.profile.breakfast_served_display }}</span> {{ school.profile.breakfast_free_and_reduced }} {{ school.profile.breakfast_explanation }}</p>
                 <p><strong>Extended care: </strong><span title="extended care provided">{{ extendedCare(school.profile) }}</span></p>
                 <p><strong>Extended care cost: </strong>{{ school.profile.extended_care_cost }}</p>
@@ -143,8 +143,8 @@
                 <div class="">
                     <p>Staff and additional resources provided for:</p>
                     <p><strong>Our Theme: </strong> {{ school.profile.other_academic }}</p>
-                    <p><strong>English Language Learners: </strong> {{ school.profile.english_language_learner }}</p>
-                    <p><strong>Special Education (Exceptional Children): </strong> {{ school.profile.special_education }}</p>
+                    <p><strong>English Language Learners: </strong><span ng-bind-html=" school.profile.english_language_learner | linky"></span></p>
+                    <p><strong>Special Education (Exceptional Children): </strong> <span ng-bind-html=" school.profile.special_education | linky"></span></p>
                     <p><strong>Academically & Intellectually Gifted: </strong> {{ school.profile.gifted_education }}</p>
                 </div>
             </div>
