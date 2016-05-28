@@ -27,6 +27,10 @@ Goal: Remove friction for understanding the local school system and improve on [
 
 Target group: Parents or Prospective Parents seeking to understand how their residential choice will impact where their kids can go to school.
 
+.. _Code for Durham: http://codefordurham.com/
+.. _Durham Public School System: http://www.dpsnc.net/
+.. _GitHub: https://github.com/codefordurham/school-navigator
+
 Getting Set Up as a Non-Developer
 -----------------------------
 * Create a Github Account
@@ -40,8 +44,5 @@ project and getting set up on your local environment.
 
 
 .. _documentation: http://school-navigator.readthedocs.org/en/latest/
-.. _Code for Durham: http://codefordurham.com/
-.. _Durham Public School System: http://www.dpsnc.net/
-.. _GitHub: https://github.com/codefordurham/school-navigator
 .. _email list: https://groups.google.com/forum/#!forum/school-inspector
 .. _project dashboard: https://waffle.io/codefordurham/school-navigator?milestone=Civic%20Hacking%20Day&label=frontend
