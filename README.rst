@@ -37,7 +37,6 @@ Overview
 .. _Durham Public School System: http://www.dpsnc.net/
 .. _GitHub: https://github.com/codefordurham/school-navigator
 .. _email list: https://groups.google.com/forum/#!forum/school-inspector
-.. _project dashboard: https://waffle.io/codefordurham/school-navigator?milestone=Civic%20Hacking%20Day&label=frontend
 .. _documentation: http://school-navigator.readthedocs.org/en/latest/
 
 Getting Set Up as a Non-Developer
@@ -46,6 +45,7 @@ Getting Set Up as a Non-Developer
 * Create a Github Account if you want to assign a task to yourself or create new tasks
 * Join this Project Repository (aka. Repo) by emailing the 'email list'_ with subject: "Add me to the School Navigator"
 
+.. _project dashboard: https://waffle.io/codefordurham/school-navigator?milestone=Civic%20Hacking%20Day
 
 Getting Set Up as a Developer
 -----------------------------
