@@ -49,5 +49,5 @@ Getting Set Up as a Non-Developer
 
 Getting Set Up as a Developer
 -----------------------------
-The following 'documentation'_ outlines how to get started developing code for the
+The following documentation (http://school-navigator.readthedocs.org/en/latest/) outlines how to get started developing code for the
 project and getting set up on your local environment.
