@@ -41,11 +41,10 @@ Overview
 
 Getting Set Up as a Non-Developer
 -----------------------------
-* See what tasks are waiting for you on our 'project dashboard'_ (prefiltered for tasks for June 4 event)
+* See what tasks are waiting for you on our project dashboard (prefiltered for tasks for June 4 event) (https://waffle.io/codefordurham/school-navigator?milestone=Civic%20Hacking%20Day)
 * Create a Github Account if you want to assign a task to yourself or create new tasks
-* Join this Project Repository (aka. Repo) by emailing the 'email list'_ with subject: "Add me to the School Navigator"
+* Join this Project Repository (aka. Repo) by emailing the email list with subject: "Add me to the School Navigator" (https://groups.google.com/forum/#!forum/school-inspector)
 
-.. _project dashboard: https://waffle.io/codefordurham/school-navigator?milestone=Civic%20Hacking%20Day
 
 Getting Set Up as a Developer
 -----------------------------
