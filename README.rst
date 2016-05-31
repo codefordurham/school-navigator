@@ -26,18 +26,10 @@ We provide parents who are looking at moving to or within Durham with a simple o
 
 Overview
 ---------------
-* Phase 1: Complete - Anser the question: How does zoning and location affect my school choices - across neighborhood, magnet and charter options?
-* Phase 2 (In testing for Launch): School profiles that incorporate key data points (e.g. principal info, score improvement rates, teacher/student ratios, etc) that parents have said they want to know about schools that will help them choose a school path. See latest details on progress by looking at our 'project page'_
-* Project Goal: Remove friction for understanding the local school system and improve on 'existing DPS web tools'_.
+* Phase 1: Complete - Answer the question: How does zoning and location affect my school choices - across neighborhood, magnet and charter options?
+* Phase 2 (In testing for Launch): School profiles that incorporate key data points (e.g. principal info, score improvement rates, teacher/student ratios, etc) that parents have said they want to know about schools that will help them choose a school path. See latest details on progress by looking at our project page (http://codefordurham.com/projects/school_navigator)
+* Project Goal: Remove friction for understanding the local school system and improve on existing DPS web tools (http://www.dpsnc.net/pages/Durham_Public_Schools/Our_Schools/Find_Your_School).
 * Target group: Parents or Prospective Parents seeking to understand how their residential choice will impact where their kids can go to school.
-
-.. _project page: http://codefordurham.com/projects/school_navigator
-.. _existing DPS web tools: http://www.dpsnc.net/pages/Durham_Public_Schools/Our_Schools/Find_Your_School
-.. _Code for Durham: http://codefordurham.com/
-.. _Durham Public School System: http://www.dpsnc.net/
-.. _GitHub: https://github.com/codefordurham/school-navigator
-.. _email list: https://groups.google.com/forum/#!forum/school-inspector
-.. _documentation: http://school-navigator.readthedocs.org/en/latest/
 
 Getting Set Up as a Non-Developer
 -----------------------------
@@ -50,3 +42,11 @@ Getting Set Up as a Developer
 -----------------------------
 The following documentation (http://school-navigator.readthedocs.org/en/latest/) outlines how to get started developing code for the
 project and getting set up on your local environment.
+
+.. _project page: http://codefordurham.com/projects/school_navigator
+.. _existing DPS web tools: http://www.dpsnc.net/pages/Durham_Public_Schools/Our_Schools/Find_Your_School
+.. _Code for Durham: http://codefordurham.com/
+.. _Durham Public School System: http://www.dpsnc.net/
+.. _GitHub: https://github.com/codefordurham/school-navigator
+.. _email list: https://groups.google.com/forum/#!forum/school-inspector
+.. _documentation: http://school-navigator.readthedocs.org/en/latest/
