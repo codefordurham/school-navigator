@@ -40,8 +40,9 @@ Getting Set Up as a Non-Developer
 
 Getting Set Up as a Developer
 -----------------------------
-The following documentation (http://school-navigator.readthedocs.org/en/latest/) outlines how to get started developing code for the
-project and getting set up on your local environment.
+The following documentation (http://school-navigator.readthedocs.org/en/latest/) outlines how to get started developing code for the project and getting set up on your local environment.
+* Frontend: front facing user interface. Built in AngularJS, HTML, and CSS.
+* Backend: backend API that powers the frontend. Built in Python/Django, PostgreSQL, and PostGIS.
 
 .. _project page: http://codefordurham.com/projects/school_navigator
 .. _existing DPS web tools: http://www.dpsnc.net/pages/Durham_Public_Schools/Our_Schools/Find_Your_School
