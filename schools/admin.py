@@ -82,6 +82,9 @@ class SchoolAdmin(LeafletGeoAdmin):
               'district', 'walk_zone', 'choice_zone', 'priority_zone', 'year_round_zone',
               'traditional_option_zone')
 
+    def get_changelist_form(self, request, **kwargs):
+            return SchoolForm
+
     def principal_name(self, obj):
         return getattr(obj.profile(), 'principal_name', '')
 
