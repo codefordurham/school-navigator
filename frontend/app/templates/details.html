@@ -3,7 +3,24 @@
 <div class="container school-detail-page">
     <div class="row">
         <div class="col-md-12">
+        <div class="school-detail-header">
             <h1>{{ school.name }}</h1>
+                <div class="dropdown">
+                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                         Sections
+                        <span class='caret'></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#/school/{{ school.id }}/#school-overview">Overview</a></li>
+                        <li><a href="#/school/{{ school.id }}/#school-leadership">Leadership</a></li>
+                        <li><a href="#/school/{{ school.id }}/#school-admission">Admission Policy</a></li>
+                        <li><a href="#/school/{{ school.id }}/#school-parent">Parent Involvement</a></li>
+                        <li><a href="#/school/{{ school.id }}/#school-offerings">Targeted Academic & Extracurricular Offerings</a></li>
+                        <li><a href="#/school/{{ school.id }}/#school-testimonials">Testimonials</a></li>
+                        <li><a href="#/school/{{ school.id }}/#school-report">State Report Card</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -14,10 +31,11 @@
 
     <div class="row">
         <div class="col-md-6">
-            <div class="school-details">
-                <h2>Mission</h2>
+            <div id="school-overview">
+                <h2>Overview</h2>
+                <h3>Mission</h3>
 		<div ng-bind-html="school.profile.mission_statement | newline | linky" class=""></div>
-                <h2>Points of Pride</h2>
+                <h3>Points of Pride</h3>
                 <div class="">
                     <ol>
                         <li data-ng-show="school.profile.points_of_pride1">{{ school.profile.points_of_pride1 }}</li>
@@ -25,7 +43,7 @@
                         <li data-ng-show="school.profile.points_of_pride3">{{ school.profile.points_of_pride3 }}</li>
                     </ol>
                 </div>
-                <h2>School Services</h2>
+                <h3>School Services</h3>
                 <p>This school provides the following services to students:</p>
                 <p><strong>Transportation: </strong> <span title="Transportation provided">{{ school.profile.transportation_display }} <span ng-bind-html="school.profile.transportation_explanation | linky"></span></span></p>
                 <p><strong>Lunch: </strong><span title="Lunch provided">{{ school.profile.lunch_served_display }}</span> {{ school.profile.lunch_free_and_reduced }} <span ng-bind-html="school.profile.lunch_explanation | linky"></span></p>
@@ -62,7 +80,7 @@
 
     <div class="row">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6" id="school-leadership">
                 <h2>School Leadership</h2>
 
                 <div class="bio">
@@ -113,7 +131,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6" id="school-admission">
                 <h2>Admission Policy</h2>
                 <div class="">
                     <p>{{ school.profile.admissions_policy_type }}</p>
@@ -136,20 +154,7 @@
                 </div>
 
             </div>
-            <div class="col-md-6">
-                <h2>Targeted Academic Offerings</h2>
-                <div class="">
-                    <p>Staff and additional resources provided for:</p>
-                    <p><strong>Our Theme: </strong> {{ school.profile.other_academic }}</p>
-                    <p><strong>English Language Learners: </strong><span ng-bind-html=" school.profile.english_language_learner | linky"></span></p>
-                    <p><strong>Special Education (Exceptional Children): </strong> <span ng-bind-html=" school.profile.special_education | linky"></span></p>
-                    <p><strong>Academically & Intellectually Gifted: </strong> {{ school.profile.gifted_education }}</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6" id="school-parent">
                 <h2>Parent Involvement</h2>
 
                 <div class="">
@@ -161,7 +166,23 @@
                 </div>
 
             </div>
-            <div class="col-md-6">
+
+        </div>
+
+        <div class="row" id="school-offerings">
+
+             <div class="col-md-6">
+                <h2>Targeted Academic Offerings</h2>
+                <div class="">
+                    <p>Staff and additional resources provided for:</p>
+                    <p><strong>Our Theme: </strong> {{ school.profile.other_academic }}</p>
+                    <p><strong>English Language Learners: </strong><span ng-bind-html=" school.profile.english_language_learner | linky"></span></p>
+                    <p><strong>Special Education (Exceptional Children): </strong> <span ng-bind-html=" school.profile.special_education | linky"></span></p>
+                    <p><strong>Academically & Intellectually Gifted: </strong> {{ school.profile.gifted_education }}</p>
+                </div>
+            </div>
+
+                    <div class="col-md-6">
                 <h2>Extracurricular Offerings</h2>
                 <p><strong>Academic: </strong> {{ school.profile.academic }}</p>
                 <p><strong>Arts: </strong> {{ school.profile.arts }}</p>
@@ -171,7 +192,7 @@
             </div>
         </div>
 
-        <div class="row map-row">
+        <div class="row map-row" id='school-testimonials'>
             <div class="col-md-6 coming-soon">
                 <h2>Testimonials</h2>
                 <p><a href="{{ school.reflection_link }}">Are you a parent or teacher at this school? Click here to share your own reflection.</a></p>
@@ -185,7 +206,8 @@
                 <leaflet class="content-row" id="leaflet-map" defaults="defaults" center="center" markers="markers" tiles="tiles" school="school" height=250 width=550></leaflet>
             </div>
         </div>
-        <div class="row map-row">
+
+        <div class="row map-row" id="school-report">
             <div class="col-md-6 coming-soon">
                 <h2>State Report Card</h2>
                 <p><a href="{{ school.report_card_link }}">To view the state report card for this school, click here.</a></p>

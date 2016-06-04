@@ -440,6 +440,15 @@ div#schools-wrapper ul.nav li.active a, div#schools-wrapper ul.nav li a:hover {
     margin-bottom: 40px;
 }
 
+.school-detail-header h1,
+.school-detail-header .dropdown {
+    display: inline-block;
+}
+.school-detail-header .dropdown {
+    top: -8px;
+    margin-left: 20px;
+}
+
 div.avgline span.actual {
     background-color: rgb(64, 208, 136);
 }
