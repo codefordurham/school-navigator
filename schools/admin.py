@@ -1,7 +1,9 @@
-from django.core.mail import EmailMessage
+from django import forms
 from django.conf import settings
 from django.contrib import admin
 from django.contrib import messages
+from django.core.mail import EmailMessage
+from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
 
 from leaflet.admin import LeafletGeoAdmin
@@ -45,11 +47,66 @@ def resend_survey(modeladmin, request, queryset):
     message = "Tried to re-send {0!s} survey(s)".format(email_count)
     messages.info(request, message)
 
+
+class SchoolForm(forms.ModelForm):
+    principal_name = forms.CharField(required=False)
+
+    class Meta:
+        model = School
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(SchoolForm, self).__init__(*args, **kwargs)
+        if self.instance and self.instance.profile():
+            self.initial['principal_name'] = self.instance.profile().principal_name
+
+    def save(self, commit=False, *args, **kwargs):
+        principal_name = self.cleaned_data.pop('principal_name')
+        if self.instance:
+            profile = self.instance.profile()
+            if profile:
+                profile.principal_name = principal_name
+                profile.save()
+        return super(SchoolForm, self).save(commit=commit, *args, **kwargs)
+
+
 class SchoolAdmin(LeafletGeoAdmin):
-    list_display = ('name', 'photo', 'type')
+    form = SchoolForm
+    list_display = ('name', 'principal_email', 'principal_name', 'profile_status', 'profile', 'photo', 'type')
+    list_editable = ('principal_email',)
     ordering = ('name',)
     list_filter = ('type', )
     actions = [send_survey, resend_survey]
+    fields = ('name', 'short_name', 'address', 'zip_code', 'active', 'photo',
+              'principal_email', 'principal_name', 'type', 'year_round', 'location',
+              'district', 'walk_zone', 'choice_zone', 'priority_zone', 'year_round_zone',
+              'traditional_option_zone')
+
+    def get_changelist_form(self, request, **kwargs):
+            return SchoolForm
+
+    def principal_name(self, obj):
+        return getattr(obj.profile(), 'principal_name', '')
+
+    def profile_status(self, obj):
+        profile = obj.profile()
+        if profile:
+            if profile.overdue():
+                return 'Over due'
+            return 'Submitted'
+        return ''
+
+    def profile(self, obj):
+        profile = obj.profile()
+        if profile:
+            url = reverse('admin:schools_schoolprofile_change', args=(profile.id,))
+            return '<a href={url}><i class="fa fa-link" aria-hidden="true"></i></a>'.format(url=url)
+        return ''
+    profile.allow_tags = True
+
+    class Media:
+        js = ('https://use.fontawesome.com/c8bb83e4c1.js',)
+
 
 admin.site.register(School, SchoolAdmin)
 admin.site.disable_action('delete_selected')

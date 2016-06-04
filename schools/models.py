@@ -132,7 +132,7 @@ class SchoolProfile(models.Model):
             help_text='Does your school have a uniform for students?'
     )
     mission_statement = models.TextField(null=True, blank=True,
-            help_text='What is your school’s mission statement?'                                    
+            help_text='What is your school’s mission statement?'
     )
 
     # About
@@ -149,26 +149,26 @@ class SchoolProfile(models.Model):
 
     # School Services
     transportation = models.CharField(choices=TRANSPORTATION, max_length=4, blank=True,
-            help_text='Do you provide transportation for students?'                                 
+            help_text='Do you provide transportation for students?'
     )
     transportation_explanation = models.TextField(null=True, blank=True,
             help_text='If you provide transportation, please describe how it is provided and for whom '
             '(I.E. one pick-up per neighborhood hub, city bus tickets provided to students)'
     )
     breakfast_served = models.CharField(max_length=4, choices=BREAKFAST, blank=True, null=True,
-            help_text='Select the option that best describes your breakfast service.' 
+            help_text='Select the option that best describes your breakfast service.'
     )
     breakfast_explanation = models.TextField(null=True, blank=True,
-            help_text='Please share any additional information that parents would like to know about your breakfast program.'                                        
+            help_text='Please share any additional information that parents would like to know about your breakfast program.'
     )
     breakfast_free_and_reduced = models.NullBooleanField(
             help_text='Do you participate in the National Free and Reduced Breakfast Program?'
     )
     lunch_served = models.CharField(max_length=4, choices=LUNCH, blank=True, null=True,
-            help_text='Select the option that best describes your lunch service.'                               
+            help_text='Select the option that best describes your lunch service.'
     )
     lunch_explanation = models.TextField(null=True, blank=True,
-            help_text='Please share any additional information that parents would like to know about your lunch program.'                                    
+            help_text='Please share any additional information that parents would like to know about your lunch program.'
     )
     lunch_free_and_reduced = models.NullBooleanField(
             help_text='Do you participate in the National Free and Reduced Lunch Program?'
@@ -179,11 +179,11 @@ class SchoolProfile(models.Model):
     after_care_offered = models.NullBooleanField(
             help_text=' Do you provide after care?'
     )
-    extended_care_cost = models.TextField(null=True, blank=True, 
+    extended_care_cost = models.TextField(null=True, blank=True,
             help_text='What is the fee for before and/or after care?'
     )
     extended_care_financial_assistance = models.TextField(null=True, blank=True,
-            help_text='Please describe any financial assistance available for before/after care.'                                                    
+            help_text='Please describe any financial assistance available for before/after care.'
     )
     before_care_hours = models.TextField(null=True, blank=True,
             help_text='If you provide before care, please enter in the hours for care.'
@@ -207,7 +207,7 @@ class SchoolProfile(models.Model):
     lottery_priority_4 = models.CharField(max_length=250, blank=True, null=True)
     lottery_priority_5 = models.CharField(max_length=250, blank=True, null=True)
     lottery_deadline = models.DateTimeField(null=True, blank=True,
-            help_text='If your school has a lottery, what is the deadline for applying for the 2017-2018 school year?  Use YYYY-MM-DD (like 2017-05-31) format.'                                       
+            help_text='If your school has a lottery, what is the deadline for applying for the 2017-2018 school year?  Use YYYY-MM-DD (like 2017-05-31) format.'
     )
     # lottery_acceptance_rate  FIXME
     learn_more_link = models.TextField(null=True, blank=True,
@@ -216,13 +216,13 @@ class SchoolProfile(models.Model):
 
     # Leadership & Teacher Info
     principal_name = models.TextField(null=True, blank=True,
-            help_text='Name of Principal'                                 
+            help_text='Name of Principal'
     )
     principal_bio = models.TextField(null=True, blank=True,
-            help_text='Please provide a brief bio for the principal.'                                
+            help_text='Please provide a brief bio for the principal.'
     )
     principal_start_year = models.IntegerField(null=True, blank=True,
-            help_text='Year that current principal began at this school:'                                          
+            help_text='Year that current principal began at this school:'
     )
 
     # Targeted Academic Offerings
