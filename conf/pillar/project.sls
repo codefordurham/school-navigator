@@ -8,4 +8,4 @@ less_version: 2.1.0
 postgres_version: 9.3
 postgresql_extensions: [postgis]
 
-margarita_version: 1.1.0
+margarita_version: 1.7.1
