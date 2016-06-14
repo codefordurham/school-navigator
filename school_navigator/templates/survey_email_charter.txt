@@ -1,0 +1,13 @@
+Dear {{ school.name }} Team,
+
+Following the recent presentation by Chrissy Deal about School Navigator at your May 3rd meeting, we are writing to request your help.  In partnership with Durham Public Schools, the PTA Council, and Durham parents, we at Code for Durham are creating a resource to help families understand the city's public school landscape.  The site will help families identify their zoned schools, view all public schools relative to their location, and access detailed and consistent information about each school.
+
+In order to create a great profile for {{ school.name }}, we are requesting your help.  We ask that you and your team complete the survey below by {{ school_profile.due_date }} so we can include your school's completed profile on the site.  Please see below for the survey link and instructions.
+
+Email sarah.sba@gmail.com if you have any questions. We know you are very busy and greatly appreciate you making time to complete this survey.  Many thanks in advance for your help! 
+
+Survey Link (with further instructions): {{ school_profile_url }}
+Due Date: {{ school_profile.due_date }}
+
+Sincerely,
+School Navigator Team
