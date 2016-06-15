@@ -105,6 +105,7 @@ TRANSPORTATION = (
 
 class SchoolProfile(models.Model):
     school = models.ForeignKey('School')
+    state_id = models.CharField(max_length=6, blank=True, null=True)
 
     level = models.CharField(choices=SCHOOL_LEVELS, max_length=20)
     school_hours = models.TextField(null=True, blank=True)

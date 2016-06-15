@@ -116,6 +116,7 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive", "ngSanitize"])
               markers: { }
             });
             Schools.get($params.school).success(function(school) {
+                console.log(school);
                 $scope.school = school;
                 console.log(school);
                 $scope.center.lat = school.location.coordinates[1];
@@ -148,7 +149,28 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive", "ngSanitize"])
                     }
                     return display;
                 };
-
+                $scope.report_card_link = function() {
+                  //url is of the form: base/<unit-code>_year_<g1>-<g2>-<School/Charter>.pdf
+                  var link_base = 'https://ncreportcards.ondemand.sas.com/snapshots/';
+                  var year = '_2015_';
+                  var link_end = '.pdf';
+                  var grades = '';
+                  var type = '';
+                  //determine grade range
+                  if ($scope.school.profile.grade_max <= 8) {
+                    grades = 'K-8';
+                  } else if ($scope.school.profile.grade_min >=9) {
+                    grades = '9-12';
+                  } else {
+                    grades = 'K-12';
+                  }
+                  if ($scope.school.school_type === 'Charter') {
+                    type = '-Charter';
+                  } else {
+                    type = '-School';
+                  }
+                  return link_base + $scope.school.profile.state_id + year + grades + type + link_end;
+                }
                 angular.extend($scope.school);
             });
         }
