@@ -116,7 +116,6 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive", "ngSanitize"])
               markers: { }
             });
             Schools.get($params.school).success(function(school) {
-                console.log(school);
                 $scope.school = school;
                 console.log(school);
                 $scope.center.lat = school.location.coordinates[1];
