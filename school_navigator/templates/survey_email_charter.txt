@@ -6,7 +6,7 @@ We are following up on an email you recently received from Lisa Gordon Stella to
  
 In order to create a great profile for {{ school.name }}, we are requesting your help. We ask that you and your team complete the survey below by {{ school_profile.due_date }} so we can include your school's completed profile on the site. Please see below for the survey link and instructions. 
  
-Email sarah.sba@gmail.com if you have any questions. We know you are very busy and greatly appreciate you making time to complete this survey. Many thanks in advance for your help in creating this resource for Durham's families! 
+Email jfreeman@codeforamerica.org if you have any questions. We know you are very busy and greatly appreciate you making time to complete this survey. Many thanks in advance for your help in creating this resource for Durham's families! 
  
 Sincerely,
 School Navigator Team
