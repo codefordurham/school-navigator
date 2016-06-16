@@ -21,13 +21,18 @@ def send_email(school, request):
     school_profile = school.profile()
     school_profile_url = request.build_absolute_uri(school_profile.get_absolute_url())
 
+    if school.type == 'charter':
+        email_template = 'survey_email_charter.txt'
+    else:
+        email_template = 'survey_email_dps.txt'
+
     context = {
         'school': school,
         'school_profile': school_profile,
         'principal_name': school_profile.principal_name,
         'school_profile_url': school_profile_url,
     }
-    body = render_to_string('survey_email.txt', context)
+    body = render_to_string(email_template, context)
 
     EmailMessage(subject, body, to=to, from_email=from_email).send()
 
