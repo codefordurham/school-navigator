@@ -213,7 +213,9 @@ class SchoolProfile(models.Model):
     learn_more_link = models.TextField(null=True, blank=True,
             help_text="Please provide a link where parents can learn more about your school’s admission process and apply."
     )
-
+    feeder_school_info = models.TextField(null=True, blank=True,
+            help_text="Do students graduating from your school have guaranteed enrollment or priority status in the lottery for another school?  If yes, please explain.  If not, please leave blank."
+    )
     # Leadership & Teacher Info
     principal_name = models.TextField(null=True, blank=True,
             help_text='Name of Principal'
