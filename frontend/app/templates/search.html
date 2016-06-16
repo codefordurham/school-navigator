@@ -32,7 +32,7 @@
                                 </div> 
                                         {{ school.name }} <small class="preference">{{ school.preference }}</small>
                                 </h4>
-                                <span data-ng-if="school.year_round == true" class="school-badge year-round" data-toggle="tooltip" data-placement="top" title="Year-round School">YR</span>
+                                <span data-ng-if="school.year_round == true" class="school-badge" data-toggle="tooltip" data-placement="top" title="Year-round School">YR</span>
                             </div>
                             <div class="distance">{{ school.distance | number:2 }} mi</div>
                             <div data-ng-show="school.selected == true">
