@@ -173,7 +173,7 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive", "ngSanitize"])
             },
             eligibility: "assigned",
             toggleSelectSchool: function (school) {
-              var selFunction = school.selected ? function(scl) { scl.selected = false; } : function(scl) { scl.selected = (scl.id === school.id) || "hide"; };
+              var selFunction = school.selected ? function(scl) { scl.selected = false; } : function(scl) { scl.selected = (scl.id === school.id); };
               angular.forEach($scope.all_schools, selFunction);
             },
             maxHeight: function () {
