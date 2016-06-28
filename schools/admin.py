@@ -10,6 +10,9 @@ from leaflet.admin import LeafletGeoAdmin
 
 from .models import School, SchoolProfile
 
+SN_EMAIL = 'schoolnavigatorteam@gmail.com'
+CC_DPS_EMAIL = ['William.Sudderth-III@dpsnc.net', SN_EMAIL] 
+CC_CHARTER_EMAIL = [SN_EMAIL]
 
 def send_email(school, request):
     subject = 'Durham School Navigator Survey: {:s}'.format(school.name)
@@ -23,8 +26,10 @@ def send_email(school, request):
 
     if school.type == 'charter':
         email_template = 'survey_email_charter.txt'
+        cc = CC_CHARTER_EMAIL
     else:
         email_template = 'survey_email_dps.txt'
+        cc = CC_DPS_EMAIL
 
     context = {
         'school': school,
@@ -34,7 +39,7 @@ def send_email(school, request):
     }
     body = render_to_string(email_template, context)
 
-    EmailMessage(subject, body, to=to, from_email=from_email).send()
+    EmailMessage(subject, body, to=to, from_email=from_email, cc=cc).send()
 
 def send_survey(modeladmin, request, queryset):
     for school in queryset:
