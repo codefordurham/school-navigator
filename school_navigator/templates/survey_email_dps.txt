@@ -1,7 +1,7 @@
 {% if principal_name %}
 Dear {{ principal_name }},
 {% else %}
-Hello,
+Hello {{ school.name }} team,
 {% endif %}
 As Superintendent L’Homme shared with you in a recent email, we are writing to request your help. In partnership with Durham Public Schools, the PTA Council, and Durham parents, we at Code for Durham are creating a resource to help families understand the city's public school landscape. The site will help families identify their zoned schools, view all public schools relative to their location, and access detailed and consistent information about each school.
 
