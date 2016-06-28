@@ -62,6 +62,6 @@
 
     // calendar widget
     $('#id_lottery_deadline').datepicker({
-
+        format: 'yyyy-mm-dd',
     });
 })(jQuery);
