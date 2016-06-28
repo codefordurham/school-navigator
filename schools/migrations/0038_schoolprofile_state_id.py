@@ -69,13 +69,13 @@ def insert_state_ids(apps, schema_editor):
             198: "320388",
             215: "320400",
             193: "320346",
-            244: "",
-            245: "",
-            230: ""
         }
     school_profile = apps.get_model("schools", "schoolprofile")
     for school in school_profile.objects.all():
-        school.state_id = id_map[school.school_id]
+        if school.school_id in id_map:
+            school.state_id = id_map[school.school_id]
+        else:
+            school.state_id = ""
         school.save()
 
 class Migration(migrations.Migration):
