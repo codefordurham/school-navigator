@@ -13,6 +13,7 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker.css" rel="stylesheet">
     <link rel="stylesheet" href='//fonts.googleapis.com/css?family=Roboto:500,900,300,700,400' type='text/css'>
     {% if debug %}
     <link rel="stylesheet" type="text/css" href="https://durhamschoolnavigator.org/css/index.css" />
@@ -31,6 +32,7 @@
         {% block content %}{% endblock %}
     </div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.js"></script>
     {% compress js %}
     <script src="{% static 'js/site.js' %}"></script>
     {% endcompress %}
