@@ -79,9 +79,8 @@ def insert_state_ids(apps, schema_editor):
         school.save()
 
 class Migration(migrations.Migration):
-
     dependencies = [
-            ('schools', '0037_auto_20160428_2107'),
+            ('schools', '0038_schoolprofile_feeder_school_info'),
             ]
 
     operations = [
