@@ -133,6 +133,8 @@
                     <p>{{ school.profile.lottery_deadline | date:format:'MMMM d, y' }}</p>
                     <p><strong>Applying</strong></p>
                     <a class="btn btn-success" href="{{ school.profile.learn_more_link | uri }}">Learn more</a>
+		    <p><strong>Feeder School Status</strong></p>
+		    <p>{{ school.profile.feeder_school_info?(school.profile.feeder_school_info): "N/A" }}</p>
                 </div>
 
             </div>

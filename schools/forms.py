@@ -36,6 +36,7 @@ class SchoolProfileForm(ModelForm):
             'other': Textarea(attrs={'rows': 4}),
             'pta_website': URLInput,
             'parental_involvement_notes': Textarea(attrs={'rows': 4}),
+            'feeder_school_info': Textarea(attrs={'rows': 4}),
 
 
         }
@@ -66,7 +67,7 @@ class SchoolProfileForm(ModelForm):
             'admissions_policy_type',
             'lottery_priority_1', 'lottery_priority_2', 'lottery_priority_3',
             'lottery_priority_4', 'lottery_priority_5',
-            'lottery_deadline', 'learn_more_link',
+            'lottery_deadline', 'learn_more_link', 'feeder_school_info',
         ]),
         ('Targeted Academic Offerings', [
             'other_academic',
