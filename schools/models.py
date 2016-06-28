@@ -283,6 +283,9 @@ class SchoolProfile(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def due_date(self):
+        first_survey_due_date = datetime.date(2016, 7, 29)
+        if datetime.date.today() < datetime.date(2016, 6, 30):
+            return first_survey_due_date
         return (self.created_at + datetime.timedelta(30)).date()
 
     def overdue(self):
