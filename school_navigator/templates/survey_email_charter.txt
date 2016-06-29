@@ -1,6 +1,6 @@
 Dear {{ school.name }} Team,
 
-We are following up on an email you recently received from Lisa Gordon Stella to ask for your help. In partnership with the Durham Charter Collaborative and Durham Public Schools, we at Code for Durham (http://codefordurham.org) are creating a resource called School Navigator (http://durhamschoolnavigator.org) to support families in understanding the city's public school landscape. The website will help families identify their zoned schools, view all public schools relative to their location, and access detailed and consistent information about each school. 
+We are following up on an email you recently received from Lisa Gordon Stella to ask for your help. In partnership with the Durham Charter Collaborative and Durham Public Schools, we at Code for Durham (http://codefordurham.com) are creating a resource called School Navigator (http://durhamschoolnavigator.org) to support families in understanding the city's public school landscape. The website will help families identify their zoned schools, view all public schools relative to their location, and access detailed and consistent information about each school. 
  
 In order to create a great profile for {{ school.name }}, we are requesting your help. We ask that you and your team complete the survey below by {{ school_profile.due_date }} so we can include your school's completed profile on the site. Please see below for the survey link and instructions. 
  
