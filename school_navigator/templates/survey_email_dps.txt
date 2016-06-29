@@ -3,7 +3,7 @@ Dear {{ principal_name }},
 {% else %}
 Hello {{ school.name }} team,
 {% endif %}
-As Superintendent L’Homme shared with you in a recent email, we are writing to request your help. In partnership with Durham Public Schools, the PTA Council, and Durham parents, we at Code for Durham are creating a resource to help families understand the city's public school landscape. The site will help families identify their zoned schools, view all public schools relative to their location, and access detailed and consistent information about each school.
+As Superintendent L’Homme shared with you in a recent email, we are writing to request your help. In partnership with Durham Public Schools, the PTA Council, and Durham parents, we at Code for Durham (http://codefordurham.org) are creating a resource to help families understand the city's public school landscape. The site will help families identify their zoned schools, view all public schools relative to their location, and access detailed and consistent information about each school.
 
 In order to create a great profile for {{ school.name }}, we are requesting your help. We ask that you and your team complete the survey below by {{ school_profile.due_date }} so we can include your school's completed profile on the site.  Please see below for the survey link and instructions.
 
@@ -22,7 +22,7 @@ Survey Instructions
 - We expect the survey to take 30-60 minutes to complete, depending on how easily accessible the information is to you.
  
 Additional FYI
-- You can view a completed sample profile<a href="https://durhamschoolnavigator.org/#/school/247/">here</a>
+- You can view a completed sample profile here: https://durhamschoolnavigator.org/#/school/247/
 - Moving forward, we will ask annually only for changes you want to make to the existing profile, so the survey will take much less time to complete in the future.
 - There is some information such as school size and teacher satisfaction data that will appear in the profile but is not included in the survey because we will collect this information directly from DPI and DPS. The sample profile shows all the information that will appear in the final version of the profile.
 - The next phase of the site will include sourcing testimonials from Durham parents. This section is currently empty on the profiles. 
