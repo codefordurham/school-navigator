@@ -15,7 +15,7 @@ CC_DPS_EMAIL = ['William.Sudderth-III@dpsnc.net', SN_EMAIL]
 CC_CHARTER_EMAIL = [SN_EMAIL]
 
 def send_email(school, request):
-    subject = 'Durham School Navigator Survey: {:s}'.format(school.name)
+    subject = 'Durham School Navigator Survey Request: {:s}'.format(school.name)
     if school.principal_email is None:
         school.principal_email = ''
     to = [school.principal_email]
