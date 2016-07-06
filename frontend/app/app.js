@@ -1,4 +1,4 @@
-va app = angular.module("schoolsApp", [
+var app = angular.module("schoolsApp", [
     'ngRoute',
     'SchoolsApp.directives',
     'SchoolsApp.geoDecoder',
@@ -135,21 +135,6 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive", "ngSanitize"])
                     className: "school_point " + school.level
                   }
                 };
-                $scope.extendedCare = function(profile) {
-                    var noBeforeCareMessage = "This school does not offer before care.";
-                    var noAfterCareMessage = "This school does not offer after care.";
-                    var display;
-                    if (profile.after_care_offered && profile.before_care_offered && profile.after_care_offered != noAfterCareMessage && profile.before_care_offered != noBeforeCareMessage) {
-                        display = 'This school offers before and after care.';
-                    } else if (profile.after_care_offered && profile.after_care_offered != noAfterCareMessage) {
-                        display = 'This school offers after care and does not offer before care.';
-                    } else if (profile.before_care_offered && profile.before_care_offered != noBeforeCareMessage) {
-                        display = "This school offers before care and does not offer after care.";
-                    } else {
-                        display = "This school does not offer extended care.";
-                    }
-                    return display;
-                };
                 $scope.report_card_link = function() {
                   //url is of the form: base/<unit-code>_year_<g1>-<g2>-<School/Charter>.pdf
                   var link_base = 'https://ncreportcards.ondemand.sas.com/snapshots/';
@@ -171,7 +156,7 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive", "ngSanitize"])
                     type = '-School';
                   }
                   return link_base + $scope.school.profile.state_id + year + grades + type + link_end;
-                }
+                };
                 angular.extend($scope.school);
             });
         }
