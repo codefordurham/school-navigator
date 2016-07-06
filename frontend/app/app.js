@@ -1,4 +1,4 @@
-var app = angular.module("schoolsApp", [
+va app = angular.module("schoolsApp", [
     'ngRoute',
     'SchoolsApp.directives',
     'SchoolsApp.geoDecoder',
@@ -141,9 +141,9 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive", "ngSanitize"])
                     var display;
                     if (profile.after_care_offered && profile.before_care_offered && profile.after_care_offered != noAfterCareMessage && profile.before_care_offered != noBeforeCareMessage) {
                         display = 'This school offers before and after care.';
-                    } else if (profile.after_care_offered && profile.after_care_offered != noAfterCareOffered) {
+                    } else if (profile.after_care_offered && profile.after_care_offered != noAfterCareMessage) {
                         display = 'This school offers after care and does not offer before care.';
-                    } else if (profile.before_care_offered && profile.before_care_offered != noBeforeCareOffered) {
+                    } else if (profile.before_care_offered && profile.before_care_offered != noBeforeCareMessage) {
                         display = "This school offers before care and does not offer after care.";
                     } else {
                         display = "This school does not offer extended care.";
