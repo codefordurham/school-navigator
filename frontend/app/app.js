@@ -136,12 +136,14 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive", "ngSanitize"])
                   }
                 };
                 $scope.extendedCare = function(profile) {
+                    var noBeforeCareMessage = "This school does not offer before care.";
+                    var noAfterCareMessage = "This school does not offer after care.";
                     var display;
-                    if (profile.after_care_offered && profile.before_care_offered) {
+                    if (profile.after_care_offered && profile.before_care_offered && profile.after_care_offered != noAfterCareMessage && profile.before_care_offered != noBeforeCareMessage) {
                         display = 'This school offers before and after care.';
-                    } else if (profile.after_care_offered) {
+                    } else if (profile.after_care_offered && profile.after_care_offered != noAfterCareOffered) {
                         display = 'This school offers after care and does not offer before care.';
-                    } else if (profile.before_care_offered) {
+                    } else if (profile.before_care_offered && profile.before_care_offered != noBeforeCareOffered) {
                         display = "This school offers before care and does not offer after care.";
                     } else {
                         display = "This school does not offer extended care.";
