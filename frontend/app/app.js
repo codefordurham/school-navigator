@@ -35,9 +35,6 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
         .when('/navigating/neighborhood', {
             templateUrl: 'app/templates/neighborhood.html'
             })
-        .when('/navigating/charter', {
-            templateUrl: 'app/templates/charter.html'
-            })
         .when('/navigating/magnet', {
             templateUrl: 'app/templates/magnet.html'
             })
@@ -96,7 +93,7 @@ angular.module('SchoolsApp.geoDecoder', [])
 
 
 var levels = ['elementary', 'secondary', 'middle', 'high'];
-var types = ['speciality', 'magnet'];
+var types = ['speciality', 'magnet', 'charter'];
 
 angular.module('SchoolsApp.controllers', ["leaflet-directive", "ngSanitize"])
     .controller('schoolsDetailCtrl', ['$scope', '$routeParams', 'Schools',
