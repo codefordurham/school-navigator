@@ -112,6 +112,7 @@ class SchoolProfile(models.Model):
     grade_min = models.IntegerField(choices=GRADE_LEVELS, default=-2)
     grade_max = models.IntegerField(choices=GRADE_LEVELS, default=-2)
     website_url = models.CharField(max_length=500, blank=True, null=True)
+    photo = models.ImageField(upload_to="school_photos/",null=True, blank=True)
     phone_number = models.TextField(null=True, blank=True,
             help_text='Please enter phone number in the format (919) XXX-XXXX.')
     year_opened = models.IntegerField(null=True, blank=True,

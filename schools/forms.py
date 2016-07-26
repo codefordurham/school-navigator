@@ -1,7 +1,11 @@
-from django.forms import ModelForm, TextInput, URLInput, Textarea
+from django import forms
+from django.forms import ModelForm, TextInput, URLInput, Textarea, FileInput
 import schools.models as schools_models
 
+
 class SchoolProfileForm(ModelForm):
+    photo = forms.ImageField(help_text="Please upload a picture of your school building as a jpeg file here. This picture will be showcased at the top of your school's profile.\n")
+
     class Meta:
         model = schools_models.SchoolProfile
         exclude = ('school', 'created_at', 'submitted_at', )
@@ -10,6 +14,7 @@ class SchoolProfileForm(ModelForm):
             'phone_number': TextInput,
             'website_url': URLInput,
             'theme': TextInput,
+            'photo': forms.ClearableFileInput,
             'mission_statement': Textarea(attrs={'rows': 8}),
             'transportation_explanation': TextInput,
             'before_care_hours': TextInput,
@@ -44,7 +49,7 @@ class SchoolProfileForm(ModelForm):
     _fieldsets = (
         ('Basic Facts', [
             'level', 'grade_min', 'grade_max', 'school_hours', 'phone_number',
-            'website_url', 'year_opened', 'mission_statement',
+            'website_url', 'photo', 'year_opened', 'mission_statement',
             'theme', 'uniform_required',
         ]),
         ('Points of Pride', [
@@ -56,7 +61,7 @@ class SchoolProfileForm(ModelForm):
             'after_care_offered', 'after_care_hours', 'extended_care_cost',
             'extended_care_financial_assistance',
             'breakfast_served', 'breakfast_free_and_reduced',
-            'breakfast_explanation', 
+            'breakfast_explanation',
             'lunch_served', 'lunch_free_and_reduced',
             'lunch_explanation',
         ]),
