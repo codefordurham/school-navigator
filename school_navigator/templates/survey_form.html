@@ -20,7 +20,7 @@
 <ul>
     <li><b>Name:</b> {{ school.name }}</li>
     <li><b>School type:</b> {{ school.type }}</li>
-    <li><b>Year round calendar:</b> {{ school.year_round }}</li>
+    <li><b>Year round calendar:</b> {{ school.year_round | yesno | title }}</li>
     <li><b>Address:</b> {{school.address}}</li>
 </ul>
 
