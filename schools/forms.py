@@ -4,7 +4,8 @@ import schools.models as schools_models
 
 
 class SchoolProfileForm(ModelForm):
-    photo = forms.ImageField(help_text="Please upload a picture of your school building as a jpeg file here. This picture will be showcased at the top of your school's profile.\n")
+    photo = forms.ImageField(help_text="Please upload a picture of your school building as a jpeg file here. This picture will be showcased at the top of your school's profile.\n",
+                             required=False)
 
     class Meta:
         model = schools_models.SchoolProfile
