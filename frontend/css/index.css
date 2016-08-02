@@ -22,9 +22,9 @@ hr.no-border {
   display: flex;
   flex-flow: column;
 }
-.container {
+/*.container {
     margin-top: 60px;
-}
+}*/
 .content-row {
   flex: 0 1 50px;
 }
@@ -423,9 +423,9 @@ div#schools-wrapper ul.nav li.active a, div#schools-wrapper ul.nav li a:hover {
 
 
  /*SCHOOL DETAIL PAGE*/
-.at-a-glance {
+/*.at-a-glance {
     padding: 20px 0;
-}
+}*/
 .school-detail-page ol {
     padding-left: 20px;
 }
@@ -532,3 +532,72 @@ div.avgline span.avg {
 .coming-soon.teacher-survey .overlay .opacity {
     opacity: 0.7;
 }
+/* NEW STYLES */
+
+.container,
+.container-fluid {
+    position: relative;
+}
+.hero {
+    height: 400px;
+    background-image: url(../img/mural.jpg);
+    opacity: 0.25;
+}
+.school-profile-header {
+    margin-top: -340px;
+}
+.school-profile-header.middle-school {
+    color: #3F899E;
+}
+.at-a-glance {
+    padding: 40px;
+    color: #ffffff;
+    font-size: 16px;
+    background-color: rgba(63, 137, 158, 0.8);
+}
+.at-a-glance a {
+    color: #ffffff;
+    text-decoration: underline;
+}
+.at-a-glance a:hover, .at-a-glance a:focus {
+    text-decoration: none;
+}
+.at-a-glance p:last-child {
+    margin-bottom: 0;
+}
+.at-a-glance .col-md-6 {
+    border-left: 1px solid #AAC2CE;
+}
+.at-a-glance strong {
+    color: #C1D2DB;
+}
+.at-a-glance .col-md-6:last-child span:last-child {
+    margin-left: 15px;
+}
+nav.school-profile-tabs {
+    background-color: #3F899E;
+}
+.middle-school-tabs-nav .nav-pills > li.active > a {
+    background-color: #3F899E;
+}
+@media screen and (max-width: 768px) {
+    .at-a-glance .col-md-6 {
+        border-left: 0;
+    }
+    .at-a-glance .col-md-6:last-child {
+        margin-top: 10px;
+    }
+    .at-a-glance .col-md-6:last-child span:last-child {
+        margin-left: 0;
+    }
+}
+
+
+
+
+
+
+
+
+
+
