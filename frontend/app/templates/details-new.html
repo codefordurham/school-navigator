@@ -12,27 +12,27 @@
             </div>
             <div class="row at-a-glance">
                 <div class="col-md-6">
-                    <p><strong>Address: </strong>{{ school.address }}409 Blackwell St, Durham, NC 27701</p>
-                    <p><strong>Phone: </strong> (919) 123-4567 {{ school.profile.phone_number }}</p>
-                    <p><strong>Website: </strong><a href="{{ school.profile.website_url | uri }}">{{ school.profile.website_url | uri }}</a><a href="http://www.dpsnc.net/">http://www.dpsnc.net/</a> </p>
-                    <p><strong>Year open: </strong>{{ school.profile.year_opened }} 1984</p>
+                    <p><span class="label">Address:</span> {{ school.address }}409 Blackwell St, Durham, NC 27701</p>
+                    <p><span class="label">Phone:</span> {{ school.profile.phone_number }}(919) 123-4567</p>
+                    <p><span class="label">Website:</span> <a href="{{ school.profile.website_url | uri }}">{{ school.profile.website_url | uri }}</a><a href="http://www.dpsnc.net/">http://www.dpsnc.net/</a> </p>
+                    <p><span class="label">Year open:</span> {{ school.profile.year_opened }} 1984</p>
                 </div>
                 <div class="col-md-6">
-                    <p><strong>Theme: </strong> {{ school.profile.theme }}Language</p>
-                    <p><strong>Uniform: </strong> {{ school.profile.uniform_required | true_false }}</p>
-                    <p><strong>School Day: </strong> {{ school.profile.school_hours }} 9:00 a.m. - 3:30 p.m.</p>
-                    <p><span><strong>Before Care Hours: </strong>{{ school.profile.before_care_hours }}6:00 - 8:00 a.m.</span>
-                    <span><strong> After Care Hours: </strong>{{ school.profile.after_care_hours }}3:30 - 7:00 p.m.</span></p>
+                    <p><span class="label">Theme:</span> {{ school.profile.theme }}Language</p>
+                    <p><span class="label">Uniform:</span> {{ school.profile.uniform_required | true_false }}</p>
+                    <p><span class="label">School Day: </span> {{ school.profile.school_hours }} 9:00 a.m. - 3:30 p.m.</p>
+                    <p><span><span class="label">Before Care Hours:</span> {{ school.profile.before_care_hours }}6:00 - 8:00 a.m.</span>
+                    <span><span class="label after-care">After Care Hours:</span> {{ school.profile.after_care_hours }}3:30 - 7:00 p.m.</span></p>
                 </div>
             </div>
         </div>   
         
         <nav class="row school-profile-tabs middle-school-tabs-nav">
-            <ul class="col-sm-12 nav nav-pills">
-                <li role="presentation" class="active"><a href="#">Tab 1</a></li>
-                <li role="presentation"><a href="#">Tab 2</a></li>
-                <li role="presentation"><a href="#">Tab 3</a></li>
-                <li role="presentation"><a href="#">Tab 4</a></li>
+            <ul class="nav nav-pills">
+                <li role="presentation" class="active"><a href="#">Overview</a></li>
+                <li role="presentation"><a href="#">Who We Are</a></li>
+                <li role="presentation"><a href="#">School Offerings</a></li>
+                <li role="presentation"><a href="#">Testimonials</a></li>
             </ul>
         </nav>
     </div>
