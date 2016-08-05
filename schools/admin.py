@@ -14,6 +14,7 @@ SN_EMAIL = 'schoolnavigatorteam@gmail.com'
 CC_DPS_EMAIL = ['William.Sudderth-III@dpsnc.net', SN_EMAIL]
 CC_CHARTER_EMAIL = [SN_EMAIL]
 
+
 def send_email(school, request):
     subject = 'Durham School Navigator Survey Request: {:s}'.format(school.name)
     if school.principal_email is None:
@@ -123,6 +124,7 @@ class SchoolAdmin(LeafletGeoAdmin):
 
 admin.site.register(School, SchoolAdmin)
 admin.site.disable_action('delete_selected')
+
 
 class SchoolProfileAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'due_date', 'created_at', 'submitted_at')

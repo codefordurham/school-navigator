@@ -280,8 +280,14 @@ class SchoolProfile(models.Model):
     )
 
     submitted_at = models.DateTimeField(null=True, default=None)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField()
 
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        if not self.created_at:
+            self.created_at = datetime.datetime.now()
+        super(SchoolProfile, self).save(force_insert=force_insert, force_update=force_update,
+                                        using=using, update_fields=update_fields)
     def due_date(self):
         first_survey_due_date = datetime.date(2016, 7, 29)
         if datetime.date.today() < datetime.date(2016, 6, 30):
