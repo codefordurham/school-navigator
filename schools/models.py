@@ -279,7 +279,7 @@ class SchoolProfile(models.Model):
             help_text='Thank you for taking the time to complete this survey!  Please let us know if you have any feedback on the process or on specific questions so we can improve next year.'
     )
 
-    submitted_at = models.DateTimeField(null=True, default=None)
+    submitted_at = models.DateTimeField(null=True, blank=True, default=None)
     created_at = models.DateTimeField()
 
     def save(self, force_insert=False, force_update=False, using=None,
