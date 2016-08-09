@@ -107,7 +107,7 @@ Then create a local settings file and set your ``DJANGO_SETTINGS_MODULE`` to use
 Exit the virtualenv and reactivate it to activate the settings just changed::
 
     deactivate
-    workon school_inspector
+    workon school_navigator
 
 If you're on Ubuntu 12.04, to get get postgis you need to set up a few more
 packages before you can create the db and set up the postgis extension::
