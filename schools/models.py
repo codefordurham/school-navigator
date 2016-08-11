@@ -29,7 +29,7 @@ class School(models.Model):
     zip_code = models.CharField(max_length=5, blank=True)
     active = models.BooleanField(default=False)
     principal_email = models.CharField(max_length=100, null=True, blank=True,
-                help_text='Email of Principal (may also reach Superintendent)'
+                help_text='Email of Principal (may also reach Superintendant)'
     )
 
     type = models.CharField(choices=SCHOOL_TYPES, max_length=20)
