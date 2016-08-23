@@ -25,22 +25,22 @@
                     <span><span class="label after-care">After Care Hours:</span> {{ school.profile.after_care_hours }}3:30 - 7:00 p.m.</span></p>
                 </div>
             </div>
-        </div>   
-        
+        </div>
+
         <nav class="row school-profile-tabs middle-school-tabs-nav">
             <ul class="nav nav-pills">
-                <li role="presentation" class="active"><a href="#">Overview</a></li>
-                <li role="presentation"><a href="#">Who We Are</a></li>
-                <li role="presentation"><a href="#">School Offerings</a></li>
-                <li role="presentation"><a href="#">Testimonials</a></li>
+                <li role="presentation" data-ng-class="{active: tab == 'overview'}"><a data-ng-click="tab = 'overview'">Overview</a></li>
+                <li role="presentation" data-ng-class="{active: tab == 'who-we-are'}"><a data-ng-click="tab = 'who-we-are'">Who We Are</a></li>
+                <li role="presentation" data-ng-class="{active: tab == 'school-offerings'}"><a data-ng-click="tab = 'school-offerings'">School Offerings</a></li>
+                <li role="presentation" data-ng-class="{active: tab == 'testimonials'}"><a data-ng-click="tab = 'testimonials'">Testimonials</a></li>
             </ul>
         </nav>
     </div>
 
-       
 
-    <div class="container school-profile-content">   
-        <div class="row">
+
+    <div class="container school-profile-content">
+        <div data-ng-class="{active: tab == 'overview', row: true}">
             <div class="col-md-6">
                 <div class="school-details">
                     <h2>Mission</h2>

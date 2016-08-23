@@ -139,6 +139,7 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive", "ngSanitize"])
                     className: "school_point " + school.level
                   }
                 };
+
                 $scope.extendedCare = function(profile) {
                     var display;
                     if (profile.after_care_offered && profile.before_care_offered) {
@@ -152,6 +153,7 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive", "ngSanitize"])
                     }
                     return display;
                 };
+                $scope.tab = 'overview';
                 $scope.report_card_link = function() {
                   //url is of the form: base/<unit-code>_year_<g1>-<g2>-<School/Charter>.pdf
                   var link_base = 'https://ncreportcards.ondemand.sas.com/snapshots/';
