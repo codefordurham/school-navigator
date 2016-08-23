@@ -52,6 +52,7 @@ class School(models.Model):
             profile = SchoolProfile.objects.create(school=self)
 
         profile.submitted_at = None
+        profile.created_at = None
         profile.save()
         return profile
 
