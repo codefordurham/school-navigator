@@ -97,7 +97,7 @@ necessary requirements::
     # Check that you have python3.4 installed
     $ which python3.4
     $ mkvirtualenv school_navigator -p `which python3.4`
-    (school_navigator)$ $VIRTUAL_ENV/bin/pip install -r $PWD/requirements/dev.txt
+    (school_navigator)$ pip install -r $PWD/requirements/dev.txt
 
 Then create a local settings file and set your ``DJANGO_SETTINGS_MODULE`` to use it::
 
