@@ -6,6 +6,7 @@ from django.http import Http404
 
 from django.utils import timezone
 
+
 def survey_form(request, hash):
     try:
         pk = schools_models.SchoolProfile.decode_url(hash)
@@ -18,7 +19,9 @@ def survey_form(request, hash):
         raise Http404("Survey Period Has Closed")
 
     if request.POST:
-        form = schools_forms.SchoolProfileForm(request.POST, instance=profile)
+        print(request.FILES)
+        form = schools_forms.SchoolProfileForm(request.POST, request.FILES, instance=profile)
+
         if form.is_valid():
             survey = form.save(commit=False)
             survey.school = profile.school

@@ -27,13 +27,14 @@ We provide parents who are looking at moving to or within Durham with a simple o
 Overview
 ---------------
 * Phase 1: Complete - Answer the question: How does zoning and location affect my school choices - across neighborhood, magnet and charter options?
-* Phase 2 (In testing for Launch): School profiles that incorporate key data points (e.g. principal info, score improvement rates, teacher/student ratios, etc) that parents have said they want to know about schools that will help them choose a school path. See latest details on progress by looking at our project page (http://codefordurham.com/projects/school_navigator)
+* Phase 2: Complete - School profiles data collection and integration. We focussed on gathering key data points (e.g. principal info, score improvement rates, teacher/student ratios, etc) that parents said they want to know about schools (through a survey n=80) that will help them choose a school path. See latest details on progress by looking at our project page (http://codefordurham.com/projects/school_navigator)
+* Phase 3: (Planning) - Improve the user interface for School Profiles & add some relevant state-collected school data.
 * Project Goal: Remove friction for understanding the local school system and improve on existing DPS web tools (http://www.dpsnc.net/pages/Durham_Public_Schools/Our_Schools/Find_Your_School).
 * Target group: Parents or Prospective Parents seeking to understand how their residential choice will impact where their kids can go to school.
 
 Getting Set Up as a Non-Developer
 -----------------------------
-* See what tasks are waiting for you on our project dashboard (prefiltered for tasks for June 4 event) (https://waffle.io/codefordurham/school-navigator?milestone=Civic%20Hacking%20Day)
+* See what tasks are waiting for you on our project dashboard (prefiltered tasks) (https://waffle.io/codefordurham/school-navigator?label=non-tech)
 * Create a Github Account if you want to assign a task to yourself or create new tasks
 * Join this Project Repository (aka. Repo) by emailing the email list with subject: "Add me to the School Navigator" (https://groups.google.com/forum/#!forum/school-inspector)
 
