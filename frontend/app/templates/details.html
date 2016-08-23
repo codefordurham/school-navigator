@@ -48,7 +48,7 @@
         <div class="col-md-6">
             <p><strong>Address: </strong> {{ school.address }}</p>
             <p><strong>Phone Number: </strong> {{ school.profile.phone_number }}</p>
-            <p><strong>Website: </strong> <a href="{{ school.profile.website_url | uri }}">{{ school.profile.website_url | uri }}</a></p>
+            <p><strong>Website: </strong> <a href="{{ school.profile.website_url | uri }}" target="_blank">{{ school.profile.website_url | uri }}</a></p>
             <p><strong>Year Opened: </strong> {{ school.profile.year_opened }}</p>
         </div>
         <div class="col-md-6">
