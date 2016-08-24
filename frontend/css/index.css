@@ -600,6 +600,7 @@ nav.school-profile-tabs {
 .school-profile-tabs .nav-pills > li.active > a,
 .school-profile-tabs .nav-pills > li > a:hover {
     border-radius: 0;
+    cursor: pointer;
 }
 .school-profile-tabs .nav-pills > li.active::after {
     content: "";
@@ -623,6 +624,24 @@ nav.school-profile-tabs {
 }
 .school-profile-content {
     margin-top: 40px;
+}
+.force-line-break {
+  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+
+  /* Adds a hyphen where the word breaks, if supported */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+
 }
 @media screen and (max-width: 768px) {
     .at-a-glance .col-md-6 {
