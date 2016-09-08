@@ -43,6 +43,9 @@ class School(models.Model):
     year_round_zone = models.MultiPolygonField(null=True, blank=True)
     traditional_option_zone = models.MultiPolygonField(null=True, blank=True)
 
+    state_id = models.CharField(max_length=6, blank=True, null=True)
+
+
     def new_profile(self):
         profile = self.profile()
         if profile:
@@ -105,7 +108,6 @@ TRANSPORTATION = (
 
 class SchoolProfile(models.Model):
     school = models.ForeignKey('School')
-    state_id = models.CharField(max_length=6, blank=True, null=True)
 
     level = models.CharField(choices=SCHOOL_LEVELS, max_length=20)
     school_hours = models.TextField(null=True, blank=True)
