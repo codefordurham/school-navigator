@@ -152,7 +152,7 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive", "ngSanitize"])
                   } else {
                     type = '-School';
                   }
-                  return link_base + $scope.school.profile.state_id + year + grades + type + link_end;
+                  return link_base + $scope.school.state_id + year + grades + type + link_end;
                 };
                 angular.extend($scope.school);
             });
