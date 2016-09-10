@@ -625,6 +625,12 @@ nav.school-profile-tabs {
 .school-profile-content {
     margin-top: 40px;
 }
+.school-profile-content .row {
+    display: none;
+}
+.school-profile-content .active {
+    display: block;
+}
 .force-line-break {
   /* These are technically the same, but use both */
   overflow-wrap: break-word;
@@ -654,13 +660,6 @@ nav.school-profile-tabs {
         padding-left: 0;
     }
 }
-
-
-
-
-
-
-
 
 
 

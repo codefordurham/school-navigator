@@ -7,22 +7,22 @@
             <div class="row school-profile-header middle-school">
                 <div class="col-md-12">
                     <h1>{{ school.name }} Sample DPS School</h1>
-                    <p class="lead">{{ school.school_type }} | {{ school.grades }}Magnet | Kindergarten - 5th grade</p>
+                    <p class="lead">{{ school.school_type }} | {{ school.grades }}</p>
                 </div>
             </div>
             <div class="row at-a-glance">
                 <div class="col-md-6">
-                    <p><span class="label">Address:</span> {{ school.address }}409 Blackwell St, Durham, NC 27701</p>
-                    <p><span class="label">Phone:</span> {{ school.profile.phone_number }}(919) 123-4567</p>
+                    <p><span class="label">Address:</span> {{ school.address }}</p>
+                    <p><span class="label">Phone:</span> {{ school.profile.phone_number }}</p>
                     <p><span class="label">Website:</span><a class="force-line-break" href="{{ school.profile.website_url | uri }}">{{ school.profile.website_url | uri }}</a></p>
-                    <p><span class="label">Year open:</span> {{ school.profile.year_opened }} 1984</p>
+                    <p><span class="label">Year open:</span> {{ school.profile.year_opened }}</p>
                 </div>
                 <div class="col-md-6">
                     <p><span class="label">Theme:</span> {{ school.profile.theme }}Language</p>
                     <p><span class="label">Uniform:</span> {{ school.profile.uniform_required | true_false }}</p>
-                    <p><span class="label">School Day: </span> {{ school.profile.school_hours }} 9:00 a.m. - 3:30 p.m.</p>
-                    <p><span><span class="label">Before Care Hours:</span> {{ school.profile.before_care_hours }}6:00 - 8:00 a.m.</span>
-                    <span><span class="label after-care">After Care Hours:</span> {{ school.profile.after_care_hours }}3:30 - 7:00 p.m.</span></p>
+                    <p><span class="label">School Day: </span> {{ school.profile.school_hours }}</p>
+                    <p><span><span class="label">Before Care:</span> {{ school.profile.before_care_hours }}</span>
+                    <span><span class="label after-care">After Care:</span> {{ school.profile.after_care_hours }}</span></p>
                 </div>
             </div>
         </div>
