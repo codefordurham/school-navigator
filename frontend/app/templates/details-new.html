@@ -1,5 +1,5 @@
 <simple-nav></simple-nav>
-<main class="school-detail-page">
+<main class="school-detail-page new-prototype">
     <div class="container-fluid ">
         <div class="row hero">
         </div>
@@ -18,7 +18,7 @@
                     <p><span class="label">Year open:</span> {{ school.profile.year_opened }}</p>
                 </div>
                 <div class="col-md-6">
-                    <p><span class="label">Theme:</span> {{ school.profile.theme }}Language</p>
+                    <p><span class="label">Theme:</span> {{ school.profile.theme }}</p>
                     <p><span class="label">Uniform:</span> {{ school.profile.uniform_required | true_false }}</p>
                     <p><span class="label">School Day: </span> {{ school.profile.school_hours }}</p>
                     <p><span><span class="label">Before Care:</span> {{ school.profile.before_care_hours }}</span>
@@ -41,6 +41,8 @@
     
         <div data-ng-class="{active: tab == 'overview', row: true}">
             <div class="col-md-6">
+                <h2>Map</h2>
+                <leaflet class="content-row" id="leaflet-map" defaults="defaults" center="center" markers="markers" tiles="tiles" school="school" height=250 width=550></leaflet>
                 <h2>Admission Policy</h2>
                 <div class="">
                     <p>{{ school.profile.admissions_policy_type }}</p>
@@ -73,7 +75,14 @@
                 <p><strong>Extended care: </strong><span title="extended care provided">{{ extendedCare(school.profile) }}</span></p>
                 <p><strong>Extended care cost: </strong>{{ school.profile.extended_care_cost }}</p>
                 <p><strong>Extended care financial assistance: </strong> <span ng-bind-html="school.profile.extended_care_financial_assistance | linky"></span></p>
-                <leaflet class="content-row" id="leaflet-map" defaults="defaults" center="center" markers="markers" tiles="tiles" school="school" height=250 width=550></leaflet>
+                <h2>Parent Involvement</h2>
+                <div class="">
+                    <p><strong>PTA/PTO: </strong>
+                        <span>{{ school.profile.pta | true_false }}</span>
+                    </p>
+                    <p data-ng-if="school.profile.pta_website"><a href="{{ school.profile.pta_website | uri }}">Learn more about this school's PTA/PTO</a></p>
+                    <p><span ng-bind-html="school.profile.parental_involvement_notes | linky"></span></p>
+                </div>
             </div>
         </div>
 
@@ -94,6 +103,7 @@
                     <a ng-show="school.profile.state_id" ng-href="{{report_card_link()}}" target="_blank">To view the state report card for this school, click here.</a>
                     <p ng-hide="school.profile.state_id">The state report card is currently unavailable </p>
                     <div class="overlay"><span class="label label-danger">Coming Soon</span></div>
+
                 </div>
             </div>
             <div class="col-md-6">
@@ -133,14 +143,7 @@
                             </div>
                         </div><!-- end ngRepeat: (question, percentage) in school.teacher_satisfaction -->
                     </div>
-                    <h2>Parent Involvement</h2>
-                    <div class="">
-                        <p><strong>PTA/PTO: </strong>
-                            <span>{{ school.profile.pta | true_false }}</span>
-                        </p>
-                        <p data-ng-if="school.profile.pta_website"><a href="{{ school.profile.pta_website | uri }}">Learn more about this school's PTA/PTO</a></p>
-                        <p><span ng-bind-html="school.profile.parental_involvement_notes | linky"></span></p>
-                    </div>
+                    
                     <div class="overlay">
                         <span class="label label-danger">Coming Soon</span>
                         <div class="text">

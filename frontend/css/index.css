@@ -534,67 +534,69 @@ div.avgline span.avg {
 }
 
 
-/* NEW STYLES */
-
-.container,
-.container-fluid {
+/* NEW PROTOTYPE STYLES */
+.new-prototype.school-detail-page {
+    margin-bottom: 60px;
+}
+.new-prototype .container,
+.new-prototype .container-fluid {
     position: relative;
 }
-.hero {
+.new-prototype .hero {
     height: 500px;
     background-image: url(../img/mural.jpg);
     opacity: 0.25;
 }
-.school-profile-header {
+.new-prototype .school-profile-header {
     margin-top: -390px;
 }
-.school-profile-header.middle-school {
+.new-prototype .school-profile-header.middle-school {
     color: #3F899E;
 }
-.at-a-glance {
+.new-prototype .at-a-glance {
     padding: 40px;
     color: #ffffff;
     font-size: 16px;
     background-color: rgba(63, 137, 158, 0.8);
 }
-.at-a-glance a {
+.new-prototype .at-a-glance a {
     color: #ffffff;
     text-decoration: underline;
 }
-.at-a-glance a:hover, .at-a-glance a:focus {
+.new-prototype .at-a-glance a:hover, .at-a-glance a:focus {
     text-decoration: none;
 }
-.at-a-glance p:last-child {
+.new-prototype .at-a-glance p:last-child {
     margin-bottom: 0;
 }
-.at-a-glance .label {
+.new-prototype .at-a-glance .label {
     color: #C1D2DB;
     font-weight: 400;
     font-size: 16px;
     padding: 0;
     padding-right: 6px;
 }
-.at-a-glance .label.after-care {
+.new-prototype .at-a-glance .label.after-care {
     padding-left: 10px;
 }
-.at-a-glance .col-md-6 {
+.new-prototype .at-a-glance .col-md-6 {
     border-left: 1px solid #AAC2CE;
 }
-.at-a-glance strong {
+.new-prototype .at-a-glance strong {
     color: #C1D2DB;
 }
-nav.school-profile-tabs {
+.new-prototype nav.school-profile-tabs {
     background-color: #ffffff;
     border-top: 1px solid #3F899E;
     border-bottom: 1px solid #3F899E;
 }
-.school-detail-page .school-profile-tabs ul li {
+.new-prototype.school-detail-page .school-profile-tabs ul li {
     text-align: center;
     text-transform: uppercase;
     width: 25%;
     padding-bottom: 0;
 }
-.school-detail-page .nav-pills > li+li {
+.new-prototype.school-detail-page .nav-pills > li+li {
     margin: 0;
 }
 .school-profile-tabs .nav-pills > li.active > a,
@@ -602,7 +604,7 @@ nav.school-profile-tabs {
     border-radius: 0;
     cursor: pointer;
 }
-.school-profile-tabs .nav-pills > li.active::after {
+.new-prototype .school-profile-tabs .nav-pills > li.active::after {
     content: "";
     position: absolute;
     left: 50%;
@@ -615,23 +617,23 @@ nav.school-profile-tabs {
     display: block;
     width: 0;
     }
-.middle-school-tabs-nav .nav-pills > li > a {
+.new-prototype .middle-school-tabs-nav .nav-pills > li > a {
     color: #3F899E;
 }
-.middle-school-tabs-nav .nav-pills > li.active > a {
+.new-prototype .middle-school-tabs-nav .nav-pills > li.active > a {
     background-color: #3F899E;
     color: #ffffff;
 }
-.school-profile-content {
+.new-prototype .school-profile-content {
     margin-top: 40px;
 }
-.school-profile-content .row {
+.new-prototype .school-profile-content .row {
     display: none;
 }
-.school-profile-content .active {
+.new-prototype .school-profile-content .active {
     display: block;
 }
-.force-line-break {
+.new-prototype .force-line-break {
   /* These are technically the same, but use both */
   overflow-wrap: break-word;
   word-wrap: break-word;
@@ -650,13 +652,13 @@ nav.school-profile-tabs {
 
 }
 @media screen and (max-width: 768px) {
-    .at-a-glance .col-md-6 {
+    .new-prototype .at-a-glance .col-md-6 {
         border-left: 0;
     }
-    .at-a-glance .col-md-6:last-child {
+    .new-prototype .at-a-glance .col-md-6:last-child {
         margin-top: 10px;
     }
-    .at-a-glance .label.after-care {
+    .new-prototype .at-a-glance .label.after-care {
         padding-left: 0;
     }
 }
