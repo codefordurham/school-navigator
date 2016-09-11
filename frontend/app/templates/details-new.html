@@ -40,14 +40,12 @@
     <div class="container school-profile-content">
     
         <div data-ng-class="{active: tab == 'overview', row: true}">
-            <div class="col-md-6">
-                <h2>Map</h2>
-                <leaflet class="content-row" id="leaflet-map" defaults="defaults" center="center" markers="markers" tiles="tiles" school="school" height=250 width=550></leaflet>
-                <h2>Admission Policy</h2>
-                <div class="">
-                    <p>{{ school.profile.admissions_policy_type }}</p>
-                    <p><strong>Lottery Priorities</strong>:</p>
-                    <div class="">
+            <div class="col-md-6"> 
+                <article>
+                    <h2>Admission Policy</h2>
+                    <div class="article-content">
+                        <p>{{ school.profile.admissions_policy_type }}</p>
+                        <p><strong>Lottery Priorities</strong>:</p>
                         <ol>
                             <li data-ng-show="school.profile.lottery_priority_1">{{ school.profile.lottery_priority_1 }}</li>
                             <li data-ng-show="school.profile.lottery_priority_2">{{ school.profile.lottery_priority_2 }}</li>
@@ -55,16 +53,22 @@
                             <li data-ng-show="school.profile.lottery_priority_4">{{ school.profile.lottery_priority_4 }}</li>
                             <li data-ng-show="school.profile.lottery_priority_5">{{ school.profile.lottery_priority_5 }}</li>
                         </ol>
+                        <p><strong>Acceptance rate</strong></p>
+                        <p><label class="label label-danger">Coming Soon</label></p>
+                        <p><strong>Deadline</strong></p>
+                        <p>{{ school.profile.lottery_deadline | date:format:'MMMM d, y' }}</p>
+                        <p><strong>Applying</strong></p>
+                        <a class="btn btn-success" href="{{ school.profile.learn_more_link | uri }}">Learn more</a>
+                        <p><strong>Feeder School Status</strong></p>
+                        <p>{{ school.profile.feeder_school_info?(school.profile.feeder_school_info): "N/A" }}</p>
+                     </div>
+                 </article>
+                 <article>
+                    <h2>Map</h2>
+                    <div class="article-content">
+                        <leaflet class="content-row" id="leaflet-map" defaults="defaults" center="center" markers="markers" tiles="tiles" school="school" height=250 width=550></leaflet>
                     </div>
-                    <p><strong>Acceptance rate</strong></p>
-                    <p><label class="label label-danger">Coming Soon</label></p>
-                    <p><strong>Deadline</strong></p>
-                    <p>{{ school.profile.lottery_deadline | date:format:'MMMM d, y' }}</p>
-                    <p><strong>Applying</strong></p>
-                    <a class="btn btn-success" href="{{ school.profile.learn_more_link | uri }}">Learn more</a>
-                    <p><strong>Feeder School Status</strong></p>
-                    <p>{{ school.profile.feeder_school_info?(school.profile.feeder_school_info): "N/A" }}</p>
-                 </div>
+                </article>
             </div>
             <div class="col-md-6">   
                 <article>
