@@ -534,7 +534,13 @@ div.avgline span.avg {
 }
 
 
-/* NEW PROTOTYPE STYLES */
+/* NEW PROTOTYPE STYLES */ 
+/* ========================
+Once the new school profile page is implemented, 
+the follwoing styles will have to be refactored to remove .new-prototype class 
+and integrated with other styles above
+=========================== */
+
 .new-prototype.school-detail-page {
     margin-bottom: 60px;
 }
