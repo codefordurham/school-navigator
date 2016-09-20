@@ -28,7 +28,6 @@ class School(models.Model):
     address = models.CharField(max_length=100, blank=True)
     zip_code = models.CharField(max_length=5, blank=True)
     active = models.BooleanField(default=False)
-    photo = models.ImageField(upload_to="school_photos/",null=True, blank=True)
     principal_email = models.CharField(max_length=100, null=True, blank=True)
 
     type = models.CharField(choices=SCHOOL_TYPES, max_length=20)
@@ -52,6 +51,7 @@ class School(models.Model):
             profile = SchoolProfile.objects.create(school=self)
 
         profile.submitted_at = None
+        profile.created_at = None
         profile.save()
         return profile
 
@@ -112,6 +112,7 @@ class SchoolProfile(models.Model):
     grade_min = models.IntegerField(choices=GRADE_LEVELS, default=-2)
     grade_max = models.IntegerField(choices=GRADE_LEVELS, default=-2)
     website_url = models.CharField(max_length=500, blank=True, null=True)
+    photo = models.ImageField(upload_to="school_photos/",null=True, blank=True)
     phone_number = models.TextField(null=True, blank=True,
             help_text='Please enter phone number in the format (919) XXX-XXXX.')
     year_opened = models.IntegerField(null=True, blank=True,
@@ -279,9 +280,15 @@ class SchoolProfile(models.Model):
             help_text='Thank you for taking the time to complete this survey!  Please let us know if you have any feedback on the process or on specific questions so we can improve next year.'
     )
 
-    submitted_at = models.DateTimeField(null=True, default=None)
-    created_at = models.DateTimeField(auto_now_add=True)
+    submitted_at = models.DateTimeField(null=True, blank=True, default=None)
+    created_at = models.DateTimeField()
 
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        if not self.created_at:
+            self.created_at = datetime.datetime.now()
+        super(SchoolProfile, self).save(force_insert=force_insert, force_update=force_update,
+                                        using=using, update_fields=update_fields)
     def due_date(self):
         first_survey_due_date = datetime.date(2016, 7, 29)
         if datetime.date.today() < datetime.date(2016, 6, 30):

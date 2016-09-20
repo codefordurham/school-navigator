@@ -150,6 +150,7 @@ class SchoolProfileSerilaizer(serializers.ModelSerializer):
     breakfast_free_and_reduced = serializers.SerializerMethodField('breakfast_free_and_reduced_display')
     before_care_offered = serializers.SerializerMethodField('before_care_offered_display')
     after_care_offered = serializers.SerializerMethodField('after_care_offered_display')
+    extended_care_offered = serializers.SerializerMethodField('_extended_care_offered')
 
     class Meta:
         model = schools_models.SchoolProfile
@@ -163,6 +164,17 @@ class SchoolProfileSerilaizer(serializers.ModelSerializer):
         if obj.lunch_free_and_reduced:
             return "This school participates in the National Free and Reduced Breakfast Program."
         return "This school does not participate in the National Free and Reduced Breakfast Program."
+
+    def _extended_care_offered(self, obj):
+        if obj.before_care_offered and obj.after_care_offered:
+            msg = 'This school offers before and after care.'
+        elif obj.before_care_offered:
+            msg = 'This school offers before care.'
+        elif obj.after_care_offered:
+            msg = 'This school offers after care.'
+        else:
+            msg = 'This school does not offer extended care.'
+        return msg
 
     def before_care_offered_display(self, obj):
         if obj.before_care_offered:

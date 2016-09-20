@@ -11,8 +11,9 @@ from leaflet.admin import LeafletGeoAdmin
 from .models import School, SchoolProfile
 
 SN_EMAIL = 'schoolnavigatorteam@gmail.com'
-CC_DPS_EMAIL = ['William.Sudderth-III@dpsnc.net', SN_EMAIL] 
+CC_DPS_EMAIL = ['William.Sudderth-III@dpsnc.net', SN_EMAIL]
 CC_CHARTER_EMAIL = [SN_EMAIL]
+
 
 def send_email(school, request):
     subject = 'Durham School Navigator Survey Request: {:s}'.format(school.name)
@@ -87,10 +88,13 @@ class SchoolAdmin(LeafletGeoAdmin):
     ordering = ('name',)
     list_filter = ('type', )
     actions = [send_survey, resend_survey]
-    fields = ('name', 'short_name', 'address', 'zip_code', 'active', 'photo',
+    fields = ('name', 'short_name', 'address', 'zip_code', 'active',
               'principal_email', 'principal_name', 'type', 'year_round', 'location',
               'district', 'walk_zone', 'choice_zone', 'priority_zone', 'year_round_zone',
               'traditional_option_zone')
+
+    def photo(self, obj):
+        return getattr(obj.profile(), 'photo', '')
 
     def get_changelist_form(self, request, **kwargs):
             return SchoolForm
@@ -120,6 +124,7 @@ class SchoolAdmin(LeafletGeoAdmin):
 
 admin.site.register(School, SchoolAdmin)
 admin.site.disable_action('delete_selected')
+
 
 class SchoolProfileAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'due_date', 'created_at', 'submitted_at')

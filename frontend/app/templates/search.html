@@ -12,10 +12,10 @@
         -->
     </div>
 
-    <div id="schools-wrapper" data-ng-show="all_sch
-          <li data-ng-class="{active: eligibility == 'assigned'}"><a data-ng-click="switchTab('assigned');" ools.length">
+    <div id="schools-wrapper" data-ng-show="all_schools.length">
         <!-- Nav tabs -->
-        <ul class="nav nav-tabs nav-justified" role="tablist">title="You are automatically assigned to your neighborhood schools regardless of the lottery. This includes walk and assigned attendance zones." data-toggle="tooltip" data-placement="top" tooltip>Assigned</a></li>
+        <ul class="nav nav-tabs nav-justified" role="tablist">
+          <li data-ng-class="{active: eligibility == 'assigned'}"><a data-ng-click="switchTab('assigned');" title="You are automatically assigned to your neighborhood schools regardless of the lottery. This includes walk and assigned attendance zones." data-toggle="tooltip" data-placement="top" tooltip>Assigned</a></li>
           <li data-ng-class="{active: eligibility == 'magnet'}"><a data-ng-click="switchTab('magnet'); deselectSchools();" title="You are eligible to apply to all magnets in this list. You have a better chance in the lottery for priority and choice zones." data-placement="top" tooltip>Magnets</a></li>
           <li data-ng-class="{active: eligibility == 'charter'}"><a data-ng-click="switchTab('charter'); deselectSchools();" title="You are eligible to apply to all charters in Durham." data-placement="top" tooltip>Charters</a></li>
         </ul>
@@ -44,6 +44,7 @@
                                 <p class='description'>
                                     {{ school.mission_statement }}
                                 </p>
+				<p><a href="#/school/{{ school.id }}/">View school profile</a></p>
                             </div>
                         </div>
                         <div class="school-group-separator" data-ng-hide="school.selected == 'hide'"></div>

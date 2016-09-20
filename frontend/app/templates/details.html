@@ -30,14 +30,14 @@
                 <p><strong>Transportation: </strong> <span title="Transportation provided">{{ school.profile.transportation_display }} <span ng-bind-html="school.profile.transportation_explanation | linky"></span></span></p>
                 <p><strong>Lunch: </strong><span title="Lunch provided">{{ school.profile.lunch_served_display }}</span> {{ school.profile.lunch_free_and_reduced }} <span ng-bind-html="school.profile.lunch_explanation | linky"></span></p>
                 <p><strong>Breakfast: </strong><span title="Breakfast provided">{{ school.profile.breakfast_served_display }}</span> {{ school.profile.breakfast_free_and_reduced }} <span ng-bind-html="school.profile.breakfast_explanation | linky"></span></p>
-                <p><strong>Extended care: </strong><span title="extended care provided">{{ extendedCare(school.profile) }}</span></p>
+                <p><strong>Extended care: </strong><span title="extended care provided">{{ school.profile.extended_care_offered }}</span></p>
                 <p><strong>Extended care cost: </strong>{{ school.profile.extended_care_cost }}</p>
                 <p><strong>Extended care financial assistance: </strong> <span ng-bind-html="school.profile.extended_care_financial_assistance | linky"></span></p>
             </div>
         </div>
 
         <div class="col-md-6">
-            <img data-ng-src="/media/{{ school.photo }}"/>
+            <img data-ng-src="/media/{{ school.profile.photo }}" data-ng-if="school.profile.photo"/>
         </div>
     </div>
 
@@ -48,7 +48,7 @@
         <div class="col-md-6">
             <p><strong>Address: </strong> {{ school.address }}</p>
             <p><strong>Phone Number: </strong> {{ school.profile.phone_number }}</p>
-            <p><strong>Website: </strong> <a href="{{ school.profile.website_url | uri }}">{{ school.profile.website_url | uri }}</a></p>
+            <p><strong>Website: </strong> <a href="{{ school.profile.website_url | uri }}" target="_blank">{{ school.profile.website_url | uri }}</a></p>
             <p><strong>Year Opened: </strong> {{ school.profile.year_opened }}</p>
         </div>
         <div class="col-md-6">

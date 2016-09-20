@@ -39,9 +39,6 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
         .when('/navigating/neighborhood', {
             templateUrl: 'app/templates/neighborhood.html'
             })
-        .when('/navigating/charter', {
-            templateUrl: 'app/templates/charter.html'
-            })
         .when('/navigating/magnet', {
             templateUrl: 'app/templates/magnet.html'
             })
@@ -100,7 +97,7 @@ angular.module('SchoolsApp.geoDecoder', [])
 
 
 var levels = ['elementary', 'secondary', 'middle', 'high'];
-var types = ['speciality', 'magnet'];
+var types = ['speciality', 'magnet', 'charter'];
 
 angular.module('SchoolsApp.controllers', ["leaflet-directive", "ngSanitize"])
     .controller('schoolsDetailCtrl', ['$scope', '$routeParams', 'Schools',
@@ -140,20 +137,8 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive", "ngSanitize"])
                   }
                 };
 
-                $scope.extendedCare = function(profile) {
-                    var display;
-                    if (profile.after_care_offered && profile.before_care_offered) {
-                        display = 'This school offers before and after care.';
-                    } else if (profile.after_care_offered) {
-                        display = 'This school offers after care and does not offer before care.';
-                    } else if (profile.before_care_offered) {
-                        display = "This school offers before care and does not offer after care.";
-                    } else {
-                        display = "This school does not offer extended care.";
-                    }
-                    return display;
-                };
                 $scope.tab = 'overview';
+
                 $scope.report_card_link = function() {
                   //url is of the form: base/<unit-code>_year_<g1>-<g2>-<School/Charter>.pdf
                   var link_base = 'https://ncreportcards.ondemand.sas.com/snapshots/';
@@ -175,7 +160,7 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive", "ngSanitize"])
                     type = '-School';
                   }
                   return link_base + $scope.school.profile.state_id + year + grades + type + link_end;
-                }
+                };
                 angular.extend($scope.school);
             });
         }
