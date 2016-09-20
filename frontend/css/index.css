@@ -550,7 +550,7 @@ and integrated with other styles above
 }
 .new-prototype .hero {
     height: 500px;
-    background-image: url(../img/mural.jpg);
+    /*background-image: url(../img/mural.jpg);*/
     opacity: 0.25;
 }
 .new-prototype .school-profile-header {
