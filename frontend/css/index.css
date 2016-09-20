@@ -532,3 +532,145 @@ div.avgline span.avg {
 .coming-soon.teacher-survey .overlay .opacity {
     opacity: 0.7;
 }
+
+
+/* NEW PROTOTYPE STYLES */
+/* ========================
+Once the new school profile page is implemented,
+the follwoing styles will have to be refactored to remove .new-prototype class
+and integrated with other styles above
+=========================== */
+
+.new-prototype.school-detail-page {
+    margin-bottom: 60px;
+}
+.new-prototype .container {
+    margin-top: 60px;
+}
+.new-prototype .container,
+.new-prototype .container-fluid {
+    position: relative;
+}
+.new-prototype .hero {
+    height: 500px;
+    /*background-image: url(../img/mural.jpg);*/
+    opacity: 0.25;
+}
+.new-prototype .school-profile-header {
+    margin-top: -390px;
+}
+.new-prototype .school-profile-header.middle-school {
+    color: #3F899E;
+}
+.new-prototype .at-a-glance {
+    padding: 40px;
+    color: #ffffff;
+    font-size: 16px;
+    background-color: rgba(63, 137, 158, 0.8);
+}
+.new-prototype .at-a-glance a {
+    color: #ffffff;
+    text-decoration: underline;
+}
+.new-prototype .at-a-glance a:hover, .at-a-glance a:focus {
+    text-decoration: none;
+}
+.new-prototype .at-a-glance p:last-child {
+    margin-bottom: 0;
+}
+.new-prototype .at-a-glance .label {
+    color: #C1D2DB;
+    font-weight: 400;
+    font-size: 16px;
+    padding: 0;
+    padding-right: 6px;
+}
+.new-prototype .at-a-glance .label.after-care {
+    padding-left: 10px;
+}
+.new-prototype .at-a-glance .col-md-6 {
+    border-left: 1px solid #AAC2CE;
+}
+.new-prototype .at-a-glance strong {
+    color: #C1D2DB;
+}
+.new-prototype nav.school-profile-tabs {
+    background-color: #ffffff;
+    border-top: 1px solid #3F899E;
+    border-bottom: 1px solid #3F899E;
+}
+.new-prototype.school-detail-page .school-profile-tabs ul li {
+    text-align: center;
+    text-transform: uppercase;
+    width: 25%;
+    padding-bottom: 0;
+}
+.new-prototype.school-detail-page .nav-pills > li+li {
+    margin: 0;
+}
+.school-profile-tabs .nav-pills > li.active > a,
+.school-profile-tabs .nav-pills > li > a:hover {
+    border-radius: 0;
+    cursor: pointer;
+}
+.new-prototype .school-profile-tabs .nav-pills > li.active::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    border-width: 15px 15px 0;
+    border-style: solid;
+    border-color: #3F899E transparent;
+    display: block;
+    width: 0;
+    }
+.new-prototype .middle-school-tabs-nav .nav-pills > li > a {
+    color: #3F899E;
+}
+.new-prototype .middle-school-tabs-nav .nav-pills > li.active > a {
+    background-color: #3F899E;
+    color: #ffffff;
+}
+.new-prototype .school-profile-content {
+    margin-top: 40px;
+}
+.new-prototype .school-profile-content .row {
+    display: none;
+}
+.new-prototype .school-profile-content .active {
+    display: block;
+}
+.new-prototype .force-line-break {
+  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+
+  /* Adds a hyphen where the word breaks, if supported */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+
+}
+@media screen and (max-width: 768px) {
+    .new-prototype .at-a-glance .col-md-6 {
+        border-left: 0;
+    }
+    .new-prototype .at-a-glance .col-md-6:last-child {
+        margin-top: 10px;
+    }
+    .new-prototype .at-a-glance .label.after-care {
+        padding-left: 0;
+    }
+}
+
+
+

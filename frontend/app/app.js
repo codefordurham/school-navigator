@@ -26,6 +26,10 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
             controller: 'schoolsDetailCtrl',
             templateUrl: 'app/templates/details.html'
             })
+        .when('/school-new/:school/', {
+            controller: 'schoolsDetailCtrl',
+            templateUrl: 'app/templates/details-new.html'
+            })
         .when('/about', {
             templateUrl: 'app/templates/about.html'
             })
@@ -132,6 +136,9 @@ angular.module('SchoolsApp.controllers', ["leaflet-directive", "ngSanitize"])
                     className: "school_point " + school.level
                   }
                 };
+
+                $scope.tab = 'overview';
+
                 $scope.report_card_link = function() {
                   //url is of the form: base/<unit-code>_year_<g1>-<g2>-<School/Charter>.pdf
                   var link_base = 'https://ncreportcards.ondemand.sas.com/snapshots/';
