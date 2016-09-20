@@ -22,9 +22,9 @@ hr.no-border {
   display: flex;
   flex-flow: column;
 }
-/*.container {
+.container {
     margin-top: 60px;
-}*/
+}
 .content-row {
   flex: 0 1 50px;
 }
@@ -423,9 +423,9 @@ div#schools-wrapper ul.nav li.active a, div#schools-wrapper ul.nav li a:hover {
 
 
  /*SCHOOL DETAIL PAGE*/
-/*.at-a-glance {
+.at-a-glance {
     padding: 20px 0;
-}*/
+}
 .school-detail-page ol {
     padding-left: 20px;
 }
@@ -534,15 +534,18 @@ div.avgline span.avg {
 }
 
 
-/* NEW PROTOTYPE STYLES */ 
+/* NEW PROTOTYPE STYLES */
 /* ========================
-Once the new school profile page is implemented, 
-the follwoing styles will have to be refactored to remove .new-prototype class 
+Once the new school profile page is implemented,
+the follwoing styles will have to be refactored to remove .new-prototype class
 and integrated with other styles above
 =========================== */
 
 .new-prototype.school-detail-page {
     margin-bottom: 60px;
+}
+.new-prototype .container {
+    margin-top: 60px;
 }
 .new-prototype .container,
 .new-prototype .container-fluid {
