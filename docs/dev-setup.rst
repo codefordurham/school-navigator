@@ -52,6 +52,36 @@ Next run a basic HTTP server with Python:
 
 Now visit http://localhost:8000/ in your browser.
 
+SASS & GULP (modifying styles on frontend)
+-------------
+
+Verify you have Ruby installed on your machine.
+If the following command gives you an error, then install ruby.
+
+      `ruby -v`
+      __installing:__ for OSX users with homebrew run `brew install ruby` for Ubuntu run `sudo apt-get install ruby-full`
+        or you can install ruby by installing Xcode commnand line tools:
+          `xcode-select --install`
+
+Verify you have Node.js installed on your machine.
+If the following command gives you an error, then install node.
+
+      `node -v`
+      __installing:__ download Node.js @ [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
+
+Install SASS with:
+
+    `gem install sass`
+    if you receive a permissions error, then type `sudo gem install sass` which requires your system password
+
+Run the SASS compiler by typing:
+
+    `npm run watch:css`
+
+This command "watches" the frontend/sass/style.css file for any changes.
+And when the file is saved, adds those changes to frontend/css/style.css
+
+
 
 .. _backend-setup:
 

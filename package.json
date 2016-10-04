@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "build:css": "gulp sass:watch",
+    "watch:css": "gulp sass:watch",
     "test": "echo \"Error: no stinkin test specified\" && exit 1"
   },
   "repository": {
