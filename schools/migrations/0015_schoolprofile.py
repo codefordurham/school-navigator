@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
             name='SchoolProfile',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
-                ('speciality_type', models.TextField(blank=True, null=True)),
+                ('specialty_type', models.TextField(blank=True, null=True)),
                 ('phone_number', models.TextField(blank=True, null=True)),
                 ('total_enrollment', models.IntegerField(null=True)),
                 ('breakfast_served', models.NullBooleanField()),

@@ -97,7 +97,7 @@ angular.module('SchoolsApp.geoDecoder', [])
 
 
 var levels = ['elementary', 'secondary', 'middle', 'high'];
-var types = ['speciality', 'magnet', 'charter'];
+var types = ['specialty', 'magnet', 'charter'];
 
 angular.module('SchoolsApp.controllers', ["leaflet-directive", "ngSanitize"])
     .controller('schoolsDetailCtrl', ['$scope', '$routeParams', 'Schools',

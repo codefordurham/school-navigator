@@ -115,7 +115,7 @@ class LocalSchoolListSerializer(SchoolListSerializer):
             return 'option'
         if obj.traditional_option_zone is not None and obj.traditional_option_zone.contains(pt):
             return 'assigned'
-        if obj.type in ('magnet', 'charter', 'speciality'):
+        if obj.type in ('magnet', 'charter', 'specialty'):
             return 'option'
         raise Exception
 

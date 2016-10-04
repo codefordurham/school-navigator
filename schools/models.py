@@ -18,7 +18,7 @@ SCHOOL_TYPES = (
     ('neighborhood', 'Neighborhood'),
     ('magnet', 'Magnet'),
     ('charter', 'Charter'),
-    ('speciality', 'Specialty')
+    ('specialty', 'Specialty')
 )
 
 
@@ -117,7 +117,7 @@ class SchoolProfile(models.Model):
             help_text='Please enter phone number in the format (919) XXX-XXXX.')
     year_opened = models.IntegerField(null=True, blank=True,
             help_text='In what year was your school opened?')
-    speciality_type = models.TextField(null=True, blank=True)  # Is this still needed?  FIXME
+    specialty_type = models.TextField(null=True, blank=True)  # Is this still needed?  FIXME
     theme = models.TextField(null=True, blank=True,
             help_text='If your school has a particular theme or focus area, '
                 'please enter the appropriate theme.  Typically one from the following list will apply: '
