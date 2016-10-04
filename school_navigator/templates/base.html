@@ -1,0 +1,41 @@
+{% load compress %}
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block meta-description %}{% endblock %}">
+    <meta name="author" content="{% block meta-author %}{% endblock %}">
+    <meta name="keywords" content="{% block meta-keywords %}{% endblock %}">
+    {% block extra-meta %}{% endblock %}
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker.css" rel="stylesheet">
+    <link rel="stylesheet" href='//fonts.googleapis.com/css?family=Roboto:500,900,300,700,400' type='text/css'>
+    {% if debug %}
+    <link rel="stylesheet" type="text/css" href="https://durhamschoolnavigator.org/css/index.css" />
+    <link rel="stylesheet/less" type="text/css" media="all" href="{% static 'less/site.less' %}">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/1.5.1/less.min.js"></script>
+    {% else %}
+    {% compress css %}
+    <link rel="stylesheet" type="text/less" media="all" href="{% static 'less/site.less' %}">
+    {% endcompress %}
+    {% endif %}
+    {% block extra-css %}{% endblock %}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.dev.js"></script>
+</head>
+<body>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.js"></script>
+    {% compress js %}
+    <script src="{% static 'js/site.js' %}"></script>
+    {% endcompress %}
+    {% block extra-js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,67 @@
+Bethesda 189 320304 k-8
+Brogden 207 320306 k-8
+Burton 179 320308 K-8
+Carrington 200 320316 k-8
+Carter Community 237 32C000 k-8-Charter
+C.C. Spaulding 180 320374 k-8
+City of Medicine Academy 222 320317 9-12
+Club Boulevard 208 320318 k-8
+Creekside 197 320319 K-8
+Durham Performance Learning Center 226 320322 9-12
+Durham School of the Arts 211 320323 K-12
+Easley 202 320313 K-8
+Eastway 212 320310 K-8
+E.K. Powe 209 320363 K-8
+Eno Valley 201 320315 K-8
+Fayetteville St 186 320344 K-8
+Forest View 213 320332 K-8
+George Watts 228 320347 K-8
+Githens 188 320366 K-8
+Glenn 206 320320 K-8
+Global Scholars Academy 238 32M000 K-8 charter
+Healthy Start Academy Charter 239 32B000 K-8 charter
+Hillandale 205 320324 K-8
+Hillside 223 320325 9-12
+Hillside New Tech 187 320701 9-12
+Holt 204 320328 K-8
+Holton Career & Resource Center 229 320329 N/A
+Hope Valley 184 320327 K-8
+Hospital School at Duke UMC 227 320336 K-12
+J.D. Clement Early College 224 320309 9-12
+Jordan 192 320312 9-12
+Kestrel Heights 240 32D000 K-12 Charter
+Lakeview School 196 320341 K-12
+Lakewood Elementary School 216 320339 K-8
+Lakewood Montessori 221 320342 K-8
+Little River 178 320340 K-8
+Lucas 220 320343 K-8
+Mangum 177 320348 K-8
+Maureen Joy Charter 241 32A000 K-8 Charter
+Merrick-Moore 210 320352 K-8
+Middle College HS at DTCCM 225 320353 9-12
+Morehead 214 320354 K-8
+Neal 181 320355 K-8
+Northern 199 320356 9-12
+Oak Grove 195 320360 K-8
+Parkwood 194 320362 K-8
+Pearsontown 190 320364 K-8
+Reaching All Minds Academy 234 32Q000 K-8 charter
+Research Triangle Charter Academy 235 32N000 9-12
+Riverside 203 320365 9-12
+R.N. Harris 183 320367 K-8
+Rogers-Herr 182 320370 K-8
+Sandy Ridge 219 320369 K-8
+Shepard 185 320338 K-8
+Southern School of Energy and Sustainability 231 320368 9-12
+Southwest 191 320372 K-8
+Spring Valley 217 320376 K-8
+The Central Park School for Children 236 32K000 K-8 Charter
+The Institute for the Development of Young Leaders 242 32P000 K-8 Charter
+The School for Creative Studies 218 320314 K-12
+Voyager Academy 243 32L000 K-12 Charter
+W.G. Pearson S.T.E.A.M. 198 320388 K-8
+Y.E. Smith Elementary Museum School 215 320400 K-8
+Lowes Grove 193 320346 K-8
+
+Excelsior Classical Academy 244 N/A
+KIPP Durham College Preparatory 245 N/A 
