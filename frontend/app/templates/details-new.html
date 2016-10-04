@@ -38,9 +38,9 @@
     </div>
 
     <div class="container school-profile-content">
-    
+
         <div data-ng-class="{active: tab == 'overview', row: true}">
-            <div class="col-md-6"> 
+            <div class="col-md-6">
                 <article>
                     <h2>Admission Policy</h2>
                     <div class="article-content">
@@ -70,7 +70,7 @@
                     </div>
                 </article>
             </div>
-            <div class="col-md-6">   
+            <div class="col-md-6">
                 <article>
                     <h2>School Services</h2>
                     <div class="article-content">
@@ -161,7 +161,7 @@
                                 </div>
                             </div><!-- end ngRepeat: (question, percentage) in school.teacher_satisfaction -->
                         </div>
-                        
+
                         <div class="overlay">
                             <span class="label label-danger">Coming Soon</span>
                             <div class="text">
@@ -185,7 +185,7 @@
                         <p><strong>Special Education (Exceptional Children): </strong> <span ng-bind-html=" school.profile.special_education | linky"></span></p>
                         <p><strong>Academically & Intellectually Gifted: </strong> {{ school.profile.gifted_education }}</p>
                     </div>
-                </article>   
+                </article>
             </div>
             <div class="col-md-6">
                 <article>
@@ -202,7 +202,7 @@
         </div>
 
         <div data-ng-class="{active: tab == 'testimonials', row: true}">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <article>
                     <h2>Testimonials</h2>
                     <div class="article-content">
@@ -212,15 +212,26 @@
                         <div class="overlay"><span class="label label-danger">Coming Soon</span></div>
                     </div>
                 </article>
-            </div>
-            <div class="col-md-6">
-                <article>
-                    <div class="article-content">
-                        <p data-ng-repeat="entry in school.reflections">{{ entry.reflection }}<br/>
-                        <i>{{ entry.who }}</i></p>
-                        <div class="overlay"><span class="label label-danger">Coming Soon</span></div>
-                    </div>
-                </article>
+                <div id="disqus_thread"></div>
+                <script>
+
+                /**
+                 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+                /*
+                var disqus_config = function () {
+                    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = '//https-durhamschoolnavigator-org.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
             </div>
         </div>
 
