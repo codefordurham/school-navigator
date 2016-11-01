@@ -89,7 +89,7 @@ class SchoolAdmin(LeafletGeoAdmin):
     list_filter = ('type', )
     actions = [send_survey, resend_survey]
     fields = ('name', 'short_name', 'address', 'zip_code', 'active',
-              'principal_email', 'principal_name', 'type', 'year_round', 'location',
+              'principal_email', 'principal_name', 'type', 'year_round', 'teacher_satisfaction_survey', 'location',
               'district', 'walk_zone', 'choice_zone', 'priority_zone', 'year_round_zone',
               'traditional_option_zone')
 
