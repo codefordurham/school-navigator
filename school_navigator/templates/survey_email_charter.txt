@@ -1,10 +1,10 @@
 Dear {{ school.name }} Team,
 
-We are following up on an email you recently received from Lisa Gordon Stella to ask for your help. In partnership with the Durham Charter Collaborative and Durham Public Schools, we at Code for Durham (http://codefordurham.com) are creating a resource called School Navigator (http://durhamschoolnavigator.org) to support families in understanding the city's public school landscape. The website will help families identify their zoned schools, view all public schools relative to their location, and access detailed and consistent information about each school.
+I hope this email finds you well. We would like to follow up on a request School Navigator (http://durhamschoolnavigator.org) sent to you recently, in hopes that you may still be able to help. As a reminder, our team at Code for Durham (http://codefordurham.com) has been working in partnership with the Durham Charter Collaborative and Durham Public Schools to create a resource that supports families in understanding the city's public school landscape.
 
 We would like to create a great profile for {{ school.name }}, but we need your help. We ask that you and your team complete the survey below as soon as possible so we can include your school's completed profile on the site. We are also excited to share that schools are now able to upload photos directly through the survey, rather than emailing our team! Please see below for the survey link and further instructions.
 
-Email schoolnavigator@codeforamerica.com if you have any questions. We know you are very busy and greatly appreciate you making time to complete this survey. Many thanks in advance for your help in creating this resource for Durham's families!
+Email SchoolNavigatorTeam@gmail.com if you have any questions. We know you are very busy and greatly appreciate you making time to complete this survey. Many thanks in advance for your help in creating this resource for Durham's families!
 
 Sincerely,
 School Navigator Team
