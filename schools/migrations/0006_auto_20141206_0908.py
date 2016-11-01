@@ -25,6 +25,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='school',
             name='type',
-            field=models.CharField(choices=[('neighborhood', 'Neighborhood'), ('magnet', 'Magnet'), ('charter', 'Charter'), ('specialty', 'Specialty')], max_length=20),
+            field=models.CharField(choices=[('neighborhood', 'Neighborhood'), ('magnet', 'Magnet'), ('charter', 'Charter'), ('speciality', 'Specialty')], max_length=20),
         ),
     ]

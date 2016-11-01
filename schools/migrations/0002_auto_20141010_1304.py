@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='school',
             name='type',
-            field=models.CharField(default='unset', max_length=20, choices=[(b'neighborhood', b'Neighborhood'), (b'magnet', b'Magnet'), (b'charter', b'Charter'), (b'specialty', b'Specialty')]),
+            field=models.CharField(default='unset', max_length=20, choices=[(b'neighborhood', b'Neighborhood'), (b'magnet', b'Magnet'), (b'charter', b'Charter'), (b'speciality', b'Specialty')]),
             preserve_default=False,
         ),
     ]

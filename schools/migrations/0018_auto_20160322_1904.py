@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='schoolprofile',
             name='type',
-            field=models.CharField(max_length=20, choices=[('neighborhood', 'Neighborhood'), ('magnet', 'Magnet'), ('charter', 'Charter'), ('specialty', 'Specialty')], blank=True),
+            field=models.CharField(max_length=20, choices=[('neighborhood', 'Neighborhood'), ('magnet', 'Magnet'), ('charter', 'Charter'), ('speciality', 'Specialty')], blank=True),
         ),
         migrations.AddField(
             model_name='schoolprofile',
