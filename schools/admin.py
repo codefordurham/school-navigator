@@ -16,7 +16,7 @@ CC_CHARTER_EMAIL = [SN_EMAIL]
 
 
 def send_email(school, request):
-    subject = 'Durham School Navigator Survey Request: {:s}'.format(school.name)
+    subject = 'Follow up: Request for your help with School Navigator'
     if school.principal_email is None:
         school.principal_email = ''
     to = [school.principal_email]
