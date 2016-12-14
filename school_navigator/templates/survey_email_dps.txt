@@ -1,19 +1,16 @@
-{% if principal_name %}
-Dear {{ principal_name }},
-{% else %}
-Hello {{ school.name }} team,
-{% endif %}
-As Superintendent L’Homme shared with you in a recent email, we are writing to request your help. In partnership with Durham Public Schools, the PTA Council, and Durham parents, we at Code for Durham (http://codefordurham.com) are creating a resource to help families understand the city's public school landscape. The site will help families identify their zoned schools, view all public schools relative to their location, and access detailed and consistent information about each school.
+Dear {{ school.name }} Team,
+
+I hope this email finds you well. We would like to follow up on a request School Navigator (http://durhamschoolnavigator.org) sent to you recently, in hopes that you may still be able to help. As a reminder, our team at Code for Durham (http://codefordurham.com) has been working in partnership with the Durham Charter Collaborative and Durham Public Schools to create a resource that supports families in understanding the city's public school landscape.
 
 We would like to create a great profile for {{ school.name }}, but we need your help. We ask that you and your team complete the survey below as soon as possible so we can include your school's completed profile on the site. We are also excited to share that schools are now able to upload photos directly through the survey, rather than emailing our team! Please see below for the survey link and further instructions.
 
-Please email schoolnavigator@codeforamerica.com if you have any questions. We know you are very busy and greatly appreciate you making time to complete this survey.  Many thanks in advance for your help!
-
-Survey Link (with further instructions): {{ school_profile_url }}
-Due Date: {{ school_profile.due_date }}
+Email SchoolNavigatorTeam@gmail.com if you have any questions. We know you are very busy and greatly appreciate you making time to complete this survey. Many thanks in advance for your help in creating this resource for Durham's families!
 
 Sincerely,
 School Navigator Team
+
+Due Date: {{ school_profile.due_date }}
+Survey Link: {{ school_profile_url }}
 
 Survey Instructions
 - You can complete the survey in multiple sittings and share the link with others. Just be sure to click SAVE at the bottom of the survey each time you work on it.

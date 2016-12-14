@@ -7,7 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('schools', '0042_remove_school_photo'),
+        ('schools', '0043_auto_20160908_1542'),
     ]
 
     operations = [
