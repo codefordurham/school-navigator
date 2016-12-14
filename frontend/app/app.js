@@ -24,10 +24,6 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
             })
         .when('/school/:school/', {
             controller: 'schoolsDetailCtrl',
-            templateUrl: 'app/templates/details.html'
-            })
-        .when('/school-new/:school/', {
-            controller: 'schoolsDetailCtrl',
             templateUrl: 'app/templates/details-new.html'
             })
         .when('/about', {
