@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  db:
+    image: mdillon/postgis:9.3
+  app:
+    build:
+      context: .
+      dockerfile: ./compose/django/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/code
+    depends_on:
+      - db
