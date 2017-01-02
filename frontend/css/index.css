@@ -560,13 +560,13 @@ and integrated with other styles above
     margin-top: -390px;
 }
 .new-prototype .school-profile-header.middle-school {
-    color: #3F899E;
+    color: #666;
 }
 .new-prototype .at-a-glance {
     padding: 40px;
     color: #ffffff;
     font-size: 16px;
-    background-color: rgba(63, 137, 158, 0.8);
+    background-color: #666;
 }
 .new-prototype .at-a-glance a {
     color: #ffffff;
@@ -579,7 +579,7 @@ and integrated with other styles above
     margin-bottom: 0;
 }
 .new-prototype .at-a-glance .label {
-    color: #C1D2DB;
+    color: #ddd;
     font-weight: 400;
     font-size: 16px;
     padding: 0;
@@ -589,15 +589,15 @@ and integrated with other styles above
     padding-left: 10px;
 }
 .new-prototype .at-a-glance .col-md-6 {
-    border-left: 1px solid #AAC2CE;
+    border-left: 1px solid #ddd;
 }
 .new-prototype .at-a-glance strong {
     color: #C1D2DB;
 }
 .new-prototype nav.school-profile-tabs {
     background-color: #ffffff;
-    border-top: 1px solid #3F899E;
-    border-bottom: 1px solid #3F899E;
+    border-top: 1px solid #666;
+    border-bottom: 1px solid #666;
 }
 .new-prototype.school-detail-page .school-profile-tabs ul li {
     text-align: center;
@@ -622,15 +622,15 @@ and integrated with other styles above
     transform: translateX(-50%);
     border-width: 15px 15px 0;
     border-style: solid;
-    border-color: #3F899E transparent;
+    border-color: #666 transparent;
     display: block;
     width: 0;
     }
 .new-prototype .middle-school-tabs-nav .nav-pills > li > a {
-    color: #3F899E;
+    color: #666;
 }
 .new-prototype .middle-school-tabs-nav .nav-pills > li.active > a {
-    background-color: #3F899E;
+    background-color: #666;
     color: #ffffff;
 }
 .new-prototype .school-profile-content {
