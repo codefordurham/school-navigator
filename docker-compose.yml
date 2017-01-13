@@ -2,14 +2,33 @@ version: '2'
 
 services:
   db:
+    restart: always
     image: mdillon/postgis:9.3
+    env_file: .env
+    expose:
+      - "5432"
+  server:
+    restart: always
+    env_file: .env
+    build:
+      context: .
+      dockerfile: ./compose/server/Dockerfile
+    links:
+      - app:app
+    volumes_from:
+      - app
+    ports:
+      - "8081:80"
   app:
+    env_file: .env
     build:
       context: .
       dockerfile: ./compose/django/Dockerfile
-    ports:
-      - "8000:8000"
     volumes:
       - .:/code
+    links:
+      - db:db
+    expose:
+      - "8000"
     depends_on:
       - db

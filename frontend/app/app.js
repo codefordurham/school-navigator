@@ -48,7 +48,7 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
 
 angular.module('SchoolsApp.services', [])
     .service('Schools', ['$http', function($http) {
-        var endpoint = location.search.indexOf('env') === -1? 'https://durhamschoolnavigator.org' : 'http://localhost:8001',
+        var endpoint = '',
             url;
 
         this.get_all_schools = function(location) {
