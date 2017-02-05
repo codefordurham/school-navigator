@@ -1,6 +1,12 @@
 {% import 'project/_vars.sls' as vars with context %}
 {% set auth_file=vars.auth_file %}
 {% set self_signed='ssl_key' not in pillar or 'ssl_cert' not in pillar %}
+{% set dhparams_file = vars.build_path(vars.ssl_dir, 'dhparams.pem') %}
+{% set letsencrypt = pillar.get('letsencrypt', False) %}
+{% set letsencrypt_dir = vars.build_path(vars.root_dir,  'letsencrypt') %}
+
+{% set ssl_certificate = vars.build_path(vars.ssl_dir, pillar['domain'] + ".crt") %}
+{% set ssl_certificate_key = vars.build_path(vars.ssl_dir, pillar['domain'] + ".key") %}
 
 include:
   - nginx
@@ -36,12 +42,14 @@ ssl_dir:
       - file: root_dir
 
 {% if self_signed %}
+# Note: even if we are using letsencrypt, we'll need a temporary SSL certificate
+# so that we can run nginx while getting the real certificate from letsencrypt.
 ssl_cert:
   cmd.run:
     - name: cd {{ vars.ssl_dir }} && /var/lib/nginx/generate-cert.sh {{ pillar['domain'] }}
     - cwd: {{ vars.ssl_dir }}
     - user: root
-    - unless: test -e {{ vars.build_path(vars.ssl_dir, pillar['domain'] + ".crt") }}
+    - unless: test -s {{ ssl_certificate }}
     - require:
       - file: ssl_dir
       - file: generate_cert
@@ -50,7 +58,7 @@ ssl_cert:
 {% else %}
 ssl_key:
   file.managed:
-    - name: {{ vars.build_path(vars.ssl_dir, pillar['domain'] + ".key") }}
+    - name: {{ ssl_certificate_key }}
     - contents_pillar: ssl_key
     - user: root
     - mode: 600
@@ -61,7 +69,7 @@ ssl_key:
 
 ssl_cert:
   file.managed:
-    - name: {{ vars.build_path(vars.ssl_dir, pillar['domain'] + ".crt") }}
+    - name: {{ ssl_certificate }}
     - contents_pillar: ssl_cert
     - user: root
     - mode: 600
@@ -108,6 +116,11 @@ auth_file:
       - service: nginx
 {% endif %}
 
+dhparams_file:
+  cmd.run:
+    - name: openssl dhparam -out {{ dhparams_file }} {{ pillar.get('dhparam_numbits', 2048) }}
+    - unless: test -f {{ dhparams_file }}
+
 nginx_conf:
   file.managed:
     - name: /etc/nginx/sites-enabled/{{ pillar['project_name'] }}.conf
@@ -119,8 +132,11 @@ nginx_conf:
     - context:
         public_root: "{{ vars.public_dir }}"
         log_dir: "{{ vars.log_dir }}"
-        ssl_dir: "{{ vars.ssl_dir }}"
+        source_dir: "{{ vars.source_dir }}"
         directory: "{{ vars.source_dir }}"
+        ssl_certificate: {{ ssl_certificate }}
+        ssl_certificate_key: {{ ssl_certificate_key }}
+        dhparams_file: "{{ dhparams_file }}"
         servers:
 {% for host, ifaces in vars.web_minions.items() %}
 {% set host_addr = vars.get_primary_ip(ifaces) %}
@@ -133,6 +149,7 @@ nginx_conf:
       - pkg: nginx
       - file: log_dir
       - file: ssl_dir
+      - cmd: dhparams_file
       {%- if self_signed %}
       - cmd: ssl_cert
       {% else %}
@@ -144,3 +161,65 @@ nginx_conf:
       {% endif %}
     - watch_in:
       - service: nginx
+
+{% if letsencrypt %}
+# Now that we have nginx running, we can get a real certificate.
+
+# To install letsencrypt for now, just clone the latest version and invoke the
+# ``letsencrypt-auto`` script from there. There's not a packaged version of
+# letsencrypt for Ubuntu yet, but once there is, we should switch to that.
+really_reset_letsencrypt:
+  cmd.run:
+    - name: cd {{ letsencrypt_dir}} && git reset --hard HEAD
+    - onlyif: test -e {{ letsencrypt_dir }}/.git
+
+install_letsencrypt:
+  git.latest:
+    - name: https://github.com/letsencrypt/letsencrypt/
+    - target: {{ letsencrypt_dir }}
+    - require:
+        - cmd: really_reset_letsencrypt
+
+# Run letsencrypt to get a key and certificate
+run_letsencrypt:
+  cmd.run:
+    - name: {{ letsencrypt_dir }}/letsencrypt-auto certonly --webroot --webroot-path {{ vars.public_dir }} -d {{ pillar['domain'] }} --email={{ pillar['admin_email'] }} --agree-tos
+    - unless: test -s /etc/letsencrypt/live/{{ pillar['domain'] }}/fullchain.pem -a -s /etc/letsencrypt/live/{{ pillar['domain'] }}/privkey.pem
+    - env:
+      - XDG_DATA_HOME: /root/letsencrypt
+    - require:
+      - git: install_letsencrypt
+      - file: nginx_conf
+
+link_cert:
+  file.symlink:
+    - name: {{ ssl_certificate }}
+    - target: /etc/letsencrypt/live/{{ pillar['domain'] }}/fullchain.pem
+    - force: true
+    - require:
+      - cmd: run_letsencrypt
+
+link_key:
+  file.symlink:
+    - name: {{ ssl_certificate_key }}
+    - target: /etc/letsencrypt/live/{{ pillar['domain'] }}/privkey.pem
+    - force: true
+    - require:
+      - file: link_cert
+    - watch_in:
+      - service: nginx
+
+# Once a week, renew our cert(s) if we need to. This will only renew them if
+# they're within 30 days of expiring, so it's not a big burden on the certificate
+# service.  https://letsencrypt.readthedocs.org/en/latest/using.html#renewal
+renew_letsencrypt:
+  cron.present:
+    - name: env XDG_DATA_HOME=/root/letsencrypt {{ letsencrypt_dir }}/letsencrypt-auto renew; /etc/init.d/nginx reload
+    - identifier: renew_letsencrypt
+    - minute: random
+    - hour: random
+    - dayweek: 0
+    - require:
+       - git: install_letsencrypt
+       - cmd: run_letsencrypt
+{% endif %}
