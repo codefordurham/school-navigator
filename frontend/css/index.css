@@ -616,19 +616,6 @@ and integrated with other styles above
     border-radius: 0;
     cursor: pointer;
 }
-.new-prototype .school-profile-tabs .nav-pills > li.active::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    transform: translateX(-50%);
-    border-width: 15px 15px 0;
-    border-style: solid;
-    border-color: #666 transparent;
-    display: block;
-    width: 0;
-    }
 .new-prototype .middle-school-tabs-nav .nav-pills > li > a {
     color: #666;
 }
