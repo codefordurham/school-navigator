@@ -335,6 +335,9 @@ div#schools-wrapper ul.nav li.active a, div#schools-wrapper ul.nav li a:hover {
 
 .navbar {
     margin-bottom: 0;
+    box-shadow: 0 1px 2px #999;
+    -webkit-box-shadow: box-shadow: 0 1px 2px #999;
+    -moz-box-shadow: box-shadow: 0 1px 2px #999;
 }
 
 .preference {
