@@ -16,9 +16,10 @@
         <nav class="row school-profile-tabs middle-school-tabs-nav">
             <ul class="nav nav-pills">
                 <li role="presentation" data-ng-class="{active: tab == 'overview'}"><a data-ng-click="tab = 'overview'">Overview</a></li>
+                <li role="presentation" data-ng-class="{active: tab == 'admissions-and-services'}"><a data-ng-click="tab = 'admissions-and-services'">Admissions &amp; Services</a></li>
                 <li role="presentation" data-ng-class="{active: tab == 'who-we-are'}"><a data-ng-click="tab = 'who-we-are'">Who We Are</a></li>
                 <li role="presentation" data-ng-class="{active: tab == 'school-offerings'}"><a data-ng-click="tab = 'school-offerings'">School Offerings</a></li>
-                <li role="presentation" data-ng-class="{active: tab == 'testimonials'}"><a data-ng-click="tab = 'testimonials'">Community Feedback</a></li>
+                <li role="presentation" data-ng-class="{active: tab == 'testimonials'}"><a data-ng-click="tab = 'testimonials'">Community &amp; Feedback</a></li>
             </ul>
         </nav>
     </div>
@@ -27,7 +28,6 @@
 
         <div data-ng-class="{active: tab == 'overview', row: true}">
 
-          <!-- <div class="row at-a-glance"> -->
               <div class="col-md-6">
                   <h2>Contact</h2>
                   <p><strong>Address:</strong> {{ school.address }}</p>
@@ -43,7 +43,10 @@
                   <p><span><strong>Before Care:</strong> {{ school.profile.before_care_hours }}</span>
                   <span><strong>After Care:</strong> {{ school.profile.after_care_hours }}</span></p>
               </div>
-          <!-- </div> -->
+        </div>
+
+        <!-- start -->
+        <div data-ng-class="{active: tab == 'admissions-and-services', row: true}">
 
             <div class="col-md-6">
                 <article>
@@ -93,6 +96,9 @@
                 </article>
             </div>
         </div>
+
+
+        <!-- end -->
 
         <div data-ng-class="{active: tab == 'who-we-are', row: true}">
             <div class="col-md-6">
