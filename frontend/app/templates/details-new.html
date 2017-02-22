@@ -10,7 +10,9 @@
                     <p class="lead">{{ school.school_type }} | {{ school.grades }}</p>
                 </div>
             </div>
-
+          <div>
+            <a class="btn btn-success" href="{{ school.profile.website_url | uri }}">Visit the Official School Website</a>
+          </div>
         </div>
 
         <nav class="row school-profile-tabs middle-school-tabs-nav">
