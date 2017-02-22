@@ -10,21 +10,7 @@
                     <p class="lead">{{ school.school_type }} | {{ school.grades }}</p>
                 </div>
             </div>
-            <div class="row at-a-glance">
-                <div class="col-md-6">
-                    <p><span class="label">Address:</span> {{ school.address }}</p>
-                    <p><span class="label">Phone:</span> {{ school.profile.phone_number }}</p>
-                    <p><span class="label">Website:</span><a class="force-line-break" href="{{ school.profile.website_url | uri }}">{{ school.profile.website_url | uri }}</a></p>
-                    <p><span class="label">Year open:</span> {{ school.profile.year_opened }}</p>
-                </div>
-                <div class="col-md-6">
-                    <p><span class="label">Theme:</span> {{ school.profile.theme }}</p>
-                    <p><span class="label">Uniform:</span> {{ school.profile.uniform_required | true_false }}</p>
-                    <p><span class="label">School Day: </span> {{ school.profile.school_hours }}</p>
-                    <p><span><span class="label">Before Care:</span> {{ school.profile.before_care_hours }}</span>
-                    <span><span class="label after-care">After Care:</span> {{ school.profile.after_care_hours }}</span></p>
-                </div>
-            </div>
+
         </div>
 
         <nav class="row school-profile-tabs middle-school-tabs-nav">
@@ -40,6 +26,25 @@
     <div class="container school-profile-content">
 
         <div data-ng-class="{active: tab == 'overview', row: true}">
+
+          <!-- <div class="row at-a-glance"> -->
+              <div class="col-md-6">
+                  <h2>Contact</h2>
+                  <p><strong>Address:</strong> {{ school.address }}</p>
+                  <p><strong>Phone:</strong> {{ school.profile.phone_number }}</p>
+                  <p><strong>Website:</strong><a class="force-line-break" href="{{ school.profile.website_url | uri }}">{{ school.profile.website_url | uri }}</a></p>
+                  <p><strong>Year open:</strong> {{ school.profile.year_opened }}</p>
+              </div>
+              <div class="col-md-6">
+                  <h2>Hours</h2>
+                  <p><strong>Theme:</strong> {{ school.profile.theme }}</p>
+                  <p><strong>Uniform:</strong> {{ school.profile.uniform_required | true_false }}</p>
+                  <p><strong>School Day: </strong> {{ school.profile.school_hours }}</p>
+                  <p><span><strong>Before Care:</strong> {{ school.profile.before_care_hours }}</span>
+                  <span><strong>After Care:</strong> {{ school.profile.after_care_hours }}</span></p>
+              </div>
+          <!-- </div> -->
+
             <div class="col-md-6">
                 <article>
                     <h2>Admission Policy</h2>
