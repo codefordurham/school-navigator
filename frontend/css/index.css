@@ -444,7 +444,17 @@ div#schools-wrapper ul.nav li.active a, div#schools-wrapper ul.nav li a:hover {
 .school-detail-page {
     margin-bottom: 40px;
 }
-
+.btn-school-website {
+    font-size: 21px;
+    background-color: #5bc0de;
+    border: 1px solid #45b4ce;
+}
+.btn-school-website:hover,
+.btn-school-website:focus {
+    background-color: #45b4ce;
+    border: 1px solid #45b4ce;
+    transition: all 0.3s ease;
+}
 div.avgline span.actual {
     background-color: rgb(64, 208, 136);
 }
