@@ -446,11 +446,13 @@ div#schools-wrapper ul.nav li.active a, div#schools-wrapper ul.nav li a:hover {
 }
 .btn-school-website {
     font-size: 21px;
+    color: #ffffff;
     background-color: #5bc0de;
     border: 1px solid #45b4ce;
 }
 .btn-school-website:hover,
 .btn-school-website:focus {
+    color: #ffffff;
     background-color: #45b4ce;
     border: 1px solid #45b4ce;
     transition: all 0.3s ease;
