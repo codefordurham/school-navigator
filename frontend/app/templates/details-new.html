@@ -206,8 +206,9 @@
 
         <div data-ng-class="{active: tab == 'testimonials', row: true}">
             <div class="col-md-6">
-              <h2>Parent Involvement</h2>
-              <div class="">
+              <h2>Community</h2>
+              <div>
+                  <h3>Parental Involvement</h3>
                   <p><strong>PTA/PTO: </strong>
                       <span>{{ school.profile.pta | true_false }}</span>
                   </p>
@@ -218,7 +219,7 @@
 
             <div class="col-md-6">
                 <article >
-                    <h2>Testimonials</h2>
+                    <h2>Feedback</h2>
                     <div class="article-content">
                         <p>Are you a parent or teacher at this school?</p>
                         <p data-ng-repeat="entry in school.reflections">{{ entry.reflection }}<br/>
