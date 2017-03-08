@@ -429,6 +429,9 @@ div#schools-wrapper ul.nav li.active a, div#schools-wrapper ul.nav li a:hover {
 
  /*SCHOOL DETAIL PAGE*/
 
+.school-detail-page {
+    margin-bottom: 60px;
+}
 .school-detail-page ol {
     padding-left: 20px;
 }
@@ -439,8 +442,19 @@ div#schools-wrapper ul.nav li.active a, div#schools-wrapper ul.nav li a:hover {
 .school-detail-page ul li {
     padding-bottom: 10px;
 }
-.school-detail-page {
-    margin-bottom: 40px;
+.school-detail-page .school-profile-tabs ul li {
+    text-align: center;
+    text-transform: uppercase;
+    width: 20%;
+    padding-bottom: 0;
+}
+.school-detail-page .nav-pills > li+li {
+    margin: 0;
+}
+.school-profile-tabs .nav-pills > li.active > a,
+.school-profile-tabs .nav-pills > li > a:hover {
+    border-radius: 0;
+    cursor: pointer;
 }
 .btn-school-website {
     font-size: 21px;
@@ -504,11 +518,9 @@ div.avgline span.avg {
 .map-row .angular-leaflet-map {
     margin-top: 20px;
 }
-
 .overlay {
     display: none;
 }
-
 .coming-soon .overlay {
     opacity: 1;
     display: block;
@@ -547,71 +559,45 @@ div.avgline span.avg {
 .coming-soon.teacher-survey .overlay .opacity {
     opacity: 0.7;
 }
-
-
-/* NEW PROTOTYPE STYLES */
-/* ========================
-Once the new school profile page is implemented,
-the follwoing styles will have to be refactored to remove .new-prototype class
-and integrated with other styles above
-=========================== */
-
-.new-prototype.school-detail-page {
-    margin-bottom: 60px;
-}
-.new-prototype .container {
+.container {
     margin-top: 0;
 }
-.new-prototype .container,
-.new-prototype .container-fluid {
+.container,
+.container-fluid {
     position: relative;
 }
-.new-prototype .hero {
+.hero {
     height: 350px;
     opacity: 0.25;
 }
-.new-prototype .school-profile-header {
+.school-profile-header {
     margin-top: -250px;
 }
-.new-prototype .school-profile-header.middle-school {
+.school-profile-header.middle-school {
     color: #666;
 }
-.new-prototype nav.school-profile-tabs {
+nav.school-profile-tabs {
     background-color: #ffffff;
     border-top: 1px solid #666;
     border-bottom: 1px solid #666;
 }
-.new-prototype.school-detail-page .school-profile-tabs ul li {
-    text-align: center;
-    text-transform: uppercase;
-    width: 20%;
-    padding-bottom: 0;
-}
-.new-prototype.school-detail-page .nav-pills > li+li {
-    margin: 0;
-}
-.school-profile-tabs .nav-pills > li.active > a,
-.school-profile-tabs .nav-pills > li > a:hover {
-    border-radius: 0;
-    cursor: pointer;
-}
-.new-prototype .middle-school-tabs-nav .nav-pills > li > a {
+.middle-school-tabs-nav .nav-pills > li > a {
     color: #666;
 }
-.new-prototype .middle-school-tabs-nav .nav-pills > li.active > a {
+.middle-school-tabs-nav .nav-pills > li.active > a {
     background-color: #666;
     color: #ffffff;
 }
-.new-prototype .school-profile-content {
+.school-profile-content {
     margin-top: 40px;
 }
-.new-prototype .school-profile-content .row {
+.school-profile-content .row {
     display: none;
 }
-.new-prototype .school-profile-content .active {
+.school-profile-content .active {
     display: block;
 }
-.new-prototype .force-line-break {
+.force-line-break {
   /* These are technically the same, but use both */
   overflow-wrap: break-word;
   word-wrap: break-word;
@@ -627,5 +613,4 @@ and integrated with other styles above
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
-
 }
