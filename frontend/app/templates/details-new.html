@@ -11,7 +11,7 @@
                 </div>
             </div>
           <div>
-            <a class="btn btn-success" href="{{ school.profile.website_url | uri }}">Visit the Official School Website</a>
+            <a class="btn btn-school-website" href="{{ school.profile.website_url | uri }}">Visit the Official School Website</a>
           </div>
         </div>
 
@@ -31,19 +31,21 @@
         <div data-ng-class="{active: tab == 'overview', row: true}">
 
               <div class="col-md-6">
-                  <h2>Contact</h2>
+                  <h2>Contact &amp; Hours</h2>
                   <p><strong>Address:</strong> {{ school.address }}</p>
                   <p><strong>Phone:</strong> {{ school.profile.phone_number }}</p>
-                  <p><strong>Website:</strong><a class="force-line-break" href="{{ school.profile.website_url | uri }}">{{ school.profile.website_url | uri }}</a></p>
-                  <p><strong>Year open:</strong> {{ school.profile.year_opened }}</p>
+                  <p><strong>Website:</strong> <a class="force-line-break" href="{{ school.profile.website_url | uri }}">{{ school.profile.website_url | uri }}</a></p>
+                  <p><strong>School Day: </strong> {{ school.profile.school_hours }}</p>
+                  <p><strong>Before Care:</strong> {{ school.profile.before_care_hours }}</p>
+                  <p><strong>After Care:</strong> {{ school.profile.after_care_hours }}</p>
               </div>
               <div class="col-md-6">
-                  <h2>Hours</h2>
+                  <h2>School Information</h2>
+                  <p><strong>Principal:</strong> {{ school.profile.principal_name }} (since {{ school.profile.principal_start_year }})</p>
+                  <p><strong>Year open:</strong> {{ school.profile.year_opened }}</p>
                   <p><strong>Theme:</strong> {{ school.profile.theme }}</p>
                   <p><strong>Uniform:</strong> {{ school.profile.uniform_required | true_false }}</p>
-                  <p><strong>School Day: </strong> {{ school.profile.school_hours }}</p>
-                  <p><span><strong>Before Care:</strong> {{ school.profile.before_care_hours }}</span>
-                  <span><strong>After Care:</strong> {{ school.profile.after_care_hours }}</span></p>
+                  
               </div>
         </div>
 
@@ -204,8 +206,9 @@
 
         <div data-ng-class="{active: tab == 'testimonials', row: true}">
             <div class="col-md-6">
-              <h2>Parent Involvement</h2>
-              <div class="">
+              <h2>Community</h2>
+              <div>
+                  <h3>Parental Involvement</h3>
                   <p><strong>PTA/PTO: </strong>
                       <span>{{ school.profile.pta | true_false }}</span>
                   </p>
@@ -216,7 +219,7 @@
 
             <div class="col-md-6">
                 <article >
-                    <h2>Testimonials</h2>
+                    <h2>Feedback</h2>
                     <div class="article-content">
                         <p>Are you a parent or teacher at this school?</p>
                         <p data-ng-repeat="entry in school.reflections">{{ entry.reflection }}<br/>

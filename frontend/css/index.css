@@ -428,9 +428,7 @@ div#schools-wrapper ul.nav li.active a, div#schools-wrapper ul.nav li a:hover {
 
 
  /*SCHOOL DETAIL PAGE*/
-/*.at-a-glance {
-    padding: 20px 0;
-}*/
+
 .school-detail-page ol {
     padding-left: 20px;
 }
@@ -444,7 +442,19 @@ div#schools-wrapper ul.nav li.active a, div#schools-wrapper ul.nav li a:hover {
 .school-detail-page {
     margin-bottom: 40px;
 }
-
+.btn-school-website {
+    font-size: 21px;
+    color: #ffffff;
+    background-color: #5bc0de;
+    border: 1px solid #45b4ce;
+}
+.btn-school-website:hover,
+.btn-school-website:focus {
+    color: #ffffff;
+    background-color: #45b4ce;
+    border: 1px solid #45b4ce;
+    transition: all 0.3s ease;
+}
 div.avgline span.actual {
     background-color: rgb(64, 208, 136);
 }
@@ -558,7 +568,6 @@ and integrated with other styles above
 }
 .new-prototype .hero {
     height: 350px;
-    /*background-image: url(../img/mural.jpg);*/
     opacity: 0.25;
 }
 .new-prototype .school-profile-header {
@@ -567,38 +576,6 @@ and integrated with other styles above
 .new-prototype .school-profile-header.middle-school {
     color: #666;
 }
-/*.new-prototype .at-a-glance {
-    padding: 40px;
-    color: #ffffff;
-    font-size: 16px;
-    background-color: #666;
-}*/
-/*.new-prototype .at-a-glance a {
-    color: #ffffff;
-    text-decoration: underline;
-}*/
-/*.new-prototype .at-a-glance a:hover, .at-a-glance a:focus {
-    text-decoration: none;
-}*/
-/*.new-prototype .at-a-glance p:last-child {
-    margin-bottom: 0;
-}
-.new-prototype .at-a-glance .label {
-    color: grey;
-    font-weight: 400;
-    font-size: 16px;
-    padding: 0;
-    padding-right: 6px;
-}
-.new-prototype .at-a-glance .label.after-care {
-    padding-left: 10px;
-}
-.new-prototype .at-a-glance .col-md-6 {
-    border-left: 1px solid #ddd;
-}
-.new-prototype .at-a-glance strong {
-    color: #C1D2DB;
-}*/
 .new-prototype nav.school-profile-tabs {
     background-color: #ffffff;
     border-top: 1px solid #666;
@@ -651,15 +628,4 @@ and integrated with other styles above
   -webkit-hyphens: auto;
   hyphens: auto;
 
-}
-@media screen and (max-width: 768px) {
-    /*.new-prototype .at-a-glance .col-md-6 {
-        border-left: 0;
-    }
-    .new-prototype .at-a-glance .col-md-6:last-child {
-        margin-top: 10px;
-    }
-    .new-prototype .at-a-glance .label.after-care {
-        padding-left: 0;
-    }*/
 }
