@@ -32,19 +32,19 @@
 
       <div class="col-md-6">
         <h2>Contact &amp; Hours</h2>
-        <p><strong>Address:</strong> {{ school.address }}</p>
-        <p><strong>Phone:</strong> {{ school.profile.phone_number }}</p>
-        <p><strong>Website:</strong> <a class="force-line-break" href="{{ school.profile.website_url | uri }}">{{ school.profile.website_url | uri }}</a></p>
-        <p><strong>School Day: </strong> {{ school.profile.school_hours }}</p>
-        <p><strong>Before Care:</strong> {{ school.profile.before_care_hours }}</p>
-        <p><strong>After Care:</strong> {{ school.profile.after_care_hours }}</p>
+        <p><i class="fa fa-map-marker" aria-hidden="true"></i><strong> Address:</strong> {{ school.address }}</p>
+        <p><i class="fa fa-phone" aria-hidden="true"></i><strong> Phone:</strong> {{ school.profile.phone_number }}</p>
+        <p><i class="fa fa-link" aria-hidden="true"></i><strong> Website:</strong> <a class="force-line-break" href="{{ school.profile.website_url | uri }}">{{ school.profile.website_url | uri }}</a></p>
+        <p><i class="fa fa-calendar" aria-hidden="true"></i><strong> School Day: </strong> {{ school.profile.school_hours }}</p>
+        <p><i class="fa fa-sun-o" aria-hidden="true"></i><strong> Before Care:</strong> {{ school.profile.before_care_hours }}</p>
+        <p><i class="fa fa-moon-o" aria-hidden="true"></i><strong> After Care:</strong> {{ school.profile.after_care_hours }}</p>
       </div>
       <div class="col-md-6">
         <h2>School Information</h2>
-        <p><strong>Principal:</strong> {{ school.profile.principal_name }} (since {{ school.profile.principal_start_year }})</p>
-        <p><strong>Year open:</strong> {{ school.profile.year_opened }}</p>
-        <p><strong>Theme:</strong> {{ school.profile.theme }}</p>
-        <p><strong>Uniform:</strong> {{ school.profile.uniform_required | true_false }}</p>
+        <p><i class="fa fa-user" aria-hidden="true"></i><strong> Principal:</strong> {{ school.profile.principal_name }} (since {{ school.profile.principal_start_year }})</p>
+        <p><i class="fa fa-folder-open-o" aria-hidden="true"></i><strong> Year open:</strong> {{ school.profile.year_opened }}</p>
+        <p><i class="fa fa-pencil" aria-hidden="true"></i><strong> Theme:</strong> {{ school.profile.theme }}</p>
+        <p><i class="fa fa-black-tie" aria-hidden="true"></i><strong> Uniform:</strong> {{ school.profile.uniform_required | true_false }}</p>
 
       </div>
     </div>
