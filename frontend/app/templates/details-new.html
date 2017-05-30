@@ -1,254 +1,258 @@
 <simple-nav></simple-nav>
 <main class="school-detail-page">
-    <div class="container-fluid ">
-        <div class="row hero" style="background-image: url(/media/{{ school.profile.photo }}), url(../img/mural.jpg)"/>
-        </div>
-        <div class="container">
-            <div class="row school-profile-header middle-school">
-                <div class="col-md-12">
-                    <h1>{{ school.name }}</h1>
-                    <p class="lead">{{ school.school_type }} | {{ school.grades }}</p>
-                </div>
-            </div>
-            <div>
-                <a class="btn btn-school-website" href="{{ school.profile.website_url | uri }}">Visit the Official School Website</a>
-            </div>
-        </div>
+  <div class="container-fluid ">
+    <div class="row hero" style="background-image: url(/media/{{ school.profile.photo }}), url(../img/mural.jpg)" />
+  </div>
+  <div class="container">
+    <div class="row school-profile-header middle-school">
+      <div class="col-md-12">
+        <h1>{{ school.name }}</h1>
+        <p class="lead">{{ school.school_type }} | {{ school.grades }}</p>
+      </div>
+    </div>
+    <div>
+      <a class="btn btn-school-website" href="{{ school.profile.website_url | uri }}">Visit the Official School Website</a>
+    </div>
+  </div>
 
-        <nav class="row school-profile-tabs middle-school-tabs-nav">
-            <ul class="nav nav-pills">
-                <li role="presentation" data-ng-class="{active: tab == 'overview'}"><a data-ng-click="tab = 'overview'">Overview</a></li>
-                <li role="presentation" data-ng-class="{active: tab == 'admissions-and-services'}"><a data-ng-click="tab = 'admissions-and-services'">Admissions &amp; Services</a></li>
-                <li role="presentation" data-ng-class="{active: tab == 'who-we-are'}"><a data-ng-click="tab = 'who-we-are'">Who We Are</a></li>
-                <li role="presentation" data-ng-class="{active: tab == 'school-offerings'}"><a data-ng-click="tab = 'school-offerings'">School Offerings</a></li>
-                <li role="presentation" data-ng-class="{active: tab == 'testimonials'}"><a data-ng-click="tab = 'testimonials'">Community &amp; Feedback</a></li>
-            </ul>
-        </nav>
+  <nav class="school-profile-tabs middle-school-tabs-nav">
+    <ul class="nav nav-pills">
+      <li role="presentation" data-ng-class="{active: tab == 'overview'}"><a data-ng-click="tab = 'overview'">Overview</a></li>
+      <li role="presentation" data-ng-class="{active: tab == 'admissions-and-services'}"><a data-ng-click="tab = 'admissions-and-services'">Admissions &amp; Services</a></li>
+      <li role="presentation" data-ng-class="{active: tab == 'who-we-are'}"><a data-ng-click="tab = 'who-we-are'">Who We Are</a></li>
+      <li role="presentation" data-ng-class="{active: tab == 'school-offerings'}"><a data-ng-click="tab = 'school-offerings'">School Offerings</a></li>
+      <li role="presentation" data-ng-class="{active: tab == 'testimonials'}"><a data-ng-click="tab = 'testimonials'">Community &amp; Feedback</a></li>
+    </ul>
+  </nav>
+  </div>
+
+  <div class="container school-profile-content">
+
+    <div data-ng-class="{active: tab == 'overview', row: true}">
+
+      <div class="col-md-6">
+        <h2>Contact &amp; Hours</h2>
+        <p><strong>Address:</strong> {{ school.address }}</p>
+        <p><strong>Phone:</strong> {{ school.profile.phone_number }}</p>
+        <p><strong>Website:</strong> <a class="force-line-break" href="{{ school.profile.website_url | uri }}">{{ school.profile.website_url | uri }}</a></p>
+        <p><strong>School Day: </strong> {{ school.profile.school_hours }}</p>
+        <p><strong>Before Care:</strong> {{ school.profile.before_care_hours }}</p>
+        <p><strong>After Care:</strong> {{ school.profile.after_care_hours }}</p>
+      </div>
+      <div class="col-md-6">
+        <h2>School Information</h2>
+        <p><strong>Principal:</strong> {{ school.profile.principal_name }} (since {{ school.profile.principal_start_year }})</p>
+        <p><strong>Year open:</strong> {{ school.profile.year_opened }}</p>
+        <p><strong>Theme:</strong> {{ school.profile.theme }}</p>
+        <p><strong>Uniform:</strong> {{ school.profile.uniform_required | true_false }}</p>
+
+      </div>
     </div>
 
-    <div class="container school-profile-content">
+    <!-- start -->
+    <div data-ng-class="{active: tab == 'admissions-and-services', row: true}">
 
-        <div data-ng-class="{active: tab == 'overview', row: true}">
+      <div class="col-md-6">
+        <article>
+          <h2>Admission Policy</h2>
+          <div class="article-content">
+            <p>{{ school.profile.admissions_policy_type }}</p>
+            <p><strong>Lottery Priorities</strong>:</p>
+            <ol>
+              <li data-ng-show="school.profile.lottery_priority_1">{{ school.profile.lottery_priority_1 }}</li>
+              <li data-ng-show="school.profile.lottery_priority_2">{{ school.profile.lottery_priority_2 }}</li>
+              <li data-ng-show="school.profile.lottery_priority_3">{{ school.profile.lottery_priority_3 }}</li>
+              <li data-ng-show="school.profile.lottery_priority_4">{{ school.profile.lottery_priority_4 }}</li>
+              <li data-ng-show="school.profile.lottery_priority_5">{{ school.profile.lottery_priority_5 }}</li>
+            </ol>
+            <p><strong>Acceptance rate</strong></p>
+            <p><label class="label label-danger">Coming Soon</label></p>
+            <p><strong>Deadline</strong></p>
+            <p>{{ school.profile.lottery_deadline | date:format:'MMMM d, y' }}</p>
+            <p><strong>Applying to School</strong></p>
+            <a class="btn btn-success" href="{{ school.profile.learn_more_link | uri }}">Learn more</a>
+            <p><strong>Feeder School Status</strong></p>
+            <p>{{ school.profile.feeder_school_info?(school.profile.feeder_school_info): "N/A" }}</p>
+          </div>
+        </article>
 
-              <div class="col-md-6">
-                  <h2>Contact &amp; Hours</h2>
-                  <p><strong>Address:</strong> {{ school.address }}</p>
-                  <p><strong>Phone:</strong> {{ school.profile.phone_number }}</p>
-                  <p><strong>Website:</strong> <a class="force-line-break" href="{{ school.profile.website_url | uri }}">{{ school.profile.website_url | uri }}</a></p>
-                  <p><strong>School Day: </strong> {{ school.profile.school_hours }}</p>
-                  <p><strong>Before Care:</strong> {{ school.profile.before_care_hours }}</p>
-                  <p><strong>After Care:</strong> {{ school.profile.after_care_hours }}</p>
-              </div>
-              <div class="col-md-6">
-                  <h2>School Information</h2>
-                  <p><strong>Principal:</strong> {{ school.profile.principal_name }} (since {{ school.profile.principal_start_year }})</p>
-                  <p><strong>Year open:</strong> {{ school.profile.year_opened }}</p>
-                  <p><strong>Theme:</strong> {{ school.profile.theme }}</p>
-                  <p><strong>Uniform:</strong> {{ school.profile.uniform_required | true_false }}</p>
-                  
-              </div>
-        </div>
+      </div>
+      <div class="col-md-6">
+        <article>
+          <h2>School Services</h2>
+          <div class="article-content">
+            <p>This school provides the following services to students:</p>
+            <p><strong>Transportation: </strong> <span title="Transportation provided">{{ school.profile.transportation_display }} <span ng-bind-html="school.profile.transportation_explanation | linky"></span></span>
+            </p>
+            <p><strong>Lunch: </strong><span title="Lunch provided">{{ school.profile.lunch_served_display }}</span> {{ school.profile.lunch_free_and_reduced }} <span ng-bind-html="school.profile.lunch_explanation | linky"></span></p>
+            <p><strong>Breakfast: </strong><span title="Breakfast provided">{{ school.profile.breakfast_served_display }}</span> {{ school.profile.breakfast_free_and_reduced }} <span ng-bind-html="school.profile.breakfast_explanation | linky"></span></p>
+            <p><strong>Extended care: </strong><span title="extended care provided">{{ extendedCare(school.profile) }}</span></p>
+            <p><strong>Extended care cost: </strong>{{ school.profile.extended_care_cost }}</p>
+            <p><strong>Extended care financial assistance: </strong> <span ng-bind-html="school.profile.extended_care_financial_assistance | linky"></span></p>
 
-        <!-- start -->
-        <div data-ng-class="{active: tab == 'admissions-and-services', row: true}">
-
-            <div class="col-md-6">
-                <article>
-                    <h2>Admission Policy</h2>
-                    <div class="article-content">
-                        <p>{{ school.profile.admissions_policy_type }}</p>
-                        <p><strong>Lottery Priorities</strong>:</p>
-                        <ol>
-                            <li data-ng-show="school.profile.lottery_priority_1">{{ school.profile.lottery_priority_1 }}</li>
-                            <li data-ng-show="school.profile.lottery_priority_2">{{ school.profile.lottery_priority_2 }}</li>
-                            <li data-ng-show="school.profile.lottery_priority_3">{{ school.profile.lottery_priority_3 }}</li>
-                            <li data-ng-show="school.profile.lottery_priority_4">{{ school.profile.lottery_priority_4 }}</li>
-                            <li data-ng-show="school.profile.lottery_priority_5">{{ school.profile.lottery_priority_5 }}</li>
-                        </ol>
-                        <p><strong>Acceptance rate</strong></p>
-                        <p><label class="label label-danger">Coming Soon</label></p>
-                        <p><strong>Deadline</strong></p>
-                        <p>{{ school.profile.lottery_deadline | date:format:'MMMM d, y' }}</p>
-                        <p><strong>Applying to School</strong></p>
-                        <a class="btn btn-success" href="{{ school.profile.learn_more_link | uri }}">Learn more</a>
-                        <p><strong>Feeder School Status</strong></p>
-                        <p>{{ school.profile.feeder_school_info?(school.profile.feeder_school_info): "N/A" }}</p>
-                     </div>
-                 </article>
-
-            </div>
-            <div class="col-md-6">
-                <article>
-                    <h2>School Services</h2>
-                    <div class="article-content">
-                        <p>This school provides the following services to students:</p>
-                        <p><strong>Transportation: </strong> <span title="Transportation provided">{{ school.profile.transportation_display }} <span ng-bind-html="school.profile.transportation_explanation | linky"></span></span></p>
-                        <p><strong>Lunch: </strong><span title="Lunch provided">{{ school.profile.lunch_served_display }}</span> {{ school.profile.lunch_free_and_reduced }} <span ng-bind-html="school.profile.lunch_explanation | linky"></span></p>
-                        <p><strong>Breakfast: </strong><span title="Breakfast provided">{{ school.profile.breakfast_served_display }}</span> {{ school.profile.breakfast_free_and_reduced }} <span ng-bind-html="school.profile.breakfast_explanation | linky"></span></p>
-                        <p><strong>Extended care: </strong><span title="extended care provided">{{ extendedCare(school.profile) }}</span></p>
-                        <p><strong>Extended care cost: </strong>{{ school.profile.extended_care_cost }}</p>
-                        <p><strong>Extended care financial assistance: </strong> <span ng-bind-html="school.profile.extended_care_financial_assistance | linky"></span></p>
-
-                    </div>
-                </article>
-            </div>
-        </div>
-
-
-        <!-- end -->
-
-        <div data-ng-class="{active: tab == 'who-we-are', row: true}">
-            <div class="col-md-6">
-                <div class="school-details">
-                    <article>
-                        <h2>Mission</h2>
-                        <div ng-bind-html="school.profile.mission_statement | linky | newline " class="article-content"></div>
-                    </article>
-                    <article>
-                        <h2>Points of Pride</h2>
-                        <div class="article-content">
-                            <ol>
-                                <li data-ng-show="school.profile.points_of_pride1">{{ school.profile.points_of_pride1 }}</li>
-                                <li data-ng-show="school.profile.points_of_pride2">{{ school.profile.points_of_pride2 }}</li>
-                                <li data-ng-show="school.profile.points_of_pride3">{{ school.profile.points_of_pride3 }}</li>
-                            </ol>
-                        </div>
-                    </article>
-                    <article>
-                        <h2>State Report Card</h2>
-                        <div class="article-content">
-                            <a ng-show="school.profile.state_id" ng-href="{{report_card_link()}}" target="_blank">To view the state report card for this school, click here.</a>
-                            <p ng-hide="school.profile.state_id">The state report card is currently unavailable </p>
-                            <div class="overlay"><span class="label label-danger">Coming Soon</span></div>
-                        </div>
-                    </article>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <article>
-                    <h2>School Leadership</h2>
-                    <div class="article-content bio">
-                         <p>{{ school.profile.principal_name }} (since {{ school.profile.principal_start_year }})</p>
-                         <div ng-bind-html="school.profile.principal_bio | newline" class=""></div>
-                    </div>
-                </article>
-                <article class="coming-soon teacher-survey">
-                    <h2>Teacher Satisfaction</h2>
-                    <div class="article-content">
-                        <p>The following percentage of teachers responded that they "agree" or "strongly agree" to the following statements</p>
-
-                        <div class="metrics">
-                            <!-- ngRepeat: (question, percentage) in school.teacher_satisfaction -->
-                            <div class="metric">
-                                <p class="score">68%</p>
-                                <p><em class="">Overall, my school is a good place to work and learn.</em></p>
-                                <div class="avgline">
-                                    <span class="actual" style="width:68%;"></span>
-                                    <span class="avg" style="left:62%;">|<br>Durham Public Schools Avg.</span>
-                                </div>
-                            </div><!-- end ngRepeat: (question, percentage) in school.teacher_satisfaction -->
-                            <div class="metric">
-                                <p class="score">75%</p>
-                                <p><em>Teachers are allowed to focus on educating students with minimal interruptions</em></p>
-                                <div class="avgline">
-                                    <span class="actual" style="width:75%;"></span>
-                                    <span class="avg" style="left:54%;">|<br>Durham Public Schools Avg.</span>
-                                </div>
-                            </div><!-- end ngRepeat: (question, percentage) in school.teacher_satisfaction -->
-                            <div class="metric">
-                                <p class="score">81%</p>
-                                <p><em class="">The school leadership consistently supports teachers</em></p>
-                                <div class="avgline">
-                                    <span class="actual" style="width:81%;"></span>
-                                    <span class="avg" style="left:66%;">|<br>Durham Public Schools Avg.</span>
-                                </div>
-                            </div><!-- end ngRepeat: (question, percentage) in school.teacher_satisfaction -->
-                        </div>
-
-                        <div class="overlay">
-                            <span class="label label-danger">Coming Soon</span>
-                            <div class="text">
-                                <span>Sample Data</span><br>
-                                <span class="opacity">Coming soon from North Carolina Teacher Working Conditions survey</span>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </div>
-
-        <div data-ng-class="{active: tab == 'school-offerings', row: true}">
-            <div class="col-md-6">
-                <article>
-                    <h2>Targeted Academic Offerings</h2>
-                    <div class="article-content">
-                        <p>Staff and additional resources provided for:</p>
-                        <p><strong>Our Theme: </strong> {{ school.profile.other_academic }}</p>
-                        <p><strong>English Language Learners: </strong><span ng-bind-html=" school.profile.english_language_learner | linky"></span></p>
-                        <p><strong>Special Education (Exceptional Children): </strong> <span ng-bind-html=" school.profile.special_education | linky"></span></p>
-                        <p><strong>Academically & Intellectually Gifted: </strong> {{ school.profile.gifted_education }}</p>
-                    </div>
-                </article>
-            </div>
-            <div class="col-md-6">
-                <article>
-                    <h2>Extracurricular Offerings</h2>
-                    <div class="article-content">
-                        <p><strong>Academic: </strong> {{ school.profile.academic }}</p>
-                        <p><strong>Arts: </strong> {{ school.profile.arts }}</p>
-                        <p><strong>Sports: </strong> {{ school.profile.sports }}</p>
-                        <p><strong>Service & leadership: </strong> {{ school.profile.service_leadership }}</p>
-                        <p><strong>Other: </strong> {{ school.profile.other }}</p>
-                    </div>
-                </article>
-            </div>
-        </div>
-
-        <div data-ng-class="{active: tab == 'testimonials', row: true}">
-            <div class="col-md-6">
-              <h2>Community</h2>
-              <div>
-                  <h3>Parental Involvement</h3>
-                  <p><strong>PTA/PTO: </strong>
-                      <span>{{ school.profile.pta | true_false }}</span>
-                  </p>
-                  <p data-ng-if="school.profile.pta_website"><a href="{{ school.profile.pta_website | uri }}">Learn more about this school's PTA/PTO</a></p>
-                  <p><span ng-bind-html="school.profile.parental_involvement_notes | linky"></span></p>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-                <article >
-                    <h2>Feedback</h2>
-                    <div class="article-content">
-                        <p>Are you a parent or teacher at this school?</p>
-                        <p data-ng-repeat="entry in school.reflections">{{ entry.reflection }}<br/>
-                        <i>{{ entry.who }}</i></p>
-                        <div class="overlay"><span class="label label-danger">Coming Soon</span></div>
-                    </div>
-                </article>
-                <div id="disqus_thread"></div>
-                <script>
-
-                /**
-                 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-                 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
-                /*
-                var disqus_config = function () {
-                    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-                    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-                };
-                */
-                (function() { // DON'T EDIT BELOW THIS LINE
-                    var d = document, s = d.createElement('script');
-                    s.src = '//https-durhamschoolnavigator-org.disqus.com/embed.js';
-                    s.setAttribute('data-timestamp', +new Date());
-                    (d.head || d.body).appendChild(s);
-                })();
-                </script>
-                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-            </div>
-        </div>
-
+          </div>
+        </article>
+      </div>
     </div>
+
+
+    <!-- end -->
+
+    <div data-ng-class="{active: tab == 'who-we-are', row: true}">
+      <div class="col-md-6">
+        <div class="school-details">
+          <article>
+            <h2>Mission</h2>
+            <div ng-bind-html="school.profile.mission_statement | linky | newline " class="article-content"></div>
+          </article>
+          <article>
+            <h2>Points of Pride</h2>
+            <div class="article-content">
+              <ol>
+                <li data-ng-show="school.profile.points_of_pride1">{{ school.profile.points_of_pride1 }}</li>
+                <li data-ng-show="school.profile.points_of_pride2">{{ school.profile.points_of_pride2 }}</li>
+                <li data-ng-show="school.profile.points_of_pride3">{{ school.profile.points_of_pride3 }}</li>
+              </ol>
+            </div>
+          </article>
+          <article>
+            <h2>State Report Card</h2>
+            <div class="article-content">
+              <a ng-show="school.profile.state_id" ng-href="{{report_card_link()}}" target="_blank">To view the state report card for this school, click here.</a>
+              <p ng-hide="school.profile.state_id">The state report card is currently unavailable </p>
+              <div class="overlay"><span class="label label-danger">Coming Soon</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <article>
+          <h2>School Leadership</h2>
+          <div class="article-content bio">
+            <p>{{ school.profile.principal_name }} (since {{ school.profile.principal_start_year }})</p>
+            <div ng-bind-html="school.profile.principal_bio | newline" class=""></div>
+          </div>
+        </article>
+        <article class="coming-soon teacher-survey">
+          <h2>Teacher Satisfaction</h2>
+          <div class="article-content">
+            <p>The following percentage of teachers responded that they "agree" or "strongly agree" to the following statements</p>
+
+            <div class="metrics">
+              <!-- ngRepeat: (question, percentage) in school.teacher_satisfaction -->
+              <div class="metric">
+                <p class="score">68%</p>
+                <p><em class="">Overall, my school is a good place to work and learn.</em></p>
+                <div class="avgline">
+                  <span class="actual" style="width:68%;"></span>
+                  <span class="avg" style="left:62%;">|<br>Durham Public Schools Avg.</span>
+                </div>
+              </div>
+              <!-- end ngRepeat: (question, percentage) in school.teacher_satisfaction -->
+              <div class="metric">
+                <p class="score">75%</p>
+                <p><em>Teachers are allowed to focus on educating students with minimal interruptions</em></p>
+                <div class="avgline">
+                  <span class="actual" style="width:75%;"></span>
+                  <span class="avg" style="left:54%;">|<br>Durham Public Schools Avg.</span>
+                </div>
+              </div>
+              <!-- end ngRepeat: (question, percentage) in school.teacher_satisfaction -->
+              <div class="metric">
+                <p class="score">81%</p>
+                <p><em class="">The school leadership consistently supports teachers</em></p>
+                <div class="avgline">
+                  <span class="actual" style="width:81%;"></span>
+                  <span class="avg" style="left:66%;">|<br>Durham Public Schools Avg.</span>
+                </div>
+              </div>
+              <!-- end ngRepeat: (question, percentage) in school.teacher_satisfaction -->
+            </div>
+
+            <div class="overlay">
+              <span class="label label-danger">Coming Soon</span>
+              <div class="text">
+                <span>Sample Data</span><br>
+                <span class="opacity">Coming soon from North Carolina Teacher Working Conditions survey</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div data-ng-class="{active: tab == 'school-offerings', row: true}">
+      <div class="col-md-6">
+        <article>
+          <h2>Targeted Academic Offerings</h2>
+          <div class="article-content">
+            <p>Staff and additional resources provided for:</p>
+            <p><strong>Our Theme: </strong> {{ school.profile.other_academic }}</p>
+            <p><strong>English Language Learners: </strong><span ng-bind-html=" school.profile.english_language_learner | linky"></span></p>
+            <p><strong>Special Education (Exceptional Children): </strong> <span ng-bind-html=" school.profile.special_education | linky"></span></p>
+            <p><strong>Academically & Intellectually Gifted: </strong> {{ school.profile.gifted_education }}</p>
+          </div>
+        </article>
+      </div>
+      <div class="col-md-6">
+        <article>
+          <h2>Extracurricular Offerings</h2>
+          <div class="article-content">
+            <p><strong>Academic: </strong> {{ school.profile.academic }}</p>
+            <p><strong>Arts: </strong> {{ school.profile.arts }}</p>
+            <p><strong>Sports: </strong> {{ school.profile.sports }}</p>
+            <p><strong>Service & leadership: </strong> {{ school.profile.service_leadership }}</p>
+            <p><strong>Other: </strong> {{ school.profile.other }}</p>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div data-ng-class="{active: tab == 'testimonials', row: true}">
+      <div class="col-md-6">
+        <h2>Community</h2>
+        <div>
+          <h3>Parental Involvement</h3>
+          <p><strong>PTA/PTO: </strong>
+            <span>{{ school.profile.pta | true_false }}</span>
+          </p>
+          <p data-ng-if="school.profile.pta_website"><a href="{{ school.profile.pta_website | uri }}">Learn more about this school's PTA/PTO</a></p>
+          <p><span ng-bind-html="school.profile.parental_involvement_notes | linky"></span></p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <article>
+          <h2>Feedback</h2>
+          <div class="article-content">
+            <p>Are you a parent or teacher at this school?</p>
+            <p data-ng-repeat="entry in school.reflections">{{ entry.reflection }}<br/>
+              <i>{{ entry.who }}</i></p>
+            <div class="overlay"><span class="label label-danger">Coming Soon</span></div>
+          </div>
+        </article>
+        <div id="disqus_thread"></div>
+        <script>
+          /**
+           *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+           *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables */
+          /*
+          var disqus_config = function () {
+              this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+              this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+          };
+          */
+          (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document,
+              s = d.createElement('script');
+            s.src = '//https-durhamschoolnavigator-org.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+
+  </div>
 </main>
