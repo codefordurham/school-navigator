@@ -522,6 +522,9 @@ div.avgline span.avg {
 .overlay {
     display: none;
 }
+.coming-soon {
+    position: relative;
+}
 .coming-soon .overlay {
     opacity: 1;
     display: block;
@@ -553,6 +556,7 @@ div.avgline span.avg {
     text-align: center;
     font-size: 46px;
     font-weight: bold;
+    line-height: 1em;
 }
 .coming-soon.teacher-survey .overlay {
     height: 458px;
