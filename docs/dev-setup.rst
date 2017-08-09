@@ -28,7 +28,7 @@ work on the project locally. In a terminal, run:
 
 .. code-block:: bash
 
-    git clone git@github.com:codefordurham/school-navigator.git
+    git clone git@github.com:codefordurham/school-navigator.git (ssh only)
     cd school-navigator
 
 

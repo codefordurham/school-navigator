@@ -22,3 +22,7 @@ conf/pillar/*/deploy
 .env
 *.cert*
 *.key*
+logfile
+school_navigator/*/
+pip-selfcheck.json
+.Python
