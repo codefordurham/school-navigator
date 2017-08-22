@@ -83,9 +83,10 @@ class SchoolForm(forms.ModelForm):
 
 class SchoolAdmin(LeafletGeoAdmin):
     form = SchoolForm
-    list_display = ('name', 'principal_email', 'principal_name', 'profile_status', 'profile', 'photo', 'type')
+    list_display = ('name', 'principal_email', 'principal_name', 'profile_complete_percent',
+                    'profile_status', 'profile', 'photo', 'type')
     list_editable = ('principal_email',)
-    ordering = ('name',)
+    ordering = ('name', 'profile_complete_percent', )
     list_filter = ('type', )
     actions = [send_survey, resend_survey]
     fields = ('name', 'short_name', 'address', 'zip_code', 'active',
@@ -97,10 +98,13 @@ class SchoolAdmin(LeafletGeoAdmin):
         return getattr(obj.profile(), 'photo', '')
 
     def get_changelist_form(self, request, **kwargs):
-            return SchoolForm
+        return SchoolForm
 
     def principal_name(self, obj):
         return getattr(obj.profile(), 'principal_name', '')
+
+    def profile_complete_percent(self, obj):
+        return obj.profile().percent_complete()
 
     def profile_status(self, obj):
         profile = obj.profile()
