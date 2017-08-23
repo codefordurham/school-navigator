@@ -619,3 +619,8 @@ nav.school-profile-tabs {
   -webkit-hyphens: auto;
   hyphens: auto;
 }
+
+.article-content {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
