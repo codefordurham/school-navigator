@@ -307,7 +307,7 @@ class SchoolProfile(models.Model):
         filled_fields = 0
         for fn in field_names:
             if getattr(latest_profile, fn):
-                filled_fields++
+                filled_fields += 1
 
         return float('%.2f' % (filled_fields/len(field_names)*100))
 
