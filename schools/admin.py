@@ -86,7 +86,7 @@ class SchoolAdmin(LeafletGeoAdmin):
     list_display = ('name', 'principal_email', 'principal_name', 'profile_complete_percent',
                     'profile_status', 'profile', 'photo', 'type')
     list_editable = ('principal_email',)
-    ordering = ('name', 'profile_complete_percent', )
+    ordering = ('name', )
     list_filter = ('type', )
     actions = [send_survey, resend_survey]
     fields = ('name', 'short_name', 'address', 'zip_code', 'active',
