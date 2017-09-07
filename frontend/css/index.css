@@ -463,19 +463,6 @@ div#schools-wrapper ul.nav li.active a, div#schools-wrapper ul.nav li a:hover {
     background-color: #5bc0de;
     border: 1px solid #45b4ce;
 }
-#breadcrumb {
-    height: 40px;
-    white-space: nowrap;
-    padding: 10px 30px;
-    box-shadow: 0 1px 2px #999;
-    -webkit-box-shadow: box-shadow: 0 1px 2px #999;
-    -moz-box-shadow: box-shadow: 0 1px 2px #999;
-}
-#breadcrumb > p, a {
-    display: inline;
-    margin-right: 10px;
-    /* font-style: italic; */
-}
 .btn-school-website:hover,
 .btn-school-website:focus {
     color: #ffffff;
