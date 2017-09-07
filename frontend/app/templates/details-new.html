@@ -1,5 +1,12 @@
 <simple-nav></simple-nav>
 <main class="school-detail-page">
+  <div id="breadcrumb">
+    <a href="#/">Map</a>
+    <p>/</p>
+    <a href="#schools">Schools</a>
+    <p>/</p>
+    <p> {{ school.name }} </p>
+  </div>
   <div class="container-fluid ">
     <div class="row hero" style="background-image: url(/media/{{ school.profile.photo }}), url(../img/mural.jpg)" />
   </div>
