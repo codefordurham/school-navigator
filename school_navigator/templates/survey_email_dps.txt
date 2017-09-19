@@ -17,9 +17,3 @@ Survey Instructions
 - You can view the saved information entered in the survey on your school's profile here: {{ school_profile_url }}. Only those with this link can view the profile right now.
 - Please complete the survey by {{ school_profile.due_date }}. At this time, the survey will close and will no longer be accessible to you.
 - We expect the survey to take 30-60 minutes to complete, depending on how easily accessible the information is to you.
-
-Additional FYI
-- You can view a completed sample profile here: https://durhamschoolnavigator.org/#/school/247/
-- Moving forward, we will ask annually only for changes you want to make to the existing profile, so the survey will take much less time to complete in the future.
-- There is some information such as school size and teacher satisfaction data that will appear in the profile but is not included in the survey because we will collect this information directly from DPI and DPS. The sample profile shows all the information that will appear in the final version of the profile.
-- The next phase of the site will include sourcing testimonials from Durham parents. This section is currently empty on the profiles.
