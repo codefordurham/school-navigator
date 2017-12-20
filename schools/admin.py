@@ -35,6 +35,7 @@ def send_email(school, request):
     context = {
         'school': school,
         'school_profile': school_profile,
+        'percent_complete': school_profile.percent_complete,
         'principal_name': school_profile.principal_name,
         'school_profile_url': school_profile_url,
     }
