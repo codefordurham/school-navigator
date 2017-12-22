@@ -398,7 +398,10 @@ angular.module('SchoolsApp.directives', [])
     .directive('simpleNav', [function() {
         return {
             restrict: 'AE',
-            templateUrl: 'app/templates/simpleNav.html'
+            templateUrl: 'app/templates/simpleNav.html',
+            scope: {
+              'activeTab': '@'
+            }
         }
     }])
     .directive('search', [function() {
