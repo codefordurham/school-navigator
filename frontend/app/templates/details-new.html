@@ -109,9 +109,9 @@
             <h2>Points of Pride</h2>
             <div class="article-content">
               <ol>
-                <li data-ng-show="school.profile.points_of_pride1">{{ school.profile.points_of_pride1 }}</li>
-                <li data-ng-show="school.profile.points_of_pride2">{{ school.profile.points_of_pride2 }}</li>
-                <li data-ng-show="school.profile.points_of_pride3">{{ school.profile.points_of_pride3 }}</li>
+                <li data-ng-show="school.profile.points_of_pride1" ng-bind-html="school.profile.points_of_pride1 | linky"></li>
+                <li data-ng-show="school.profile.points_of_pride2" ng-bind-html="school.profile.points_of_pride2 | linky"></li>
+                <li data-ng-show="school.profile.points_of_pride3" ng-bind-html="school.profile.points_of_pride3 | linky"></li>
               </ol>
             </div>
           </article>
@@ -187,10 +187,10 @@
           <h2>Targeted Academic Offerings</h2>
           <div class="article-content ">
             <p>Staff and additional resources provided for:</p>
-            <p><i class="fa fa-smile-o" aria-hidden="true"></i><strong> Our Theme: </strong> {{ school.profile.other_academic }}</p>
+            <p><i class="fa fa-smile-o" aria-hidden="true"></i><strong> Our Theme: </strong> <span ng-bind-html=" school.profile.other_academic | linky "> </span></p>
             <p><i class="fa fa-globe" aria-hidden="true"></i><strong> English Language Learners: </strong><span ng-bind-html=" school.profile.english_language_learner | linky "></span></p>
             <p><i class="fa fa-star" aria-hidden="true"></i><strong> Special Education (Exceptional Children): </strong> <span ng-bind-html=" school.profile.special_education | linky "></span></p>
-            <p><i class="fa fa-level-up" aria-hidden="true"></i><strong>Academically & Intellectually Gifted: </strong> {{ school.profile.gifted_education }}</p>
+            <p><i class="fa fa-level-up" aria-hidden="true"></i><strong>Academically & Intellectually Gifted: </strong> <span ng-bind-html=" school.profile.gifted_education | linky"> </span></p>
           </div>
         </article>
       </div>

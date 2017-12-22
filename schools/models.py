@@ -294,11 +294,22 @@ class SchoolProfile(models.Model):
             self.created_at = datetime.datetime.now()
         super(SchoolProfile, self).save(force_insert=force_insert, force_update=force_update,
                                         using=using, update_fields=update_fields)
+
     def due_date(self):
         first_survey_due_date = datetime.date(2016, 7, 29)
         if datetime.date.today() < datetime.date(2016, 6, 30):
             return first_survey_due_date
         return (self.created_at + datetime.timedelta(30)).date()
+
+    def percent_complete(self):
+        field_names = self.__class__._meta.get_all_field_names()
+
+        filled_fields = 0
+        for fn in field_names:
+            if getattr(self, fn):
+                filled_fields += 1
+
+        return float('%.2f' % (filled_fields/len(field_names)*100))
 
     def overdue(self):
         tomorrow = (timezone.now() + datetime.timedelta(days=1)).date()
