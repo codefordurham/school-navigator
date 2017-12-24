@@ -1,19 +1,26 @@
 Dear {{ school.name }} Team,
 
-I hope this email finds you well. We would like to follow up on a request School Navigator (http://durhamschoolnavigator.org) sent to you recently, in hopes that you may still be able to help. As a reminder, our team at Code for Durham (http://codefordurham.com) has been working in partnership with the Durham Charter Collaborative and Durham Public Schools to create a resource that supports families in understanding the city's public school landscape.
+This is our second year requesting survey information about your school to be included on your school profile on Durham School Navigator ( http://durhamschoolnavigator.org/ ).
 
-We would like to create a great profile for {{ school.name }}, but we need your help. We ask that you and your team complete the survey below as soon as possible so we can include your school's completed profile on the site. We are also excited to share that schools are now able to upload photos directly through the survey, rather than emailing our team! Please see below for the survey link and further instructions.
+{{ school.name }}’s Survey Completion Percent: {{ percent_complete }}
+Overall School Survey Completion Percent Range: 11% -- 92%
+You can add more information to your school’s profile page and verify the accuracy of the existing information by filling out your school’s survey (or forwarding this email to someone to fill it out):
 
-Email SchoolNavigatorTeam@gmail.com if you have any questions. We know you are very busy and greatly appreciate you making time to complete this survey. Many thanks in advance for your help in creating this resource for Durham's families!
+Edit your profile: {{ school_profile_url }}
+Due Date: {{ school_profile.due_date }}
+
+The site has been developed by over 35 Code for Durham volunteers over three years in collaboration with Durham Public Schools and a number of community groups to provide the most sought after information to families as they make important education decisions. You can now upload school pictures directly to the site, and we have newly designed profile pages highlighting the most important information as determined by our community testing and outreach.
+
+Please email SchoolNavigatorTeam@gmail.com if you have any questions or feedback. 
+
+We greatly appreciate you making time to complete this survey. Many thanks in advance for your help in creating this resource for Durham's families!
 
 Sincerely,
 School Navigator Team
 
-Due Date: {{ school_profile.due_date }}
-Survey Link: {{ school_profile_url }}
-
-Survey Instructions
+Survey Instructions:
+====================
 - You can complete the survey in multiple sittings and share the link with others. Just be sure to click SAVE at the bottom of the survey each time you work on it.
-- You can view the saved information entered in the survey on your school's profile here: {{ school_profile_url }}. Only those with this link can view the profile right now.
+- You can view the saved information entered in the survey on your school's profile here: {{ school_profile_url }}.
 - Please complete the survey by {{ school_profile.due_date }}. At this time, the survey will close and will no longer be accessible to you.
 - We expect the survey to take 30-60 minutes to complete, depending on how easily accessible the information is to you.
