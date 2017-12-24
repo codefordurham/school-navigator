@@ -296,9 +296,9 @@ class SchoolProfile(models.Model):
                                         using=using, update_fields=update_fields)
 
     def due_date(self):
-        first_survey_due_date = datetime.date(2016, 7, 29)
-        if datetime.date.today() < datetime.date(2016, 6, 30):
-            return first_survey_due_date
+        hard_coded_due_date = datetime.date(2018, 1, 8)
+        if self.created_at < datetime.date(2018, 1, 10):
+            return hard_coded_due_date
         return (self.created_at + datetime.timedelta(30)).date()
 
     def percent_complete(self):
