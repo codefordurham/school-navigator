@@ -2,16 +2,17 @@ Dear {{ school.name }} Team,
 
 This is our second year requesting survey information about your school to be included on your school profile on Durham School Navigator ( http://durhamschoolnavigator.org/ ).
 
-{{ school.name }}’s Survey Completion Percent: {{ percent_complete }}
-Overall School Survey Completion Percent Range: 11% -- 92%
-You can add more information to your school’s profile page and verify the accuracy of the existing information by filling out your school’s survey (or forwarding this email to someone to fill it out):
+The site has been developed by over 35 Code for Durham volunteers over three years in collaboration with a number of community groups to provide the most sought after information to families as they make important education decisions.
 
 Edit your profile: {{ school_profile_url }}
 Due Date: {{ school_profile.due_date }}
 
-The site has been developed by over 35 Code for Durham volunteers over three years in collaboration with Durham Public Schools and a number of community groups to provide the most sought after information to families as they make important education decisions. You can now upload school pictures directly to the site, and we have newly designed profile pages highlighting the most important information as determined by our community testing and outreach.
+{{ school.name }}’s Survey Completion Percent: {{ percent_complete }}
+Overall School Survey Completion Percent Range: 11% -- 92%
 
-Please email SchoolNavigatorTeam@gmail.com if you have any questions or feedback. 
+You can add more information to your school’s profile page and verify the accuracy of the existing information by filling out your school’s survey (or forwarding this email to someone to fill it out).  You can now upload school pictures directly to the site, and we have newly designed profile pages highlighting the most important information as determined by our community testing and outreach.
+
+Please email SchoolNavigatorTeam@gmail.com if you have any questions or feedback.  If you need more time to complete the survey, please complete as much as possible and contact us to extend the due date.
 
 We greatly appreciate you making time to complete this survey. Many thanks in advance for your help in creating this resource for Durham's families!
 
@@ -23,4 +24,4 @@ Survey Instructions:
 - You can complete the survey in multiple sittings and share the link with others. Just be sure to click SAVE at the bottom of the survey each time you work on it.
 - You can view the saved information entered in the survey on your school's profile here: {{ school_profile_url }}.
 - Please complete the survey by {{ school_profile.due_date }}. At this time, the survey will close and will no longer be accessible to you.
-- We expect the survey to take 30-60 minutes to complete, depending on how easily accessible the information is to you.
+- We expect the survey to take 30-60 minutes to complete, depending on how easily accessible the information is to you.  If you have completed the profile survey in the past, confirming the data and updating can take far less time. 
