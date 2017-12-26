@@ -1,26 +1,17 @@
-version: '2'
+version: '3'
 
 services:
   db:
     restart: always
-    image: mdillon/postgis:9.3
-    env_file: .env
+    image: mdillon/postgis:9.6-alpine
+    volumes:
+      - pgdata:/var/lib/postgresql/data
     expose:
       - "5432"
-  server:
-    restart: always
-    env_file: .env
-    build:
-      context: .
-      dockerfile: ./compose/server/Dockerfile
-    links:
-      - app:app
-    volumes_from:
-      - app
-    ports:
-      - "8081:80"
   app:
-    env_file: .env
+    command: /code/compose/django/runserver.sh
+    environment:
+      DATABASE_URL: postgis://postgres@db:5432/postgres
     build:
       context: .
       dockerfile: ./compose/django/Dockerfile
@@ -28,7 +19,22 @@ services:
       - .:/code
     links:
       - db:db
-    expose:
-      - "8000"
+    ports:
+      - "8000:8000"
     depends_on:
       - db
+  proxy:
+    restart: always
+    image: nginx:stable-alpine
+    build:
+      context: .
+      dockerfile: ./compose/server/Dockerfile
+    links:
+      - app:app
+    volumes:
+      - ./frontend:/code
+    ports:
+      - "8081:80"
+
+volumes:
+  pgdata:

@@ -1,0 +1,2 @@
+# requirements when deploying (using Dokku etc)
+-r requirements/production.txt

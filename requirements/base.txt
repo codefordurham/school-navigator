@@ -19,3 +19,6 @@ django-cors-headers==0.13
 
 hashids==1.1.0
 django-widget-tweaks==1.4.1
+
+whitenoise==3.3.0
+dj-database-url==0.4.2

@@ -1,7 +1,7 @@
-FROM nginx
+FROM nginx:stable-alpine
 
 WORKDIR /code
 
-COPY frontend /usr/share/nginx/html
+COPY frontend /code
 
 COPY compose/server/nginx.conf /etc/nginx/conf.d/default.conf

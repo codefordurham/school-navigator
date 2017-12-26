@@ -1,11 +1,8 @@
-FROM python:3.4-slim
+FROM python:3.5-slim
 
 # Ensure that Python outputs everything that's printed inside
 # the application rather than buffering it.
 ENV PYTHONUNBUFFERED 1
-
-RUN mkdir /code
-WORKDIR /code
 
 # Setup the locales in the Dockerfile
 RUN set -x \
@@ -27,19 +24,23 @@ RUN set -x \
             binutils \
             libproj-dev \
             gdal-bin \
-            nodejs \
             --no-install-recommends -y \
     && apt-get autoremove -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+WORKDIR /
+
 # Build Python virtualenv
-ADD ./requirements /code/requirements
+COPY ./requirements/dev.txt /requirements/dev.txt
+COPY ./requirements/base.txt /requirements/base.txt
 RUN set -ex \
     && pip install -U virtualenv \
     && virtualenv /venv \
-    && LIBRARY_PATH=/lib:/usr/lib /bin/sh -c "/venv/bin/pip install -r /code/requirements/dev.txt"
+    && LIBRARY_PATH=/lib:/usr/lib /bin/sh -c "/venv/bin/pip install -r /requirements/dev.txt"
 
-ADD . /code/
+RUN mkdir /code
+WORKDIR /code
+COPY . /code
 
 CMD ["/code/compose/django/runserver.sh"]
