@@ -1,7 +1,8 @@
+
+
 import os
 
 from celery import Celery
-
 from . import load_env
 
 load_env.load_env()
