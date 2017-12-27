@@ -27,6 +27,7 @@ Contents:
    :maxdepth: 1
 
    dev-setup
+   docker
    server-setup
    provisioning
    vagrant
