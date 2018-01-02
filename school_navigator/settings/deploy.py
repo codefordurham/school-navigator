@@ -51,7 +51,7 @@ ALLOWED_HOSTS = ['*']
 
 # Uncomment if using celery worker configuration
 CELERY_SEND_TASK_ERROR_EMAILS = True
-BROKER_URL = environ.get('REDIS_URL', '')
+BROKER_URL = os.environ.get('REDIS_URL', '')
 
 # Environment overrides
 # These should be kept to an absolute minimum
