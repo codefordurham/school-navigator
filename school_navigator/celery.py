@@ -8,7 +8,7 @@ from . import load_env
 load_env.load_env()
 
 # set the default Django settings module for the 'celery' program.
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', os.environ.get('DJANGO_SETTINGS_MODULE', 'school_navigator.settings'))
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'school_navigator.settings.deploy')
 
 from django.conf import settings
 
