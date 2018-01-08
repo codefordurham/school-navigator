@@ -315,6 +315,7 @@ class SchoolProfile(models.Model):
 
     def overdue(self):
         tomorrow = (timezone.now() + datetime.timedelta(days=2)).date()
+        return False  # HACK
         return self.due_date() < tomorrow
 
     def url(self):
