@@ -299,7 +299,7 @@ class SchoolProfile(models.Model):
         tz = self.created_at.tzinfo
         if (self.created_at < timezone.datetime(2018, 1, 7, tzinfo=tz) and
                 self.created_at > timezone.datetime(2017, 12, 30, tzinfo=tz)):
-            hard_coded_due_date = timezone.datetime(2018, 1, 9, tzinfo=tz)
+            hard_coded_due_date = timezone.datetime(2018, 1, 9, 23, 59, 59 tzinfo=tz)
             return hard_coded_due_date.date()
         return (self.created_at + datetime.timedelta(30)).date()
 
