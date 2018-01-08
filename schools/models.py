@@ -312,7 +312,7 @@ class SchoolProfile(models.Model):
         return float('%.2f' % (filled_fields/len(field_names)*100))
 
     def overdue(self):
-        tomorrow = (timezone.now() + datetime.timedelta(days=1)).date()
+        tomorrow = (timezone.now() + datetime.timedelta(days=2)).date()
         return self.due_date() < tomorrow
 
     def url(self):
