@@ -296,8 +296,8 @@ class SchoolProfile(models.Model):
                                         using=using, update_fields=update_fields)
 
     def due_date(self):
-        hard_coded_due_date = timezone.datetime(2018, 1, 8, tzinfo=self.created_at.tzinfo)
-        if self.created_at < timezone.datetime(2018, 1, 10, tzinfo=self.created_at.tzinfo):
+        hard_coded_due_date = timezone.datetime(2018, 1, 9, tzinfo=self.created_at.tzinfo)
+        if self.created_at < timezone.datetime(2018, 1, 7, tzinfo=self.created_at.tzinfo):
             return hard_coded_due_date.date()
         return (self.created_at + datetime.timedelta(30)).date()
 
