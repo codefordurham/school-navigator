@@ -1,5 +1,8 @@
 Dear {{ school.name }} Team,
 
+Update:  Given the weather related closures last week, we have extended the deadline one week for the survey (until {{ school_profile.due_date }}).
+Please contact Chip Sudderth (william.sudderth-iii@dpsnc.net) or Janet Del Pinal (janet.delpinal@dpsnc.net) if you need help/advice with the CONTENT of your information.
+
 This is our second year requesting survey information about your school to be included on your school profile on Durham School Navigator ( http://durhamschoolnavigator.org/ ).
 
 The site has been developed by over 35 Code for Durham volunteers over three years in collaboration with a number of community groups to provide the most sought after information to families as they make important education decisions.
