@@ -1,5 +1,7 @@
 Dear {{ school.name }} Team,
 
+Reminder: Due to the weather related closures last week, we have extended the deadline for one week (until {{ school_profile.due_date }}).
+
 This is our second year requesting survey information about your school to be included on your school profile on Durham School Navigator ( http://durhamschoolnavigator.org/ ).
 
 {{ school.name }}’s Survey Completion Percent: {{ percent_complete }}
