@@ -1,6 +1,6 @@
 Dear {{ school.name }} Team,
 
-Reminder:  Given the weather related closures last week, we have extended the deadline one week for the survey (until {{ school_profile.due_date }}).
+Update:  Given the weather related closures last week, we have extended the deadline one week for the survey (until {{ school_profile.due_date }}).
 Please contact Chip Sudderth (william.sudderth-iii@dpsnc.net) or Janet Del Pinal (janet.delpinal@dpsnc.net) if you need help/advice with the CONTENT of your information.
 
 This is our second year requesting survey information about your school to be included on your school profile on Durham School Navigator ( http://durhamschoolnavigator.org/ ).
