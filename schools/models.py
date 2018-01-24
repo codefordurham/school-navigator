@@ -291,7 +291,7 @@ class SchoolProfile(models.Model):
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         if not self.created_at:
-            self.created_at = datetime.datetime.now()
+            self.created_at = timezone.now()
         super(SchoolProfile, self).save(force_insert=force_insert, force_update=force_update,
                                         using=using, update_fields=update_fields)
 
@@ -301,7 +301,8 @@ class SchoolProfile(models.Model):
                 self.created_at > timezone.datetime(2017, 12, 30, tzinfo=tz)):
             hard_coded_due_date = timezone.datetime(2018, 1, 15, tzinfo=tz)
             return hard_coded_due_date.date()
-        return (self.created_at + datetime.timedelta(30)).date()
+        due_dt = (self.created_at + datetime.timedelta(30))
+        return due_dt.astimezone(timezone.get_current_timezone()).date()
 
     def percent_complete(self):
         field_names = self.__class__._meta.get_all_field_names()
@@ -314,8 +315,9 @@ class SchoolProfile(models.Model):
         return float('%.2f' % (filled_fields/len(field_names)*100))
 
     def overdue(self):
-        tomorrow = (timezone.now() + datetime.timedelta(days=2)).date()
-        return False  # HACK
+        tomorrow = (timezone.now() + datetime.timedelta(days=1))
+        tomorrow = tomorrow.astimezone(timezone.get_current_timezone())
+        tomorrow = tomorrow.date()
         return self.due_date() < tomorrow
 
     def url(self):
