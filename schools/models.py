@@ -53,6 +53,7 @@ class School(models.Model):
         profile = self.profile()
         if profile:
             profile.pk = None
+            profile.survey_feedback = ""
         else:
             profile = SchoolProfile.objects.create(school=self)
 
