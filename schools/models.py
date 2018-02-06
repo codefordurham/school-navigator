@@ -305,12 +305,14 @@ class SchoolProfile(models.Model):
         return (self.created_at + datetime.timedelta(30)).date()
 
     def percent_complete(self):
-        field_names = self.__class__._meta.get_all_field_names()
+        field_names = set(self.__class__._meta.get_all_field_names())
+        excluded_fields = {'survey_feedback', 'created_at', 'submitted_at',
+                           'school', 'id', 'school_id'}
+        lottery_fields = {fn for fn in field_names if 'lottery' in fn}
+        field_names = {fn for fn in field_names if fn not in excluded_fields}
+        field_names = field_names - lottery_fields
 
-        filled_fields = 0
-        for fn in field_names:
-            if getattr(self, fn):
-                filled_fields += 1
+        filled_fields = sum([1 for fn in field_names if getattr(self, fn)])
 
         return float('%.2f' % (filled_fields/len(field_names)*100))
 
