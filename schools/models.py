@@ -214,7 +214,7 @@ class SchoolProfile(models.Model):
     lottery_priority_4 = models.CharField(max_length=250, blank=True, null=True)
     lottery_priority_5 = models.CharField(max_length=250, blank=True, null=True)
     lottery_deadline = models.DateTimeField(null=True, blank=True,
-            help_text='If your school has a lottery, what is the deadline for applying for the 2017-2018 school year?  Use YYYY-MM-DD (like 2017-05-31) format.'
+            help_text='If your school has a lottery, what is the deadline for applying for the upcoming school year?  Use YYYY-MM-DD (eg 2017-05-31) format.'
     )
     # lottery_acceptance_rate  FIXME
     learn_more_link = models.TextField(null=True, blank=True,
