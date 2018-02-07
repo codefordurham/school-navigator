@@ -31,7 +31,7 @@ class School(models.Model):
     principal_email = models.CharField(max_length=100, null=True, blank=True,
                 help_text='Email of Principal (may also reach Superintendent)'
     )
-    teacher_satisfaction_survey = models.URLField(null=True)
+    teacher_satisfaction_survey = models.URLField(null=True, blank=True)
 
     type = models.CharField(choices=SCHOOL_TYPES, max_length=20)
     year_round = models.BooleanField(default=False)
