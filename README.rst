@@ -1,36 +1,22 @@
-.. image:: https://badge.waffle.io/codefordurham/school-navigator.png?label=ready&title=Ready
- :target: https://waffle.io/codefordurham/school-navigator
- :alt: 'Stories in Ready'
-
-.. image:: https://coveralls.io/repos/codefordurham/school-navigator/badge.png?branch=master
- :target: https://coveralls.io/r/codefordurham/school-navigator?branch=master
-
-.. image:: https://travis-ci.org/codefordurham/school-navigator.svg?branch=master
- :target: https://travis-ci.org/codefordurham/school-navigator
-
-
 Durham School Navigator
 =======================
+This open source project is built and maintained by `Code for Durham`_.
 
-Durham School Navigator is a website to help Durham, NC residents navigate the
-`Durham Public School System`_. We found it difficult to find information about all the public schools - neighborhood, magnet and charter - and navigate the lottery and priority zoning rules. This open source project is built and maintained by
-`Code for Durham`_.
+Durham School Navigator is a web app to help people learn more about the `Durham Public School System`_. Our goal is to provide an enhancements on the `existing DPS web tools`_ geared at helping families easily have access to the information that they need to make education decisions.
 
-The official site is online at https://durhamschoolnavigator.org/ if you want to test out the latest or share with friends. The code is available on `GitHub`_ if you want to contribute. The `email list`_ is on Google Groups if you want to communicate and support us on this project.
+* The site accessible online: https://durhamschoolnavigator.org/ 
+* The code is available on `GitHub`_ if you want to contribute. 
+* The `email list`_ is on Google Groups if you want to communicate and support us on this project.
 
 Why get involved?
 -----------------
 If you have ever been a new parent or new to the area and confused about which schools are the best fit for your kids', or confused about your kids' chances of going to the schools nearest your home.... Or if you just think that in this day in age it should not take so much time to find out about the schools in your area.... or you just want to help demonstrate what is possible today with technology to our local government.... AND want to HELP DO something about it and make the system work better for all... Then JOIN US to make this application better. 
 
-We provide parents who are looking at moving to or within Durham with a simple online interface to find out where your home sits within the different school zones, as well as give them relevant data for each school.  
-
-Overview
+Status
 ---------------
-* Phase 1: Complete - Answer the question: How does zoning and location affect my school choices - across neighborhood, magnet and charter options?
-* Phase 2: Complete - School profiles data collection and integration. We focussed on gathering key data points (e.g. principal info, score improvement rates, teacher/student ratios, etc) that parents said they want to know about schools (through a survey n=80) that will help them choose a school path. See latest details on progress by looking at our project page (http://codefordurham.com/projects/school_navigator)
-* Phase 3: (Planning) - Improve the user interface for School Profiles & add some relevant state-collected school data.
-* Project Goal: Remove friction for understanding the local school system and improve on existing DPS web tools (http://www.dpsnc.net/pages/Durham_Public_Schools/Our_Schools/Find_Your_School).
-* Target group: Parents or Prospective Parents seeking to understand how their residential choice will impact where their kids can go to school.
+* **Phase 1**: Complete - Answer the question: How does zoning and location affect my school choices - across neighborhood, magnet and charter options?
+* **Phase 2**: Complete - School profiles data collection and integration. We focussed on gathering key data points (e.g. principal info, score improvement rates, teacher/student ratios, etc) that parents said they want to know about schools (through a survey n=80) that will help them choose a school path. See latest details on progress by looking at our project page (http://codefordurham.com/projects/school_navigator)
+* **Phase 3**: (In Progress) - Improve the user interface for School Profiles & add some relevant state-collected school data.
 
 Getting Set Up as a Non-Developer
 -----------------------------
