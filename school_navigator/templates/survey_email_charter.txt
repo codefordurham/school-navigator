@@ -5,7 +5,7 @@ Update: Due to the weather related closures last week, we have extended the dead
 This is our second year requesting survey information about your school to be included on your school profile on Durham School Navigator ( http://durhamschoolnavigator.org/ ).
 
 {{ school.name }}’s Survey Completion Percent: {{ percent_complete }}
-Overall School Survey Completion Percent Range: 11% -- 92%
+Overall School Survey Completion Percent Range: 6% -- 100%
 You can add more information to your school’s profile page and verify the accuracy of the existing information by filling out your school’s survey (or forwarding this email to someone to fill it out):
 
 Edit your profile: {{ school_profile_url }}
