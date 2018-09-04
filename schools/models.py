@@ -321,9 +321,6 @@ class SchoolProfile(models.Model):
         field_names -= excluded_field_names
         field_names -= {field.name for field in self.__class__.lottery_fields()}
         filled_field_names = {fn for fn in field_names if getattr(self, fn) or getattr(self, fn) is False}
-        unfilled = field_names - excluded_field_names - filled_field_names
-        if len(unfilled) < 10:
-            print('{} - {}'.format(self.school.name, unfilled))
 
         return int(len(filled_field_names)/len(field_names)*100)
 
