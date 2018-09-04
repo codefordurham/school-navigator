@@ -11,7 +11,7 @@ Edit your profile: {{ school_profile_url }}
 Due Date: {{ school_profile.due_date }}
 
 {{ school.name }}’s Survey Completion Percent: {{ percent_complete }}
-Overall School Survey Completion Percent Range: 11% -- 92%
+Overall School Survey Completion Percent Range: 11% -- 100%
 
 You can add more information to your school’s profile page and verify the accuracy of the existing information by filling out your school’s survey (or forwarding this email to someone to fill it out).  You can now upload school pictures directly to the site, and we have newly designed profile pages highlighting the most important information as determined by our community testing and outreach.
 

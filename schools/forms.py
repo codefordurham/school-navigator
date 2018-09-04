@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import ModelForm, TextInput, URLInput, Textarea, FileInput
+from django.forms import ModelForm, TextInput, URLInput, Textarea
 import schools.models as schools_models
 
 
@@ -72,8 +72,8 @@ class SchoolProfileForm(ModelForm):
         ('Admissions Policy', [
             'admissions_policy_type',
             'lottery_priority_1', 'lottery_priority_2', 'lottery_priority_3',
-            'lottery_priority_4', 'lottery_priority_5',
-            'lottery_deadline', 'learn_more_link', 'feeder_school_info',
+            'lottery_priority_4', 'lottery_priority_5', 'lottery_deadline',
+            'learn_more_link', 'feeder_school_info',
         ]),
         ('Targeted Academic Offerings', [
             'other_academic',

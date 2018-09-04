@@ -53,6 +53,7 @@ class School(models.Model):
         profile = self.profile()
         if profile:
             profile.pk = None
+            profile.survey_feedback = ""
         else:
             profile = SchoolProfile.objects.create(school=self)
 
@@ -304,15 +305,25 @@ class SchoolProfile(models.Model):
         due_dt = (self.created_at + datetime.timedelta(30))
         return due_dt.astimezone(timezone.get_current_timezone()).date()
 
+    @classmethod
+    def lottery_fields(cls):
+        lottery_field_names = ['lottery_priority_1', 'lottery_priority_2',
+                               'lottery_priority_3', 'lottery_priority_4',
+                               'lottery_priority_5', 'learn_more_link',
+                               'lottery_deadline']
+        return {field for field in cls._meta.fields
+                if field.name in lottery_field_names}
+
     def percent_complete(self):
-        field_names = self.__class__._meta.get_all_field_names()
+        field_names = set(self.__class__._meta.get_all_field_names())
+        excluded_field_names = {'survey_feedback', 'created_at',
+                                'submitted_at', 'school', 'id', 'school_id',
+                                'speciality_type'}
+        field_names -= excluded_field_names
+        field_names -= {field.name for field in self.__class__.lottery_fields()}
+        filled_field_names = {fn for fn in field_names if getattr(self, fn) or getattr(self, fn) is False}
 
-        filled_fields = 0
-        for fn in field_names:
-            if getattr(self, fn):
-                filled_fields += 1
-
-        return float('%.2f' % (filled_fields/len(field_names)*100))
+        return int(len(filled_field_names)/len(field_names)*100)
 
     def overdue(self):
         tomorrow = (timezone.now() + datetime.timedelta(days=1))
