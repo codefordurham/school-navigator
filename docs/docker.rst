@@ -19,7 +19,7 @@ The default development environment, provided by ``docker-compose.yml``, will pr
 
 Configure environment to use the docker settings file::
 
-  echo "DJANGO_SETTINGS_MODULE=eatsmart.settings.docker" > .env
+  echo "DJANGO_SETTINGS_MODULE=school_navigator.settings.docker" > .env
 
 Build the containers::
 

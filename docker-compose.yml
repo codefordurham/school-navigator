@@ -2,7 +2,6 @@ version: '3'
 
 services:
   db:
-    restart: always
     image: mdillon/postgis:9.6-alpine
     volumes:
       - pgdata:/var/lib/postgresql/data
@@ -24,7 +23,6 @@ services:
     depends_on:
       - db
   proxy:
-    restart: always
     image: nginx:stable-alpine
     build:
       context: .
