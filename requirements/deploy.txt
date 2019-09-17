@@ -5,4 +5,4 @@ paramiko==1.15.2
 pycrypto==2.6.1
 ecdsa==0.13
 
-newrelic
+newrelic==2.56
