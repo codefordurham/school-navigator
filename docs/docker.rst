@@ -56,3 +56,26 @@ Now follow the ``pg_restore`` steps above.
 To create the database dump (as an admin), you can run::
 
   ssh durhamschoolnavigator.org 'sudo -u postgres pg_dump -Fc school_navigator_production' > db.dump
+
+
+Heroku Setup
+------------
+
+heroku stack --app durhamschoolnavigator
+heroku stack:set heroku-18 --app durhamschoolnavigator
+heroku buildpacks:clear --app durhamschoolnavigator
+heroku buildpacks:add https://github.com/cyberdelia/heroku-geo-buildpack.git --app durhamschoolnavigator
+heroku buildpacks:set https://github.com/heroku/heroku-buildpack-python.git --app durhamschoolnavigator
+heroku buildpacks:add https://github.com/heroku/heroku-buildpack-nginx.git --app durhamschoolnavigator
+heroku git:remote --app durhamschoolnavigator
+
+heroku config:set BUILD_WITH_GEO_LIBRARIES=1
+heroku config:set ENVIRONMENT=production
+pwgen --secure --symbols 80 1
+heroku config:set SECRET_KEY="fill-me-in"
+heroku config:set DATABASE_URL=postgres://user:pass@address:5432/dbname
+heroku config:set DOMAIN=durhamschoolnavigator.org
+
+git push heroku master
+git push heroku docker-deploy:master
+
