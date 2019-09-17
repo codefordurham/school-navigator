@@ -10,4 +10,6 @@ postgresql_extensions: [postgis]
 
 margarita_version: 1.7.2
 
+use_newrelic: false
+
 admin_email: code-for-durham-team@codeforamerica.org
