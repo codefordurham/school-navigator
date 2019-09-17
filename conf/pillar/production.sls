@@ -68,20 +68,6 @@ secrets:
     E/iNQR+ITUonXjvCwhzaB/PPLpyUejOGn3XcQQ==
     =qI05
     -----END PGP MESSAGE-----
-  "NEW_RELIC_LICENSE_KEY": |-
-    -----BEGIN PGP MESSAGE-----
-    Version: GnuPG v1
-
-    hQEMA8VrrxEeDTagAQf/UtpBRj35bkhvPKLfjSeycyp3wp9ml+FJRnBHyFjcfKF9
-    Mn+NFPBv+Lflqc1y5RqIuApsr45XfGXbnJWOeLoRIMPVAEpr68cJ7LXKJrPNtsvh
-    L+5uMK3xLAWHpmJSdmZ6ymZBvh7foxGrK6XcnQo+FHO6xW0Lj7mKSehjlpNSf4Gu
-    TK25Ah5KlEFKrQPrKKasqH7gf9kbOmViKmSlXE1g+rQ2nmxF2MqUe+O+s7V1wGqh
-    +4m/VRmlQO5Qn9W1rfmMQlijEo6EVB50OaAwSUTFGLLcBPqw4c1+L0wX+a4ElQo2
-    Jgnh+KhPFbT5SzKwfpPYLykUFu0OFJYsPLdFRETBkdJjAdeCdYdVoTjBHsiMavVv
-    H2ayX1t+uj8RBluhRHnmSU1Viv1zqXT0/xnOs3THtb6Y+L0lra8JHh1GIu8X9rEa
-    bjSgtwVr1ewZZ35WXsWLC78HZGsjMNhyOREbwZv00Mw8Pu93
-    =typs
-    -----END PGP MESSAGE-----
   "EMAIL_HOST_PASSWORD": |-
     -----BEGIN PGP MESSAGE-----
     Version: GnuPG v1
