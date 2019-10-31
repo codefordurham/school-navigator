@@ -22,3 +22,5 @@ conf/pillar/*/deploy
 .env
 *.cert*
 *.key*
+node_modules
+frontend/css/style.css

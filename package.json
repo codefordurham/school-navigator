@@ -1,0 +1,27 @@
+{
+  "name": "school-navigator",
+  "version": "1.0.0",
+  "description": ".. image:: https://badge.waffle.io/codefordurham/school-navigator.png?label=ready&title=Ready  :target: https://waffle.io/codefordurham/school-navigator  :alt: 'Stories in Ready'",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "watch:css": "gulp sass:watch",
+    "test": "echo \"Error: no stinkin test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codefordurham/school-navigator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codefordurham/school-navigator/issues"
+  },
+  "homepage": "https://github.com/codefordurham/school-navigator#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^2.3.2"
+  }
+}
