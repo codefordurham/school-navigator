@@ -25,9 +25,9 @@ hr.no-border {
   display: flex;
   flex-flow: column;
 }
-.container {
+/*.container {
     margin-top: 60px;
-}
+}*/
 .content-row {
   flex: 0 1 50px;
 }
@@ -565,7 +565,7 @@ div.avgline span.avg {
     opacity: 0.7;
 }
 .container {
-    margin-top: 0;
+    margin-top: 80px;
 }
 .container,
 .container-fluid {
