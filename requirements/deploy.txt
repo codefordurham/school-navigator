@@ -1,4 +1,4 @@
-PyYAML==3.11
+PyYAML==5.4
 Fabric==1.10.2
 # Required by Fabric
 paramiko==1.15.2
