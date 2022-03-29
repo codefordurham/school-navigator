@@ -1,7 +1,7 @@
 PyYAML==3.11
 Fabric==1.10.2
 # Required by Fabric
-paramiko==1.15.2
+paramiko==2.10.1
 pycrypto==2.6.1
 ecdsa==0.13
 
