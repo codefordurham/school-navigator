@@ -1,6 +1,6 @@
 psycopg2==2.6.1
 Pillow==9.3.0
-Django==1.8.4
+Django==3.2.25
 django_compressor==1.5
 # Required by django-compressor
 django-appconf==1.0.1
